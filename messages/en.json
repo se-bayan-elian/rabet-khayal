@@ -1,0 +1,1101 @@
+{
+  "serviceHero": {
+    "title": {
+      "start": "Complete",
+      "highlight": "Solutions",
+      "end": "for your success"
+    },
+    "description": "We provide a comprehensive suite of technical and creative services to achieve your goals and elevate your business with the highest professional standards",
+    "features": {
+      "security": {
+        "title": "High Security",
+        "desc": "Advanced data protection"
+      },
+      "performance": {
+        "title": "Fast Performance",
+        "desc": "Lightning-fast response time"
+      },
+      "support": {
+        "title": "Continuous Support",
+        "desc": "24/7 customer service"
+      },
+      "quality": {
+        "title": "High Quality",
+        "desc": "Advanced professional standards"
+      }
+    }
+  },
+  "header": {
+    "services": "Services",
+    "categories": "Categories",
+    "about": "About Us",
+    "contact": "Contact",
+    "web-development": "Web Development",
+    "mobile-apps": "Mobile Apps",
+    "digital-marketing": "Digital Marketing",
+    "branding": "Branding",
+    "electronics": "Electronics",
+    "fashion": "Fashion",
+    "home-garden": "Home & Garden",
+    "sports": "Sports",
+    "login": "Login",
+    "myAccount": "My Account",
+    "myProfile": "My Profile",
+    "myOrders": "My Orders",
+    "wishlist": "Wishlist",
+    "logout": "Logout",
+    "getConsultation": "Get Free Consultation"
+  },
+  "hero": {
+    "title": "Connecting Dreams to Reality",
+    "subtitle": "Innovative tech solutions for a modern digital world",
+    "cta": "Discover Our Services",
+    "learnMore": "Learn More",
+    "watchVideo": "Watch Video"
+  },
+  "products": {
+    "featured": "Featured",
+    "outOfStock": "Out of Stock",
+    "addToCart": "Add to Cart",
+    "viewReviews": "View Reviews ({count})",
+    "weight": "Weight",
+    "relatedProducts": "Related Products"
+  },
+  "stats": {
+    "title": "Company Statistics",
+    "clients": "Happy Clients",
+    "projects": "Completed Projects",
+    "coffee": "Cups of Coffee",
+    "satisfaction": "Satisfaction Rate",
+    "experience": "Years of Experience",
+    "description": {
+      "projects": "Including websites, apps, and branding",
+      "clients": "Local businesses and institutions",
+      "satisfaction": "Customer satisfaction and trust rate",
+      "experience": "In design and development"
+    }
+  },
+  "services": {
+    "title": "Our Premium Services",
+    "subtitle": "We offer comprehensive innovative tech solutions",
+    "viewDetails": "View Details",
+    "projectCount": "{count} Projects",
+    "previous": "Previous",
+    "next": "Next",
+    "error": {
+      "title": "Something went wrong",
+      "message": "We couldn't load the services. Please try again.",
+      "retry": "Try Again",
+      "goHome": "Go to Homepage"
+    },
+    "noServices": {
+      "title": "No Services Found",
+      "message": "We couldn't find any services at the moment. Please check back later.",
+      "refresh": "Refresh Page",
+      "goHome": "Go to Homepage"
+    },
+    "loading": "Loading...",
+    "detail": {
+      "notFound": "Service Not Found",
+      "notFoundDescription": "The service you're looking for doesn't exist or has been removed.",
+      "backToServices": "Back to Services",
+      "requestService": "Request Service",
+      "tabs": {
+        "details": "Service Details",
+        "projects": "Our Projects",
+        "portfolio": "Portfolio"
+      },
+      "serviceDetails": "Service Information",
+      "pricingPlans": "Pricing Plans",
+      "noPricingPlans": "Custom Pricing",
+      "noPricingPlansDescription": "Contact us for a personalized quote tailored to your needs.",
+      "requestQuote": "Request Quote",
+      "popular": "Most Popular",
+      "deliveryTime": "{days} days delivery",
+      "revisions": "{count} revisions",
+      "selectPlan": "Select Plan",
+      "ourProjects": "Our Portfolio",
+      "projectsDescription": "Explore our latest work and see how we bring ideas to life.",
+      "noProjects": "No Projects Yet",
+      "noProjectsDescription": "We're working on amazing projects for this service. Check back soon!",
+      "viewProject": "View Project",
+      "viewLive": "View Live"
+    },
+    "web": {
+      "title": "Web Development",
+      "description": "Building modern and responsive websites"
+    },
+    "mobile": {
+      "title": "Mobile Apps",
+      "description": "Cross-platform mobile applications"
+    },
+    "marketing": {
+      "title": "Digital Marketing",
+      "description": "Grow your business with digital strategies"
+    },
+    "design": {
+      "title": "UI/UX Design",
+      "description": "Creating beautiful and intuitive designs"
+    },
+    "features": {
+      "freeConsultation": "Free Consultation",
+      "competitivePricing": "Competitive Pricing",
+      "onTimeDelivery": "On-time Delivery"
+    },
+    "project": {
+      "notFound": "Project Not Found",
+      "notFoundDescription": "The project you're looking for doesn't exist or has been removed.",
+      "goBack": "Go Back",
+      "back": "Back",
+      "client": "Client",
+      "completed": "Completed",
+      "service": "Service",
+      "viewLive": "View Live Project",
+      "gallery": "Project Gallery",
+      "galleryDescription": "Browse through the visual journey of this project.",
+      "relatedService": "Related Service",
+      "viewService": "View Service"
+    }
+  },
+  "footer": {
+    "company": "Rabet Alkhayal",
+    "description": "We are a leading company in technology and design",
+    "quickLinks": "Quick Links",
+    "services": "Our Services",
+    "newsletter": "Stay Updated",
+    "newsletterDesc": "Subscribe to our newsletter for the latest news and offers",
+    "emailPlaceholder": "Your email address",
+    "followUs": "Follow Us",
+    "links": {
+      "home": "Home",
+      "products": "Products",
+      "portfolio": "Portfolio",
+      "about": "About Us",
+      "contact": "Contact Us"
+    },
+    "bottom": {
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Use",
+      "cookies": "Cookies",
+      "copyright": "© {year} {company}. All rights reserved"
+    }
+  },
+  "categoriesPage": {
+    "heading": "Explore Our Categories",
+    "subtitle": "Pick a category and browse elegant, curated subcategories.",
+    "subcategory": "Subcategory",
+    "explore": "Explore",
+    "promo": {
+      "title": "Premium quality, delivered fast",
+      "desc": "From concept to delivery, we craft outstanding products that elevate your brand.",
+      "ctaPrimary": "Get Free Consultation",
+      "ctaSecondary": "Browse Services"
+    },
+    "promo2": {
+      "title": "Tailored solutions for your next launch",
+      "desc": "Our team builds high-impact experiences that convert and delight.",
+      "ctaPrimary": "Start Your Project",
+      "ctaSecondary": "See Portfolio"
+    },
+    "loading": "Loading categories...",
+    "error": {
+      "title": "Unable to load categories",
+      "message": "Something went wrong while fetching categories. Please try again.",
+      "retry": "Try Again"
+    },
+    "empty": {
+      "title": "No categories found",
+      "message": "We couldn't find any categories at the moment. Check back later!",
+      "goHome": "Go Home"
+    }
+  },
+  "subcategoryPage": {
+    "filters": {
+      "title": "Filters",
+      "clear": "Clear All",
+      "apply": "Apply Filters",
+      "search": "Search products...",
+      "priceRange": "Price Range",
+      "minPrice": "Min Price",
+      "maxPrice": "Max Price",
+      "sortBy": "Sort By",
+      "sortOptions": {
+        "newest": "Newest First",
+        "oldest": "Oldest First",
+        "priceHigh": "Price: High to Low",
+        "priceLow": "Price: Low to High",
+        "nameAZ": "Name: A to Z",
+        "nameZA": "Name: Z to A"
+      }
+    },
+    "products": {
+      "showing": "Showing {count, number} products",
+      "noResults": "No products found",
+      "noResultsDesc": "Try adjusting your filters or search terms",
+      "addToCart": "Add to Cart",
+      "addToWishlist": "Add to Wishlist",
+      "removeFromWishlist": "Remove from Wishlist",
+      "viewDetails": "View Details",
+      "outOfStock": "Out of Stock",
+      "inStock": "In Stock",
+      "sale": "Sale",
+      "new": "New"
+    },
+    "loading": "Loading products...",
+    "error": {
+      "title": "Error loading products",
+      "message": "Something went wrong. Please try again.",
+      "retry": "Try Again"
+    },
+    "pageTitle": "Products",
+    "emptyState": {
+      "suggestions": "Try these suggestions:",
+      "browseCategoriesBtn": "Browse Categories",
+      "removeFilters": "Remove filters",
+      "searchDifferent": "Search different terms",
+      "checkOther": "Check other categories",
+      "contactSupport": "Contact support"
+    }
+  },
+  "cart": {
+    "title": "Shopping Cart",
+    "empty": "Your cart is empty",
+    "emptyDesc": "Start shopping to add items to your cart",
+    "backToShopping": "Continue Shopping",
+    "continueShopping": "Continue Shopping",
+    "itemsCount": "{count} items in your cart",
+    "clearCart": "Clear Cart",
+    "clearing": "Clearing...",
+    "quantity": "Quantity",
+    "itemTotal": "Item Total",
+    "subtotal": "Subtotal",
+    "delivery": "Delivery",
+    "shipping": "Shipping",
+    "tax": "Tax",
+    "total": "Total",
+    "free": "Free",
+    "customizations": "Customizations",
+    "sale": "Sale",
+    "editCustomizations": "Edit Customizations",
+    "completeCustomizations": "Complete Required",
+    "requiredCustomizationsMissing": "Please complete required customizations",
+    "shopNow": "Shop Now",
+    "cancel": "Cancel",
+    "addToCart": "Add to Cart",
+    "remove": "Remove",
+    "update": "Update",
+    "checkout": "Checkout",
+    "modal": {
+      "success": "Successfully Added!",
+      "addedToCart": "Product added to cart",
+      "total": "Total",
+      "continueShopping": "Continue Shopping",
+      "goToCart": "View Cart",
+      "viewCart": "View Cart"
+    },
+    "errors": {
+      "addFailed": "Failed to add product to cart",
+      "updateFailed": "Failed to update quantity",
+      "removeFailed": "Failed to remove product"
+    },
+    "emptyCart": "Your cart is empty",
+    "emptyCartDescription": "Start by adding products to your cart",
+    "startShopping": "Start Shopping",
+    "orderSummary": "Order Summary",
+    "deliveryOptions": "Delivery Options",
+    "pickupFromCompany": "Pickup from Company",
+    "pickupFromCompanyDesc": "Pick up your order from our office",
+    "homeDelivery": "Home Delivery",
+    "homeDeliveryDesc": "Delivery to your address",
+    "selectDeliveryOption": "Select delivery option",
+    "chooseDeliveryOption": "Choose delivery method",
+    "estimatedDays": "Estimated: {days} days",
+    "deliveryCost": "Delivery cost",
+    "deliveryAddress": "Delivery Address",
+    "useMyLocation": "Use My Location",
+    "gettingLocation": "Getting location...",
+    "enterDeliveryAddress": "Enter delivery address",
+    "addressHelp": "Enter your complete address for accurate delivery",
+    "addressRequired": "Delivery address is required",
+    "geolocationNotSupported": "Geolocation is not supported in your browser",
+    "locationAccessDenied": "Location access denied",
+    "proceedToCheckout": "Proceed to Checkout",
+    "secureCheckout": "Secure and encrypted checkout 🔒",
+    "missingRequiredCustomization": "Required customization missing for {product}: {question}",
+    "couponDiscount": "Coupon Discount",
+    "noCustomizationsAvailable": "No customizations available",
+    "close": "Close",
+    "customizationCost": "Customization Cost",
+    "required": "Required",
+    "optional": "Optional",
+    "selectOption": "Select an option",
+    "enterText": "Enter text",
+    "addNote": "Add a note",
+    "uploadImage": "Upload image",
+    "cancel": "Cancel",
+    "saving": "Saving...",
+    "saveChanges": "Save Changes",
+    "productQuestions": "Product Questions",
+    "question": "question",
+    "questions": "questions",
+    "coupon": {
+      "title": "Coupon Code",
+      "placeholder": "Enter coupon code",
+      "apply": "Apply",
+      "helpText": "Enter your coupon code to get a discount on your order",
+      "off": "off",
+      "percentageOff": "% off",
+      "dollarOff": "off"
+    }
+  },
+  "wishlist": {
+    "title": "My Wishlist",
+    "addToWishlist": "Add to Wishlist",
+    "removeFromWishlist": "Remove from Wishlist",
+    "empty": "Your wishlist is empty",
+    "emptyDesc": "Save items you love for later!",
+    "moveToCart": "Move to Cart",
+    "removeItem": "Remove from Wishlist",
+    "clearAll": "Clear All",
+    "totalItems": "Total Items",
+    "addedToCart": "Added to cart",
+    "removedFromWishlist": "Removed from wishlist",
+    "shareWishlist": "Share Wishlist",
+    "saveForLater": "Save for Later"
+  },
+
+  "contact": {
+    "title": "Get in Touch",
+    "description": "Ready to start your project? We'd love to hear from you. Send us a message and we'll respond as soon as possible.",
+    "serviceRequest": "Service Request",
+    "getInTouch": "Send Message",
+    "serviceSelected": "Service Selected",
+    "form": {
+      "name": "Full Name",
+      "namePlaceholder": "Enter your full name",
+      "email": "Email Address",
+      "emailPlaceholder": "Enter your email address",
+      "phone": "Phone Number",
+      "phonePlaceholder": "Enter your phone number",
+      "company": "Company",
+      "companyPlaceholder": "Enter your company name",
+      "service": "Service",
+      "selectService": "Select a service",
+      "serviceDetails": "Service Selection",
+      "pricingPlan": "Pricing Plan",
+      "selectPlan": "Select a pricing plan (optional)",
+      "message": "Message",
+      "messageSection": "Your Message",
+      "messagePlaceholder": "Tell us about your project requirements...",
+      "submit": "Send Message",
+      "sending": "Sending...",
+      "error": "Failed to send message. Please try again."
+    },
+    "contactInfo": "Contact Information",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "addressText": "Riyadh, Saudi Arabia",
+    "workingHours": "Working Hours",
+    "sunday": "Sunday",
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "hours": {
+      "weekday": "9:00 AM - 6:00 PM",
+      "friday": "2:00 PM - 6:00 PM",
+      "weekend": "10:00 AM - 4:00 PM"
+    },
+    "success": {
+      "title": "Message Sent!",
+      "message": "Thank you for your message. We'll get back to you within 24 hours.",
+      "close": "Close"
+    }
+  },
+  "reviews": {
+    "title": "Customer Reviews",
+    "addReview": "Write a Review",
+    "noReviews": "No Reviews Yet",
+    "noReviewsDescription": "Be the first to share your experience with this product.",
+    "basedOnReviews": "Based on {count} reviews",
+    "sortBy": {
+      "newest": "Newest First",
+      "oldest": "Oldest First",
+      "highest": "Highest Rating",
+      "lowest": "Lowest Rating"
+    },
+    "allRatings": "All Ratings",
+    "stars": "Stars",
+    "star": "Star",
+    "featured": "Featured Review",
+    "helpful": "Helpful",
+    "errorLoading": "Failed to load reviews. Please try again.",
+    "add": {
+      "title": "Write a Review",
+      "successTitle": "Review Submitted!",
+      "successMessage": "Thank you for your review!",
+      "successDescription": "Your review will be published after moderation.",
+      "authRequired": "Please log in to write a review.",
+      "rating": "Rating",
+      "reviewTitle": "Review Title",
+      "titlePlaceholder": "Summarize your experience",
+      "reviewContent": "Your Review",
+      "contentPlaceholder": "Share your detailed experience with this product...",
+      "submitting": "Submitting...",
+      "submitReview": "Submit Review",
+      "submitError": "Failed to submit review. Please try again."
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome Back",
+      "subtitle": "Sign in to your account to continue",
+      "welcome": {
+        "title": "Welcome Back!",
+        "subtitle": "Access your account securely with our passwordless authentication system."
+      },
+      "features": {
+        "security": {
+          "title": "Secure Access",
+          "description": "Advanced security with email verification"
+        },
+        "fast": {
+          "title": "Quick Login",
+          "description": "No passwords to remember or forget"
+        },
+        "verified": {
+          "title": "Email Verified",
+          "description": "Secure authentication via email"
+        }
+      },
+      "form": {
+        "email": "Email Address",
+        "emailPlaceholder": "Enter your email address",
+        "sendCode": "Send Verification Code",
+        "sending": "Sending...",
+        "googleSignIn": "Continue with Google"
+      },
+      "emailSent": {
+        "title": "Check Your Email",
+        "description": "We've sent a verification code to",
+        "continue": "Continue to Verification"
+      },
+      "or": "or",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign up",
+      "backToHome": "Back to Home"
+    },
+    "register": {
+      "title": "Create Account",
+      "subtitle": "Join us today and start your journey",
+      "welcome": {
+        "title": "Join Our Community!",
+        "subtitle": "Create your account and discover amazing products and services."
+      },
+      "features": {
+        "security": {
+          "title": "Secure Registration",
+          "description": "Your data is protected with encryption"
+        },
+        "easy": {
+          "title": "Easy Setup",
+          "description": "Simple registration with email verification"
+        },
+        "support": {
+          "title": "24/7 Support",
+          "description": "We're here to help you anytime"
+        }
+      },
+      "form": {
+        "firstName": "First Name",
+        "firstNamePlaceholder": "Enter your first name",
+        "lastName": "Last Name",
+        "lastNamePlaceholder": "Enter your last name",
+        "email": "Email Address",
+        "emailPlaceholder": "Enter your email address",
+        "phone": "Phone Number",
+        "phonePlaceholder": "Enter your phone number",
+        "optional": "Optional",
+        "agreeTerms": {
+          "start": "I agree to the",
+          "terms": "Terms & Conditions",
+          "and": "and",
+          "cookies": "Cookie Policy"
+        },
+        "agreeMarketing": "I'd like to receive marketing emails and promotions",
+        "createAccount": "Create Account",
+        "creating": "Creating Account...",
+        "googleSignUp": "Sign up with Google"
+      },
+      "emailSent": {
+        "title": "Verify Your Email",
+        "description": "We've sent a verification code to",
+        "continue": "Continue to Verification"
+      },
+      "or": "or",
+      "hasAccount": "Already have an account?",
+      "signIn": "Sign in",
+      "backToHome": "Back to Home"
+    },
+    "verify": {
+      "title": "Enter Verification Code",
+      "subtitle": {
+        "login": "Enter the 6-digit code sent to your email",
+        "register": "Enter the 6-digit code to complete registration"
+      },
+      "codeExpires": "Code expires in",
+      "verify": "Verify Code",
+      "verifying": "Verifying...",
+      "didntReceive": "Didn't receive the code?",
+      "resend": {
+        "button": "Resend Code",
+        "sending": "Sending...",
+        "waitTimer": "Resend in {time}",
+        "success": "New code sent successfully!",
+        "error": "Failed to resend code. Please try again."
+      },
+      "changeEmail": "Change Email",
+      "backToHome": "Back to Home",
+      "errors": {
+        "invalidLength": "Please enter all 6 digits",
+        "invalidCode": "Invalid verification code. Please try again."
+      },
+      "help": {
+        "title": "Need help?",
+        "checkSpam": "Check your spam/junk folder",
+        "checkEmail": "Make sure the email address is correct",
+        "wait": "Wait a few moments for the email to arrive"
+      }
+    }
+  },
+  "orders": {
+    "title": "My Orders",
+    "subtitle": "Track and manage your order history",
+    "refresh": "Refresh",
+    "filters": {
+      "title": "Filter Orders",
+      "searchPlaceholder": "Search by order number or product name...",
+      "statusPlaceholder": "Filter by status",
+      "allStatuses": "All Statuses"
+    },
+    "status": {
+      "pending": "Pending",
+      "confirmed": "Confirmed",
+      "processing": "Processing",
+      "shipped": "Shipped",
+      "delivered": "Delivered",
+      "cancelled": "Cancelled"
+    },
+    "orderNumber": "Order",
+    "quantity": "Qty",
+    "moreItems": "more items",
+    "estimatedDelivery": "Estimated Delivery",
+    "viewDetails": "View Details",
+    "track": "Track Package",
+    "empty": {
+      "title": "No Orders Yet",
+      "description": "You haven't placed any orders yet. Start shopping to see your orders here.",
+      "startShopping": "Start Shopping"
+    },
+    "error": {
+      "loadFailed": "Failed to load orders. Please try again."
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next"
+    }
+  },
+  "profile": {
+    "title": "My Profile",
+    "subtitle": "Manage your account information and preferences",
+    "editProfile": "Edit Profile",
+    "verified": "Verified",
+    "unverified": "Not Verified",
+    "role": {
+      "user": "Customer",
+      "admin": "Administrator",
+      "super_admin": "Super Admin"
+    },
+    "memberSince": "Member since",
+    "quickStats": "Quick Stats",
+    "totalOrders": "Total Orders",
+    "totalSpent": "Total Spent",
+    "wishlistItems": "Wishlist Items",
+    "tabs": {
+      "personal": "Personal Info",
+      "address": "Address",
+      "preferences": "Preferences"
+    },
+    "personalInfo": "Personal Information",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email Address",
+    "emailCannotChange": "Email address cannot be changed",
+    "phone": "Phone Number",
+    "dateOfBirth": "Date of Birth",
+    "gender": "Gender",
+    "selectGender": "Select gender",
+    "male": "Male",
+    "female": "Female",
+    "other": "Other",
+    "addressInfo": "Address Information",
+    "street": "Street Address",
+    "city": "City",
+    "state": "State/Province",
+    "zipCode": "ZIP/Postal Code",
+    "country": "Country",
+    "preferences": "Preferences",
+    "language": "Language",
+    "currency": "Currency",
+    "notifications": "Notification Preferences",
+    "emailNotifications": "Email Notifications",
+    "emailNotificationsDesc": "Receive updates about orders and promotions",
+    "smsNotifications": "SMS Notifications",
+    "smsNotificationsDesc": "Get order updates via text message",
+    "pushNotifications": "Push Notifications",
+    "pushNotificationsDesc": "Browser notifications for important updates",
+    "saveChanges": "Save Changes",
+    "updating": "Updating...",
+    "cancel": "Cancel",
+    "updateSuccess": "Profile updated successfully!"
+  },
+  "terms": {
+    "title": "Terms & Conditions",
+    "subtitle": "Please read these terms and conditions carefully before using our services.",
+    "lastUpdated": "Last updated",
+    "tableOfContents": "Table of Contents",
+    "introduction": "Welcome to Rabet Al-Khayal. These terms and conditions outline the rules and regulations for the use of our website and services. By accessing this website, we assume you accept these terms and conditions. Do not continue to use our website if you do not agree to take all of the terms and conditions stated on this page.",
+    "sections": {
+      "acceptance": {
+        "title": "Acceptance of Terms",
+        "content": "By accessing and using our services, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.\n\nThese terms apply to all visitors, users, and others who access or use our service. We reserve the right to update and change the Terms of Service from time to time without notice."
+      },
+      "services": {
+        "title": "Description of Services",
+        "content": "Rabet Al-Khayal provides digital services including but not limited to web development, design, consultation, and digital products through our platform.\n\nWe reserve the right to modify, suspend, or discontinue any part of our service at any time. We may also impose limits on certain features or restrict access to parts or all of the service without notice or liability."
+      },
+      "accounts": {
+        "title": "User Accounts",
+        "content": "When you create an account with us, you must provide information that is accurate, complete, and current at all times. You are responsible for safeguarding the password and for keeping your account information up to date.\n\nYou agree not to disclose your password to any third party and to take sole responsibility for activities that occur under your account."
+      },
+      "orders": {
+        "title": "Orders and Payments",
+        "content": "All orders are subject to acceptance and availability. We reserve the right to refuse any order at our discretion. Prices are subject to change without notice.\n\nPayment must be received in full before we begin work on your order. We accept various payment methods as displayed during checkout."
+      },
+      "shipping": {
+        "title": "Shipping and Delivery",
+        "content": "Delivery times are estimates and may vary depending on location and product type. We are not responsible for delays caused by customs, weather, or other factors beyond our control.\n\nRisk of loss and title for physical products pass to you upon delivery to the carrier."
+      },
+      "returns": {
+        "title": "Returns and Refunds",
+        "content": "Digital products are generally non-refundable due to their nature. Physical products may be returned within 30 days of delivery in their original condition.\n\nRefunds will be processed within 5-10 business days of approval and will be credited to the original payment method."
+      },
+      "liability": {
+        "title": "Limitation of Liability",
+        "content": "In no event shall Rabet Al-Khayal be liable for any indirect, incidental, special, consequential, or punitive damages arising out of your use of our services.\n\nOur total liability shall not exceed the amount paid by you for the specific service or product that gave rise to the claim."
+      }
+    },
+    "contact": {
+      "title": "Contact Information",
+      "legal": {
+        "title": "Legal Department",
+        "email": "legal@rabet-alkhayal.com",
+        "phone": "+966 11 234 5678"
+      },
+      "support": {
+        "title": "Customer Support",
+        "email": "support@rabet-alkhayal.com",
+        "phone": "+966 11 234 5679"
+      },
+      "address": {
+        "title": "Registered Address",
+        "full": "123 Business District, Riyadh 12345, Saudi Arabia"
+      }
+    },
+    "goBack": "Go Back",
+    "contactUs": "Contact Us"
+  },
+  "about": {
+    "hero": {
+      "title": "About Rabet Al-Khayal",
+      "subtitle": "We are a leading digital innovation company dedicated to transforming ideas into reality through cutting-edge technology and creative excellence."
+    },
+    "stats": {
+      "customers": "Happy Customers",
+      "projects": "Completed Projects",
+      "countries": "Countries Served",
+      "satisfaction": "Satisfaction Rate"
+    },
+    "mission": {
+      "title": "Our Mission",
+      "description": "To bridge the gap between imagination and reality by providing innovative digital solutions that empower businesses and individuals to achieve their goals in the digital age."
+    },
+    "vision": {
+      "title": "Our Vision",
+      "description": "To be the leading force in digital transformation across the Middle East, setting new standards for creativity, innovation, and customer satisfaction in the digital services industry."
+    },
+    "values": {
+      "title": "Our Core Values",
+      "subtitle": "The principles that guide everything we do",
+      "quality": {
+        "title": "Quality Excellence",
+        "description": "We deliver exceptional quality in every project, ensuring our clients receive solutions that exceed expectations."
+      },
+      "customer": {
+        "title": "Customer Focus",
+        "description": "Our customers are at the heart of everything we do. We listen, understand, and deliver solutions that truly matter."
+      },
+      "innovation": {
+        "title": "Innovation",
+        "description": "We embrace new technologies and creative approaches to solve complex challenges and drive digital transformation."
+      },
+      "sustainability": {
+        "title": "Sustainability",
+        "description": "We are committed to sustainable practices that benefit our community and the environment for future generations."
+      }
+    },
+    "timeline": {
+      "title": "Our Journey",
+      "subtitle": "Milestones that shaped our story",
+      "founded": {
+        "title": "Company Founded",
+        "description": "Started with a vision to revolutionize digital services in the region"
+      },
+      "expansion": {
+        "title": "Regional Expansion",
+        "description": "Expanded operations to serve clients across the Middle East"
+      },
+      "recognition": {
+        "title": "Industry Recognition",
+        "description": "Received multiple awards for innovation and customer satisfaction"
+      },
+      "growth": {
+        "title": "Rapid Growth",
+        "description": "Reached 10,000+ satisfied customers and 500+ successful projects"
+      },
+      "innovation": {
+        "title": "Innovation Hub",
+        "description": "Launched our innovation center focusing on emerging technologies"
+      }
+    },
+    "team": {
+      "title": "Meet Our Team",
+      "subtitle": "The talented people behind our success",
+      "ceo": "Chief Executive Officer",
+      "cto": "Chief Technology Officer",
+      "designer": "Lead Designer",
+      "developer": "Lead Developer",
+      "ceo_bio": "Visionary leader with 15+ years in digital transformation",
+      "cto_bio": "Technology expert specializing in scalable solutions",
+      "designer_bio": "Creative mind behind our award-winning designs",
+      "developer_bio": "Full-stack developer with expertise in modern frameworks"
+    },
+    "cta": {
+      "title": "Ready to Start Your Journey?",
+      "subtitle": "Let's work together to transform your ideas into digital reality. Contact us today to discuss your project.",
+      "contact": "Get in Touch",
+      "services": "View Services"
+    }
+  },
+  "cookies": {
+    "title": "Cookie Policy",
+    "subtitle": "Learn how we use cookies to improve your experience on our website and how you can manage your preferences.",
+    "lastUpdated": "Last updated",
+    "quickActions": "Quick Actions",
+    "acceptAll": "Accept All Cookies",
+    "rejectOptional": "Only Necessary",
+    "savePreferences": "Save Preferences",
+    "nav": {
+      "whatAreCookies": "What are Cookies?",
+      "howWeUse": "How We Use Cookies",
+      "cookieTypes": "Types of Cookies",
+      "managePreferences": "Manage Preferences"
+    },
+    "sections": {
+      "whatAreCookies": {
+        "title": "What are Cookies?",
+        "description": "Cookies are small text files that are stored on your device when you visit our website. They help us provide you with a better browsing experience by remembering your preferences and improving site functionality.",
+        "details": "These files contain information that is transferred to your device's hard drive and allow our website to recognize your device and remember certain information about your visit."
+      },
+      "howWeUse": {
+        "title": "How We Use Cookies",
+        "performance": {
+          "title": "Website Performance",
+          "description": "Monitor site performance and user interactions"
+        },
+        "functionality": {
+          "title": "Site Functionality",
+          "description": "Remember your preferences and settings"
+        },
+        "analytics": {
+          "title": "Analytics & Insights",
+          "description": "Understand how visitors use our website"
+        },
+        "marketing": {
+          "title": "Marketing & Advertising",
+          "description": "Deliver relevant content and advertisements"
+        }
+      },
+      "cookieTypes": {
+        "title": "Types of Cookies We Use"
+      },
+      "managePreferences": {
+        "title": "Manage Your Cookie Preferences",
+        "description": "You can control which cookies you allow by adjusting the settings below or through your browser settings.",
+        "browserSettings": {
+          "title": "Browser Settings",
+          "chrome": "Chrome: Settings > Privacy and security > Cookies",
+          "firefox": "Firefox: Preferences > Privacy & Security",
+          "safari": "Safari: Preferences > Privacy",
+          "edge": "Edge: Settings > Privacy, search, and services"
+        },
+        "thirdParty": {
+          "title": "Third-Party Opt-outs"
+        },
+        "unsavedChanges": "You have unsaved changes to your cookie preferences."
+      }
+    },
+    "types": {
+      "necessary": {
+        "title": "Necessary Cookies",
+        "description": "These cookies are essential for the website to function properly. They enable core functionality such as security, network management, and accessibility.",
+        "examples": "Authentication, security, load balancing"
+      },
+      "analytics": {
+        "title": "Analytics Cookies",
+        "description": "These cookies help us understand how visitors interact with our website by collecting and reporting information anonymously.",
+        "examples": "Google Analytics, page views, user behavior"
+      },
+      "marketing": {
+        "title": "Marketing Cookies",
+        "description": "These cookies are used to track visitors across websites to display relevant advertisements and marketing campaigns.",
+        "examples": "Facebook Pixel, Google Ads, retargeting"
+      },
+      "personalization": {
+        "title": "Personalization Cookies",
+        "description": "These cookies enable the website to provide enhanced functionality and personalization based on your interactions.",
+        "examples": "Language preferences, theme settings, user interface"
+      }
+    },
+    "required": "Required",
+    "optional": "Optional",
+    "examples": "Examples",
+    "preferences": {
+      "saved": "Cookie preferences saved successfully!",
+      "allAccepted": "All cookies accepted!",
+      "onlyNecessary": "Only necessary cookies accepted!"
+    },
+    "goBack": "Go Back",
+    "contactUs": "Contact Us"
+  },
+  "testimonials": {
+    "title": "What Our Clients Say",
+    "subtitle": "Real testimonials from our satisfied customers",
+    "verifiedCustomer": "Verified Customer",
+    "viewAllReviews": "View All Reviews"
+  },
+  "productDetails": {
+    "notFound": "Product Not Found",
+    "notFoundDesc": "We couldn't find the product you're looking for. It may have been deleted or moved.",
+    "goBack": "Go Back",
+    "details": {
+      "featured": "Featured",
+      "category": "Category",
+      "sale": "Sale"
+    },
+    "stock": {
+      "inStock": "In Stock",
+      "outOfStock": "Out of Stock",
+      "lowStock": "Low Stock"
+    },
+    "actions": {
+      "backToProducts": "Back to Products",
+      "addToCart": "Add to Cart",
+      "orderDetails": "Order Details",
+      "buyNow": "Buy Now",
+      "share": "Share",
+      "wishlist": "Add to Wishlist",
+      "removeFromWishlist": "Remove from Wishlist"
+    },
+    "quantity": {
+      "label": "Quantity",
+      "increase": "Increase quantity",
+      "decrease": "Decrease quantity"
+    },
+    "price": {
+      "originalPrice": "Original Price",
+      "salePrice": "Sale Price",
+      "totalPrice": "Total Price",
+      "pricePerItem": "Price per item",
+      "youSave": "You save"
+    },
+    "questions": {
+      "title": "Customization Options",
+      "required": "Required",
+      "optional": "Optional",
+      "selectOption": "Select an option",
+      "enterText": "Enter text",
+      "addNote": "Add a note",
+      "uploadImage": "Upload image",
+      "chooseFile": "Choose file",
+      "dragAndDrop": "Drag and drop file here"
+    },
+    "reviews": {
+      "title": "Reviews & Ratings",
+      "addReview": "Add Review",
+      "noReviews": "No reviews yet",
+      "beFirst": "Be the first to review this product",
+      "averageRating": "Average Rating",
+      "totalReviews": "Total Reviews",
+      "filterByRating": "Filter by Rating",
+      "sortBy": "Sort By",
+      "newest": "Newest",
+      "oldest": "Oldest",
+      "highest": "Highest Rated",
+      "lowest": "Lowest Rated",
+      "helpful": "Helpful",
+      "notHelpful": "Not Helpful",
+      "verified": "Verified Buyer",
+      "anonymous": "Anonymous"
+    },
+    "relatedProducts": "Related Products",
+    "share": {
+      "linkCopied": "Link copied to clipboard!",
+      "shareProduct": "Share this product"
+    },
+    "uploadImage": "Upload image"
+  },
+  "products": {
+    "title": "Our Products",
+    "subtitle": "Discover our premium collection of high-quality products",
+    "viewAll": "View All",
+    "addToCart": "Add to Cart",
+    "addToWishlist": "Add to Wishlist",
+    "removeFromWishlist": "Remove from Wishlist",
+    "quickView": "Quick View",
+    "outOfStock": "Out of Stock",
+    "sale": "Sale",
+    "new": "New",
+    "featured": "Featured",
+    "rating": "Rating",
+    "reviews": "reviews",
+    "noProducts": "No products found",
+    "loadMore": "Load More",
+    "sortBy": "Sort By",
+    "filterBy": "Filter By",
+    "priceRange": "Price Range",
+    "brand": "Brand",
+    "category": "Category",
+    "clearFilters": "Clear Filters",
+    "searchProducts": "Search Products",
+    "searchPlaceholder": "Search for products...",
+    "noSearchResults": "No search results found",
+    "customize": "Customize",
+    "hasCustomization": "Customizable"
+  },
+  "reviews": {
+    "title": "Reviews",
+    "addReview": "Add Review",
+    "writeReview": "Write a Review",
+    "yourRating": "Your Rating",
+    "yourReview": "Your Review",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "comment": "Comment",
+    "anonymous": "Anonymous",
+    "verified": "Verified Buyer",
+    "helpful": "Helpful",
+    "notHelpful": "Not Helpful",
+    "report": "Report",
+    "edit": "Edit",
+    "delete": "Delete",
+    "reply": "Reply",
+    "noReviews": "No reviews yet",
+    "beFirst": "Be the first to review",
+    "loadMore": "Load More",
+    "mostHelpful": "Most Helpful",
+    "filterByRating": "Filter by Rating",
+    "allRatings": "All Ratings",
+    "withPhotos": "With Photos",
+    "verifiedOnly": "Verified Only",
+    "averageRating": "Average Rating",
+    "totalReviews": "Total Reviews",
+    "ratingBreakdown": "Rating Breakdown",
+    "recommendProduct": "I recommend this product",
+    "wouldBuyAgain": "I would buy again",
+    "errors": {
+      "submitFailed": "Failed to submit review",
+      "loginRequired": "Please login first",
+      "alreadyReviewed": "You have already reviewed this product"
+    },
+    "success": {
+      "submitted": "Review submitted successfully",
+      "updated": "Review updated successfully",
+      "deleted": "Review deleted successfully"
+    }
+  },
+  "subcategoryPage": {
+    "title": "Products",
+    "loading": "Loading...",
+    "error": "Error loading products",
+    "retry": "Retry",
+    "noProducts": "No products found",
+    "noProductsDesc": "We couldn't find any products matching your search or filters",
+    "clearFilters": "Clear Filters",
+    "searchPlaceholder": "Search products...",
+    "filters": {
+      "title": "Filters",
+      "search": "Search",
+      "priceRange": "Price Range",
+      "minPrice": "Min Price",
+      "maxPrice": "Max Price",
+      "sortBy": "Sort By",
+      "applyFilters": "Apply Filters",
+      "clearAll": "Clear All"
+    },
+    "sort": {
+      "newest": "Newest",
+      "oldest": "Oldest",
+      "priceAsc": "Price: Low to High",
+      "priceDesc": "Price: High to Low",
+      "nameAsc": "Name: A-Z",
+      "nameDesc": "Name: Z-A",
+      "popular": "Most Popular",
+      "rating": "Highest Rated"
+    },
+    "viewProduct": "View Product"
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "We provide a comprehensive suite of premium digital services",
+    "getQuote": "Get Quote",
+    "learnMore": "Learn More",
+    "bookConsultation": "Book Consultation",
+    "web": {
+      "title": "Web Development",
+      "description": "Building modern and responsive websites"
+    },
+    "design": {
+      "title": "UI/UX Design",
+      "description": "Creating beautiful and intuitive designs"
+    },
+    "mobile": {
+      "title": "Mobile Apps",
+      "description": "Developing smartphone applications"
+    },
+    "marketing": {
+      "title": "Digital Marketing",
+      "description": "Effective marketing strategies"
+    },
+    "features": {
+      "onTimeDelivery": "On Time Delivery",
+      "competitivePricing": "Competitive Pricing",
+      "freeConsultation": "Free Consultation",
+      "support247": "24/7 Support",
+      "qualityAssurance": "Quality Assurance"
+    }
+  }
+}

@@ -5,68 +5,97 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import {
-  FileText,
-  Scale,
   Shield,
-  CreditCard,
-  Truck,
-  RefreshCw,
-  AlertTriangle,
+  Eye,
+  Database,
+  Lock,
+  UserCheck,
+  FileText,
   Mail,
   Phone,
   MapPin,
   Calendar,
-  ArrowLeft
+  ArrowLeft,
+  Users,
+  Globe,
+  Settings,
+  AlertTriangle,
+  CheckCircle,
+  Info
 } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-export default function TermsPage() {
-  const t = useTranslations('terms');
+export default function PrivacyPolicyPage() {
+  const t = useTranslations('privacy');
   const router = useRouter();
 
   const sections = [
     {
-      id: 'acceptance',
-      icon: Scale,
-      title: t('sections.acceptance.title'),
-      content: t('sections.acceptance.content'),
+      id: 'introduction',
+      icon: Info,
+      title: t('sections.introduction.title'),
+      content: t('sections.introduction.content'),
     },
     {
-      id: 'services',
+      id: 'dataCollection',
+      icon: Database,
+      title: t('sections.dataCollection.title'),
+      content: t('sections.dataCollection.content'),
+    },
+    {
+      id: 'dataUsage',
+      icon: Settings,
+      title: t('sections.dataUsage.title'),
+      content: t('sections.dataUsage.content'),
+    },
+    {
+      id: 'dataSharing',
+      icon: Users,
+      title: t('sections.dataSharing.title'),
+      content: t('sections.dataSharing.content'),
+    },
+    {
+      id: 'dataSecurity',
+      icon: Lock,
+      title: t('sections.dataSecurity.title'),
+      content: t('sections.dataSecurity.content'),
+    },
+    {
+      id: 'userRights',
+      icon: UserCheck,
+      title: t('sections.userRights.title'),
+      content: t('sections.userRights.content'),
+    },
+    {
+      id: 'cookies',
       icon: FileText,
-      title: t('sections.services.title'),
-      content: t('sections.services.content'),
+      title: t('sections.cookies.title'),
+      content: t('sections.cookies.content'),
     },
     {
-      id: 'accounts',
+      id: 'thirdParty',
+      icon: Globe,
+      title: t('sections.thirdParty.title'),
+      content: t('sections.thirdParty.content'),
+    },
+    {
+      id: 'dataRetention',
+      icon: Calendar,
+      title: t('sections.dataRetention.title'),
+      content: t('sections.dataRetention.content'),
+    },
+    {
+      id: 'children',
       icon: Shield,
-      title: t('sections.accounts.title'),
-      content: t('sections.accounts.content'),
+      title: t('sections.children.title'),
+      content: t('sections.children.content'),
     },
     {
-      id: 'orders',
-      icon: CreditCard,
-      title: t('sections.orders.title'),
-      content: t('sections.orders.content'),
-    },
-    {
-      id: 'shipping',
-      icon: Truck,
-      title: t('sections.shipping.title'),
-      content: t('sections.shipping.content'),
-    },
-    {
-      id: 'returns',
-      icon: RefreshCw,
-      title: t('sections.returns.title'),
-      content: t('sections.returns.content'),
-    },
-    {
-      id: 'liability',
+      id: 'changes',
       icon: AlertTriangle,
-      title: t('sections.liability.title'),
-      content: t('sections.liability.content'),
+      title: t('sections.changes.title'),
+      content: t('sections.changes.content'),
     },
   ];
 
@@ -78,7 +107,7 @@ export default function TermsPage() {
           <div className="text-center mb-12">
             <div className="w-16 h-16 mx-auto mb-6 rounded-2xl flex items-center justify-center shadow-lg"
               style={{ background: 'linear-gradient(135deg, var(--brand-gold), var(--brand-navy))' }}>
-              <Scale className="w-8 h-8 text-white" />
+              <Shield className="w-8 h-8 text-white" />
             </div>
             <h1 className="text-4xl font-bold brand-heading mb-4">{t('title')}</h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-6">
@@ -175,15 +204,15 @@ export default function TermsPage() {
                 <CardContent>
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
-                      <h4 className="font-semibold mb-3">{t('contact.legal.title')}</h4>
+                      <h4 className="font-semibold mb-3">{t('contact.privacy.title')}</h4>
                       <div className="space-y-2 text-sm text-gray-600">
                         <div className="flex items-center gap-2">
                           <Mail className="w-4 h-4" />
-                          <span>{t('contact.legal.email')}</span>
+                          <span>{t('contact.privacy.email')}</span>
                         </div>
                         <div className="flex items-center gap-2">
                           <Phone className="w-4 h-4" />
-                          <span>{t('contact.legal.phone')}</span>
+                          <span>{t('contact.privacy.phone')}</span>
                         </div>
                       </div>
                     </div>
@@ -224,8 +253,8 @@ export default function TermsPage() {
                   <ArrowLeft className="w-4 h-4" />
                   {t('goBack')}
                 </Button>
-                <Button asChild className="btn-primary">
-                  <Link href="/contact">{t('contactUs')}</Link>
+                <Button onClick={() => router.push('/contact')} className="btn-primary">
+                  <span>{t('contactUs')}</span>
                 </Button>
               </div>
             </div>

@@ -146,4 +146,5 @@ export interface AuthContextType {
   logout: () => void;
   updateProfile: (data: UpdateProfileRequest) => Promise<void>;
   refreshToken: () => Promise<void>;
+  setUser: (user: User | null) => void;
 }

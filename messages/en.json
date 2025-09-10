@@ -1,4 +1,8 @@
 {
+  "company": {
+    "name": "Rabet Alkhayal",
+    "tagline": "Link of Imagination"
+  },
   "serviceHero": {
     "title": {
       "start": "Complete",
@@ -45,6 +49,68 @@
     "wishlist": "Wishlist",
     "logout": "Logout",
     "getConsultation": "Get Free Consultation"
+  },
+  "services": {
+    "title": "Our Premium Services",
+    "subtitle": "We offer comprehensive innovative tech solutions",
+    "web": {
+      "title": "Web Development",
+      "description": "Building modern and responsive websites"
+    },
+    "design": {
+      "title": "UI/UX Design",
+      "description": "Creating beautiful and intuitive designs"
+    },
+    "marketing": {
+      "title": "Digital Marketing",
+      "description": "Grow your business with digital strategies"
+    },
+    "mobile": {
+      "title": "Mobile Apps",
+      "description": "Cross-platform mobile applications"
+    },
+    "features": {
+      "onTimeDelivery": "On Time Delivery",
+      "competitivePricing": "Competitive Pricing",
+      "freeConsultation": "Free Consultation"
+    },
+    "viewDetails": "View Details",
+    "error": {
+      "message": "Failed to load featured services",
+      "retry": "Try Again"
+    },
+    "detail": {
+      "tabs": {
+        "portfolio": "Portfolio"
+      }
+    }
+  },
+  "banner": {
+    "badges": {
+      "featuredProduct": "🔥 Featured Product",
+      "amazingCategory": "⭐ Amazing Category",
+      "featuredSubcategory": "✨ Featured Subcategory",
+      "professionalService": "🚀 Professional Service",
+      "specialOffer": "🎯 Special Offer",
+      "featured": "🌟 Featured"
+    },
+    "stats": {
+      "productViews": "Product Views",
+      "productClicks": "Product Clicks",
+      "customerRating": "Customer Rating",
+      "categoryProducts": "Category Products",
+      "categoryViews": "Category Views",
+      "completedProjects": "Completed Projects",
+      "satisfiedClients": "Satisfied Clients",
+      "serviceRating": "Service Rating",
+      "bannerViews": "Banner Views",
+      "bannerClicks": "Banner Clicks",
+      "clickRate": "Click Rate"
+    },
+    "discoverMore": "Discover More",
+    "clickToNavigate": "Click to Navigate",
+    "pauseAutoplay": "Pause Autoplay",
+    "startAutoplay": "Start Autoplay"
   },
   "hero": {
     "title": "Connecting Dreams to Reality",
@@ -159,6 +225,20 @@
   },
   "footer": {
     "company": "Rabet Alkhayal",
+    "links": {
+      "home": "Home",
+      "products": "Products",
+      "services": "Services",
+      "categories": "Categories",
+      "about": "About Us",
+      "contact": "Contact"
+    },
+    "services": {
+      "webDevelopment": "Web Development",
+      "mobileApps": "Mobile Apps",
+      "digitalMarketing": "Digital Marketing",
+      "uiUxDesign": "UI/UX Design"
+    },
     "description": "We are a leading company in technology and design",
     "quickLinks": "Quick Links",
     "services": "Our Services",
@@ -361,7 +441,12 @@
     "addedToCart": "Added to cart",
     "removedFromWishlist": "Removed from wishlist",
     "shareWishlist": "Share Wishlist",
-    "saveForLater": "Save for Later"
+    "saveForLater": "Save for Later",
+    "item": "item",
+    "items": "items",
+    "sale": "Sale",
+    "moving": "Moving...",
+    "added": "Added"
   },
 
   "contact": {
@@ -541,33 +626,49 @@
       "backToHome": "Back to Home"
     },
     "verify": {
-      "title": "Enter Verification Code",
+      "title": "Verify Your Email",
       "subtitle": {
-        "login": "Enter the 6-digit code sent to your email",
-        "register": "Enter the 6-digit code to complete registration"
+        "login": "Enter the 6-digit code sent to your email to complete login",
+        "register": "Enter the 6-digit code sent to your email to complete registration"
       },
       "codeExpires": "Code expires in",
-      "verify": "Verify Code",
       "verifying": "Verifying...",
+      "verify": "Verify Code",
       "didntReceive": "Didn't receive the code?",
+      "changeEmail": "Change Email Address",
+      "backToHome": "Back to Home",
+      "instructions": {
+        "title": "How to Verify Your Email",
+        "subtitle": "Follow these simple steps to complete your verification",
+        "step1": {
+          "title": "Check Your Email",
+          "description": "Look for an email from Rabet Al-Khayal in your inbox"
+        },
+        "step2": {
+          "title": "Enter the Code",
+          "description": "Copy the 6-digit verification code from the email"
+        },
+        "step3": {
+          "title": "Complete Verification",
+          "description": "The code expires in 5 minutes for security"
+        }
+      },
+      "help": {
+        "title": "Need Help?",
+        "checkSpam": "Check your spam or junk folder",
+        "checkEmail": "Make sure you entered the correct email address",
+        "wait": "Wait a few minutes for the email to arrive"
+      },
       "resend": {
         "button": "Resend Code",
         "sending": "Sending...",
         "waitTimer": "Resend in {time}",
-        "success": "New code sent successfully!",
+        "success": "Verification code sent successfully!",
         "error": "Failed to resend code. Please try again."
       },
-      "changeEmail": "Change Email",
-      "backToHome": "Back to Home",
       "errors": {
-        "invalidLength": "Please enter all 6 digits",
+        "invalidLength": "Please enter a 6-digit code",
         "invalidCode": "Invalid verification code. Please try again."
-      },
-      "help": {
-        "title": "Need help?",
-        "checkSpam": "Check your spam/junk folder",
-        "checkEmail": "Make sure the email address is correct",
-        "wait": "Wait a few moments for the email to arrive"
       }
     }
   },
@@ -630,10 +731,28 @@
       "preferences": "Preferences"
     },
     "personalInfo": "Personal Information",
+    "addressInfo": "Address Information",
     "firstName": "First Name",
     "lastName": "Last Name",
-    "email": "Email Address",
-    "emailCannotChange": "Email address cannot be changed",
+    "email": "Email",
+    "phoneNumber": "Phone Number",
+    "address": "Address",
+    "firstNamePlaceholder": "Enter your first name",
+    "lastNamePlaceholder": "Enter your last name",
+    "phoneNumberPlaceholder": "Enter your phone number",
+    "addressPlaceholder": "Enter your full address",
+    "emailNotEditable": "Email address cannot be changed",
+    "saving": "Saving...",
+    "saveChanges": "Save Changes",
+    "cancel": "Cancel",
+    "updateSuccess": "Profile updated successfully",
+    "updateError": "Failed to update profile",
+    "back": "Back",
+    "imageUploadSuccess": "Image uploaded successfully",
+    "imageUploadError": "Failed to upload image",
+    "imageUploadInstructions": "Click on the image or drag & drop an image here to upload"
+  },
+  "profileOld": {
     "phone": "Phone Number",
     "dateOfBirth": "Date of Birth",
     "gender": "Gender",
@@ -659,8 +778,21 @@
     "pushNotificationsDesc": "Browser notifications for important updates",
     "saveChanges": "Save Changes",
     "updating": "Updating...",
+    "saving": "Saving...",
     "cancel": "Cancel",
-    "updateSuccess": "Profile updated successfully!"
+    "updateSuccess": "Profile updated successfully!",
+    "updateError": "Failed to update profile",
+    "back": "Back",
+    "phoneNumber": "Phone Number",
+    "phoneNumberPlaceholder": "Enter your phone number",
+    "firstNamePlaceholder": "Enter your first name",
+    "lastNamePlaceholder": "Enter your last name",
+    "emailNotEditable": "Email address cannot be changed",
+    "address": "Address",
+    "addressPlaceholder": "Enter your full address",
+    "imageUploadSuccess": "Image uploaded successfully",
+    "imageUploadError": "Failed to upload image",
+    "imageUploadInstructions": "Click on the image or drag & drop an image here to upload"
   },
   "terms": {
     "title": "Terms & Conditions",
@@ -886,7 +1018,9 @@
     "preferences": {
       "saved": "Cookie preferences saved successfully!",
       "allAccepted": "All cookies accepted!",
-      "onlyNecessary": "Only necessary cookies accepted!"
+      "onlyNecessary": "Only necessary cookies accepted!",
+      "changeNote": "You can change your preferences anytime by refreshing this page",
+      "changePreferences": "Change Preferences"
     },
     "goBack": "Go Back",
     "contactUs": "Contact Us"
@@ -968,7 +1102,7 @@
     },
     "uploadImage": "Upload image"
   },
-  "products": {
+  "productsPage": {
     "title": "Our Products",
     "subtitle": "Discover our premium collection of high-quality products",
     "viewAll": "View All",
@@ -996,7 +1130,7 @@
     "customize": "Customize",
     "hasCustomization": "Customizable"
   },
-  "reviews": {
+  "reviewsPage": {
     "title": "Reviews",
     "addReview": "Add Review",
     "writeReview": "Write a Review",
@@ -1037,7 +1171,7 @@
       "deleted": "Review deleted successfully"
     }
   },
-  "subcategoryPage": {
+  "subcategoryPage2": {
     "title": "Products",
     "loading": "Loading...",
     "error": "Error loading products",
@@ -1068,7 +1202,7 @@
     },
     "viewProduct": "View Product"
   },
-  "services": {
+  "servicesPage": {
     "title": "Our Services",
     "subtitle": "We provide a comprehensive suite of premium digital services",
     "getQuote": "Get Quote",
@@ -1097,5 +1231,77 @@
       "support247": "24/7 Support",
       "qualityAssurance": "Quality Assurance"
     }
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "subtitle": "Learn how we collect, use, and protect your personal information when you use our services.",
+    "lastUpdated": "Last updated",
+    "tableOfContents": "Table of Contents",
+    "introduction": "At Rabet Al-Khayal, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services. Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the site.",
+    "sections": {
+      "introduction": {
+        "title": "Introduction",
+        "content": "This Privacy Policy describes how Rabet Al-Khayal collects, uses, and shares information about you when you use our website, mobile applications, and services. We are committed to protecting your privacy and ensuring that your personal information is handled responsibly and in accordance with applicable data protection laws.\n\nBy using our services, you agree to the collection and use of information in accordance with this policy. We will not use or share your information with anyone except as described in this Privacy Policy."
+      },
+      "dataCollection": {
+        "title": "Information We Collect",
+        "content": "We collect information you provide directly to us, such as when you create an account, make a purchase, or contact us for support.\n\nPersonal Information:\n• Name and contact information (email address, phone number)\n• Billing and shipping addresses\n• Payment information (processed securely through third-party providers)\n• Account credentials and preferences\n• Communication preferences\n\nUsage Information:\n• Website usage data and analytics\n• Device information and browser type\n• IP address and location data\n• Cookies and similar tracking technologies\n• Interaction with our services and content"
+      },
+      "dataUsage": {
+        "title": "How We Use Your Information",
+        "content": "We use the information we collect to provide, maintain, and improve our services:\n\nService Delivery:\n• Process orders and transactions\n• Provide customer support and respond to inquiries\n• Deliver products and services\n• Manage your account and preferences\n\nCommunication:\n• Send important updates about your orders\n• Provide customer service and support\n• Send marketing communications (with your consent)\n• Notify you about changes to our services\n\nImprovement and Analytics:\n• Analyze usage patterns and trends\n• Improve our website and services\n• Develop new features and products\n• Conduct research and analytics"
+      },
+      "dataSharing": {
+        "title": "Information Sharing and Disclosure",
+        "content": "We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, except in the following circumstances:\n\nService Providers:\n• Payment processors for transaction processing\n• Shipping companies for order delivery\n• Email service providers for communications\n• Analytics providers for website insights\n\nLegal Requirements:\n• When required by law or legal process\n• To protect our rights and property\n• To prevent fraud or abuse\n• In case of emergency to protect user safety\n\nBusiness Transfers:\n• In connection with a merger, acquisition, or sale of assets\n• With your explicit consent for other purposes"
+      },
+      "dataSecurity": {
+        "title": "Data Security",
+        "content": "We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction:\n\nSecurity Measures:\n• SSL encryption for data transmission\n• Secure servers and databases\n• Regular security audits and updates\n• Access controls and authentication\n• Employee training on data protection\n\nData Protection:\n• Limited access to personal information\n• Regular backup and recovery procedures\n• Incident response and breach notification\n• Compliance with industry standards\n\nWhile we strive to protect your personal information, no method of transmission over the internet or electronic storage is 100% secure. We cannot guarantee absolute security but are committed to maintaining the highest standards of data protection."
+      },
+      "userRights": {
+        "title": "Your Rights and Choices",
+        "content": "You have certain rights regarding your personal information:\n\nAccess and Portability:\n• Request access to your personal information\n• Receive a copy of your data in a portable format\n• Update or correct your information\n\nControl and Deletion:\n• Delete your account and associated data\n• Opt-out of marketing communications\n• Manage cookie preferences\n• Withdraw consent for data processing\n\nData Protection:\n• Object to certain processing activities\n• Request restriction of processing\n• File a complaint with supervisory authorities\n\nTo exercise these rights, please contact us using the information provided in the Contact section. We will respond to your request within a reasonable timeframe and in accordance with applicable law."
+      },
+      "cookies": {
+        "title": "Cookies and Tracking Technologies",
+        "content": "We use cookies and similar tracking technologies to enhance your experience on our website:\n\nTypes of Cookies:\n• Essential cookies for website functionality\n• Analytics cookies to understand usage patterns\n• Marketing cookies for personalized content\n• Preference cookies to remember your settings\n\nCookie Management:\n• You can control cookies through your browser settings\n• Disabling cookies may affect website functionality\n• We provide cookie preference controls on our website\n\nFor detailed information about our cookie usage, please refer to our Cookie Policy."
+      },
+      "thirdParty": {
+        "title": "Third-Party Services",
+        "content": "Our website may contain links to third-party websites and services:\n\nThird-Party Integration:\n• Payment processors (Stripe, PayPal)\n• Analytics services (Google Analytics)\n• Social media platforms\n• Marketing and advertising partners\n\nExternal Links:\n• We are not responsible for third-party privacy practices\n• Please review their privacy policies before providing information\n• We do not control third-party data collection\n\nThird-Party Data Sharing:\n• We may share information with trusted service providers\n• These providers are bound by confidentiality agreements\n• We ensure they meet our data protection standards"
+      },
+      "dataRetention": {
+        "title": "Data Retention",
+        "content": "We retain your personal information for as long as necessary to fulfill the purposes outlined in this Privacy Policy:\n\nRetention Periods:\n• Account information: Until account deletion\n• Transaction data: As required by law (typically 7 years)\n• Marketing data: Until consent is withdrawn\n• Analytics data: Aggregated and anonymized after 2 years\n\nData Deletion:\n• We will delete personal information upon request\n• Some data may be retained for legal compliance\n• Backup data is securely deleted according to schedule\n• Anonymized data may be retained for analytics"
+      },
+      "children": {
+        "title": "Children's Privacy",
+        "content": "Our services are not intended for children under the age of 13:\n\nAge Restrictions:\n• We do not knowingly collect information from children under 13\n• If we discover such collection, we will delete the information\n• Parents should monitor their children's online activities\n\nParental Rights:\n• Parents can request deletion of their child's information\n• We provide tools for parents to control data collection\n• We comply with applicable children's privacy laws\n\nIf you believe we have collected information from a child under 13, please contact us immediately."
+      },
+      "changes": {
+        "title": "Changes to This Privacy Policy",
+        "content": "We may update this Privacy Policy from time to time:\n\nPolicy Updates:\n• We will notify you of significant changes\n• Updates will be posted on this page with a new date\n• Continued use constitutes acceptance of changes\n\nNotification Methods:\n• Email notification for material changes\n• Website banner for important updates\n• In-app notifications for mobile users\n\nWe encourage you to review this Privacy Policy periodically to stay informed about how we protect your information."
+      }
+    },
+    "contact": {
+      "title": "Contact Information",
+      "privacy": {
+        "title": "Privacy Officer",
+        "email": "privacy@rabet-alkhayal.com",
+        "phone": "+966 11 234 5678"
+      },
+      "support": {
+        "title": "Customer Support",
+        "email": "support@rabet-alkhayal.com",
+        "phone": "+966 11 234 5679"
+      },
+      "address": {
+        "title": "Registered Address",
+        "full": "123 Business District, Riyadh 12345, Saudi Arabia"
+      }
+    },
+    "goBack": "Go Back",
+    "contactUs": "Contact Us"
   }
 }

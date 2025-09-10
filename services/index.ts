@@ -370,7 +370,7 @@ export async function fetchRelatedProducts(
   productId: string,
   limit: number = 6
 ) {
-  const { data } = await axiosClient.get<ProductItem[]>(
+  const { data } = await axiosClient.get(
     `/products/${productId}/related?limit=${limit}`
   );
   return data?.data;
@@ -432,10 +432,10 @@ export interface BannerItem {
 
 // Banners API
 export async function fetchActiveBanners(limit?: number) {
-  const { data } = await axiosClient.get<BannerItem[]>(`/banners/active`, {
+  const { data } = await axiosClient.get(`/banners/active`, {
     params: limit ? { limit } : undefined,
   });
-  return data;
+  return data?.data;
 }
 
 export function useBannersQuery(limit?: number) {

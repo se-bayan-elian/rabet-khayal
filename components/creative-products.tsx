@@ -93,7 +93,7 @@ export function CreativeProducts({ title, subtitle }: CreativeProductsProps) {
     const isWishlisted = isInWishlist(product.id);
 
     return (
-      <Card className="group relative overflow-hidden rounded-2xl shadow-md hover:shadow-2xl transition-all duration-500 bg-white border-0">
+      <Card className="group relative overflow-hidden rounded-2xl shadow-md hover:shadow-2xl transition-all duration-500 bg-white dark:bg-gray-800 border-0 dark:border-gray-700">
         {/* Product Image */}
         <div className="relative aspect-square overflow-hidden">
           {product.imageUrl ? (
@@ -104,8 +104,8 @@ export function CreativeProducts({ title, subtitle }: CreativeProductsProps) {
               className="object-cover transition-transform duration-700 group-hover:scale-110"
             />
           ) : (
-            <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-              <div className="w-16 h-16 rounded-full bg-gray-300" />
+            <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 flex items-center justify-center">
+              <div className="w-16 h-16 rounded-full bg-gray-300 dark:bg-gray-600" />
             </div>
           )}
 
@@ -169,17 +169,17 @@ export function CreativeProducts({ title, subtitle }: CreativeProductsProps) {
         <CardContent className="p-4 space-y-3">
           <div>
             <Link href={`/products/${product.id}`}>
-              <h3 className="font-semibold text-gray-900 line-clamp-2 group-hover:text-brand-navy transition-colors cursor-pointer hover:underline">
+              <h3 className="font-semibold text-gray-900 dark:text-white line-clamp-2 group-hover:text-brand-navy transition-colors cursor-pointer hover:underline">
                 {product.name}
               </h3>
             </Link>
             {product.description ? (
               <div
-                className="text-sm text-gray-600 line-clamp-2 mt-1"
+                className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2 mt-1"
                 dangerouslySetInnerHTML={{ __html: product.description }}
               />
             ) : (
-              <p className="text-sm text-gray-600 line-clamp-2 mt-1">
+              <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2 mt-1">
                 {product.subcategory?.description || product.name}
               </p>
             )}
@@ -219,13 +219,13 @@ export function CreativeProducts({ title, subtitle }: CreativeProductsProps) {
   };
 
   return (
-    <section className="section-padding" style={{ background: 'var(--brand-bg)' }}>
+    <section className="section-padding bg-white dark:bg-gray-900">
       <div className="section-container">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-6" style={{ color: 'var(--brand-navy)' }}>
+          <h2 className="text-4xl font-bold mb-6 text-gray-900 dark:text-white">
             {title}
           </h2>
-          <p className="text-xl max-w-2xl mx-auto" style={{ color: 'var(--brand-text-secondary)' }}>
+          <p className="text-xl max-w-2xl mx-auto text-gray-600 dark:text-gray-300">
             {subtitle}
           </p>
         </div>

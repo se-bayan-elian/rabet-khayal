@@ -1,4 +1,3 @@
-"use client";
 
 import { API_BASE_URL } from "@/config/constant";
 import axios from "axios";

@@ -15,15 +15,7 @@ const MainLayout = ({ children }: PropsWithChildren) => {
         categories={headerT('categories')}
         about={headerT('about')}
         contact={headerT('contact')}
-        webDev={headerT('web-development')}
-        mobileApps={headerT('mobile-apps')}
-        digitalMarketing={headerT('digital-marketing')}
-        branding={headerT('branding')}
-        electronics={headerT('electronics')}
-        fashion={headerT('fashion')}
-        homeGarden={headerT('home-garden')}
-        sports={headerT('sports')}
-        getConsultation={headerT('getConsultation')}
+
       />
       <main>
         {children}

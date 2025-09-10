@@ -54,7 +54,7 @@ export default function WishlistPage() {
     return (
       <div className="min-h-screen bg-gray-50 py-12">
         <div className="section-container section-padding px-4 md:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto">
+          <div className=" mx-auto">
             {/* Header Skeleton */}
             <div className="flex items-center justify-between mb-8">
               <div>
@@ -67,7 +67,7 @@ export default function WishlistPage() {
             {/* Grid Skeleton */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-                <div key={i} className="bg-white rounded-2xl border shadow-md">
+                <div key={i} className=" rounded-2xl  shadow-md">
                   <div className="aspect-square bg-gray-200 rounded-t-2xl animate-pulse"></div>
                   <div className="p-4 space-y-3">
                     <div className="h-4 bg-gray-200 rounded animate-pulse w-3/4"></div>
@@ -115,7 +115,7 @@ export default function WishlistPage() {
           <div>
             <h1 className="text-3xl font-bold brand-heading mb-2">{t("title")}</h1>
             <p className="text-gray-600">
-              {items.length} {items.length === 1 ? 'item' : 'items'} saved
+              {items.length} {items.length === 1 ? t('item') : t('items')} saved
             </p>
           </div>
 
@@ -126,7 +126,7 @@ export default function WishlistPage() {
               className="text-red-600 border-red-200 hover:bg-red-50"
             >
               <Trash2 className="w-4 h-4 mr-2" />
-              Clear All
+              {t('clearAll')}
             </Button>
           )}
         </div>
@@ -170,7 +170,7 @@ export default function WishlistPage() {
                   {isOnSale && (
                     <div className="absolute top-3 left-3">
                       <Badge className="bg-red-500 text-white font-bold px-2 py-1 text-xs">
-                        Sale
+                        {t('sale')}
                       </Badge>
                     </div>
                   )}
@@ -183,7 +183,7 @@ export default function WishlistPage() {
                       onClick={() => handleMoveToCart(item)}
                     >
                       <ShoppingCart className="w-4 h-4 mr-2" />
-                      {cartLoading ? "Moving..." : t("moveToCart")}
+                      {cartLoading ? t("moving") : t("moveToCart")}
                     </Button>
                   </div>
                 </div>
@@ -213,7 +213,7 @@ export default function WishlistPage() {
 
                   {/* Added date */}
                   <div className="text-xs text-gray-500">
-                    Added {new Date(item.addedAt).toLocaleDateString()}
+                    {t('added')} {new Date(item.addedAt).toLocaleDateString()}
                   </div>
                 </CardContent>
               </Card>

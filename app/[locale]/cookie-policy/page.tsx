@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -40,6 +40,21 @@ export default function CookiesPage() {
   });
 
   const [hasChanges, setHasChanges] = useState(false);
+  const [hasMadeChoice, setHasMadeChoice] = useState(false);
+
+  // Check if user has already made a choice on page load
+  useEffect(() => {
+    const savedPreferences = localStorage.getItem('cookiePreferences');
+    if (savedPreferences) {
+      setHasMadeChoice(true);
+      try {
+        const parsed = JSON.parse(savedPreferences);
+        setPreferences(parsed);
+      } catch (error) {
+        console.error('Error parsing saved preferences:', error);
+      }
+    }
+  }, []);
 
   const cookieTypes = [
     {
@@ -98,6 +113,7 @@ export default function CookiesPage() {
     // Here you would save to localStorage or send to your analytics service
     localStorage.setItem('cookiePreferences', JSON.stringify(preferences));
     setHasChanges(false);
+    setHasMadeChoice(true);
     toast.success(t('preferences.saved'));
   };
 
@@ -110,6 +126,8 @@ export default function CookiesPage() {
     };
     setPreferences(allAccepted);
     localStorage.setItem('cookiePreferences', JSON.stringify(allAccepted));
+    setHasMadeChoice(true);
+    setHasChanges(false);
     toast.success(t('preferences.allAccepted'));
   };
 
@@ -122,6 +140,8 @@ export default function CookiesPage() {
     };
     setPreferences(onlyNecessary);
     localStorage.setItem('cookiePreferences', JSON.stringify(onlyNecessary));
+    setHasMadeChoice(true);
+    setHasChanges(false);
     toast.success(t('preferences.onlyNecessary'));
   };
 
@@ -153,22 +173,26 @@ export default function CookiesPage() {
                   <CardTitle className="text-lg">{t('quickActions')}</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  <Button
-                    onClick={handleAcceptAll}
-                    className="w-full btn-primary"
-                  >
-                    <CheckCircle className="w-4 h-4 mr-2" />
-                    {t('acceptAll')}
-                  </Button>
-                  <Button
-                    onClick={handleRejectOptional}
-                    variant="outline"
-                    className="w-full"
-                  >
-                    <Shield className="w-4 h-4 mr-2" />
-                    {t('rejectOptional')}
-                  </Button>
-                  {hasChanges && (
+                  {!hasMadeChoice && (
+                    <>
+                      <Button
+                        onClick={handleAcceptAll}
+                        className="w-full btn-primary text-sm"
+                      >
+                        <CheckCircle className="w-4 h-4 mr-2" />
+                        {t('acceptAll')}
+                      </Button>
+                      <Button
+                        onClick={handleRejectOptional}
+                        variant="outline"
+                        className="w-full text-sm"
+                      >
+                        <Shield className="w-4 h-4 mr-2" />
+                        {t('rejectOptional')}
+                      </Button>
+                    </>
+                  )}
+                  {hasChanges && !hasMadeChoice && (
                     <Button
                       onClick={handleSavePreferences}
                       variant="outline"
@@ -177,6 +201,22 @@ export default function CookiesPage() {
                       <Save className="w-4 h-4 mr-2" />
                       {t('savePreferences')}
                     </Button>
+                  )}
+                  {hasMadeChoice && (
+                    <div className="text-center p-4 bg-green-50 rounded-lg border border-green-200">
+                      <CheckCircle className="w-6 h-6 text-green-600 mx-auto mb-2" />
+                      <p className="text-sm text-green-700 font-medium">
+                        {t('preferences.saved')}
+                      </p>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setHasMadeChoice(false)}
+                        className="mt-2 text-xs"
+                      >
+                        {t('preferences.changePreferences')}
+                      </Button>
+                    </div>
                   )}
                   <Separator />
                   <nav className="space-y-2">
@@ -284,7 +324,7 @@ export default function CookiesPage() {
                 <CardContent>
                   <div className="space-y-6">
                     {cookieTypes.map((type, index) => (
-                      <div key={type.id} className="border rounded-xl p-6 hover:shadow-md transition-shadow">
+                      <div key={type.id} className="shadow-lg rounded-xl p-6 hover:shadow-md transition-shadow">
                         <div className="flex items-start justify-between gap-4">
                           <div className="flex items-start gap-4 flex-1">
                             <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${type.color}`}>
@@ -311,6 +351,7 @@ export default function CookiesPage() {
                           </div>
                           <div className="flex items-center">
                             <Switch
+                              dir="ltr"
                               checked={preferences[type.id as keyof typeof preferences]}
                               onCheckedChange={(checked) => handlePreferenceChange(type.id, checked)}
                               disabled={type.required}
@@ -369,20 +410,40 @@ export default function CookiesPage() {
                       </Alert>
                     )}
 
-                    <div className="flex gap-4">
-                      <Button onClick={handleSavePreferences} className="btn-primary">
-                        <Save className="w-4 h-4 mr-2" />
-                        {t('savePreferences')}
-                      </Button>
-                      <Button onClick={handleAcceptAll} variant="outline">
-                        <CheckCircle className="w-4 h-4 mr-2" />
-                        {t('acceptAll')}
-                      </Button>
-                      <Button onClick={handleRejectOptional} variant="outline">
-                        <Shield className="w-4 h-4 mr-2" />
-                        {t('rejectOptional')}
-                      </Button>
-                    </div>
+                    {!hasMadeChoice ? (
+                      <div className="flex gap-4">
+                        <Button onClick={handleSavePreferences} className="btn-primary">
+                          <Save className="w-4 h-4 mr-2" />
+                          {t('savePreferences')}
+                        </Button>
+                        <Button onClick={handleAcceptAll} variant="outline">
+                          <CheckCircle className="w-4 h-4 mr-2" />
+                          {t('acceptAll')}
+                        </Button>
+                        <Button onClick={handleRejectOptional} variant="outline">
+                          <Shield className="w-4 h-4 mr-2" />
+                          {t('rejectOptional')}
+                        </Button>
+                      </div>
+                    ) : (
+                      <div className="text-center p-4 bg-green-50 rounded-lg border border-green-200">
+                        <CheckCircle className="w-6 h-6 text-green-600 mx-auto mb-2" />
+                        <p className="text-sm text-green-700 font-medium">
+                          {t('preferences.saved')}
+                        </p>
+                        <p className="text-xs text-green-600 mt-1 mb-3">
+                          {t('preferences.changeNote')}
+                        </p>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => setHasMadeChoice(false)}
+                          className="text-xs"
+                        >
+                          {t('preferences.changePreferences')}
+                        </Button>
+                      </div>
+                    )}
                   </div>
                 </CardContent>
               </Card>
@@ -397,8 +458,8 @@ export default function CookiesPage() {
                   <ArrowLeft className="w-4 h-4" />
                   {t('goBack')}
                 </Button>
-                <Button asChild className="btn-primary">
-                  <Link href="/contact">{t('contactUs')}</Link>
+                <Button onClick={() => router.push('/contact')} className="btn-primary">
+                  <span>{t('contactUs')}</span>
                 </Button>
               </div>
             </div>

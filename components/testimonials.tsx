@@ -27,7 +27,7 @@ export function Testimonials({ title, subtitle }: TestimonialsProps) {
 
   if (isLoading) {
     return (
-      <section className="section-padding bg-gray-50">
+      <section className="section-padding bg-gray-50 dark:bg-gray-800">
         <div className="section-container">
           <div className="text-center mb-16">
             <Skeleton className="h-10 w-64 mx-auto mb-4" />
@@ -35,7 +35,7 @@ export function Testimonials({ title, subtitle }: TestimonialsProps) {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[...Array(3)].map((_, index) => (
-              <Card key={index} className="p-6">
+              <Card key={index} className="p-6 bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700">
                 <div className="flex items-center gap-4 mb-4">
                   <Skeleton className="w-12 h-12 rounded-full" />
                   <div className="space-y-2">
@@ -93,14 +93,14 @@ export function Testimonials({ title, subtitle }: TestimonialsProps) {
   }
 
   return (
-    <section className="section-padding bg-gray-50">
+    <section className="section-padding bg-gray-50 dark:bg-gray-800">
       <div className="section-container">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-6" style={{ color: 'var(--brand-navy)' }}>
+          <h2 className="text-4xl font-bold mb-6 text-gray-900 dark:text-white">
             {title || t('title', { default: 'What Our Clients Say' })}
           </h2>
-          <p className="text-xl max-w-2xl mx-auto" style={{ color: 'var(--brand-text-secondary)' }}>
+          <p className="text-xl max-w-2xl mx-auto text-gray-600 dark:text-gray-300">
             {subtitle || t('subtitle', { default: 'Real testimonials from our satisfied customers' })}
           </p>
         </div>
@@ -108,7 +108,7 @@ export function Testimonials({ title, subtitle }: TestimonialsProps) {
         {/* Testimonials Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           {featuredReviews?.slice(0, 6).map((review, index) => (
-            <Card key={review.id} className="group overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+            <Card key={review.id} className="group overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white dark:bg-gray-900 dark:border-gray-700">
               <CardContent className="p-6">
                 {/* Quote Icon */}
                 <div className="mb-4">
@@ -117,13 +117,13 @@ export function Testimonials({ title, subtitle }: TestimonialsProps) {
 
                 {/* Review Title */}
                 {review.title && (
-                  <h4 className="font-semibold text-lg mb-3 text-gray-900">
+                  <h4 className="font-semibold text-lg mb-3 text-gray-900 dark:text-white">
                     {review.title}
                   </h4>
                 )}
 
                 {/* Review Content */}
-                <p className="text-gray-600 leading-relaxed mb-6 line-clamp-4">
+                <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6 line-clamp-4">
                   {review.content}
                 </p>
 
@@ -133,15 +133,15 @@ export function Testimonials({ title, subtitle }: TestimonialsProps) {
                 </div>
 
                 {/* User Info */}
-                <div className="flex items-center gap-3 pt-4 border-t border-gray-100">
-                  <div className="w-10 h-10 rounded-full bg-brand-navy/10 flex items-center justify-center">
-                    <User className="w-5 h-5 text-brand-navy" />
+                <div className="flex items-center gap-3 pt-4 border-t border-gray-100 dark:border-gray-700">
+                  <div className="w-10 h-10 rounded-full bg-brand-navy/10 dark:bg-gray-700 flex items-center justify-center">
+                    <User className="w-5 h-5 text-brand-navy dark:text-gray-300" />
                   </div>
                   <div>
-                    <p className="font-semibold text-gray-900">
+                    <p className="font-semibold text-gray-900 dark:text-white">
                       {review.user.firstName} {review.user.lastName}
                     </p>
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
                       {t('verifiedCustomer', { default: 'Verified Customer' })}
                     </p>
                   </div>

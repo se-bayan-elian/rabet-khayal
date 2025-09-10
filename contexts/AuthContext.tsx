@@ -26,30 +26,46 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 interface AuthProviderProps {
   children: ReactNode;
+  initialProfile?: User | null;
 }
 
-export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+export const AuthProvider: React.FC<AuthProviderProps> = ({ children, initialProfile }) => {
+  const [user, setUser] = useState<User | null>(initialProfile || null);
+  const [isLoading, setIsLoading] = useState(!initialProfile);
   const router = useRouter();
+
+  console.log('AuthProvider initialized with:', { 
+    hasInitialProfile: !!initialProfile, 
+    initialProfile, 
+    isLoading 
+  });
 
   const isAuthenticated = !!user;
 
   // Initialize auth state on mount
   useEffect(() => {
+    // If we already have initial profile data, we don't need to fetch it again
+    if (initialProfile) {
+      setIsLoading(false);
+      return;
+    }
+    
     initializeAuth();
-  }, []);
+  }, [initialProfile]);
 
   const initializeAuth = async () => {
     try {
       const token = getAccessToken();
       if (token) {
+        // Try to get profile, if successful, set user
+        // If fails, the axios interceptor will handle token refresh
         const profile = await getUserProfile();
-        setUser(profile as User);
+        setUser(profile as unknown as User);
       }
     } catch (error) {
       console.error('Auth initialization failed:', error);
-      removeTokens();
+      // Don't remove tokens here, let the axios interceptor handle it
+      // This allows for automatic token refresh
     } finally {
       setIsLoading(false);
     }
@@ -161,7 +177,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       setIsLoading(true);
       const updatedProfile = await updateUserProfile(data);
-      setUser(updatedProfile as User);
+      setUser(updatedProfile as unknown as User);
       toast.success('Profile updated successfully!');
     } catch (error: any) {
       const message = error.response?.data?.message || error.message || 'Profile update failed';
@@ -177,7 +193,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     // but we can expose it for manual refresh if needed
     try {
       const profile = await getUserProfile();
-      setUser(profile as User);
+      setUser(profile as unknown as User);
     } catch (error) {
       console.error('Token refresh failed:', error);
       setUser(null);
@@ -196,6 +212,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     logout,
     updateProfile,
     refreshToken,
+    setUser,
   };
 
   return (

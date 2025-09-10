@@ -16,7 +16,7 @@ import {
 import Image from "next/image"
 import Link from "next/link"
 import { useTranslations } from 'next-intl'
-import { useFeaturedServicesQuery } from '@/services'
+import { useFeaturedServicesQuery, ServiceItem } from '@/services'
 
 interface ServicesOverviewProps {
   title: string
@@ -35,6 +35,7 @@ export function ServicesOverview({ title, subtitle }: ServicesOverviewProps) {
       icon: "/icons/code.svg",
       title: t('web.title', { default: 'Web Development' }),
       description: t('web.description', { default: 'Building modern and responsive websites' }),
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&crop=center",
       features: [t('features.onTimeDelivery', { default: 'On Time Delivery' }), t('features.competitivePricing', { default: 'Competitive Pricing' }), t('features.freeConsultation', { default: 'Free Consultation' })],
       color: "from-blue-500 to-blue-600"
     },
@@ -43,6 +44,7 @@ export function ServicesOverview({ title, subtitle }: ServicesOverviewProps) {
       icon: "/icons/palette.svg",
       title: t('design.title', { default: 'UI/UX Design' }),
       description: t('design.description', { default: 'Creating beautiful and intuitive designs' }),
+      image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=600&fit=crop&crop=center",
       features: [t('features.onTimeDelivery', { default: 'On Time Delivery' }), t('features.competitivePricing', { default: 'Competitive Pricing' })],
       color: "from-purple-500 to-purple-600"
     },
@@ -51,6 +53,7 @@ export function ServicesOverview({ title, subtitle }: ServicesOverviewProps) {
       icon: "/icons/bar-chart.svg",
       title: t('marketing.title', { default: 'Digital Marketing' }),
       description: t('marketing.description', { default: 'Grow your business with digital strategies' }),
+      image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop&crop=center",
       features: [t('features.onTimeDelivery', { default: 'On Time Delivery' }), t('features.competitivePricing', { default: 'Competitive Pricing' })],
       color: "from-green-500 to-green-600"
     },
@@ -59,6 +62,7 @@ export function ServicesOverview({ title, subtitle }: ServicesOverviewProps) {
       icon: "/icons/smartphone.svg",
       title: t('mobile.title', { default: 'Mobile Apps' }),
       description: t('mobile.description', { default: 'Cross-platform mobile applications' }),
+      image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop&crop=center",
       features: [t('features.onTimeDelivery', { default: 'On Time Delivery' }), t('features.competitivePricing', { default: 'Competitive Pricing' })],
       color: "from-orange-500 to-orange-600"
     }
@@ -66,7 +70,7 @@ export function ServicesOverview({ title, subtitle }: ServicesOverviewProps) {
 
   // Map fetched services to the expected format
   const services = featuredServices && featuredServices.length > 0
-    ? featuredServices.slice(0, 4).map((service, index) => {
+    ? featuredServices.slice(0, 4).map((service: ServiceItem, index) => {
       const serviceName = typeof service.name === 'string' ? service.name : service.name?.en || service.name?.ar || 'Service'
       const serviceDesc = service.description ?
         (typeof service.description === 'string' ? service.description : service.description?.en || service.description?.ar || 'Service description')
@@ -74,9 +78,10 @@ export function ServicesOverview({ title, subtitle }: ServicesOverviewProps) {
 
       return {
         id: service.id,
-        icon: service.icon as string,
+        icon: service.icon || "/icons/default-service.svg",
         title: serviceName,
         description: serviceDesc,
+        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&crop=center", // Default image since ServiceItem doesn't have image
         features: [
           t('features.onTimeDelivery', { default: 'On Time Delivery' }),
           t('features.competitivePricing', { default: 'Competitive Pricing' }),
@@ -116,14 +121,14 @@ export function ServicesOverview({ title, subtitle }: ServicesOverviewProps) {
   ]
 
   return (
-    <section className="section-padding section-alt-bg">
+    <section className="section-padding bg-white dark:bg-gray-900">
       <div className="section-container">
         {/* Header */}
         <div className="text-center mb-16 fade-in">
-          <h2 className="text-section-title brand-heading" style={{ fontFamily: 'Tajwal, sans-serif' }}>
+          <h2 className="text-section-title brand-heading text-gray-900 dark:text-white" style={{ fontFamily: 'Tajawal, sans-serif' }}>
             {title}
           </h2>
-          <p className="text-xl max-w-3xl mx-auto mt-6" style={{ color: 'var(--brand-text-secondary)', fontFamily: 'Tajwal, sans-serif' }}>
+          <p className="text-xl max-w-3xl mx-auto mt-6 text-gray-600 dark:text-gray-300" style={{ fontFamily: 'Tajawal, sans-serif' }}>
             {subtitle}
           </p>
         </div>
@@ -181,13 +186,13 @@ export function ServicesOverview({ title, subtitle }: ServicesOverviewProps) {
               return (
                 <Card
                   key={service.id}
-                  className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border-0 fade-in"
+                  className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border-0 fade-in bg-white dark:bg-gray-800 dark:border-gray-700"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   {/* Background Image */}
                   <div className="absolute inset-0">
                     <Image
-                      src={serviceImages[index % serviceImages.length]}
+                      src={service?.image ?? serviceImages[index % serviceImages.length]}
                       alt={service.title}
                       fill
                       className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -212,21 +217,21 @@ export function ServicesOverview({ title, subtitle }: ServicesOverviewProps) {
                       </div>
 
                       {/* Title */}
-                      <h3 className="text-2xl font-bold text-white group-hover:text-yellow-300 transition-colors duration-300" style={{ fontFamily: 'Tajwal, sans-serif' }}>
+                      <h3 className="text-2xl font-bold text-white group-hover:text-yellow-300 transition-colors duration-300" style={{ fontFamily: 'Tajawal, sans-serif' }}>
                         {service.title}
                       </h3>
 
-                      {/* Description */}
-                      <p className="text-lg text-gray-200 group-hover:text-white transition-colors duration-300" style={{ fontFamily: 'Tajwal, sans-serif' }}>
+                      {/* Description
+                      <p className="text-lg text-gray-200 group-hover:text-white transition-colors duration-300" style={{ fontFamily: 'Tajawal, sans-serif' }}>
                         {service.description}
-                      </p>
+                      </p> */}
 
                       {/* Features */}
                       <div className="grid grid-cols-1 gap-2">
                         {service.features.map((feature, featureIndex) => (
                           <div key={featureIndex} className="flex items-center gap-2">
                             <CheckCircle className="w-4 h-4 text-yellow-400 flex-shrink-0" />
-                            <span className="text-sm text-gray-200 group-hover:text-white transition-colors duration-300" style={{ fontFamily: 'Tajwal, sans-serif' }}>
+                            <span className="text-sm text-gray-200 group-hover:text-white transition-colors duration-300" style={{ fontFamily: 'Tajawal, sans-serif' }}>
                               {feature}
                             </span>
                           </div>
@@ -243,7 +248,7 @@ export function ServicesOverview({ title, subtitle }: ServicesOverviewProps) {
                         </Button>
                       </Link>
                       <Link href={`/services/${service.id}#portfolio`} className="flex-1">
-                        <Button variant="outline" className="w-full border-white/30 text-white hover:bg-white hover:text-gray-900 transition-all duration-300 group-hover:bg-white group-hover:text-gray-900" style={{ fontFamily: 'Tajwal, sans-serif' }}>
+                        <Button variant="outline" className="w-full border-white/30 text-white hover:bg-white hover:text-gray-900 transition-all duration-300 group-hover:bg-white group-hover:text-gray-900" style={{ fontFamily: 'Tajawal, sans-serif' }}>
                           {t('detail.tabs.portfolio', { default: 'Portfolio' })}
                           <Award className="w-4 h-4 ml-2" />
                         </Button>
@@ -263,17 +268,16 @@ export function ServicesOverview({ title, subtitle }: ServicesOverviewProps) {
             return (
               <div
                 key={index}
-                className="text-center p-6 card-minimal hover:scale-105 transition-all duration-300 fade-in"
+                className="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-xl hover:scale-105 transition-all duration-300 fade-in"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className="w-16 h-16 rounded-full mx-auto mb-6 flex items-center justify-center"
-                  style={{ background: `linear-gradient(135deg, var(--brand-gold), var(--brand-accent-blue))` }}>
+                <div className="w-16 h-16 rounded-full mx-auto mb-6 flex items-center justify-center bg-gradient-to-br from-amber-500 to-blue-600">
                   <Icon className="w-8 h-8 text-white" />
                 </div>
-                <h4 className="text-lg font-bold mb-3 brand-heading">
+                <h4 className="text-lg font-bold mb-3 text-gray-900 dark:text-white">
                   {feature.title}
                 </h4>
-                <p className="text-sm leading-relaxed" style={{ color: 'var(--brand-text-secondary)' }}>
+                <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-300">
                   {feature.description}
                 </p>
               </div>
@@ -316,15 +320,15 @@ export function ServicesOverview({ title, subtitle }: ServicesOverviewProps) {
               <div className="mt-8 flex justify-center gap-6 text-sm opacity-90">
                 <div className="flex items-center gap-2 text-white">
                   <CheckCircle className="w-4 h-4 text-yellow-300" />
-                  <span style={{ fontFamily: 'Tajwal, sans-serif' }}>{t('features.freeConsultation', { default: 'Free Consultation' })}</span>
+                  <span style={{ fontFamily: 'Tajawal, sans-serif' }}>{t('features.freeConsultation', { default: 'Free Consultation' })}</span>
                 </div>
                 <div className="flex items-center gap-2 text-white">
                   <CheckCircle className="w-4 h-4 text-yellow-300" />
-                  <span style={{ fontFamily: 'Tajwal, sans-serif' }}>{t('features.competitivePricing', { default: 'Competitive Pricing' })}</span>
+                  <span style={{ fontFamily: 'Tajawal, sans-serif' }}>{t('features.competitivePricing', { default: 'Competitive Pricing' })}</span>
                 </div>
                 <div className="flex items-center gap-2 text-white">
                   <CheckCircle className="w-4 h-4 text-yellow-300" />
-                  <span style={{ fontFamily: 'Tajwal, sans-serif' }}>{t('features.onTimeDelivery', { default: 'On-time Delivery' })}</span>
+                  <span style={{ fontFamily: 'Tajawal, sans-serif' }}>{t('features.onTimeDelivery', { default: 'On-time Delivery' })}</span>
                 </div>
               </div>
             </div>

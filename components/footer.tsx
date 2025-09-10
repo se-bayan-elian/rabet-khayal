@@ -2,9 +2,12 @@
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Sparkles, Send } from "lucide-react"
+import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Sparkles, Send, Youtube, MessageCircle, Send as TelegramIcon, Music, Camera } from "lucide-react"
 import Link from "next/link"
 import { useTranslations } from 'next-intl'
+import { useFeaturedServicesQuery } from '@/services'
+import { useQuery } from '@tanstack/react-query'
+import { axiosClient } from '@/lib/axios'
 
 interface FooterProps {
   company: string
@@ -13,6 +16,18 @@ interface FooterProps {
   services: string
   newsletter: string
   followUs: string
+}
+
+// Social media settings API query
+const useSocialMediaSettings = () => {
+  return useQuery({
+    queryKey: ['socialMediaSettings'],
+    queryFn: async () => {
+      const response = await axiosClient.get('/settings/social')
+      return response.data
+    },
+    staleTime: 5 * 60 * 1000, // 5 minutes
+  })
 }
 
 export function Footer({
@@ -24,23 +39,40 @@ export function Footer({
   followUs
 }: FooterProps) {
   const t = useTranslations('footer')
+  const { data: featuredServices } = useFeaturedServicesQuery(6) // Get more services for footer
+  const { data: socialSettings } = useSocialMediaSettings()
   const quickLinks = [
     { name: t('links.home'), href: "/" },
     { name: t('links.products'), href: "/products" },
-    { name: t('links.portfolio'), href: "#portfolio" },
-    { name: t('links.about'), href: "#about" },
-    { name: t('links.contact'), href: "#contact" }
+    { name: t('links.services'), href: "/services" },
+    { name: t('links.categories'), href: "/categories" },
+    { name: t('links.about'), href: "/about" },
+    { name: t('links.contact'), href: "/contact" }
   ]
 
-  const services = [
-    t('services'),
-    t('company'),
-  ]
-  const localizedServices = [
-    t('services'),
-  ]
+  // Map services from API to footer links
+  const footerServices = featuredServices && featuredServices.length > 0
+    ? featuredServices.slice(0, 6).map((service: any) => {
+      const serviceName = typeof service.name === 'string' ? service.name : service.name?.en || service.name?.ar || 'Service'
+      return {
+        name: serviceName,
+        href: `/services/${service.id}`
+      }
+    }) : []
 
-  const socialLinks = [
+
+  // Map social media settings from API
+  const socialLinks = socialSettings?.data ? [
+    ...(socialSettings.data.facebookUrl ? [{ name: "Facebook", icon: Facebook, href: socialSettings.data.facebookUrl }] : []),
+    ...(socialSettings.data.instagramUrl ? [{ name: "Instagram", icon: Instagram, href: socialSettings.data.instagramUrl }] : []),
+    ...(socialSettings.data.twitterUrl ? [{ name: "Twitter", icon: Twitter, href: socialSettings.data.twitterUrl }] : []),
+    ...(socialSettings.data.linkedinUrl ? [{ name: "LinkedIn", icon: Linkedin, href: socialSettings.data.linkedinUrl }] : []),
+    ...(socialSettings.data.youtubeUrl ? [{ name: "YouTube", icon: Youtube, href: socialSettings.data.youtubeUrl }] : []),
+    ...(socialSettings.data.whatsappNumber ? [{ name: "WhatsApp", icon: MessageCircle, href: `https://wa.me/${socialSettings.data.whatsappNumber}` }] : []),
+    ...(socialSettings.data.telegramUrl ? [{ name: "Telegram", icon: TelegramIcon, href: socialSettings.data.telegramUrl }] : []),
+    ...(socialSettings.data.tiktokUrl ? [{ name: "TikTok", icon: Music, href: socialSettings.data.tiktokUrl }] : []),
+    ...(socialSettings.data.snapchatUrl ? [{ name: "Snapchat", icon: Camera, href: socialSettings.data.snapchatUrl }] : [])
+  ] : [
     { name: "Facebook", icon: Facebook, href: "#" },
     { name: "Twitter", icon: Twitter, href: "#" },
     { name: "Instagram", icon: Instagram, href: "#" },
@@ -115,9 +147,15 @@ export function Footer({
           <div className="footer-section">
             <h3 className="text-xl font-bold mb-6 brand-text">{servicesTitle}</h3>
             <ul className="space-y-3">
-              {[t('services')].map((service, index) => (
-                <li key={index} style={{ color: 'var(--brand-gray-300)' }}>
-                  {service}
+              {footerServices?.map((service, index) => (
+                <li key={index}>
+                  <Link
+                    href={service.href}
+                    className="transition-all duration-300 hover:translate-x-2 inline-block"
+                    style={{ color: 'var(--brand-gray-300)' }}
+                  >
+                    {service.name}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -133,7 +171,7 @@ export function Footer({
               {/* Embedded Map */}
               <div className="w-full h-48 rounded-lg overflow-hidden border border-gray-600">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3623.952446394948!2d46.67203887491216!3d24.69134785395158!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2f03890d489399%3A0xba974d1c98e79fd5!2sRiyadh%20Saudi%20Arabia!5e0!3m2!1sen!2sus!4v1680000000000!5m2!1sen!2sus"
+                  src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3624.7435780725514!2d46.803523!3d24.70134!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjTCsDQyJzA0LjgiTiA0NsKwNDgnMTIuNyJF!5e0!3m2!1sen!2s!4v1757328557598!5m2!1sen!2s"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
@@ -177,13 +215,13 @@ export function Footer({
               {t('bottom.copyright', { year: new Date().getFullYear(), company })}
             </div>
             <div className="flex gap-6 text-sm">
-              <Link href="#" className="transition-colors duration-300" style={{ color: 'var(--brand-gray-400)' }}>
+              <Link href="/privacy-policy" className="transition-colors duration-300" style={{ color: 'var(--brand-gray-400)' }}>
                 {t('bottom.privacy')}
               </Link>
-              <Link href="#" className="transition-colors duration-300" style={{ color: 'var(--brand-gray-400)' }}>
+              <Link href="/terms-and-conditions" className="transition-colors duration-300" style={{ color: 'var(--brand-gray-400)' }}>
                 {t('bottom.terms')}
               </Link>
-              <Link href="#" className="transition-colors duration-300" style={{ color: 'var(--brand-gray-400)' }}>
+              <Link href="/cookie-policy" className="transition-colors duration-300" style={{ color: 'var(--brand-gray-400)' }}>
                 {t('bottom.cookies')}
               </Link>
             </div>

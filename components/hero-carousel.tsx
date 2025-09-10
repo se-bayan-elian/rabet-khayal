@@ -19,6 +19,16 @@ import {
 import Image from "next/image"
 import Link from "next/link"
 import { useBannersQuery } from '@/services'
+import CarouselSkeleton from "./hero-carousel-skeleton"
+
+// Banner types
+enum IntegrationType {
+  PRODUCT = "product",
+  CATEGORY = "category",
+  SUBCATEGORY = "subcategory",
+  SERVICE = "service",
+  EXTERNAL_URL = "external_url",
+}
 
 interface HeroCarouselProps {
   title: string
@@ -28,9 +38,102 @@ interface HeroCarouselProps {
 
 export function HeroCarousel({ title, subtitle, cta }: HeroCarouselProps) {
   const t = useTranslations('hero')
+  const tBanner = useTranslations('banner')
   const { data: banners, isLoading, error } = useBannersQuery(5)
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
+
+  // Helper function to generate link based on integration type
+  const generateBannerLink = (banner: any) => {
+    switch (banner.integrationType) {
+      case IntegrationType.PRODUCT:
+        return `/products/${banner.productId}`
+      case IntegrationType.CATEGORY:
+        return `/categories/${banner.categoryId}`
+      case IntegrationType.SUBCATEGORY:
+        return `/categories/${banner.categoryId}/subcategories/${banner.subcategoryId}`
+      case IntegrationType.SERVICE:
+        return `/services/${banner.serviceId}`
+      case IntegrationType.EXTERNAL_URL:
+        return banner.externalUrl || '/'
+      default:
+        return '/'
+    }
+  }
+
+  // Helper function to get promotional badge text based on integration type
+  const getPromotionalBadge = (banner: any) => {
+    switch (banner.integrationType) {
+      case IntegrationType.PRODUCT:
+        return tBanner('badges.featuredProduct', { default: 'Featured Product' })
+      case IntegrationType.CATEGORY:
+        return tBanner('badges.amazingCategory', { default: 'Amazing Category' })
+      case IntegrationType.SUBCATEGORY:
+        return tBanner('badges.featuredSubcategory', { default: 'Featured Subcategory' })
+      case IntegrationType.SERVICE:
+        return tBanner('badges.professionalService', { default: 'Professional Service' })
+      case IntegrationType.EXTERNAL_URL:
+        return tBanner('badges.specialOffer', { default: 'Special Offer' })
+      default:
+        return tBanner('badges.featured', { default: 'Featured' })
+    }
+  }
+
+  // Helper function to get promotional stats based on integration type
+  const getPromotionalStats = (banner: any) => {
+    switch (banner.integrationType) {
+      case IntegrationType.PRODUCT:
+        return [
+          { label: tBanner('stats.productViews', { default: 'Product Views' }), value: "2.5K+" },
+          { label: tBanner('stats.productClicks', { default: 'Product Clicks' }), value: "850+" },
+          { label: tBanner('stats.customerRating', { default: 'Customer Rating' }), value: "4.9⭐" }
+        ]
+      case IntegrationType.CATEGORY:
+        return [
+          { label: tBanner('stats.categoryProducts', { default: 'Category Products' }), value: "150+" },
+          { label: tBanner('stats.categoryViews', { default: 'Category Views' }), value: "5.2K+" },
+          { label: tBanner('stats.customerRating', { default: 'Customer Rating' }), value: "4.8⭐" }
+        ]
+      case IntegrationType.SERVICE:
+        return [
+          { label: tBanner('stats.completedProjects', { default: 'Completed Projects' }), value: "500+" },
+          { label: tBanner('stats.satisfiedClients', { default: 'Satisfied Clients' }), value: "98%" },
+          { label: tBanner('stats.serviceRating', { default: 'Service Rating' }), value: "5.0⭐" }
+        ]
+      default:
+        return [
+          { label: tBanner('stats.bannerViews', { default: 'Banner Views' }), value: "10K+" },
+          { label: tBanner('stats.bannerClicks', { default: 'Banner Clicks' }), value: "1.2K+" },
+          { label: tBanner('stats.clickRate', { default: 'Click Rate' }), value: "18%" }
+        ]
+    }
+  }
+
+  // Helper function to highlight last 2 words of title
+  const highlightTitleWords = (title: string) => {
+    const words = title.split(' ')
+    if (words.length <= 2) {
+      return (
+        <span className="relative inline-block font-black" style={{ color: 'var(--brand-gold)' }}>
+          {title}
+          <div className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full" />
+        </span>
+      )
+    }
+
+    const regularWords = words.slice(0, -2).join(' ')
+    const highlightWords = words.slice(-2).join(' ')
+
+    return (
+      <>
+        {regularWords}{" "}
+        <span className="relative inline-block font-black" style={{ color: 'var(--brand-gold)' }}>
+          {highlightWords}
+          <div className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full" />
+        </span>
+      </>
+    )
+  }
 
   // Default slides as fallback
   const defaultSlides = [
@@ -69,17 +172,17 @@ export function HeroCarousel({ title, subtitle, cta }: HeroCarouselProps) {
       ]
     }
   ]
-
+  console.log(banners)
   // Use banners if available, otherwise use default slides
   const slides = banners && banners.length > 0
-    ? banners.map((banner, index) => ({
+    ? banners.map((banner: any, index: number) => ({
       id: banner.id,
       title: banner.title,
       description: banner.description || subtitle || "",
       imageUrl: banner.imageUrl,
-      linkUrl: banner.linkUrl || "/services",
-      linkText: banner.linkText || cta || "Learn More",
-      badge: `Featured Banner ${index + 1}`,
+      linkUrl: generateBannerLink(banner),
+      linkText: cta || tBanner('discoverMore', { default: 'Discover More' }),
+      badge: getPromotionalBadge(banner),
       highlight: "",
       icon: [Rocket, Palette, TrendingUp][index % 3],
       gradient: [
@@ -87,11 +190,8 @@ export function HeroCarousel({ title, subtitle, cta }: HeroCarouselProps) {
         "from-purple-600 via-pink-600 to-purple-800",
         "from-green-600 via-teal-600 to-green-800"
       ][index % 3],
-      stats: [
-        { label: "Projects", value: "500+" },
-        { label: "Clients", value: "300+" },
-        { label: "Years", value: "8+" }
-      ]
+      stats: getPromotionalStats(banner),
+      integrationType: banner.integrationType
     }))
     : defaultSlides
 
@@ -122,74 +222,24 @@ export function HeroCarousel({ title, subtitle, cta }: HeroCarouselProps) {
     setIsAutoPlaying(!isAutoPlaying)
   }
 
-  const currentSlideData = slides[currentSlide]
+  // Ensure currentSlide is within bounds
+  const safeCurrentSlide = slides.length > 0 ? Math.min(currentSlide, slides.length - 1) : 0
+  const currentSlideData = slides[safeCurrentSlide] || slides[0] || defaultSlides[0]
   const Icon = currentSlideData?.icon || Rocket
 
   if (isLoading) {
     return (
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-600 via-purple-600 to-blue-800">
-        {/* Animated Background Elements */}
-        <div className="absolute top-20 right-20 w-64 h-64 rounded-full bg-white/5 animate-pulse" />
-        <div className="absolute bottom-32 left-16 w-96 h-96 rounded-full bg-yellow-400/10" style={{ animation: 'float 8s ease-in-out infinite' }} />
-        <div className="absolute top-1/2 right-1/4 w-32 h-32 rounded-full bg-white/5" style={{ animation: 'pulse 4s ease-in-out infinite' }} />
+      <CarouselSkeleton />
+    )
+  }
 
-        <div className="section-container px-6 relative z-10 py-12 lg:py-16">
-          <div className="grid lg:grid-cols-2 gap-12 items-center px-4 lg:px-6">
-            {/* Content Side Skeleton */}
-            <div className="text-white space-y-6">
-              {/* Badge Skeleton */}
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-white/10 backdrop-blur-sm">
-                <Skeleton className="w-4 h-4 bg-white/30 rounded" />
-                <Skeleton className="h-4 w-32 bg-white/30" />
-              </div>
-
-              {/* Title Skeleton */}
-              <div className="space-y-4">
-                <Skeleton className="h-12 w-full bg-white/20" />
-                <Skeleton className="h-12 w-4/5 bg-white/20" />
-                <Skeleton className="h-8 w-3/5 bg-white/20" />
-              </div>
-
-              {/* Description Skeleton */}
-              <div className="space-y-2">
-                <Skeleton className="h-5 w-full bg-white/20" />
-                <Skeleton className="h-5 w-4/5 bg-white/20" />
-                <Skeleton className="h-5 w-3/5 bg-white/20" />
-              </div>
-
-              {/* Buttons Skeleton */}
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Skeleton className="h-12 w-40 bg-white/20 rounded-lg" />
-                <Skeleton className="h-12 w-36 bg-white/20 rounded-lg" />
-              </div>
-
-              {/* Stats Skeleton */}
-              <div className="grid grid-cols-3 gap-4 pt-6">
-                {[...Array(3)].map((_, index) => (
-                  <div key={index} className="text-center space-y-2">
-                    <Skeleton className="h-8 w-16 bg-white/20 mx-auto" />
-                    <Skeleton className="h-4 w-20 bg-white/20 mx-auto" />
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Visual Side Skeleton */}
-            <div className="relative px-2 lg:px-0">
-              <div className="relative w-full h-80 lg:h-[450px] rounded-2xl overflow-hidden bg-white/10 backdrop-blur-sm">
-                <Skeleton className="w-full h-full bg-white/20" />
-                {/* Floating Icon Skeleton */}
-                <div className="absolute top-4 right-4 w-12 h-12 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                  <Skeleton className="w-6 h-6 bg-white/30 rounded" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Progress Bar Skeleton */}
-        <div className="absolute bottom-0 left-0 w-full h-1 bg-white/20">
-          <div className="h-full bg-gradient-to-r from-yellow-400 to-yellow-600 w-1/3 animate-pulse" />
+  // If no slides available, show error state
+  if (!slides || slides.length === 0) {
+    return (
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-4">No banners available</h2>
+          <p className="text-gray-600 dark:text-gray-400">Please check back later.</p>
         </div>
       </section>
     )
@@ -203,7 +253,7 @@ export function HeroCarousel({ title, subtitle, cta }: HeroCarouselProps) {
     >
       {/* Background with Enhanced Gradient */}
       <div className="absolute inset-0">
-        <div className={`absolute inset-0 bg-gradient-to-br ${slides[currentSlide].gradient} opacity-90`} />
+        <div className={`absolute inset-0 bg-gradient-to-br ${currentSlideData.gradient} opacity-90`} />
         <div className="absolute inset-0 bg-black/20" />
 
         {/* Animated Background Elements */}
@@ -221,24 +271,15 @@ export function HeroCarousel({ title, subtitle, cta }: HeroCarouselProps) {
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-white/10 backdrop-blur-sm">
               <Icon className="w-4 h-4 text-yellow-300" />
-              <span className="text-sm font-medium" style={{ fontFamily: 'Tajwal, sans-serif' }}>{currentSlideData.badge}</span>
+              <span className="text-sm font-medium" style={{ fontFamily: 'Tajawal, sans-serif' }}>{currentSlideData.badge}</span>
             </div>
 
             {/* Main Title */}
             <div>
-              <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 leading-tight" style={{ fontFamily: 'Tajwal, sans-serif' }}>
-                {currentSlideData.title}{" "}
-                {currentSlideData.highlight && (
-                  <span
-                    className="relative inline-block font-black"
-                    style={{ color: 'var(--brand-gold)' }}
-                  >
-                    {currentSlideData.highlight}
-                    <div className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full" />
-                  </span>
-                )}
+              <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 leading-tight" style={{ fontFamily: 'Tajawal, sans-serif' }}>
+                {highlightTitleWords(currentSlideData.title)}
               </h1>
-              <p className="text-lg lg:text-xl text-gray-200 leading-relaxed max-w-2xl" style={{ fontFamily: 'Tajwal, sans-serif' }}>
+              <p className="text-lg lg:text-xl text-gray-200 leading-relaxed max-w-2xl" style={{ fontFamily: 'Tajawal, sans-serif' }}>
                 {currentSlideData.description}
               </p>
             </div>
@@ -246,13 +287,13 @@ export function HeroCarousel({ title, subtitle, cta }: HeroCarouselProps) {
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
               <Link href={currentSlideData.linkUrl}>
-                <Button className="btn-cta-primary text-lg px-6 py-3" style={{ fontFamily: 'Tajwal, sans-serif' }}>
+                <Button className="btn-cta-primary text-lg px-6 py-3" style={{ fontFamily: 'Tajawal, sans-serif' }}>
                   <Users className="w-5 h-5 mr-3" />
                   {currentSlideData.linkText}
                 </Button>
               </Link>
               <Link href="/about">
-                <Button className="btn-cta-secondary text-lg px-6 py-3" style={{ fontFamily: 'Tajwal, sans-serif' }}>
+                <Button className="btn-cta-secondary text-lg px-6 py-3" style={{ fontFamily: 'Tajawal, sans-serif' }}>
                   <ArrowRight className="w-5 h-5 mr-3" />
                   {t('learnMore', { default: 'Learn More' })}
                 </Button>
@@ -261,12 +302,12 @@ export function HeroCarousel({ title, subtitle, cta }: HeroCarouselProps) {
 
             {/* Stats */}
             <div className="grid grid-cols-3 gap-4 pt-6">
-              {currentSlideData.stats.map((stat, index) => (
+              {currentSlideData.stats.map((stat: any, index: number) => (
                 <div key={index} className="text-center">
-                  <div className="text-2xl lg:text-3xl font-bold text-yellow-300 mb-1" style={{ fontFamily: 'Tajwal, sans-serif' }}>
+                  <div className="text-2xl lg:text-3xl font-bold text-yellow-300 mb-1" style={{ fontFamily: 'Tajawal, sans-serif' }}>
                     {stat.value}
                   </div>
-                  <div className="text-sm text-gray-300" style={{ fontFamily: 'Tajwal, sans-serif' }}>
+                  <div className="text-sm text-gray-300" style={{ fontFamily: 'Tajawal, sans-serif' }}>
                     {stat.label}
                   </div>
                 </div>
@@ -276,21 +317,31 @@ export function HeroCarousel({ title, subtitle, cta }: HeroCarouselProps) {
 
           {/* Visual Side */}
           <div className="relative px-2 lg:px-0">
-            <div className="relative w-full h-80 lg:h-[450px] rounded-2xl overflow-hidden">
-              <Image
-                src={currentSlideData.imageUrl}
-                alt={currentSlideData.title}
-                fill
-                className="object-cover"
-                priority
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+            <Link href={currentSlideData.linkUrl} className="block group">
+              <div className="relative w-full h-80 lg:h-[450px] rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl">
+                <Image
+                  src={currentSlideData.imageUrl}
+                  alt={currentSlideData.title}
+                  fill
+                  className="object-cover transition-all duration-300 group-hover:scale-110"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
 
-              {/* Floating Icon */}
-              <div className="absolute top-4 right-4 w-12 h-12 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                <Icon className="w-6 h-6 text-yellow-300" />
+                {/* Floating Icon */}
+                <div className="absolute top-4 right-4 w-12 h-12 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center transition-all duration-300 group-hover:bg-white/30">
+                  <Icon className="w-6 h-6 text-yellow-300" />
+                </div>
+
+                {/* Hover Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-amber-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                {/* Click Indicator */}
+                <div className="absolute bottom-4 left-4 px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  {tBanner('clickToNavigate', { default: 'Click to Navigate' })}
+                </div>
               </div>
-            </div>
+            </Link>
           </div>
         </div>
       </div>
@@ -313,7 +364,7 @@ export function HeroCarousel({ title, subtitle, cta }: HeroCarouselProps) {
           <button
             onClick={toggleAutoPlay}
             className="carousel-control relative"
-            title={isAutoPlaying ? "إيقاف التشغيل التلقائي" : "تشغيل تلقائي"}
+            title={isAutoPlaying ? tBanner('pauseAutoplay', { default: 'Pause Autoplay' }) : tBanner('startAutoplay', { default: 'Start Autoplay' })}
           >
             {isAutoPlaying ? (
               <Pause className="w-4 h-4" />
@@ -346,7 +397,7 @@ export function HeroCarousel({ title, subtitle, cta }: HeroCarouselProps) {
         <div
           className="h-full bg-gradient-to-r from-yellow-400 to-yellow-600 transition-all duration-300"
           style={{
-            width: `${((currentSlide + 1) / slides.length) * 100}%`
+            width: `${((safeCurrentSlide + 1) / slides.length) * 100}%`
           }}
         />
       </div>

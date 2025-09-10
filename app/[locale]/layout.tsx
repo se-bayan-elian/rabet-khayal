@@ -9,6 +9,7 @@ import { QueryProvider } from "@/components/query-provider"
 import { Toaster } from "@/components/ui/toaster"
 import { Toaster as SonnerToaster } from 'sonner'
 import { AuthProvider } from '@/contexts/AuthContext'
+import { getServerProfile } from '@/lib/server-auth'
 import MainLayout from "@/components/layouts/MainLayout"
 
 const tajawal = Tajawal({
@@ -28,7 +29,10 @@ export default async function RootLayout({
   params: Promise<{ locale: string }>
 }) {
   const { locale } = await params;
-  const messages = await getMessages()
+  const messages = await getMessages();
+  
+  // Fetch profile data on server-side for hydration
+  const initialProfile = await getServerProfile();
 
   return (
     <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
@@ -36,7 +40,7 @@ export default async function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange={false}>
           <NextIntlClientProvider messages={messages}>
             <QueryProvider>
-              <AuthProvider>
+              <AuthProvider initialProfile={initialProfile}>
                 <MainLayout>
                   {children}
                 </MainLayout>

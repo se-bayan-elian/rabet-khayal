@@ -1,4 +1,4 @@
-import { axiosClient } from "@/lib/axios";
+import { axiosAuthClient, axiosClient } from "@/lib/axios";
 import {
   LoginRequest,
   RegisterRequest,
@@ -12,12 +12,20 @@ import {
 } from "@/types/auth";
 import Cookies from "js-cookie";
 
+// Flag to prevent multiple simultaneous refresh attempts
+let isRefreshing = false;
+let failedQueue: Array<{
+  resolve: (value: any) => void;
+  reject: (error: any) => void;
+}> = [];
+
 const AUTH_ENDPOINTS = {
   LOGIN: "/auth/login",
   REGISTER: "/auth/sign-up", // Backend uses sign-up
   VERIFY_OTP: "/auth/sign-up-verification", // Backend uses sign-up-verification
   VERIFY_LOGIN: "/auth/verify-login", // Separate endpoint for login verification
-  GOOGLE_AUTH: "/auth/google",
+  GOOGLE_URL: "/auth/google/url", // Get Google OAuth URL
+  GOOGLE_CALLBACK: "/auth/google/callback", // Google OAuth callback
   REFRESH_TOKEN: "/auth/refresh",
   LOGOUT: "/auth/logout",
   PROFILE: "/auth/profile",
@@ -74,18 +82,24 @@ export const verifyOtp = async (
   return response.data;
 };
 
+export const getGoogleAuthUrl = async (): Promise<{ url: string }> => {
+  const response = await axiosClient.get<{ url: string }>(AUTH_ENDPOINTS.GOOGLE_URL);
+  return response.data;
+};
+
 export const googleAuth = async (
   data: GoogleAuthRequest
 ): Promise<AuthResponse> => {
   const response = await axiosClient.post<AuthResponse>(
-    AUTH_ENDPOINTS.GOOGLE_AUTH,
+    AUTH_ENDPOINTS.GOOGLE_CALLBACK,
     data
   );
   return response.data;
 };
 
 export const refreshAuthToken = async (): Promise<AuthResponse> => {
-  const response = await axiosClient.post<AuthResponse>(
+  // Use axiosAuthClient to avoid triggering the interceptor
+  const response = await axiosAuthClient.post<AuthResponse>(
     AUTH_ENDPOINTS.REFRESH_TOKEN
   );
   return response.data;
@@ -159,24 +173,85 @@ axiosClient.interceptors.request.use(
   }
 );
 
+// Process failed queue
+const processQueue = (error: any, token: string | null = null) => {
+  failedQueue.forEach(({ resolve, reject }) => {
+    if (error) {
+      reject(error);
+    } else {
+      resolve(token);
+    }
+  });
+  
+  failedQueue = [];
+};
+
 // Axios interceptor for handling auth errors
 axiosClient.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
 
+    // Only handle 401 errors and avoid infinite loops
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
+      // Skip refresh for certain endpoints that shouldn't trigger refresh
+      const skipRefreshEndpoints = [
+        '/auth/refresh',
+        '/auth/logout',
+        '/auth/login',
+        '/auth/sign-up'
+      ];
+      
+      const shouldSkipRefresh = skipRefreshEndpoints.some(endpoint => 
+        originalRequest.url?.includes(endpoint)
+      );
+
+      if (shouldSkipRefresh) {
+        removeTokens();
+        if (typeof window !== 'undefined') {
+          window.location.href = "/login";
+        }
+        return Promise.reject(error);
+      }
+
+      // If already refreshing, queue the request
+      if (isRefreshing) {
+        return new Promise((resolve, reject) => {
+          failedQueue.push({ resolve, reject });
+        }).then(token => {
+          originalRequest.headers.Authorization = `Bearer ${token}`;
+          return axiosClient(originalRequest);
+        }).catch(err => {
+          return Promise.reject(err);
+        });
+      }
+
+      isRefreshing = true;
+
       try {
         const response = await refreshAuthToken();
-        setAccessToken(response.data.accessToken);
-        originalRequest.headers.Authorization = `Bearer ${response.data.accessToken}`;
+        const newToken = response.data.accessToken;
+        setAccessToken(newToken);
+        
+        // Process queued requests
+        processQueue(null, newToken);
+        
+        originalRequest.headers.Authorization = `Bearer ${newToken}`;
         return axiosClient(originalRequest);
       } catch (refreshError) {
+        // Process queued requests with error
+        processQueue(refreshError, null);
+        
+        // Clear tokens and redirect to login
         removeTokens();
-        window.location.href = "/login";
+        if (typeof window !== 'undefined') {
+          window.location.href = "/login";
+        }
         return Promise.reject(refreshError);
+      } finally {
+        isRefreshing = false;
       }
     }
 

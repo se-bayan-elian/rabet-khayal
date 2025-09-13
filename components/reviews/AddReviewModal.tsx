@@ -96,26 +96,26 @@ const AddReviewModal = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="max-w-md">
+      <DialogContent className="max-w-md bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
         <DialogHeader>
-          <DialogTitle className="brand-heading">
+          <DialogTitle className="brand-heading dark:!text-amber-100">
             {showSuccess ? t('successTitle') : t('title')}
           </DialogTitle>
         </DialogHeader>
 
         {showSuccess ? (
           <div className="text-center py-8">
-            <CheckCircle className="w-16 h-16 mx-auto mb-4 text-green-500" />
-            <h3 className="text-lg font-semibold mb-2">{t('successMessage')}</h3>
-            <p className="text-gray-600">{t('successDescription')}</p>
+            <CheckCircle className="w-16 h-16 mx-auto mb-4 text-green-500 dark:text-green-400" />
+            <h3 className="text-lg font-semibold mb-2 dark:text-white">{t('successMessage')}</h3>
+            <p className="text-gray-600 dark:text-gray-300">{t('successDescription')}</p>
           </div>
         ) : (
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             {/* Authentication Warning */}
             {!isAuthenticated && (
-              <Alert>
-                <AlertTriangle className="h-4 w-4" />
-                <AlertDescription>
+              <Alert className="bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-800">
+                <AlertTriangle className="h-4 w-4 text-yellow-600 dark:text-yellow-400" />
+                <AlertDescription className="text-yellow-700 dark:text-yellow-300">
                   {t('authRequired')}
                 </AlertDescription>
               </Alert>
@@ -123,7 +123,7 @@ const AddReviewModal = ({
 
             {/* Rating */}
             <div>
-              <Label htmlFor="rating">{t('rating')} *</Label>
+              <Label htmlFor="rating" className="dark:text-gray-300">{t('rating')} *</Label>
               <div className="flex items-center gap-1 mt-2">
                 {[1, 2, 3, 4, 5].map((star) => (
                   <button
@@ -137,52 +137,52 @@ const AddReviewModal = ({
                     <Star 
                       className={`w-8 h-8 ${
                         star <= (hoveredRating || currentRating) 
-                          ? 'fill-yellow-400 text-yellow-400' 
-                          : 'text-gray-300 hover:text-yellow-300'
+                          ? 'fill-yellow-400 text-yellow-400 dark:fill-amber-400 dark:text-amber-400' 
+                          : 'text-gray-300 hover:text-yellow-300 dark:text-gray-500 dark:hover:text-amber-300'
                       }`}
                     />
                   </button>
                 ))}
               </div>
               {errors.rating && (
-                <p className="text-sm text-red-500 mt-1">{errors.rating.message}</p>
+                <p className="text-sm text-red-500 dark:text-red-400 mt-1">{errors.rating.message}</p>
               )}
             </div>
 
             {/* Title */}
             <div>
-              <Label htmlFor="title">{t('reviewTitle')} *</Label>
+              <Label htmlFor="title" className="dark:text-gray-300">{t('reviewTitle')} *</Label>
               <Input
                 id="title"
                 {...register('title')}
                 placeholder={t('titlePlaceholder')}
-                className="mt-2"
+                className="mt-2 bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
               />
               {errors.title && (
-                <p className="text-sm text-red-500 mt-1">{errors.title.message}</p>
+                <p className="text-sm text-red-500 dark:text-red-400 mt-1">{errors.title.message}</p>
               )}
             </div>
 
             {/* Content */}
             <div>
-              <Label htmlFor="content">{t('reviewContent')} *</Label>
+              <Label htmlFor="content" className="dark:text-gray-300">{t('reviewContent')} *</Label>
               <Textarea
                 id="content"
                 {...register('content')}
                 placeholder={t('contentPlaceholder')}
                 rows={4}
-                className="mt-2"
+                className="mt-2 bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
               />
               {errors.content && (
-                <p className="text-sm text-red-500 mt-1">{errors.content.message}</p>
+                <p className="text-sm text-red-500 dark:text-red-400 mt-1">{errors.content.message}</p>
               )}
             </div>
 
             {/* Error Display */}
             {addReviewMutation.isError && (
-              <Alert variant="destructive">
-                <AlertTriangle className="h-4 w-4" />
-                <AlertDescription>
+              <Alert variant="destructive" className="bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800">
+                <AlertTriangle className="h-4 w-4 text-red-600 dark:text-red-400" />
+                <AlertDescription className="text-red-700 dark:text-red-300">
                   {t('submitError')}
                 </AlertDescription>
               </Alert>

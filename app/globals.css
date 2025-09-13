@@ -146,6 +146,69 @@
   }
 }
 
+/* Fix for HTML content rendered with dangerouslySetInnerHTML */
+@layer utilities {
+  .html-content ul {
+    list-style-type: disc;
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .html-content ol {
+    list-style-type: decimal;
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .html-content li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+  }
+  
+  .html-content ul ul {
+    list-style-type: circle;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .html-content ul ul ul {
+    list-style-type: square;
+  }
+  
+  .html-content ol ol {
+    list-style-type: lower-alpha;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .html-content ol ol ol {
+    list-style-type: lower-roman;
+  }
+  
+  /* RTL support for lists */
+  [dir="rtl"] .html-content ul,
+  [dir="rtl"] .html-content ol {
+    margin-left: 0;
+    margin-right: 1.5rem;
+  }
+  
+  [dir="rtl"] .html-content ul ul,
+  [dir="rtl"] .html-content ol ol {
+    margin-left: 0;
+    margin-right: 1.5rem;
+  }
+  
+  /* Dark mode support */
+  .dark .html-content ul,
+  .dark .html-content ol {
+    color: var(--brand-text-primary);
+  }
+  
+  .dark .html-content li {
+    color: var(--brand-text-primary);
+  }
+}
+
 /* === STANDARDIZED CONTAINERS === */
 
 /* Main container for all sections */
@@ -248,6 +311,39 @@
   background: var(--brand-navy-light);
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
+}
+
+/* Brand Color Utilities */
+.bg-brand-gold {
+  background-color: var(--brand-gold) !important;
+}
+
+.text-brand-gold {
+  color: var(--brand-gold) !important;
+}
+
+.bg-brand-navy {
+  background-color: var(--brand-navy) !important;
+}
+
+.text-brand-navy {
+  color: var(--brand-navy) !important;
+}
+
+.bg-brand-navy-light {
+  background-color: var(--brand-navy-light) !important;
+}
+
+.text-brand-navy-light {
+  color: var(--brand-navy-light) !important;
+}
+
+.bg-brand-navy-dark {
+  background-color: var(--brand-navy-dark) !important;
+}
+
+.text-brand-navy-dark {
+  color: var(--brand-navy-dark) !important;
 }
 
 .btn-creative {

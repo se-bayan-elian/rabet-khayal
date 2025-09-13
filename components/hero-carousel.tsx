@@ -247,7 +247,7 @@ export function HeroCarousel({ title, subtitle, cta }: HeroCarouselProps) {
 
   return (
     <section
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-[calc(100vh - 80px)] flex items-start justify-center overflow-hidden"
       onMouseEnter={() => setIsAutoPlaying(false)}
       onMouseLeave={() => setIsAutoPlaying(true)}
     >
@@ -263,11 +263,11 @@ export function HeroCarousel({ title, subtitle, cta }: HeroCarouselProps) {
       </div>
 
       {/* Main Content */}
-      <div className="section-container px-6 relative z-10 py-12 lg:py-16">
-        <div className="grid lg:grid-cols-2 gap-12 items-center px-4 lg:px-6">
+      <div className="lg:section-container px-4 relative z-10 !py-12 lg:py-16">
+        <div className="grid  lg:grid-cols-2 gap-12 items-center  lg:px-6">
 
           {/* Content Side */}
-          <div className="text-white space-y-6 fade-in">
+          <div className="order-2 lg:order-1 text-white space-y-6 fade-in">
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-white/10 backdrop-blur-sm">
               <Icon className="w-4 h-4 text-yellow-300" />
@@ -316,7 +316,7 @@ export function HeroCarousel({ title, subtitle, cta }: HeroCarouselProps) {
           </div>
 
           {/* Visual Side */}
-          <div className="relative px-2 lg:px-0">
+          <div className="order-1 lg:order-2 relative  lg:px-0">
             <Link href={currentSlideData.linkUrl} className="block group">
               <div className="relative w-full h-80 lg:h-[450px] rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 group-hover:scale-105 group-hover:shadow-2xl">
                 <Image

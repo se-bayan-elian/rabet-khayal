@@ -6,11 +6,9 @@ import { routing } from "./i18n/routing";
 const PROTECTED_ROUTES = [
   '/my-profile',
   '/my-orders',
-  '/wishlist',
   '/settings',
   '/checkout',
-  '/cart'
-];
+  ];
 
 // Define auth routes that should redirect if user is already logged in
 const AUTH_ROUTES = [

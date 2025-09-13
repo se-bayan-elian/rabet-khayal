@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useQuery, useMutation } from '@tanstack/react-query'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useSearchParams } from 'next/navigation'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -21,7 +21,8 @@ export default function ContactPage() {
   const searchParams = useSearchParams()
   const serviceId = searchParams.get('serviceId')
   const pricingPlanId = searchParams.get('pricingPlanId')
-
+  const locale = useLocale();
+  const dir = locale === 'ar' ? 'rtl' : 'ltr';
   const [showSuccessModal, setShowSuccessModal] = useState(false)
   const [formData, setFormData] = useState<ContactFormRequest>({
     name: '',
@@ -108,31 +109,32 @@ export default function ContactPage() {
   const selectedPlan = Array.isArray(pricingPlans) ? pricingPlans.find((plan: any) => plan.id === formData.pricingPlanId) : null
 
   return (
-    <div className="min-h-screen pt-20 overflow-x-hidden max-w-[100vw]">
+    <div className="min-h-screen pt-20 overflow-x-hidden max-w-[100vw] bg-white dark:bg-gray-900">
       {/* Enhanced Hero Section */}
-      <section className="section-padding relative overflow-hidden" style={{ 
-        background: 'linear-gradient(135deg, rgba(255,204,0,0.1) 0%, rgba(255,255,255,0.95) 50%, rgba(28,28,60,0.05) 100%)' 
+      <section className="section-padding relative overflow-hidden bg-gradient-to-br from-amber-50 via-white to-blue-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950" style={{ 
+        // background: 'linear-gradient(135deg, rgba(255,204,0,0.1) 0%, rgba(255,255,255,0.95) 50%, rgba(28,28,60,0.05) 100%)' 
       }}>
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-1/4 right-1/4 w-64 h-64 rounded-full bg-gradient-to-br from-amber-400/20 to-orange-500/20 animate-float"></div>
-          <div className="absolute bottom-1/4 left-1/4 w-48 h-48 rounded-full bg-gradient-to-br from-blue-400/20 to-purple-500/20 animate-bounce-slow"></div>
+          <div className="absolute top-1/4 right-1/4 w-64 h-64 rounded-full bg-gradient-to-br from-amber-400/20 to-orange-500/20 dark:from-gray-600/5 dark:to-gray-500/5 animate-float"></div>
+          <div className="absolute bottom-1/4 left-1/4 w-48 h-48 rounded-full bg-gradient-to-br from-blue-400/20 to-purple-500/20 dark:from-gray-600/5 dark:to-gray-500/5 animate-bounce-slow"></div>
+          <div className="absolute top-1/2 left-1/2 w-32 h-32 rounded-full bg-gradient-to-br from-green-400/15 to-emerald-500/15 dark:from-gray-600/3 dark:to-gray-500/3 animate-pulse"></div>
         </div>
         <div className="section-container relative z-10">
           <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-gradient-creative leading-tight animate-pulse-slow">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-gradient-creative dark:text-white dark:bg-gradient-to-r dark:from-white dark:via-amber-100 dark:to-amber-200 dark:bg-clip-text dark:text-transparent leading-tight animate-pulse-slow">
               {t('title')}
             </h1>
-            <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 mb-8 leading-relaxed max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 dark:text-amber-100 mb-8 leading-relaxed max-w-2xl mx-auto">
               {t('description')}
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <div className="flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full shadow-lg">
-                <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                <span className="text-sm font-medium text-gray-700">نحن متاحون الآن</span>
+              <div className="flex items-center gap-2 px-4 py-2 bg-white/80 dark:bg-gray-800/90 backdrop-blur-sm rounded-full shadow-lg dark:shadow-gray-900/50 border border-gray-200/50 dark:border-gray-700/50">
+                <div className="w-3 h-3 bg-green-500 dark:bg-green-400 rounded-full animate-pulse"></div>
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-amber-100">{t('status.available')}</span>
               </div>
-              <div className="flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full shadow-lg">
-                <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse"></div>
-                <span className="text-sm font-medium text-gray-700">استجابة خلال دقائق</span>
+              <div className="flex items-center gap-2 px-4 py-2 bg-white/80 dark:bg-gray-800/90 backdrop-blur-sm rounded-full shadow-lg dark:shadow-gray-900/50 border border-gray-200/50 dark:border-gray-700/50">
+                <div className="w-3 h-3 bg-blue-500 dark:bg-blue-400 rounded-full animate-pulse"></div>
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300 dark:text-amber-100">{t('status.quickResponse')}</span>
               </div>
             </div>
           </div>
@@ -145,10 +147,10 @@ export default function ContactPage() {
           <div className="grid lg:grid-cols-3 gap-12">
             {/* Enhanced Contact Form */}
             <div className="lg:col-span-2">
-              <Card className="shadow-2xl border-0 card-creative">
+              <Card className="shadow-2xl border-0 card-creative bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                 <CardHeader className="relative">
                   <div className="absolute -top-4 -right-4 w-8 h-8 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full animate-bounce opacity-70"></div>
-                  <CardTitle className="text-3xl brand-heading flex items-center gap-3">
+                  <CardTitle className="text-3xl brand-heading dark:text-white flex items-center gap-3">
                     <div className="w-10 h-10 bg-gradient-to-r from-amber-400 to-orange-500 rounded-xl flex items-center justify-center">
                       <span className="text-white text-xl">📝</span>
                     </div>
@@ -198,8 +200,9 @@ export default function ContactPage() {
                             type="email"
                             value={formData.email}
                             onChange={(e) => handleInputChange('email', e.target.value)}
-                            placeholder={t('form.emailPlaceholder')}
+                            placeholder={"example@example.com"}
                             required
+                            dir="ltr"
                             className="input-enhanced focus-creative"
                           />
                       </div>
@@ -216,7 +219,8 @@ export default function ContactPage() {
                           id="phone"
                           value={formData.phone}
                           onChange={(e) => handleInputChange('phone', e.target.value)}
-                          placeholder={t('form.phonePlaceholder')}
+                          placeholder={"+966 123 456 789"}
+                          dir="ltr"
                           className="input-enhanced focus-creative"
                         />
                       </div>
@@ -252,11 +256,12 @@ export default function ContactPage() {
                           value={formData.serviceId}
                           onValueChange={(value) => handleInputChange('serviceId', value)}
                           required
+                          dir={dir}
                         >
-                          <SelectTrigger className="h-14 text-base">
+                          <SelectTrigger className="h-14 text-base bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100">
                             <SelectValue placeholder={t('form.selectService')} />
                           </SelectTrigger>
-                          <SelectContent>
+                          <SelectContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                             {services.map((service) => (
                               <SelectItem key={service.id} value={service.id}>
                                 <div className="flex items-center gap-2">
@@ -279,19 +284,20 @@ export default function ContactPage() {
                           <Select
                             value={formData.pricingPlanId}
                             onValueChange={(value) => handleInputChange('pricingPlanId', value)}
-                          >
-                            <SelectTrigger className="h-14 text-base">
-                              <SelectValue placeholder={t('form.selectPlan')} />
+                            dir={dir}
+                         >
+                            <SelectTrigger className="h-14 text-base bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100 gap-2">
+                              <SelectValue className='gap-4' placeholder={t('form.selectPlan')} />
                             </SelectTrigger>
-                            <SelectContent>
+                            <SelectContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 w-full">
                               {Array.isArray(pricingPlans) && pricingPlans.map((plan: any) => (
-                                <SelectItem key={plan.id} value={plan.id}>
-                                  <div className="flex items-center justify-between w-full">
+                                <SelectItem key={plan.id} value={plan.id} className='w-full'>
+                                  <div className="flex items-center justify-between w-full gap-2">
                                     <div className="flex items-center gap-2">
                                       <span className="text-lg">💵</span>
                                       <span className="font-medium">{plan.name}</span>
                                     </div>
-                                    <span className="text-amber-600 font-bold">${plan.finalPrice}</span>
+                                    <span className="text-amber-600 dark:text-amber-400 font-bold">{plan.finalPrice} ﷼</span>
                                   </div>
                                 </SelectItem>
                               ))}
@@ -305,10 +311,10 @@ export default function ContactPage() {
                                 </div>
                                 <div>
                                   <p className="text-sm font-bold text-blue-800 dark:text-blue-300">
-                                    {selectedPlan.name} - <span className="text-amber-600">${selectedPlan.finalPrice}</span>
+                                    {selectedPlan.name} - <span className="text-amber-600 dark:text-amber-400">{selectedPlan.finalPrice} ﷼</span>
                                   </p>
                                   {selectedPlan.description && (
-                                    <p className="text-sm text-blue-600 dark:text-blue-400 mt-1">{selectedPlan.description}</p>
+                                    <div className="text-sm text-blue-600 dark:text-blue-400 mt-1 html-content" dangerouslySetInnerHTML={{ __html: selectedPlan.description }}></div>
                                   )}
                                 </div>
                               </div>
@@ -338,7 +344,7 @@ export default function ContactPage() {
                           placeholder={t('form.messagePlaceholder')}
                           rows={6}
                           required
-                          className="min-h-[150px] resize-y"
+                          className="min-h-[150px] resize-y bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100"
                         />
                         <p className="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1">
                           <span>💡</span>
@@ -362,23 +368,23 @@ export default function ContactPage() {
                       <Button
                         type="submit"
                         variant="creative"
-                        className="w-full"
+                        className="w-full items-center flex-row"
                         disabled={submitMutation.isPending}
                         size="xl"
                       >
                         {submitMutation.isPending ? (
-                          <>
+                          <div className='flex items-center gap-2'>
                             <Loader2 className="w-5 h-5 mr-3 animate-spin" />
                             <span className="text-lg font-bold">{t('form.sending')}</span>
-                          </>
+                          </div>
                         ) : (
-                          <>
+                          <div className='flex items-center gap-2'>
                             <Send className="w-5 h-5 mr-3" />
                             <span className="text-lg font-bold">{t('form.submit')}</span>
                             <div className="ml-3 w-6 h-6 bg-white/20 rounded-full flex items-center justify-center">
                               <span className="text-xs">🚀</span>
                             </div>
-                          </>
+                          </div>
                         )}
                       </Button>
                     </div>
@@ -390,23 +396,23 @@ export default function ContactPage() {
             {/* Enhanced Contact Information */}
             <div className="space-y-8">
               {/* Contact Details */}
-              <Card className="shadow-2xl border-0 card-creative">
-                <CardHeader>
-                  <CardTitle className="brand-heading flex items-center gap-3">
+              <Card className="shadow-2xl border-0 card-creative bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+                <CardHeader className='xl:px-4 px-0'>
+                  <CardTitle className="brand-heading dark:text-white flex items-center gap-3">
                     <div className="w-10 h-10 bg-gradient-to-r from-blue-400 to-purple-500 rounded-xl flex items-center justify-center">
                       <span className="text-white text-xl">📞</span>
                     </div>
                     {t('contactInfo')}
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-6">
+                <CardContent className="space-y-6 px-0 xl:px-4">
                   <div className="flex items-start gap-4">
                     <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ background: 'var(--brand-gold)' }}>
                       <Mail className="w-5 h-5 text-white" />
                     </div>
                     <div>
-                      <h4 className="font-semibold mb-1">{t('email')}</h4>
-                      <p className="text-gray-600">info@rabetalkhayal.com</p>
+                      <h4 className="font-semibold mb-1 dark:text-gray-200">{t('email')}</h4>
+                      <p className="text-gray-600 dark:text-gray-400">info@rabetalkhayal.com</p>
                     </div>
                   </div>
 
@@ -415,8 +421,8 @@ export default function ContactPage() {
                       <Phone className="w-5 h-5 text-white" />
                     </div>
                     <div>
-                      <h4 className="font-semibold mb-1">{t('phone')}</h4>
-                      <p className="text-gray-600">+966 123 456 789</p>
+                      <h4 className="font-semibold mb-1 dark:text-gray-200">{t('phone')}</h4>
+                      <p dir="ltr" className="text-gray-600 dark:text-gray-400">+966 56 455 4142</p>
                     </div>
                   </div>
 
@@ -425,47 +431,47 @@ export default function ContactPage() {
                       <MapPin className="w-5 h-5 text-white" />
                     </div>
                     <div>
-                      <h4 className="font-semibold mb-1">{t('address')}</h4>
-                      <p className="text-gray-600">{t('addressText')}</p>
+                      <h4 className="font-semibold mb-1 dark:text-gray-200">{t('address')}</h4>
+                      <p className="text-gray-600 dark:text-gray-400">{t('addressText')}</p>
                     </div>
                   </div>
                 </CardContent>
               </Card>
 
               {/* Working Hours */}
-              <Card className="shadow-lg">
+              <Card className="shadow-lg bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                 <CardHeader>
-                  <CardTitle className="brand-heading">{t('workingHours')}</CardTitle>
+                  <CardTitle className="brand-heading dark:text-white">{t('workingHours')}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
-                      <span>{t('sunday')}</span>
-                      <span className="text-gray-600">{t('hours.weekday')}</span>
+                      <span className="dark:text-gray-300">{t('sunday')}</span>
+                      <span className="text-gray-600 dark:text-gray-400">{t('hours.weekday')}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span>{t('monday')}</span>
-                      <span className="text-gray-600">{t('hours.weekday')}</span>
+                      <span className="dark:text-gray-300">{t('monday')}</span>
+                      <span className="text-gray-600 dark:text-gray-400">{t('hours.weekday')}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span>{t('tuesday')}</span>
-                      <span className="text-gray-600">{t('hours.weekday')}</span>
+                      <span className="dark:text-gray-300">{t('tuesday')}</span>
+                      <span className="text-gray-600 dark:text-gray-400">{t('hours.weekday')}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span>{t('wednesday')}</span>
-                      <span className="text-gray-600">{t('hours.weekday')}</span>
+                      <span className="dark:text-gray-300">{t('wednesday')}</span>
+                      <span className="text-gray-600 dark:text-gray-400">{t('hours.weekday')}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span>{t('thursday')}</span>
-                      <span className="text-gray-600">{t('hours.weekday')}</span>
+                      <span className="dark:text-gray-300">{t('thursday')}</span>
+                      <span className="text-gray-600 dark:text-gray-400">{t('hours.weekday')}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span>{t('friday')}</span>
-                      <span className="text-red-600">{t('hours.friday')}</span>
+                      <span className="dark:text-gray-300">{t('friday')}</span>
+                      <span className="text-red-600 dark:text-red-400">{t('hours.friday')}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span>{t('saturday')}</span>
-                      <span className="text-gray-600">{t('hours.weekend')}</span>
+                      <span className="dark:text-gray-300">{t('saturday')}</span>
+                      <span className="text-gray-600 dark:text-gray-400">{t('hours.weekend')}</span>
                     </div>
                   </div>
                 </CardContent>
@@ -477,9 +483,9 @@ export default function ContactPage() {
 
       {/* Success Modal */}
       <Dialog open={showSuccessModal} onOpenChange={setShowSuccessModal}>
-        <DialogContent className="max-w-md">
+        <DialogContent className="max-w-md bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
           <DialogHeader>
-            <DialogTitle className="text-center">
+            <DialogTitle className="text-center dark:text-white">
               <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-green-100 flex items-center justify-center">
                 <Check className="w-8 h-8 text-green-600" />
               </div>
@@ -487,7 +493,7 @@ export default function ContactPage() {
             </DialogTitle>
           </DialogHeader>
           <div className="text-center">
-            <p className="text-gray-600 mb-6">{t('success.message')}</p>
+            <p className="text-gray-600 dark:text-gray-300 mb-6">{t('success.message')}</p>
             <Button onClick={() => setShowSuccessModal(false)} className="btn-primary">
               {t('success.close')}
             </Button>

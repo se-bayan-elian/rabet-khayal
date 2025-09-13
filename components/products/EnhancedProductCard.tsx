@@ -10,7 +10,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ProductItem } from '@/services'
 import { useWishlistStore } from '@/store/wishlist'
-import ProductCustomizationModal from './ProductCustomizationModal'
+import { AddToCartWithQuestionsModal } from '@/components/cart/AddToCartWithQuestionsModal'
+import { useCartStore } from '@/store/cart'
 
 interface EnhancedProductCardProps {
   product: ProductItem
@@ -21,7 +22,8 @@ const EnhancedProductCard = ({ product, showQuickActions = true }: EnhancedProdu
   const t = useTranslations('products')
   const [showCustomizationModal, setShowCustomizationModal] = useState(false)
   const [isAddingToWishlist, setIsAddingToWishlist] = useState(false)
-  const { items: wishlistItems, addItem: addToWishlist, removeItem: removeFromWishlist } = useWishlistStore()
+  const { items: wishlistItems, addToWishlist, removeFromWishlist } = useWishlistStore()
+  const addToCart = useCartStore((state) => state.addToCart)
 
   const isInWishlist = wishlistItems.some(item => item.id === product.id)
   const hasQuestions = product.questions && product.questions.length > 0
@@ -37,10 +39,10 @@ const EnhancedProductCard = ({ product, showQuickActions = true }: EnhancedProdu
         addToWishlist({
           id: product.id,
           name: product.name,
+          description: product.description || '',
           price: Number(product.discountedPrice || product.originalPrice),
-          image: product.imageUrl || '',
-          originalPrice: Number(product.originalPrice),
-          discountedPrice: product.discountedPrice ? Number(product.discountedPrice) : undefined,
+          imageUrl: product.imageUrl || '',
+          salePrice: product.discountedPrice ? Number(product.discountedPrice) : undefined,
         })
       }
     } finally {
@@ -49,12 +51,22 @@ const EnhancedProductCard = ({ product, showQuickActions = true }: EnhancedProdu
   }
 
   const handleAddToCart = () => {
-    if (hasQuestions) {
-      setShowCustomizationModal(true)
-    } else {
-      // Direct add to cart for products without customization
-      setShowCustomizationModal(true)
-    }
+    setShowCustomizationModal(true)
+  }
+
+  const handleAddToCartWithQuestions = (product: any, quantity: number, customizations: any[], totalCost: number) => {
+    // Add to cart with customizations
+    addToCart({
+      id: product.id, // Cart item ID
+      productId: product.id,
+      name: product.name,
+      description: product.description || '',
+      price: totalCost / quantity, // Price per item
+      imageUrl: product.imageUrl || '',
+      customizations: customizations.length > 0 ? customizations : undefined,
+      customizationCost: customizations.length > 0 ? totalCost - (product.price * quantity) : 0,
+    }, quantity)
+    setShowCustomizationModal(false)
   }
 
   const renderStars = (rating: number) => {
@@ -73,7 +85,7 @@ const EnhancedProductCard = ({ product, showQuickActions = true }: EnhancedProdu
   }
 
   const formatPrice = (price: string | number) => {
-    return `$${Number(price).toFixed(2)}`
+    return `﷼${Number(price).toFixed(2)}`
   }
 
   const discountPercentage = product.discountedPrice 
@@ -82,7 +94,7 @@ const EnhancedProductCard = ({ product, showQuickActions = true }: EnhancedProdu
 
   return (
     <>
-      <Card className="group overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+      <Card className="group overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 bg-white dark:bg-gray-900 dark:border-gray-700">
         <div className="relative overflow-hidden">
           {/* Product Image */}
           <Link href={`/products/${product.id}`}>
@@ -146,12 +158,12 @@ const EnhancedProductCard = ({ product, showQuickActions = true }: EnhancedProdu
           <CardContent className="p-4">
             {/* Category */}
             {product.subcategory && (
-              <p className="text-xs text-gray-500 mb-2">{product.subcategory.name}</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">{product.subcategory.name}</p>
             )}
 
             {/* Product Name */}
             <Link href={`/products/${product.id}`}>
-              <h3 className="font-semibold text-lg mb-2 line-clamp-2 hover:text-blue-600 transition-colors brand-heading">
+              <h3 className="font-semibold text-lg mb-2 line-clamp-2 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-gray-900 dark:text-white">
                 {product.name}
               </h3>
             </Link>
@@ -160,7 +172,7 @@ const EnhancedProductCard = ({ product, showQuickActions = true }: EnhancedProdu
             {reviewCount > 0 && (
               <div className="flex items-center gap-2 mb-3">
                 {renderStars(averageRating)}
-                <span className="text-sm text-gray-600">
+                <span className="text-sm text-gray-600 dark:text-gray-400">
                   {averageRating.toFixed(1)} ({reviewCount})
                 </span>
               </div>
@@ -168,11 +180,11 @@ const EnhancedProductCard = ({ product, showQuickActions = true }: EnhancedProdu
 
             {/* Price */}
             <div className="flex items-center gap-2 mb-4">
-              <span className="text-2xl font-bold" style={{ color: 'var(--brand-navy)' }}>
+              <span className="text-2xl font-bold text-gray-900 dark:text-white">
                 {formatPrice(product.discountedPrice || product.originalPrice)}
               </span>
               {product.discountedPrice && (
-                <span className="text-lg text-gray-400 line-through">
+                <span className="text-lg text-gray-400 dark:text-gray-500 line-through">
                   {formatPrice(product.originalPrice)}
                 </span>
               )}
@@ -181,7 +193,7 @@ const EnhancedProductCard = ({ product, showQuickActions = true }: EnhancedProdu
             {/* Description */}
             {product.description && (
               <div 
-                className="text-sm text-gray-600 mb-4 line-clamp-2"
+                className="text-sm text-gray-600 dark:text-gray-300 mb-4 line-clamp-2 html-content"
                 dangerouslySetInnerHTML={{ __html: product.description }}
               />
             )}
@@ -217,17 +229,22 @@ const EnhancedProductCard = ({ product, showQuickActions = true }: EnhancedProdu
         </div>
       </Card>
 
-      {/* Customization Modal */}
+      {/* Add to Cart with Questions Modal */}
       {showCustomizationModal && (
-        <ProductCustomizationModal
+        <AddToCartWithQuestionsModal
           isOpen={showCustomizationModal}
           onClose={() => setShowCustomizationModal(false)}
-          product={product}
-          quantity={1}
-          onSuccess={() => {
-            // Could show a toast notification here
-            console.log('Product added to cart successfully')
+          product={{
+            id: product.id,
+            name: product.name,
+            description: product.description,
+            price: Number(product.discountedPrice || product.originalPrice),
+            salePrice: product.discountedPrice ? Number(product.discountedPrice) : undefined,
+            imageUrl: product.imageUrl || undefined,
+            questions: product.questions
           }}
+          quantity={1}
+          onAddToCart={handleAddToCartWithQuestions}
         />
       )}
     </>

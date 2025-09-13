@@ -33,6 +33,14 @@ const config: Config = {
           DEFAULT: "#1C1C3C",
           foreground: "#FFFFFF",
         },
+        brand: {
+          gold: "var(--brand-gold)",
+          navy: "var(--brand-navy)",
+          "navy-light": "var(--brand-navy-light)",
+          "navy-dark": "var(--brand-navy-dark)",
+          "gold-light": "var(--brand-gold-light)",
+          "gold-dark": "var(--brand-gold-dark)",
+        },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",

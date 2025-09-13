@@ -111,7 +111,7 @@ export function ImageUpload({
       <div className="mt-2">
         {imageUrl ? (
           <div className="relative">
-            <div className="relative h-32 w-full overflow-hidden rounded-lg border bg-gray-50">
+            <div className="relative h-60 w-full overflow-hidden rounded-lg border bg-gray-50">
               <Image
                 src={imageUrl}
                 alt="Preview"
@@ -149,7 +149,7 @@ export function ImageUpload({
           </div>
         ) : (
           <div
-            className={`relative h-32 w-full rounded-lg border-2 border-dashed transition-colors ${disabled
+            className={`relative h-60 w-full rounded-lg border-2 border-dashed transition-colors ${disabled
                 ? "border-gray-200 bg-gray-50 cursor-not-allowed"
                 : dragActive
                   ? "border-brand-gold bg-brand-gold/5"

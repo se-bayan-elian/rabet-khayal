@@ -337,7 +337,7 @@ export function ProductCustomizationModal({
                                     <span>{answer.answerText}</span>
                                     {parseFloat(answer.extraPrice.toString()) > 0 && (
                                       <span className="text-xs text-brand-gold ml-2 font-medium">
-                                        +${parseFloat(answer.extraPrice.toString()).toFixed(2)}
+                                        +﷼{parseFloat(answer.extraPrice.toString()).toFixed(2)}
                                       </span>
                                     )}
                                   </div>
@@ -405,7 +405,7 @@ export function ProductCustomizationModal({
                                   {answer.answerText}
                                   {parseFloat(answer.extraPrice.toString()) > 0 && (
                                     <span className="text-xs text-brand-gold">
-                                      +${parseFloat(answer.extraPrice.toString()).toFixed(2)}
+                                      +﷼{parseFloat(answer.extraPrice.toString()).toFixed(2)}
                                     </span>
                                   )}
                                 </Label>

@@ -1,7 +1,22 @@
 {
+  "common": {
+    "cancel": "إلغاء",
+    "save": "حفظ",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "close": "إغلاق",
+    "back": "رجوع",
+    "next": "التالي",
+    "previous": "السابق",
+    "loading": "جاري التحميل...",
+    "error": "خطأ",
+    "success": "نجح",
+    "warning": "تحذير",
+    "info": "معلومات"
+  },
   "company": {
     "name": "ربط الخيال",
-    "tagline": "رابط الخيال"
+    "tagline": "نربط الخيال لننير الواقع"
   },
   "serviceHero": {
     "title": {
@@ -75,14 +90,105 @@
       "freeConsultation": "استشارة مجانية"
     },
     "viewDetails": "عرض التفاصيل",
+    "projectCount": "{count} مشروع",
+    "previous": "السابق",
+    "next": "التالي",
     "error": {
-      "message": "فشل في تحميل الخدمات المميزة",
-      "retry": "حاول مرة أخرى"
+      "title": "حدث خطأ ما",
+      "message": "لم نتمكن من تحميل الخدمات. يرجى المحاولة مرة أخرى.",
+      "retry": "حاول مرة أخرى",
+      "goHome": "العودة للصفحة الرئيسية"
     },
+    "noServices": {
+      "title": "لا توجد خدمات",
+      "message": "لم نتمكن من العثور على أي خدمات في الوقت الحالي. يرجى المحاولة لاحقاً.",
+      "refresh": "تحديث الصفحة",
+      "goHome": "العودة للصفحة الرئيسية"
+    },
+    "loading": "جاري التحميل...",
     "detail": {
+      "notFound": "الخدمة غير موجودة",
+      "notFoundDescription": "الخدمة التي تبحث عنها غير موجودة أو تم حذفها.",
+      "backToServices": "العودة للخدمات",
+      "requestService": "طلب الخدمة",
       "tabs": {
+        "details": "تفاصيل الخدمة",
+        "projects": "مشاريعنا",
         "portfolio": "معرض الأعمال"
+      },
+      "serviceDetails": "معلومات الخدمة",
+      "pricingPlans": "باقات الأسعار",
+      "noPricingPlans": "أسعار مخصصة",
+      "noPricingPlansDescription": "تواصل معنا للحصول على عرض سعر مخصص لاحتياجاتك.",
+      "requestQuote": "طلب عرض سعر",
+      "popular": "الأكثر شعبية",
+      "deliveryTime": "تسليم خلال {days} أيام",
+      "revisions": "{count} مراجعة",
+      "selectPlan": "اختيار الباقة",
+      "ourProjects": "معرض أعمالنا",
+      "projectsDescription": "استكشف أحدث أعمالنا وشاهد كيف نحول الأفكار إلى واقع.",
+      "noProjects": "لا توجد مشاريع",
+      "noProjectsDescription": "لم نتمكن من العثور على أي مشاريع لهذه الخدمة في الوقت الحالي.",
+      "viewLive": "عرض الموقع",
+      "viewProject": "عرض المشروع",
+      "projectCount": "{count} مشروع",
+      "detailedDescription": "الوصف التفصيلي",
+      "whatWeOffer": "ما نقدمه",
+      "keyFeatures": "المميزات الرئيسية",
+      "whyChooseUs": "لماذا تختارنا",
+      "process": "عملية العمل",
+      "step": "الخطوة {number}",
+      "getStarted": "ابدأ الآن",
+      "learnMore": "اعرف المزيد",
+      "features": {
+        "customizedSolutions": "حلول مخصصة",
+        "professionalQuality": "جودة احترافية",
+        "fastDelivery": "تسليم سريع",
+        "expertTeam": "فريق خبراء",
+        "modernTechnology": "تقنيات حديثة",
+        "qualityGuarantee": "ضمان الجودة"
+      },
+      "benefits": {
+        "professionalExcellence": "التميز المهني",
+        "professionalExcellenceDesc": "نقدم نتائج عالية الجودة تتجاوز التوقعات وتدفع نمو الأعمال.",
+        "timelyDelivery": "التسليم في الوقت المحدد",
+        "timelyDeliveryDesc": "نحترم وقتك ونقدم المشاريع في الموعد المحدد دون المساس بالجودة.",
+        "expertSupport": "الدعم المتخصص",
+        "expertSupportDesc": "فريقنا ذو الخبرة يوفر الدعم والتوجيه المستمر طوال مشروعك."
+      },
+      "steps": {
+        "consultation": "الاستشارة",
+        "consultationDesc": "نناقش احتياجاتك ومتطلباتك",
+        "planning": "التخطيط",
+        "planningDesc": "نضع خطة مشروع مفصلة",
+        "development": "التطوير",
+        "developmentDesc": "نبني حلك بعناية",
+        "delivery": "التسليم",
+        "deliveryDesc": "نسلم المشروع ونوفر الدعم المستمر"
+      },
+      "cta": {
+        "readyToStart": "مستعد للبدء؟",
+        "description": "دعنا نناقش مشروعك ونحول رؤيتك إلى واقع.",
+        "trustIndicators": {
+          "expertTeam": "فريق خبراء",
+          "fastDelivery": "تسليم سريع",
+          "qualityGuarantee": "ضمان الجودة"
+        }
       }
+    },
+    "project": {
+      "notFound": "المشروع غير موجود",
+      "notFoundDescription": "المشروع الذي تبحث عنه غير موجود أو تم حذفه.",
+      "goBack": "العودة",
+      "back": "رجوع",
+      "client": "العميل",
+      "completed": "تاريخ الإنجاز",
+      "service": "الخدمة",
+      "viewLive": "عرض المشروع المباشر",
+      "gallery": "معرض المشروع",
+      "galleryDescription": "تصفح الرحلة البصرية لهذا المشروع.",
+      "relatedService": "الخدمة ذات الصلة",
+      "viewService": "عرض الخدمة"
     }
   },
   "banner": {
@@ -124,6 +230,7 @@
     "subtitle": "اكتشف مجموعة مختارة من أفضل منتجاتنا",
     "viewAll": "عرض جميع المنتجات",
     "featured": "مميز",
+    "sale": "تخفيض",
     "outOfStock": "نفد المخزون",
     "addToCart": "أضف للسلة",
     "viewReviews": "عرض التقييمات ({count})",
@@ -163,14 +270,14 @@
     },
     "description": "نحن شركة رائدة في مجال التقنية والتصميم",
     "quickLinks": "روابط سريعة",
-    "servicesTitle": "خدماتنا",
+    "services": "خدماتنا",
     "location": "موقعنا",
     "locationDesc": "قم بزيارة مكتبنا أو تواصل معنا",
     "newsletter": "ابقَ على اطلاع",
     "newsletterDesc": "اشترك في نشرتنا الإخبارية لتحصل على آخر الأخبار والعروض",
     "emailPlaceholder": "بريدك الإلكتروني",
     "followUs": "تابعنا",
-    "quickLinks": {
+    "links": {
       "home": "الرئيسية",
       "products": "المنتجات",
       "services": "الخدمات",
@@ -245,7 +352,9 @@
       "outOfStock": "غير متوفر",
       "inStock": "متوفر",
       "sale": "تخفيض",
-      "new": "جديد"
+      "new": "جديد",
+      "featured": "مميز",
+      "adding": "جاري الإضافة..."
     },
     "loading": "جاري تحميل المنتجات...",
     "error": {
@@ -254,6 +363,14 @@
       "retry": "حاول مرة أخرى"
     },
     "pageTitle": "المنتجات",
+    "breadcrumb": {
+      "categories": "التصنيفات"
+    },
+    "noProducts": {
+      "title": "لا توجد منتجات",
+      "message": "لم نتمكن من العثور على أي منتجات تطابق معاييرك. جرب تعديل المرشحات أو مصطلحات البحث.",
+      "clearFilters": "مسح المرشحات"
+    },
     "emptyState": {
       "suggestions": "جرب هذه الاقتراحات:",
       "browseCategoriesBtn": "تصفح التصنيفات",
@@ -304,6 +421,24 @@
       "updateFailed": "فشل في تحديث الكمية",
       "removeFailed": "فشل في إزالة المنتج"
     },
+    "validation": {
+      "selectOption": "يرجى اختيار خيار",
+      "enterText": "يرجى إدخال نص",
+      "addNote": "يرجى إضافة ملاحظة",
+      "selectAtLeastOne": "يرجى اختيار خيار واحد على الأقل",
+      "uploadImage": "يرجى رفع صورة"
+    },
+    "optional": "اختياري",
+    "selectOption": "اختر خيار",
+    "enterText": "أدخل نص",
+    "addNote": "أضف ملاحظة",
+    "uploadImage": "رفع صورة",
+    "saving": "جاري الحفظ...",
+    "productQuestions": "أسئلة المنتج",
+    "question": "سؤال",
+    "questions": "أسئلة",
+    "noCustomizationsAvailable": "لا توجد تخصيصات متاحة لهذا المنتج",
+    "close": "إغلاق",
     "emptyCart": "السلة فارغة",
     "emptyCartDescription": "ابدأ بإضافة المنتجات إلى سلتك",
     "startShopping": "ابدأ التسوق",
@@ -392,6 +527,7 @@
       "service": "الخدمة",
       "selectService": "اختر خدمة",
       "serviceDetails": "اختيار الخدمة",
+      "personalInfo": "المعلومات الشخصية",
       "pricingPlan": "خطة التسعير",
       "selectPlan": "اختر خطة تسعير (اختياري)",
       "message": "الرسالة",
@@ -423,6 +559,10 @@
       "title": "تم إرسال الرسالة!",
       "message": "شكراً لك على رسالتك. سنتواصل معك خلال 24 ساعة.",
       "close": "إغلاق"
+    },
+    "status": {
+      "available": "نحن متاحون الآن",
+      "quickResponse": "استجابة خلال دقائق"
     }
   },
   "reviews": {
@@ -456,7 +596,12 @@
       "contentPlaceholder": "شارك تجربتك المفصلة مع هذا المنتج...",
       "submitting": "جاري الإرسال...",
       "submitReview": "إرسال التقييم",
-      "submitError": "فشل في إرسال التقييم. يرجى المحاولة مرة أخرى."
+      "submitError": "فشل في إرسال التقييم. يرجى المحاولة مرة أخرى.",
+      "required": "مطلوب",
+      "optional": "اختياري",
+      "selectOption": "اختر خياراً",
+      "enterText": "أدخل النص هنا",
+      "addNote": "أضف ملاحظتك هنا"
     }
   },
   "auth": {
@@ -1012,6 +1157,19 @@
       "addReview": "إضافة تقييم",
       "noReviews": "لا توجد تقييمات بعد",
       "beFirst": "كن أول من يقيم هذا المنتج",
+      "rating": "التقييم",
+      "review": "التقييم",
+      "submit": "إرسال التقييم",
+      "cancel": "إلغاء"
+    },
+    "relatedProducts": "منتجات ذات صلة",
+    "relatedProductsDesc": "اكتشف المزيد من المنتجات التي قد تعجبك",
+    "share": {
+      "title": "مشاركة المنتج",
+      "linkCopied": "تم نسخ الرابط إلى الحافظة!",
+      "shareOn": "مشاركة على"
+    },
+    "rating": {
       "averageRating": "متوسط التقييم",
       "totalReviews": "إجمالي التقييمات",
       "filterByRating": "فلتر حسب التقييم",

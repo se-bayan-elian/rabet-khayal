@@ -1,7 +1,22 @@
 {
+  "common": {
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "warning": "Warning",
+    "info": "Info"
+  },
   "company": {
     "name": "Rabet Alkhayal",
-    "tagline": "Link of Imagination"
+    "tagline": "Connecting Dreams to Reality"
   },
   "serviceHero": {
     "title": {
@@ -50,41 +65,6 @@
     "logout": "Logout",
     "getConsultation": "Get Free Consultation"
   },
-  "services": {
-    "title": "Our Premium Services",
-    "subtitle": "We offer comprehensive innovative tech solutions",
-    "web": {
-      "title": "Web Development",
-      "description": "Building modern and responsive websites"
-    },
-    "design": {
-      "title": "UI/UX Design",
-      "description": "Creating beautiful and intuitive designs"
-    },
-    "marketing": {
-      "title": "Digital Marketing",
-      "description": "Grow your business with digital strategies"
-    },
-    "mobile": {
-      "title": "Mobile Apps",
-      "description": "Cross-platform mobile applications"
-    },
-    "features": {
-      "onTimeDelivery": "On Time Delivery",
-      "competitivePricing": "Competitive Pricing",
-      "freeConsultation": "Free Consultation"
-    },
-    "viewDetails": "View Details",
-    "error": {
-      "message": "Failed to load featured services",
-      "retry": "Try Again"
-    },
-    "detail": {
-      "tabs": {
-        "portfolio": "Portfolio"
-      }
-    }
-  },
   "banner": {
     "badges": {
       "featuredProduct": "🔥 Featured Product",
@@ -120,7 +100,11 @@
     "watchVideo": "Watch Video"
   },
   "products": {
+    "title": "Our Featured Products",
+    "subtitle": "Discover our carefully curated selection of premium products",
+    "viewAll": "View All Products",
     "featured": "Featured",
+    "sale": "Sale",
     "outOfStock": "Out of Stock",
     "addToCart": "Add to Cart",
     "viewReviews": "View Reviews ({count})",
@@ -185,7 +169,50 @@
       "noProjects": "No Projects Yet",
       "noProjectsDescription": "We're working on amazing projects for this service. Check back soon!",
       "viewProject": "View Project",
-      "viewLive": "View Live"
+      "viewLive": "View Live",
+      "detailedDescription": "Detailed Description",
+      "whatWeOffer": "What We Offer",
+      "keyFeatures": "Key Features",
+      "whyChooseUs": "Why Choose Us",
+      "process": "Our Process",
+      "step": "Step {number}",
+      "getStarted": "Get Started",
+      "learnMore": "Learn More",
+      "features": {
+        "customizedSolutions": "Customized Solutions",
+        "professionalQuality": "Professional Quality",
+        "fastDelivery": "Fast Delivery",
+        "expertTeam": "Expert Team",
+        "modernTechnology": "Modern Technology",
+        "qualityGuarantee": "Quality Guarantee"
+      },
+      "benefits": {
+        "professionalExcellence": "Professional Excellence",
+        "professionalExcellenceDesc": "We deliver high-quality results that exceed expectations and drive business growth.",
+        "timelyDelivery": "Timely Delivery",
+        "timelyDeliveryDesc": "We respect your time and deliver projects on schedule without compromising quality.",
+        "expertSupport": "Expert Support",
+        "expertSupportDesc": "Our experienced team provides ongoing support and guidance throughout your project."
+      },
+      "steps": {
+        "consultation": "Consultation",
+        "consultationDesc": "We discuss your needs and requirements",
+        "planning": "Planning",
+        "planningDesc": "We create a detailed project plan",
+        "development": "Development",
+        "developmentDesc": "We build your solution with care",
+        "delivery": "Delivery",
+        "deliveryDesc": "We deliver and provide ongoing support"
+      },
+      "cta": {
+        "readyToStart": "Ready to Get Started?",
+        "description": "Let's discuss your project and bring your vision to life.",
+        "trustIndicators": {
+          "expertTeam": "Expert Team",
+          "fastDelivery": "Fast Delivery",
+          "qualityGuarantee": "Quality Guarantee"
+        }
+      }
     },
     "web": {
       "title": "Web Development",
@@ -242,6 +269,8 @@
     "description": "We are a leading company in technology and design",
     "quickLinks": "Quick Links",
     "services": "Our Services",
+    "location": "Our Location",
+    "locationDesc": "Visit our office or get in touch with us",
     "newsletter": "Stay Updated",
     "newsletterDesc": "Subscribe to our newsletter for the latest news and offers",
     "emailPlaceholder": "Your email address",
@@ -249,6 +278,8 @@
     "links": {
       "home": "Home",
       "products": "Products",
+      "services": "Services",
+      "categories": "Categories",
       "portfolio": "Portfolio",
       "about": "About Us",
       "contact": "Contact Us"
@@ -319,7 +350,9 @@
       "outOfStock": "Out of Stock",
       "inStock": "In Stock",
       "sale": "Sale",
-      "new": "New"
+      "new": "New",
+      "featured": "Featured",
+      "adding": "Adding..."
     },
     "loading": "Loading products...",
     "error": {
@@ -328,6 +361,14 @@
       "retry": "Try Again"
     },
     "pageTitle": "Products",
+    "breadcrumb": {
+      "categories": "Categories"
+    },
+    "noProducts": {
+      "title": "No Products Found",
+      "message": "We couldn't find any products matching your criteria. Try adjusting your filters or search terms.",
+      "clearFilters": "Clear Filters"
+    },
     "emptyState": {
       "suggestions": "Try these suggestions:",
       "browseCategoriesBtn": "Browse Categories",
@@ -378,6 +419,24 @@
       "updateFailed": "Failed to update quantity",
       "removeFailed": "Failed to remove product"
     },
+    "validation": {
+      "selectOption": "Please select an option",
+      "enterText": "Please enter text",
+      "addNote": "Please add a note",
+      "selectAtLeastOne": "Please select at least one option",
+      "uploadImage": "Please upload an image"
+    },
+    "optional": "Optional",
+    "selectOption": "Select an option",
+    "enterText": "Enter text",
+    "addNote": "Add a note",
+    "uploadImage": "Upload image",
+    "saving": "Saving...",
+    "productQuestions": "Product Questions",
+    "question": "question",
+    "questions": "questions",
+    "noCustomizationsAvailable": "No customizations available for this product",
+    "close": "Close",
     "emptyCart": "Your cart is empty",
     "emptyCartDescription": "Start by adding products to your cart",
     "startShopping": "Start Shopping",
@@ -467,6 +526,7 @@
       "service": "Service",
       "selectService": "Select a service",
       "serviceDetails": "Service Selection",
+      "personalInfo": "Personal Information",
       "pricingPlan": "Pricing Plan",
       "selectPlan": "Select a pricing plan (optional)",
       "message": "Message",
@@ -498,6 +558,10 @@
       "title": "Message Sent!",
       "message": "Thank you for your message. We'll get back to you within 24 hours.",
       "close": "Close"
+    },
+    "status": {
+      "available": "We're available now",
+      "quickResponse": "Response within minutes"
     }
   },
   "reviews": {
@@ -531,7 +595,12 @@
       "contentPlaceholder": "Share your detailed experience with this product...",
       "submitting": "Submitting...",
       "submitReview": "Submit Review",
-      "submitError": "Failed to submit review. Please try again."
+      "submitError": "Failed to submit review. Please try again.",
+      "required": "Required",
+      "optional": "Optional",
+      "selectOption": "Select an option",
+      "enterText": "Enter your text here",
+      "addNote": "Add your note here"
     }
   },
   "auth": {
@@ -1082,6 +1151,19 @@
       "addReview": "Add Review",
       "noReviews": "No reviews yet",
       "beFirst": "Be the first to review this product",
+      "rating": "Rating",
+      "review": "Review",
+      "submit": "Submit Review",
+      "cancel": "Cancel"
+    },
+    "relatedProducts": "Related Products",
+    "relatedProductsDesc": "Discover more products you might love",
+    "share": {
+      "title": "Share Product",
+      "linkCopied": "Link copied to clipboard!",
+      "shareOn": "Share on"
+    },
+    "rating": {
       "averageRating": "Average Rating",
       "totalReviews": "Total Reviews",
       "filterByRating": "Filter by Rating",

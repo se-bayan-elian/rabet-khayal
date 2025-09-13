@@ -321,7 +321,7 @@ const ProductCustomizationModal = ({
                   {t('quantity')}: {quantity}
                 </p>
                 <p className="text-lg font-bold" style={{ color: 'var(--brand-navy)' }}>
-                  ${totalPrice.toFixed(2)}
+                  ﷼{totalPrice.toFixed(2)}
                 </p>
               </div>
             </div>
@@ -352,7 +352,7 @@ const ProductCustomizationModal = ({
                   <div className="flex justify-between items-center mb-4">
                     <span className="text-lg font-semibold">{t('totalPrice')}</span>
                     <span className="text-2xl font-bold" style={{ color: 'var(--brand-navy)' }}>
-                      ${totalPrice.toFixed(2)}
+                      ﷼{totalPrice.toFixed(2)}
                     </span>
                   </div>
                   

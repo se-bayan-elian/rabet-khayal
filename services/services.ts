@@ -59,6 +59,6 @@ export const fetchServicePricingPlans = async (
 export const submitContactForm = async (
   data: ContactFormRequest
 ): Promise<any> => {
-  const response = await axiosClient.post("/contact", data);
+  const response = await axiosClient.post("/emails/contact-us", data);
   return response.data;
 };

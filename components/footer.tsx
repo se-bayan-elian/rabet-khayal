@@ -8,6 +8,7 @@ import { useTranslations } from 'next-intl'
 import { useFeaturedServicesQuery } from '@/services'
 import { useQuery } from '@tanstack/react-query'
 import { axiosClient } from '@/lib/axios'
+import Image from "next/image"
 
 interface FooterProps {
   company: string
@@ -87,10 +88,17 @@ export function Footer({
           {/* Company Info */}
           <div className="footer-section">
             <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse hover:opacity-80 transition-opacity mb-6">
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center"
+              {/* <div className="w-12 h-12 rounded-xl flex items-center justify-center"
                 style={{ background: 'linear-gradient(135deg, var(--brand-gold), var(--brand-gold-dark))' }}>
                 <Sparkles className="w-6 h-6 text-white" />
-              </div>
+              </div> */}
+              <Image 
+                src={"/m-logo-white.png"}
+                alt={company}
+                width={48}
+                height={48}
+                className="w-12 h-12 rounded-xl flex items-center justify-center"
+              />
               <div className="text-2xl font-bold text-white">
                 {company}
               </div>

@@ -83,8 +83,8 @@ export const verifyOtp = async (
 };
 
 export const getGoogleAuthUrl = async (): Promise<{ url: string }> => {
-  const response = await axiosClient.get<{ url: string }>(AUTH_ENDPOINTS.GOOGLE_URL);
-  return response.data;
+  const response = await axiosClient.get(AUTH_ENDPOINTS.GOOGLE_URL);
+  return response.data?.data; 
 };
 
 export const googleAuth = async (

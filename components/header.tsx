@@ -115,7 +115,7 @@ export function Header({
   return (
     <header
       className={`fixed top-0 w-full z-50 transition-all duration-500 ${isScrolled
-        ? 'backdrop-blur-xl bg-white/80 dark:bg-gray-900/80 shadow-2xl border-b border-amber-100/20'
+        ? 'backdrop-blur-xl bg-white/80 dark:bg-gray-900/90 shadow-2xl border-b border-amber-100/20 dark:border-amber-500/20'
         : 'backdrop-blur-md bg-white/95 dark:bg-gray-900/95 border-b border-transparent'
         }`}
     >
@@ -124,29 +124,19 @@ export function Header({
           }`}>
           {/* Enhanced Logo */}
           <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse hover:opacity-80 transition-all duration-300 group">
-            <div className="relative">
-              <div className={`rounded-2xl flex items-center justify-center shadow-xl transition-all duration-300 ${isScrolled ? 'w-10 h-10' : 'w-12 h-12'
-                }`}
-                style={{
-                  background: 'linear-gradient(135deg, #FFCC00 0%, #1C1C3C 100%)',
-                  boxShadow: '0 10px 25px rgba(255, 204, 0, 0.3)'
-                }}>
-                <Image alt="logo" src={"/m-logo-white.png"} width={50} height={50} className={`text-white transition-all duration-300 ${isScrolled ? 'w-5 h-5' : 'w-6 h-6'
+           
+            <Image alt="logo" src={"/m-logo.png"} width={50} height={50} className={`text-white transition-all duration-300 ${isScrolled ? 'w-8 h-8' : 'w-12 h-12'
                   } group-hover:rotate-12`} />
-              </div>
-              <div className="absolute -top-1 -right-1 w-4 h-4 rounded-full animate-pulse bg-gradient-to-r from-amber-400 to-orange-500 shadow-lg"></div>
-              <div className="absolute -bottom-1 -left-1 w-2 h-2 rounded-full animate-bounce bg-gradient-to-r from-blue-400 to-purple-500" style={{ animationDelay: '0.5s' }}></div>
-            </div>
             <div className={`transition-all duration-300 ${isScrolled ? 'scale-90' : 'scale-100'}`}>
-              <div className={`hidden md:block font-bold brand-heading text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-amber-700 transition-all duration-300 ${isScrolled ? 'text-lg' : 'text-xl'
+              <div className={`hidden md:block font-bold  text-transparent bg-clip-text bg-gradient-to-r dark:from-white dark:via-amber-100 dark:to-amber-200 from-amber-500 to-amber-700 transition-all duration-300 ${isScrolled ? 'text-lg' : 'text-xl'
                 }`}>{tCompany('name')}</div>
-              <div className={`opacity-70 text-gray-600 dark:text-gray-300 transition-all duration-300 ${isScrolled ? 'text-[10px]' : 'text-xs'
+              <div className={`opacity-80 text-gray-600 dark:text-amber-200/80 transition-all duration-300 ${isScrolled ? 'text-[10px]' : 'text-xs'
                 } hidden sm:block`}>{tCompany('tagline')}</div>
             </div>
           </Link>
 
           {/* Enhanced Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8 rtl:space-x-reverse">
+          <nav className="hidden lg:flex items-center space-x-4 xl:space-x-8 rtl:space-x-reverse">
             {navItems.map((item) => (
               <Link
                 key={item.href}
@@ -174,9 +164,9 @@ export function Header({
                   <span className="absolute inset-0 rounded-lg bg-amber-50 dark:bg-amber-900/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></span>
                 </Link>
               </HoverCardTrigger>
-              <HoverCardContent className="w-80 p-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl border border-amber-100 dark:border-amber-900/20 shadow-2xl rounded-2xl overflow-hidden" align="center">
+              <HoverCardContent className="w-80 p-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl border border-amber-100 dark:border-amber-500/30 shadow-2xl rounded-2xl overflow-hidden" align="center">
                 <div className="p-6">
-                  <div className="text-sm font-bold brand-heading mb-4 text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-orange-600">{tHeader('services')}</div>
+                  <div className="text-sm font-bold    mb-4 !text-transparent bg-clip-text bg-gradient-to-r !from-amber-600 !to-orange-600">{tHeader('services')}</div>
                   <div className="space-y-2">
                     {servicesApi.length && servicesApi?.filter((service: any) => service && typeof service === 'object').map((service: any, index: number) => {
                       const displayName = service?.name || service?.title || 'Service'
@@ -224,7 +214,7 @@ export function Header({
               </HoverCardTrigger>
               <HoverCardContent className="w-[500px] p-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl border border-amber-100 dark:border-amber-900/20 shadow-2xl rounded-2xl overflow-hidden" align="center">
                 <div className="p-6">
-                  <div className="text-sm font-bold brand-heading mb-4 text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-orange-600">{tHeader('categories')}</div>
+                  <div className="text-sm font-bold  mb-4 text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-orange-600">{tHeader('categories')}</div>
                   <div className="grid grid-cols-2 gap-4">
                     {categoriesApi.length > 0 && categoriesApi?.filter((category: any) => category && typeof category === 'object').map((category: any, index: number) => {
                       const name = category?.title || category?.name || 'Category'
@@ -252,7 +242,7 @@ export function Header({
                               {subcategories.slice(0, 3).map((subcategory: any, subIndex: number) => (
                                 <Link
                                   key={subIndex}
-                                  href={`/categories/${category.id}/subcategories/${subcategory.id}`}
+                                  href={`/categories/${category.id}/sub/${subcategory.id}`}
                                   className="flex items-center gap-3 p-2 rounded-lg hover:bg-gradient-to-r hover:from-amber-50/50 hover:to-orange-50/50 dark:hover:from-amber-900/10 dark:hover:to-orange-900/10 transition-all duration-300 group/subcategory"
                                 >
                                   <div className="w-7 h-7 rounded-lg flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700/50 dark:to-gray-600/50 group-hover/subcategory:from-amber-100 group-hover/subcategory:to-orange-100 dark:group-hover/subcategory:from-amber-900/40 dark:group-hover/subcategory:to-orange-900/40 transition-all duration-300 overflow-hidden shadow-sm group-hover/subcategory:shadow-md">
@@ -288,7 +278,7 @@ export function Header({
           </nav>
 
           {/* Enhanced Action Buttons */}
-          <div className="hidden lg:flex items-center space-x-3 rtl:space-x-reverse">
+          <div className="hidden lg:flex items-center space-x-1 xl:space-x-3 rtl:space-x-reverse">
             {/* Enhanced Wishlist Button */}
             <Link href="/wishlist">
               <Button variant="ghost" size="sm" className="relative overflow-visible p-2.5 hover:bg-amber-50 dark:hover:bg-amber-900/20 rounded-xl transition-all duration-300 group">
@@ -550,7 +540,7 @@ export function Header({
 
         {/* Enhanced Mobile Navigation */}
         {isMenuOpen && (
-          <div className="lg:hidden border-t border-amber-100 dark:border-amber-900/20 bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl rounded-b-2xl mt-2 shadow-2xl">
+          <div className="lg:hidden border-t border-amber-100 dark:border-amber-500/20 bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl rounded-b-2xl mt-2 shadow-2xl">
             <nav className="p-4 space-y-2 max-h-[80vh] overflow-y-auto scrollbar-hide">
               {navItems.map((item) => (
                 <Link

@@ -17,7 +17,7 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
 
   return (
     <Link href={`/services/${service.id}`}>
-      <Card className="group overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+      <Card className="group overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 bg-white dark:bg-gray-900 dark:border-gray-700">
         <div className="relative overflow-hidden">
           <Image
             src={service.image}
@@ -30,16 +30,15 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
         </div>
 
         <CardContent className="p-6">
-          <h3 className="text-xl font-bold mb-3" style={{ color: 'var(--brand-navy)' }}>
+          <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
             {service.name}
           </h3>
-          <p className="text-gray-600 mb-4 line-clamp-2">
-            {service.description}
-          </p>
+          <div className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-2 html-content"
+               dangerouslySetInnerHTML={{ __html: service.description || "" }}
+          >
+          </div>
           <div className="flex justify-between items-center">
-            <span className="text-sm" style={{ color: 'var(--brand-navy)' }}>
-              {t('projectCount', { count: service.projectCount })}
-            </span>
+    <div></div>
             <Button variant="ghost" size="sm" className="group-hover:translate-x-2 rtl:group-hover:-translate-x-2 transition-transform">
               {t('viewDetails')}
               <ArrowRight className="w-4 h-4 ml-2 rtl:hidden" />

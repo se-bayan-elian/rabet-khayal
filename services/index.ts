@@ -336,7 +336,7 @@ export async function fetchProductReviews(
     `/reviews/product/${productId}`,
     { params }
   );
-  return data?.data;
+  return data;
 }
 
 export function useProductReviewsQuery(
@@ -348,7 +348,7 @@ export function useProductReviewsQuery(
     limit?: number;
   }
 ) {
-  return useQuery({
+  return useQuery<ReviewsResponse>({
     queryKey: ["reviews", productId, params],
     queryFn: () => fetchProductReviews(productId, params),
     enabled: !!productId,

@@ -51,7 +51,7 @@ export function CartSummary({ showCheckoutButton = true, className }: CartSummar
             {t('summary.items', { default: 'Items' })} ({cart.totalItems})
           </span>
           <span className="font-medium">
-            ${cart.subtotal.toFixed(2)}
+            ﷼{cart.subtotal.toFixed(2)}
           </span>
         </div>
 
@@ -68,7 +68,7 @@ export function CartSummary({ showCheckoutButton = true, className }: CartSummar
               </Badge>
             </div>
             <span className="font-medium text-green-600">
-              -${cart.couponDiscount.toFixed(2)}
+              -﷼{cart.couponDiscount.toFixed(2)}
             </span>
           </div>
         )}
@@ -89,7 +89,7 @@ export function CartSummary({ showCheckoutButton = true, className }: CartSummar
           <span className="font-medium">
             {cart.deliveryCost === 0 
               ? t('summary.free', { default: 'Free' })
-              : `$${cart.deliveryCost.toFixed(2)}`
+              : `﷼${cart.deliveryCost.toFixed(2)}`
             }
           </span>
         </div>
@@ -115,7 +115,7 @@ export function CartSummary({ showCheckoutButton = true, className }: CartSummar
         <div className="flex justify-between text-lg font-bold">
           <span>{t('summary.total', { default: 'Total' })}</span>
           <span className="text-brand-navy">
-            ${cart.totalPrice.toFixed(2)}
+            ﷼{cart.totalPrice.toFixed(2)}
           </span>
         </div>
 
@@ -124,7 +124,7 @@ export function CartSummary({ showCheckoutButton = true, className }: CartSummar
           <div className="text-center text-sm text-green-600 bg-green-50 p-2 rounded">
             🎉 {t('summary.savings', { 
               default: 'You saved ${{amount}}!',
-              amount: cart.couponDiscount.toFixed(2)
+              amount: ﷼{cart.couponDiscount.toFixed(2)}
             })}
           </div>
         )}

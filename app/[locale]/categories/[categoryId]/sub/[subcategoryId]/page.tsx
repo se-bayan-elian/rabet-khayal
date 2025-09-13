@@ -1,14 +1,15 @@
 "use client"
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { useParams } from "next/navigation";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useProductsBySubCategoryQuery, useProductsQuery, ProductItem as APIProductItem } from "@/services";
 import { useQuery } from "@tanstack/react-query";
 import { axiosClient } from "@/lib/axios";
 import { useCartStore } from "@/store/cart";
 import { useWishlistStore } from "@/store/wishlist";
 import { AddToCartModal } from "@/components/cart/AddToCartModal";
+import { AddToCartWithQuestionsModal } from "@/components/cart/AddToCartWithQuestionsModal";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -34,6 +35,111 @@ import Image from "next/image";
 import Link from "next/link";
 
 // Using ProductItem from @/services
+
+// Filter Panel Component - Separate component to prevent re-creation
+const FilterPanel = ({ 
+  filters, 
+  t, 
+  handleFilterChange, 
+  handleClearFilters, 
+  handleApplyFilters,
+  isMobile = false ,
+  dir = "ltr"
+}: {
+  filters: FilterState;
+  t: any;
+  handleFilterChange: (field: keyof FilterState, value: any) => void;
+  handleClearFilters: () => void;
+  handleApplyFilters: () => void;
+  isMobile?: boolean;
+  dir?: "ltr" | "rtl";
+}) => (
+  <div className="space-y-6">
+    <div className="flex items-center justify-between">
+      <h3 className="text-lg font-semibold brand-heading dark:text-white">{t("filters.title")}</h3>
+      <Button variant="ghost" size="sm" onClick={handleClearFilters} className="text-brand-gold hover:bg-brand-gold/10 dark:text-amber-400 dark:hover:bg-amber-400/10">
+        <X className="w-4 h-4 mr-1" />
+        {t("filters.clear")}
+      </Button>
+    </div>
+
+    {/* Search */}
+    <div className="space-y-2">
+      <label className="text-sm font-medium text-gray-700 dark:text-gray-300">{t("filters.search")}</label>
+      <div className="relative">
+        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-gray-500" />
+        <Input
+          placeholder={t("filters.search")}
+          value={filters.search}
+          onChange={(e) => handleFilterChange('search', e.target.value)}
+          className="pl-10 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100"
+        />
+      </div>
+    </div>
+
+    {/* Price Range */}
+    <div className="space-y-4">
+      <label className="text-sm font-medium text-gray-700 dark:text-gray-300">{t("filters.priceRange")}</label>
+      <div className="px-2">
+        <Slider
+          value={[filters.minPrice, filters.maxPrice]}
+          onValueChange={([min, max]) => {
+            handleFilterChange('minPrice', min);
+            handleFilterChange('maxPrice', max);
+          }}
+          dir={dir}
+          max={10000}
+          min={0}
+          step={50}
+          className="w-full"
+        />
+      </div>
+      <div className="flex gap-2">
+        <div className="flex-1">
+          <label className="text-xs text-gray-500 dark:text-gray-400">{t("filters.minPrice")}</label>
+          <Input
+            type="number"
+            value={filters.minPrice}
+            onChange={(e) => handleFilterChange('minPrice', Number(e.target.value))}
+            className="mt-1 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100"
+          />
+        </div>
+        <div className="flex-1">
+          <label className="text-xs text-gray-500 dark:text-gray-400">{t("filters.maxPrice")}</label>
+          <Input
+            type="number"
+            value={filters.maxPrice}
+            onChange={(e) => handleFilterChange('maxPrice', Number(e.target.value))}
+            className="mt-1 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100"
+          />
+        </div>
+      </div>
+    </div>
+
+    {/* Sort By */}
+    <div className="space-y-2">
+      <label className="text-sm font-medium text-gray-700 dark:text-gray-300">{t("filters.sortBy")}</label>
+      <Select dir={dir} value={filters.sortBy} onValueChange={(value) => handleFilterChange('sortBy', value)}>
+        <SelectTrigger className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100">
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+          <SelectItem value="newest" className="text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">{t("filters.sortOptions.newest")}</SelectItem>
+          <SelectItem value="oldest" className="text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">{t("filters.sortOptions.oldest")}</SelectItem>
+          <SelectItem value="priceHigh" className="text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">{t("filters.sortOptions.priceHigh")}</SelectItem>
+          <SelectItem value="priceLow" className="text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">{t("filters.sortOptions.priceLow")}</SelectItem>
+          <SelectItem value="nameAZ" className="text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">{t("filters.sortOptions.nameAZ")}</SelectItem>
+          <SelectItem value="nameZA" className="text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">{t("filters.sortOptions.nameZA")}</SelectItem>
+        </SelectContent>
+      </Select>
+    </div>
+
+    {/* Apply Button */}
+    <Button onClick={handleApplyFilters} className="w-full btn-primary">
+      {t("filters.apply")}
+    </Button>
+  </div>
+);
 
 interface SubcategoryItem {
   id: string;
@@ -61,6 +167,8 @@ export default function SubcategoryPage() {
   const tCart = useTranslations("cart");
   const tWishlist = useTranslations("wishlist");
   const { subcategoryId, categoryId } = params;
+  const locale = useLocale();
+  const dir = locale === "ar" ? "rtl" : "ltr";
 
   const [filters, setFilters] = useState<FilterState>({
     search: "",
@@ -70,15 +178,36 @@ export default function SubcategoryPage() {
   });
 
   const [appliedFilters, setAppliedFilters] = useState<FilterState>(filters);
+  const [debouncedSearch, setDebouncedSearch] = useState(filters.search);
 
   // Cart and wishlist modal states
   const [showCartModal, setShowCartModal] = useState(false);
   const [cartModalProduct, setCartModalProduct] = useState<any>(null);
   const [cartModalQuantity, setCartModalQuantity] = useState(1);
+  
+  // Questions modal state
+  const [showQuestionsModal, setShowQuestionsModal] = useState(false);
+  const [questionsModalProduct, setQuestionsModalProduct] = useState<any>(null);
 
   // Store hooks
   const { addToCart, isLoading: cartLoading } = useCartStore();
   const { toggleWishlist, isInWishlist } = useWishlistStore();
+
+  // Debounce search input
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearch(filters.search);
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [filters.search]);
+
+  // Auto-apply search when debounced search changes
+  useEffect(() => {
+    if (debouncedSearch !== appliedFilters.search) {
+      setAppliedFilters(prev => ({ ...prev, search: debouncedSearch }));
+    }
+  }, [debouncedSearch, appliedFilters.search]);
 
   // Fetch subcategory data
   const { data: subcategoryData, isLoading: subcategoryLoading } = useQuery({
@@ -93,7 +222,7 @@ export default function SubcategoryPage() {
   // Build query params for API
   const queryParams = {
     subcategoryId: subcategoryId as string,
-    search: appliedFilters.search || undefined,
+    search: debouncedSearch || undefined,
     minPrice: appliedFilters.minPrice > 0 ? appliedFilters.minPrice : undefined,
     maxPrice: appliedFilters.maxPrice < 10000 ? appliedFilters.maxPrice : undefined,
     sort: getSortConfig(appliedFilters.sortBy),
@@ -126,11 +255,11 @@ export default function SubcategoryPage() {
     return JSON.stringify(sortConfigs[sortBy] || sortConfigs.newest);
   }
 
-  const handleApplyFilters = () => {
-    setAppliedFilters({ ...filters });
-  };
+  const handleApplyFilters = useCallback(() => {
+    setAppliedFilters({ ...filters, search: debouncedSearch });
+  }, [filters, debouncedSearch]);
 
-  const handleClearFilters = () => {
+  const handleClearFilters = useCallback(() => {
     const clearedFilters = {
       search: "",
       minPrice: 0,
@@ -139,9 +268,31 @@ export default function SubcategoryPage() {
     };
     setFilters(clearedFilters);
     setAppliedFilters(clearedFilters);
-  };
+    setDebouncedSearch("");
+  }, []);
+
+  const handleFilterChange = useCallback((field: keyof FilterState, value: any) => {
+    setFilters(prev => ({ ...prev, [field]: value }));
+  }, []);
 
   const handleAddToCart = async (product: APIProductItem & { price: number; salePrice?: number; isInStock: boolean }, quantity = 1) => {
+    // Check if product has required questions
+    const hasRequiredQuestions = product.questions && product.questions.some((q: any) => q.required);
+    
+    if (hasRequiredQuestions) {
+      // Show questions modal
+      setQuestionsModalProduct({
+        id: product.id,
+        name: product.name,
+        description: product.description || product.subcategory?.description || "",
+        price: parseFloat(product.originalPrice),
+        salePrice: product.discountedPrice ? parseFloat(product.discountedPrice) : undefined,
+        imageUrl: product.imageUrl || undefined,
+        questions: product.questions
+      });
+      setShowQuestionsModal(true);
+    } else {
+      // Direct add to cart
     try {
       const cartItem = {
         id: product.id,
@@ -161,6 +312,7 @@ export default function SubcategoryPage() {
       setShowCartModal(true);
     } catch (error) {
       console.error('Failed to add to cart:', error);
+      }
     }
   };
 
@@ -178,90 +330,31 @@ export default function SubcategoryPage() {
     toggleWishlist(wishlistItem);
   };
 
-  // Filter Panel Component
-  const FilterPanel = ({ isMobile = false }) => (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h3 className="text-lg font-semibold brand-heading">{t("filters.title")}</h3>
-        <Button variant="ghost" size="sm" onClick={handleClearFilters} className="text-brand-gold hover:bg-brand-gold/10">
-          <X className="w-4 h-4 mr-1" />
-          {t("filters.clear")}
-        </Button>
-      </div>
+  const handleAddToCartWithQuestions = async (product: any, quantity: number, customizations: any[], totalCost: number) => {
+    try {
+      const cartItem = {
+        id: product.id,
+        productId: product.id,
+        name: product.name,
+        description: product.description || "",
+        price: totalCost / quantity, // Price per item
+        imageUrl: product.imageUrl || undefined,
+        customizations: customizations.length > 0 ? customizations : undefined,
+        customizationCost: customizations.length > 0 ? totalCost - (product.price * quantity) : 0,
+      };
 
-      {/* Search */}
-      <div className="space-y-2">
-        <label className="text-sm font-medium text-gray-700">{t("filters.search")}</label>
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
-          <Input
-            placeholder={t("filters.search")}
-            value={filters.search}
-            onChange={(e) => setFilters(prev => ({ ...prev, search: e.target.value }))}
-            className="pl-10"
-          />
-        </div>
-      </div>
+      await addToCart(cartItem, quantity);
 
-      {/* Price Range */}
-      <div className="space-y-4">
-        <label className="text-sm font-medium text-gray-700">{t("filters.priceRange")}</label>
-        <div className="px-2">
-          <Slider
-            value={[filters.minPrice, filters.maxPrice]}
-            onValueChange={([min, max]) => setFilters(prev => ({ ...prev, minPrice: min, maxPrice: max }))}
-            max={10000}
-            min={0}
-            step={50}
-            className="w-full"
-          />
-        </div>
-        <div className="flex gap-2">
-          <div className="flex-1">
-            <label className="text-xs text-gray-500">{t("filters.minPrice")}</label>
-            <Input
-              type="number"
-              value={filters.minPrice}
-              onChange={(e) => setFilters(prev => ({ ...prev, minPrice: Number(e.target.value) }))}
-              className="mt-1"
-            />
-          </div>
-          <div className="flex-1">
-            <label className="text-xs text-gray-500">{t("filters.maxPrice")}</label>
-            <Input
-              type="number"
-              value={filters.maxPrice}
-              onChange={(e) => setFilters(prev => ({ ...prev, maxPrice: Number(e.target.value) }))}
-              className="mt-1"
-            />
-          </div>
-        </div>
-      </div>
+      // Show success modal
+      setCartModalProduct(cartItem);
+      setCartModalQuantity(quantity);
+      setShowCartModal(true);
+      setShowQuestionsModal(false);
+    } catch (error) {
+      console.error('Failed to add to cart:', error);
+    }
+  };
 
-      {/* Sort By */}
-      <div className="space-y-2">
-        <label className="text-sm font-medium text-gray-700">{t("filters.sortBy")}</label>
-        <Select value={filters.sortBy} onValueChange={(value) => setFilters(prev => ({ ...prev, sortBy: value }))}>
-          <SelectTrigger>
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="newest">{t("filters.sortOptions.newest")}</SelectItem>
-            <SelectItem value="oldest">{t("filters.sortOptions.oldest")}</SelectItem>
-            <SelectItem value="priceHigh">{t("filters.sortOptions.priceHigh")}</SelectItem>
-            <SelectItem value="priceLow">{t("filters.sortOptions.priceLow")}</SelectItem>
-            <SelectItem value="nameAZ">{t("filters.sortOptions.nameAZ")}</SelectItem>
-            <SelectItem value="nameZA">{t("filters.sortOptions.nameZA")}</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-
-      {/* Apply Button */}
-      <Button onClick={handleApplyFilters} className="w-full btn-primary">
-        {t("filters.apply")}
-      </Button>
-    </div>
-  );
 
   // Product Card Component
   const ProductCard = ({ product }: { product: APIProductItem & { price: number; salePrice?: number; isInStock: boolean } }) => {
@@ -272,9 +365,9 @@ export default function SubcategoryPage() {
     const isWishlisted = isInWishlist(product.id);
 
     return (
-      <Card className="group relative overflow-hidden rounded-2xl shadow-md hover:shadow-2xl transition-all duration-500 bg-white border-0">
+      <Card className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl dark:hover:shadow-gray-900/50 transition-all duration-500 bg-gradient-to-br from-white via-gray-50 to-white dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 border border-gray-200/50 dark:border-gray-700/50 hover:border-brand-gold/30 dark:hover:border-amber-400/30">
         {/* Product Image */}
-        <div className="relative aspect-square overflow-hidden">
+        <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-gray-100 via-gray-50 to-gray-200 dark:from-gray-800 dark:via-gray-700 dark:to-gray-900">
           {product.imageUrl ? (
             <Image
               src={product.imageUrl}
@@ -283,31 +376,34 @@ export default function SubcategoryPage() {
               className="object-cover transition-transform duration-700 group-hover:scale-110"
             />
           ) : (
-            <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-              <div className="w-16 h-16 rounded-full bg-gray-300" />
+            <div className="w-full h-full bg-gradient-to-br from-brand-gold/20 via-brand-navy/10 to-brand-gold/20 dark:from-amber-400/20 dark:via-gray-700 dark:to-amber-400/20 flex items-center justify-center">
+              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-brand-gold to-brand-navy dark:from-amber-400 dark:to-gray-600 shadow-lg" />
             </div>
           )}
 
-          {/* Overlay gradient */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          {/* Enhanced overlay gradient */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          
+          {/* Subtle border gradient */}
+          <div className="absolute inset-0 bg-gradient-to-br from-brand-gold/10 via-transparent to-brand-navy/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
           {/* Action buttons */}
           <div className="absolute top-3 right-3 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
             <Button
               size="sm"
               variant="secondary"
-              className="w-9 h-9 rounded-full bg-white/90 hover:bg-white shadow-lg backdrop-blur-sm"
+              className="w-9 h-9 rounded-full bg-white/95 hover:bg-white shadow-lg backdrop-blur-sm border border-gray-200/50 hover:border-red-300 hover:shadow-red-100/50 dark:bg-gray-800/95 dark:hover:bg-gray-700 dark:border-gray-600/50 dark:hover:border-red-400/50"
               onClick={() => handleWishlistToggle(product)}
             >
-              <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-red-500 text-red-500' : 'text-gray-700'}`} />
+              <Heart className={`w-4 h-4 transition-colors ${isWishlisted ? 'fill-red-500 text-red-500' : 'text-gray-700 hover:text-red-500 dark:text-gray-300 dark:hover:text-red-400'}`} />
             </Button>
             <Link href={`/products/${product.id}`}>
               <Button
                 size="sm"
                 variant="secondary"
-                className="w-9 h-9 rounded-full bg-white/90 hover:bg-white shadow-lg backdrop-blur-sm"
+                className="w-9 h-9 rounded-full bg-white/95 hover:bg-white shadow-lg backdrop-blur-sm border border-gray-200/50 hover:border-brand-gold/50 hover:shadow-brand-gold/20 dark:bg-gray-800/95 dark:hover:bg-gray-700 dark:border-gray-600/50 dark:hover:border-amber-400/50"
               >
-                <Eye className="w-4 h-4 text-gray-700" />
+                <Eye className="w-4 h-4 text-gray-700 hover:text-brand-navy dark:text-gray-300 dark:hover:text-amber-400 transition-colors" />
               </Button>
             </Link>
           </div>
@@ -315,17 +411,17 @@ export default function SubcategoryPage() {
           {/* Badges */}
           <div className="absolute top-3 left-3 flex flex-col gap-1">
             {isOnSale && (
-              <Badge className="bg-red-500 text-white font-bold px-2 py-1 text-xs">
+              <Badge className="bg-gradient-to-r from-red-500 to-red-600 text-white font-bold px-3 py-1.5 text-xs shadow-lg border border-red-400/30">
                 {t("products.sale")}
               </Badge>
             )}
             {product.isFeatured && (
-              <Badge className="bg-brand-gold text-brand-navy font-bold px-2 py-1 text-xs">
+              <Badge className="bg-gradient-to-r from-brand-gold to-yellow-400 text-brand-navy font-bold px-3 py-1.5 text-xs justify-center shadow-lg border border-yellow-300/30 dark:from-amber-400 dark:to-yellow-400 dark:text-gray-900 dark:border-amber-300/60 dark:shadow-amber-400/20">
                 {t("products.featured")}
               </Badge>
             )}
             {!product.isInStock && (
-              <Badge variant="secondary" className="bg-gray-500 text-white font-bold px-2 py-1 text-xs">
+              <Badge variant="secondary" className="bg-gradient-to-r from-gray-500 to-gray-600 text-white font-bold px-3 py-1.5 text-xs shadow-lg border border-gray-400/30">
                 {t("products.outOfStock")}
               </Badge>
             )}
@@ -334,61 +430,61 @@ export default function SubcategoryPage() {
           {/* Quick add to cart */}
           <div className="absolute bottom-3 left-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
             <Button
-              className="w-full btn-primary backdrop-blur-sm"
+              className="w-full bg-brand-navy hover:bg-brand-navy-light text-white font-semibold py-2.5 px-4 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed dark:bg-gray-800 dark:hover:bg-gray-700"
               disabled={!product.isInStock || cartLoading}
               onClick={() => handleAddToCart(product)}
             >
               <ShoppingCart className="w-4 h-4 mr-2" />
-              {cartLoading ? "Adding..." : tCart("addToCart")}
+              {cartLoading ? t("products.adding") : tCart("addToCart")}
             </Button>
           </div>
         </div>
 
         {/* Product Info */}
-        <CardContent className="p-4 space-y-3">
+        <CardContent className="p-5 space-y-4 bg-gradient-to-b from-transparent to-gray-50/50 dark:to-gray-800/50">
           <div>
             <Link href={`/products/${product.id}`}>
-              <h3 className="font-semibold text-gray-900 line-clamp-2 group-hover:text-brand-navy transition-colors cursor-pointer hover:underline">
+              <h3 className="font-bold text-gray-900 dark:text-white line-clamp-2 group-hover:text-brand-gold dark:group-hover:text-amber-400 transition-colors cursor-pointer hover:underline text-lg leading-tight">
                 {product.name}
               </h3>
             </Link>
             {product.description ? (
               <div
-                className="text-sm text-gray-600 line-clamp-2 mt-1"
+                className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2 mt-2 html-content leading-relaxed"
                 dangerouslySetInnerHTML={{ __html: product.description }}
               />
             ) : (
-              <p className="text-sm text-gray-600 line-clamp-2 mt-1">
+              <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2 mt-2 leading-relaxed">
                 {product.subcategory?.description || product.name}
               </p>
             )}
           </div>
 
           {/* Product Features */}
-          <div className="flex flex-wrap gap-1">
+          <div className="flex flex-wrap gap-2">
             {product.isFeatured && (
-              <Badge variant="secondary" className="bg-brand-gold/10 text-brand-navy text-xs">
+              <Badge variant="secondary" className="bg-gradient-to-r from-brand-gold/20 to-yellow-100 text-brand-navy text-xs font-semibold px-3 py-1.5 border border-brand-gold/30 dark:from-amber-400/40 dark:to-yellow-300/30 dark:text-gray-900 dark:border-amber-400/50 shadow-sm">
                 {t("products.featured")}
               </Badge>
             )}
           </div>
 
           {/* Price */}
-          <div className="flex items-center gap-2">
-            <span className="text-lg font-bold text-brand-navy">
-              ${finalPrice?.toFixed(2)}
+          <div className="flex items-center gap-3">
+            <span className="text-2xl font-black text-brand-navy dark:!text-amber-300">
+              {finalPrice?.toFixed(2)} ﷼
             </span>
             {isOnSale && (
-              <span className="text-sm text-gray-500 line-through">
-                ${price.toFixed(2)}
+              <span className="text-sm text-gray-500 dark:text-gray-400 line-through">
+                {price.toFixed(2)} ﷼
               </span>
             )}
           </div>
-
+            
           {/* Stock status */}
           <div className="flex items-center gap-2">
-            <div className={`w-2 h-2 rounded-full ${product.isInStock ? 'bg-green-500' : 'bg-red-500'}`} />
-            <span className={`text-xs font-medium ${product.isInStock ? 'text-green-700' : 'text-red-700'}`}>
+            <div className={`w-3 h-3 rounded-full shadow-sm ${product.isInStock ? 'bg-gradient-to-r from-green-400 to-green-500' : 'bg-gradient-to-r from-red-400 to-red-500'}`} />
+            <span className={`text-xs font-semibold px-2 py-1 rounded-full ${product.isInStock ? 'text-green-700 bg-green-100 dark:text-green-300 dark:bg-green-800/50 dark:border dark:border-green-600/30' : 'text-red-700 bg-red-100 dark:text-red-300 dark:bg-red-800/50 dark:border dark:border-red-600/30'}`}>
               {product.isInStock ? t("products.inStock") : t("products.outOfStock")}
             </span>
           </div>
@@ -398,14 +494,14 @@ export default function SubcategoryPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen  bg-gray-50 dark:bg-gray-900">
       {/* Subcategory Banner */}
       {subcategoryLoading ? (
-        <div className="relative h-64 md:h-80 bg-gray-100">
-          <Skeleton className="w-full h-full" />
+        <div className="relative h-64 md:h-80 bg-gray-100 dark:bg-gray-800">
+          <Skeleton className="w-full h-full bg-gray-200 dark:bg-gray-700" />
           <div className="absolute bottom-6 left-6 right-6">
-            <Skeleton className="h-8 w-64 mb-2" />
-            <Skeleton className="h-4 w-96" />
+            <Skeleton className="h-8 w-64 mb-2 bg-gray-200 dark:bg-gray-700" />
+            <Skeleton className="h-4 w-96 bg-gray-200 dark:bg-gray-700" />
           </div>
         </div>
       ) : subcategoryData ? (
@@ -421,7 +517,7 @@ export default function SubcategoryPage() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
             </>
           ) : (
-            <div className="w-full h-full bg-gradient-to-br from-brand-navy via-brand-navy/80 to-brand-gold/20" />
+            <div className="w-full h-full bg-gradient-to-br from-brand-navy via-brand-navy/80 to-brand-gold/20 dark:from-gray-900 dark:via-gray-800 dark:to-amber-400/20" />
           )}
 
           {/* Content overlay */}
@@ -432,10 +528,10 @@ export default function SubcategoryPage() {
                   <div className="flex-1 min-w-0">
                     {/* Breadcrumb */}
                     <div className="flex items-center gap-2 text-white/80 text-sm mb-3 overflow-hidden">
-                      <Link href="/categories" className="hover:text-white transition-colors shrink-0">
-                        {subcategoryData.category?.name || "Categories"}
+                      <Link href="/categories" className="hover:text-white transition-colors shrink-0 hover:underline">
+                        {t('breadcrumb.categories')}
                       </Link>
-                      <ChevronRight className="w-4 h-4 shrink-0" />
+                      <ChevronRight className="w-4 h-4 shrink-0 text-white/60" />
                       <span className="text-white font-medium truncate">{subcategoryData.name}</span>
                     </div>
 
@@ -457,12 +553,12 @@ export default function SubcategoryPage() {
       ) : null}
 
       {/* Main Content */}
-      <div className="section-container py-8">
+      <div className="section-container !py-12 ">
         {/* Page Header */}
         <div className="mb-8">
-          <h2 className="text-2xl md:text-3xl font-bold brand-heading mb-2">{t("pageTitle")}</h2>
+          <h2 className="text-2xl md:text-3xl font-bold brand-heading dark:text-amber-100 mb-2">{t("pageTitle")}</h2>
           {!isLoading && (
-            <p className="text-gray-600">
+            <p className="text-gray-600 dark:text-gray-400">
               {t("products.showing", { count: totalCount })}
             </p>
           )}
@@ -472,46 +568,61 @@ export default function SubcategoryPage() {
         <div className="grid lg:grid-cols-4 gap-8">
           {/* Desktop Filters */}
           <div className="hidden lg:block">
-            <div className="sticky top-24">
-              <FilterPanel />
+             <div className="sticky top-24 p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
+               <FilterPanel 
+                 filters={filters}
+                 t={t}
+                 handleFilterChange={handleFilterChange}
+                 handleClearFilters={handleClearFilters}
+                 handleApplyFilters={handleApplyFilters}
+                 dir={dir}
+               />
             </div>
           </div>
 
           {/* Mobile Filter Button */}
-          <div className="lg:hidden mb-4">
+          <div className="lg:hidden mb-6">
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="outline" className="w-full">
+                <Button variant="outline" className="w-full border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800">
                   <SlidersHorizontal className="w-4 h-4 mr-2" />
                   {t("filters.title")}
                 </Button>
               </SheetTrigger>
-              <SheetContent side="left" className="w-80 p-0">
+              <SheetContent side="left" className="w-80 p-0 bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700">
                 <SheetHeader className="p-6 pb-0">
-                  <SheetTitle>{t("filters.title")}</SheetTitle>
+                  <SheetTitle className="text-gray-900 dark:text-white">{t("filters.title")}</SheetTitle>
                 </SheetHeader>
                 <div className="p-6 pt-4">
-                  <FilterPanel isMobile={true} />
+                   <FilterPanel 
+                     filters={filters}
+                     t={t}
+                     handleFilterChange={handleFilterChange}
+                     handleClearFilters={handleClearFilters}
+                     handleApplyFilters={handleApplyFilters}
+                     isMobile={true}
+                     dir={dir}
+                   />
                 </div>
               </SheetContent>
             </Sheet>
           </div>
 
           {/* Products Grid */}
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-3 px-2 sm:px-0">
             {/* Loading State */}
             {isLoading && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-2">
                 {[...Array(12)].map((_, index) => (
-                  <Card key={index} className="overflow-hidden">
-                    <Skeleton className="w-full aspect-square" />
+                  <Card key={index} className="overflow-hidden bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+                    <Skeleton className="w-full aspect-square bg-gray-200 dark:bg-gray-700" />
                     <CardContent className="p-4 space-y-3">
-                      <Skeleton className="h-4 w-3/4" />
-                      <Skeleton className="h-4 w-1/2" />
-                      <Skeleton className="h-6 w-full" />
+                      <Skeleton className="h-4 w-3/4 bg-gray-200 dark:bg-gray-700" />
+                      <Skeleton className="h-4 w-1/2 bg-gray-200 dark:bg-gray-700" />
+                      <Skeleton className="h-6 w-full bg-gray-200 dark:bg-gray-700" />
                       <div className="flex justify-between">
-                        <Skeleton className="h-6 w-16" />
-                        <Skeleton className="h-8 w-20" />
+                        <Skeleton className="h-6 w-16 bg-gray-200 dark:bg-gray-700" />
+                        <Skeleton className="h-8 w-20 bg-gray-200 dark:bg-gray-700" />
                       </div>
                     </CardContent>
                   </Card>
@@ -522,12 +633,12 @@ export default function SubcategoryPage() {
             {/* Error State */}
             {error && (
               <div className="text-center py-12">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-100 text-red-600 mb-4">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-100 dark:bg-red-900/20 text-red-600 dark:text-red-400 mb-4">
                   <AlertCircle className="w-8 h-8" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">{t("error.title")}</h3>
-                <p className="text-gray-600 mb-4">{t("error.message")}</p>
-                <Button onClick={() => refetch()} variant="outline">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{t("error.title")}</h3>
+                <p className="text-gray-600 dark:text-gray-300 mb-4">{t("error.message")}</p>
+                <Button onClick={() => refetch()} variant="outline" className="border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800">
                   <RefreshCw className="w-4 h-4 mr-2" />
                   {t("error.retry")}
                 </Button>
@@ -538,19 +649,19 @@ export default function SubcategoryPage() {
             {!isLoading && !error && products && (
               <>
                 {products.length > 0 ? (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-2">
                     {products.map((product: APIProductItem & { price: number; salePrice?: number; isInStock: boolean }) => (
                       <ProductCard key={product.id} product={product} />
                     ))}
                   </div>
                 ) : (
                   <div className="text-center py-12">
-                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 text-gray-400 mb-4">
+                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 mb-4">
                       <Search className="w-8 h-8" />
                     </div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">{t("noProducts.title")}</h3>
-                    <p className="text-gray-600 mb-4">{t("noProducts.message")}</p>
-                    <Button onClick={handleClearFilters} variant="outline">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{t("noProducts.title")}</h3>
+                    <p className="text-gray-600 dark:text-gray-300 mb-4">{t("noProducts.message")}</p>
+                    <Button onClick={handleClearFilters} variant="outline" className="border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800">
                       {t("noProducts.clearFilters")}
                     </Button>
                   </div>
@@ -568,6 +679,17 @@ export default function SubcategoryPage() {
         product={cartModalProduct}
         quantity={cartModalQuantity}
       />
+
+      {/* Add to Cart with Questions Modal */}
+      <AddToCartWithQuestionsModal
+        isOpen={showQuestionsModal}
+        onClose={() => setShowQuestionsModal(false)}
+        product={questionsModalProduct}
+        quantity={1}
+        onAddToCart={handleAddToCartWithQuestions}
+      />
     </div>
   );
 }
+
+                   

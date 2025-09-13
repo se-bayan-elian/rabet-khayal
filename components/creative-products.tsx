@@ -19,6 +19,7 @@ import { useFeaturedProductsQuery, ProductItem as APIProductItem } from '@/servi
 import { useCartStore } from '@/store/cart'
 import { useWishlistStore } from '@/store/wishlist'
 import { AddToCartModal } from "@/components/cart/AddToCartModal"
+import { AddToCartWithQuestionsModal } from "@/components/cart/AddToCartWithQuestionsModal"
 
 interface CreativeProductsProps {
   title: string
@@ -35,11 +36,46 @@ export function CreativeProducts({ title, subtitle }: CreativeProductsProps) {
 
   // Modal states
   const [showCartModal, setShowCartModal] = useState(false)
+  const [showQuestionsModal, setShowQuestionsModal] = useState(false)
   const [cartModalProduct, setCartModalProduct] = useState<any>(null)
   const [cartModalQuantity, setCartModalQuantity] = useState(1)
 
   console.log(error)
   const handleAddToCart = async (product: APIProductItem & { price: number; salePrice?: number; isInStock: boolean }, quantity = 1) => {
+    // Check if product has required questions
+    const hasRequiredQuestions = product.questions && product.questions.some((q: any) => q.required)
+    
+    if (hasRequiredQuestions) {
+      // Show questions modal
+      setCartModalProduct(product)
+      setCartModalQuantity(quantity)
+      setShowQuestionsModal(true)
+    } else {
+      // Add directly to cart
+      try {
+        const cartItem = {
+          id: product.id,
+          productId: product.id,
+          name: product.name,
+          description: product.description || product.subcategory?.description || "",
+          price: parseFloat(product.originalPrice),
+          salePrice: product.discountedPrice ? parseFloat(product.discountedPrice) : undefined,
+          imageUrl: product.imageUrl || undefined,
+        }
+
+        await addToCart(cartItem, quantity)
+
+        // Show success modal
+        setCartModalProduct(cartItem)
+        setCartModalQuantity(quantity)
+        setShowCartModal(true)
+      } catch (error) {
+        console.error('Failed to add to cart:', error)
+      }
+    }
+  }
+
+  const handleAddToCartWithQuestions = async (product: any, quantity: number, customizations: any[], totalCost: number) => {
     try {
       const cartItem = {
         id: product.id,
@@ -49,16 +85,18 @@ export function CreativeProducts({ title, subtitle }: CreativeProductsProps) {
         price: parseFloat(product.originalPrice),
         salePrice: product.discountedPrice ? parseFloat(product.discountedPrice) : undefined,
         imageUrl: product.imageUrl || undefined,
+        customizations: customizations,
+        customizationCost: totalCost,
       }
 
       await addToCart(cartItem, quantity)
-
+      setShowQuestionsModal(false)
       // Show success modal
-      setCartModalProduct(cartItem)
+      setCartModalProduct(product)
       setCartModalQuantity(quantity)
       setShowCartModal(true)
     } catch (error) {
-      console.error('Failed to add to cart:', error)
+      console.error('Failed to add to cart with customizations:', error)
     }
   }
 
@@ -175,7 +213,7 @@ export function CreativeProducts({ title, subtitle }: CreativeProductsProps) {
             </Link>
             {product.description ? (
               <div
-                className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2 mt-1"
+                className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2 mt-1 html-content"
                 dangerouslySetInnerHTML={{ __html: product.description }}
               />
             ) : (
@@ -197,11 +235,11 @@ export function CreativeProducts({ title, subtitle }: CreativeProductsProps) {
           {/* Price */}
           <div className="flex items-center gap-2">
             <span className="text-lg font-bold text-brand-navy">
-              ${finalPrice?.toFixed(2)}
+              ﷼{finalPrice?.toFixed(2)}
             </span>
             {isOnSale && (
               <span className="text-sm text-gray-500 line-through">
-                ${price.toFixed(2)}
+                ﷼{price.toFixed(2)}
               </span>
             )}
           </div>
@@ -281,6 +319,15 @@ export function CreativeProducts({ title, subtitle }: CreativeProductsProps) {
         onClose={() => setShowCartModal(false)}
         product={cartModalProduct}
         quantity={cartModalQuantity}
+      />
+
+      {/* Add to Cart with Questions Modal */}
+      <AddToCartWithQuestionsModal
+        isOpen={showQuestionsModal}
+        onClose={() => setShowQuestionsModal(false)}
+        product={cartModalProduct}
+        quantity={cartModalQuantity}
+        onAddToCart={handleAddToCartWithQuestions}
       />
     </section>
   )

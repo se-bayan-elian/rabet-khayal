@@ -95,11 +95,11 @@ export function AddToCartModal({ isOpen, onClose, product, quantity, totalPrice:
               {/* Price */}
               <div className="flex items-center gap-2">
                 <span className="text-lg font-bold text-brand-navy dark:text-brand-gold" style={{ fontFamily: 'Tajwal, sans-serif' }}>
-                  ${finalPrice.toFixed(2)}
+                  ﷼{finalPrice.toFixed(2)}
                 </span>
                 {isOnSale && (
                   <span className="text-sm text-gray-500 dark:text-gray-400 line-through" style={{ fontFamily: 'Tajwal, sans-serif' }}>
-                    ${product.price.toFixed(2)}
+                    ﷼{product.price.toFixed(2)}
                   </span>
                 )}
               </div>
@@ -113,7 +113,7 @@ export function AddToCartModal({ isOpen, onClose, product, quantity, totalPrice:
                 {t("modal.total")}
               </span>
               <span className="text-xl font-bold text-brand-navy dark:text-brand-gold" style={{ fontFamily: 'Tajwal, sans-serif' }}>
-                ${calculatedTotal.toFixed(2)}
+                ﷼{calculatedTotal.toFixed(2)}
               </span>
             </div>
           </div>

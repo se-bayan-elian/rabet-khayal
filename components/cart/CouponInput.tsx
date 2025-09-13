@@ -80,7 +80,7 @@ export function CouponInput() {
                         ) : (
                           <>
                             <DollarSign className="w-3 h-3 mr-1 rtl:mr-0 rtl:ml-1" />
-                            ${cart.appliedCoupon.discount.toFixed(2)} {t('coupon.dollarOff')}
+                            ﷼{cart.appliedCoupon.discount.toFixed(2)} {t('coupon.dollarOff')}
                           </>
                         )}
                       </div>

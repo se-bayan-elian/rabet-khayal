@@ -166,11 +166,11 @@ function CartItemComponent({ item, onEditCustomizations }: {
                   <div className="flex flex-col">
                     <div className="flex items-center gap-2">
                       <span className="text-lg font-bold text-brand-navy">
-                        ${itemPrice.toFixed(2)}
+                        ﷼{itemPrice.toFixed(2)}
                       </span>
                       {isOnSale && (
                         <span className="text-sm text-gray-500 line-through">
-                          ${item.price.toFixed(2)}
+                          ﷼{item.price.toFixed(2)}
                         </span>
                       )}
                       {isOnSale && (
@@ -181,7 +181,7 @@ function CartItemComponent({ item, onEditCustomizations }: {
                     </div>
                     {customizationCost > 0 && (
                       <span className="text-xs text-brand-gold">
-                        +${customizationCost.toFixed(2)} {t("customizations")}
+                        +﷼{customizationCost.toFixed(2)} {t("customizations")}
                       </span>
                     )}
                   </div>
@@ -275,7 +275,7 @@ function CartItemComponent({ item, onEditCustomizations }: {
               <div className="text-right">
                 <p className="text-sm text-gray-600">{t("itemTotal")}:</p>
                 <p className="text-lg font-bold text-brand-navy">
-                  ${totalPrice.toFixed(2)}
+                  ﷼{totalPrice.toFixed(2)}
                 </p>
               </div>
             </div>
@@ -640,7 +640,7 @@ export default function CartPage() {
                         </div>
                         {cart.deliveryType === 'home' && cart.selectedDeliveryOption && (
                           <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
-                            ${cart.selectedDeliveryOption.cost.toFixed(2)}
+                            ﷼{cart.selectedDeliveryOption.cost.toFixed(2)}
                           </Badge>
                         )}
                       </div>
@@ -683,7 +683,7 @@ export default function CartPage() {
                               </div>
                               <div className="ml-4 rtl:ml-0 rtl:mr-4 text-right rtl:text-left">
                                 <span className="font-bold text-brand-navy">
-                                  ${option.cost.toFixed(2)}
+                                  ﷼{option.cost.toFixed(2)}
                                 </span>
                                 <div className="text-xs text-gray-500">
                                   {t("deliveryCost")}
@@ -758,7 +758,7 @@ export default function CartPage() {
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
                     <span className="text-gray-600">{t("subtotal")}:</span>
-                    <span className="font-medium">${subtotal.toFixed(2)}</span>
+                    <span className="font-medium">﷼{subtotal.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-gray-600">{t("delivery")}:</span>
@@ -766,7 +766,7 @@ export default function CartPage() {
                       {cart.deliveryType === 'company' ? (
                         <span className="text-green-600">{t("free")}</span>
                       ) : cart.selectedDeliveryOption ? (
-                        `$${cart.selectedDeliveryOption.cost.toFixed(2)}`
+                        `﷼${cart.selectedDeliveryOption.cost.toFixed(2)}`
                       ) : (
                         t("selectDeliveryOption")
                       )}
@@ -786,7 +786,7 @@ export default function CartPage() {
                         {t("couponDiscount")} ({cart.appliedCoupon.code}):
                       </span>
                       <span className="font-medium text-green-600">
-                        -{cart.appliedCoupon.discountType === 'percentage' ? `${(cart.appliedCoupon.discount / subtotal * 100).toFixed(0)}%` : `$${cart.appliedCoupon.discount.toFixed(2)}`}
+                        -{cart.appliedCoupon.discountType === 'percentage' ? `${(cart.appliedCoupon.discount / subtotal * 100).toFixed(0)}%` : `﷼${cart.appliedCoupon.discount.toFixed(2)}`}
                       </span>
                     </div>
                   )}
@@ -823,7 +823,7 @@ export default function CartPage() {
                                 ) : (
                                   <>
                                     <DollarSign className="w-3 h-3 mr-1 rtl:mr-0 rtl:ml-1" />
-                                    ${cart.appliedCoupon.discount.toFixed(2)} {t('coupon.dollarOff')}
+                                    ﷼{cart.appliedCoupon.discount.toFixed(2)} {t('coupon.dollarOff')}
                                   </>
                                 )}
                               </div>
@@ -902,7 +902,7 @@ export default function CartPage() {
                 <div className="flex justify-between">
                   <span className="text-lg font-semibold">{t("total")}:</span>
                   <span className="text-xl font-bold text-brand-navy">
-                    ${cart.totalPrice?.toFixed(2)}
+                    ﷼{cart.totalPrice?.toFixed(2)}
                   </span>
                 </div>
 

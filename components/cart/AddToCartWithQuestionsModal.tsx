@@ -1,7 +1,7 @@
 "use client"
 
-import { useState, useEffect } from "react";
-import { useTranslations } from "next-intl";
+import { useState, useEffect, useMemo } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,14 +13,12 @@ import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { ImageUpload } from "@/components/ui/image-upload";
 import {
-  Save,
+  ShoppingCart,
   X,
   AlertCircle,
   DollarSign
 } from "lucide-react";
-import { useLocale } from "next-intl";
 import Image from "next/image";
-import { CartItem, CartItemCustomization } from "@/store/cart";
 
 interface ProductQuestion {
   id: string;
@@ -36,59 +34,85 @@ interface ProductAnswer {
   extraPrice: number;
 }
 
-interface EditCustomizationModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  cartItem: CartItem;
-  onSave: (customizations: CartItemCustomization[], totalCost: number) => void;
+interface Product {
+  id: string;
+  name: string;
+  description?: string;
+  price: number;
+  salePrice?: number;
+  imageUrl?: string;
+  questions?: ProductQuestion[];
 }
 
+interface AddToCartWithQuestionsModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  product: Product | null;
+  quantity: number;
+  onAddToCart: (product: Product, quantity: number, customizations: any[], totalCost: number) => void;
+}
 
-export function EditCustomizationModal({
+// Simple validation function
+const validateForm = (formData: Record<string, any>, questions: ProductQuestion[], t: any): Record<string, string> => {
+  const errors: Record<string, string> = {};
+
+  questions.forEach((question) => {
+    const fieldName = `question_${question.id}`;
+    const value = formData[fieldName];
+
+    if (question.required) {
+      if (!value || (Array.isArray(value) && value.length === 0) || (typeof value === 'string' && value.trim() === '')) {
+        switch (question.type) {
+          case 'select':
+            errors[fieldName] = t("validation.selectOption");
+            break;
+          case 'text':
+            errors[fieldName] = t("validation.enterText");
+            break;
+          case 'note':
+            errors[fieldName] = t("validation.addNote");
+            break;
+          case 'checkbox':
+            errors[fieldName] = t("validation.selectAtLeastOne");
+            break;
+          case 'image':
+            errors[fieldName] = t("validation.uploadImage");
+            break;
+        }
+      }
+    }
+  });
+
+  return errors;
+};
+
+export function AddToCartWithQuestionsModal({
   isOpen,
   onClose,
-  cartItem,
-  onSave
-}: EditCustomizationModalProps) {
+  product,
+  quantity,
+  onAddToCart
+}: AddToCartWithQuestionsModalProps) {
   const t = useTranslations("cart");
-  const locale = useLocale();
-  const dir = locale === "ar" ? "rtl" : "ltr";
+  const tProducts = useTranslations("products");
   const [isLoading, setIsLoading] = useState(false);
   const [customizationCost, setCustomizationCost] = useState(0);
   const [formData, setFormData] = useState<Record<string, any>>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const locale = useLocale();
+  const dir = locale === "ar" ? "rtl" : "ltr";
+  // Always call useMemo unconditionally - use empty array as fallback
+  const questions = useMemo(() => {
+    return product?.questions || [];
+  }, [product?.questions]);
 
-  const questions = cartItem.questions || [];
-
-  // Build default values from existing customizations
-  const getDefaultValues = () => {
-    const defaults: any = {};
-
-    if (cartItem.customizations) {
-      cartItem.customizations.forEach((customization) => {
-        const fieldName = `question_${customization.questionId}`;
-        if (customization.answerId) {
-          // Check if it's a checkbox question
-          const question = questions.find(q => q.id === customization.questionId);
-          if (question?.type === 'checkbox') {
-            if (!defaults[fieldName]) defaults[fieldName] = [];
-            defaults[fieldName].push(customization.answerId);
-          } else {
-            defaults[fieldName] = customization.answerId;
-          }
-        } else if (customization.textValue) {
-          defaults[fieldName] = customization.textValue;
-        } else if (customization.imagePublicId) {
-          defaults[fieldName] = customization.imagePublicId;
-        }
-      });
+  // Calculate customization cost - always call useEffect
+  useEffect(() => {
+    if (!questions || questions.length === 0) {
+      setCustomizationCost(0);
+      return;
     }
 
-    return defaults;
-  };
-
-  // Calculate customization cost
-  useEffect(() => {
     let totalCost = 0;
 
     questions.forEach((question) => {
@@ -111,57 +135,19 @@ export function EditCustomizationModal({
     setCustomizationCost(totalCost);
   }, [formData, questions]);
 
-  // Reset form when modal opens with new data
+  // Reset form when modal opens - always call useEffect
   useEffect(() => {
     if (isOpen) {
-      setFormData(getDefaultValues());
+      setFormData({});
       setErrors({});
       setCustomizationCost(0);
     }
-  }, [isOpen, cartItem]);
+  }, [isOpen]);
 
-  // Validation function
-  const validateForm = (formData: Record<string, any>, questions: ProductQuestion[], t: any) => {
-    const errors: Record<string, string> = {};
+  // Early return after all hooks
+  if (!product) return null;
 
-    questions.forEach((question) => {
-      const fieldName = `question_${question.id}`;
-      const value = formData[fieldName];
-
-      if (question.required) {
-        if (!value || (Array.isArray(value) && value.length === 0) || (typeof value === 'string' && value.trim() === '')) {
-          switch (question.type) {
-            case 'select':
-              errors[fieldName] = t("validation.selectOption");
-              break;
-            case 'text':
-            case 'note':
-              errors[fieldName] = t("validation.enterText");
-              break;
-            case 'checkbox':
-              errors[fieldName] = t("validation.selectAtLeastOne");
-              break;
-            case 'image':
-              errors[fieldName] = t("validation.uploadImage");
-              break;
-          }
-        }
-      }
-    });
-
-    return errors;
-  };
-
-  // Helper function to update form field
-  const updateFormField = (fieldName: string, value: any) => {
-    setFormData(prev => ({ ...prev, [fieldName]: value }));
-    // Clear error when user starts typing
-    if (errors[fieldName]) {
-      setErrors(prev => ({ ...prev, [fieldName]: '' }));
-    }
-  };
-
-  const handleSave = async () => {
+  const handleAddToCart = async () => {
     // Validate form
     const validationErrors = validateForm(formData, questions, t);
     if (Object.keys(validationErrors).length > 0) {
@@ -172,7 +158,7 @@ export function EditCustomizationModal({
     setIsLoading(true);
 
     try {
-      const customizations: CartItemCustomization[] = [];
+      const customizations: any[] = [];
 
       questions.forEach((question) => {
         const fieldName = `question_${question.id}`;
@@ -214,16 +200,29 @@ export function EditCustomizationModal({
         }
       });
 
-      onSave(customizations, customizationCost);
+      await onAddToCart(product, quantity, customizations, customizationCost);
+      // Close the modal - parent will handle success modal
       onClose();
     } catch (error) {
-      console.error('Failed to save customizations:', error);
+      console.error('Failed to add to cart:', error);
     } finally {
       setIsLoading(false);
     }
   };
 
-  if (!isOpen) return null;
+  // Helper functions for form field updates
+  const updateFormField = (fieldName: string, value: any) => {
+    setFormData(prev => ({ ...prev, [fieldName]: value }));
+    // Clear error when user starts typing
+    if (errors[fieldName]) {
+      setErrors(prev => ({ ...prev, [fieldName]: '' }));
+    }
+  };
+
+  const finalPrice = product.salePrice || product.price;
+  const totalPrice = (finalPrice * quantity) + customizationCost;
+  const isOnSale = product.salePrice && product.salePrice < product.price;
+
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -238,15 +237,15 @@ export function EditCustomizationModal({
 
         <DialogHeader className="p-6 pb-4">
           <DialogTitle className="flex items-center gap-2 text-xl font-bold text-gray-900 dark:text-white" style={{ fontFamily: 'Tajawal, sans-serif' }}>
-            <Save className="w-5 h-5 text-brand-gold" />
-            {t("editCustomizations")}
+            <ShoppingCart className="w-5 h-5 text-brand-gold" />
+            {tProducts("addToCart")}
           </DialogTitle>
           <div className="flex items-center gap-3 pt-2">
-            {cartItem.imageUrl && (
+            {product.imageUrl && (
               <div className="relative w-12 h-12 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 shrink-0">
                 <Image
-                  src={cartItem.imageUrl}
-                  alt={cartItem.name}
+                  src={product.imageUrl}
+                  alt={product.name}
                   fill
                   className="object-cover"
                 />
@@ -254,21 +253,23 @@ export function EditCustomizationModal({
             )}
             <div className="flex-1 text-right rtl:text-right">
               <Badge variant="outline" className="text-sm font-medium">
-                {cartItem.name}
+                {product.name}
               </Badge>
-              {cartItem.description && (
+              {product.description && (
                 <div className="text-xs text-gray-600 dark:text-gray-300 mt-1 line-clamp-2 text-right rtl:text-right html-content"
-                dangerouslySetInnerHTML={{ __html: cartItem.description || "" }}
+                dangerouslySetInnerHTML={{ __html: product.description || "" }}
                 >
                 </div>
+                
+                  
               )}
             </div>
           </div>
         </DialogHeader>
 
         {questions.length === 0 ? (
-          <div className="text-center py-8">
-            <p className="text-gray-500">{t("noCustomizationsAvailable")}</p>
+          <div className="text-center py-8 px-6">
+            <p className="text-gray-500 dark:text-gray-400 mb-4">{t("noCustomizationsAvailable")}</p>
             <Button onClick={onClose} className="mt-4">
               {t("close")}
             </Button>
@@ -362,7 +363,7 @@ export function EditCustomizationModal({
                     )}
 
                     {question.type === 'checkbox' && (
-                      <div className="space-y-2 rtl:space-x-reverse">
+                      <div className="space-y-2">
                         {question.answers.map((answer: ProductAnswer) => (
                           <div key={answer.id} className="flex items-center space-x-2 rtl:space-x-reverse">
                             <Checkbox
@@ -379,7 +380,7 @@ export function EditCustomizationModal({
                             />
                             <Label
                               htmlFor={`${fieldName}_${answer.id}`}
-                              className="text-sm font-normal flex items-center gap-2 text-start rtl:text-right"
+                              className="text-sm font-normal flex items-center gap-2 text-start rtl:text-right text-gray-900 dark:text-white"
                             >
                               {answer.answerText}
                               {parseFloat(answer.extraPrice.toString()) > 0 && (
@@ -434,13 +435,25 @@ export function EditCustomizationModal({
               })}
             </div>
 
+            {/* Total Price */}
+            <div className="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-700 rounded-xl p-4 border border-gray-200 dark:border-gray-600">
+              <div className="flex items-center justify-between">
+                <span className="text-gray-600 dark:text-gray-300 font-medium" style={{ fontFamily: 'Tajawal, sans-serif' }}>
+                  {t("total")}:
+                </span>
+                <span className="text-xl font-bold text-brand-navy dark:text-brand-gold" style={{ fontFamily: 'Tajawal, sans-serif' }}>
+                  ﷼{totalPrice.toFixed(2)}
+                </span>
+              </div>
+            </div>
+
             {/* Actions */}
-            <div className="flex gap-3 pt-4 border-t">
+            <div className="flex gap-3 pt-4 border-t border-gray-200 dark:border-gray-700">
               <Button
                 type="button"
                 variant="outline"
                 onClick={onClose}
-                className="flex-1"
+                className="flex-1 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
                 disabled={isLoading}
               >
                 <X className="w-4 h-4 mr-2 rtl:mr-0 rtl:ml-2" />
@@ -448,12 +461,12 @@ export function EditCustomizationModal({
               </Button>
               <Button
                 type="button"
-                onClick={handleSave}
+                onClick={handleAddToCart}
                 className="flex-1 btn-primary"
                 disabled={isLoading}
               >
-                <Save className="w-4 h-4 mr-2 rtl:mr-0 rtl:ml-2" />
-                {isLoading ? t("saving") : t("saveChanges")}
+                <ShoppingCart className="w-4 h-4 mr-2 rtl:mr-0 rtl:ml-2" />
+                {isLoading ? t("saving") : t("addToCart")}
               </Button>
             </div>
           </div>

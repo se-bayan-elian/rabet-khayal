@@ -290,9 +290,9 @@ export function ServicesOverview({ title, subtitle }: ServicesOverviewProps) {
           <div className="cta-creative max-w-5xl mx-auto">
             <div className="cta-content">
               <div className="flex justify-center mb-6">
-                <div className="w-20 h-20 rounded-full flex items-center justify-center"
-                  style={{ background: 'rgba(255, 204, 0, 0.2)' }}>
-                  <Sparkles className="w-10 h-10 text-yellow-300" />
+                <div className="w-20 h-20 rounded-full flex items-center justify-center dark:bg-secondary bg-primary"
+                  >
+                  <Sparkles className="w-10 h-10 dark:text-yellow-300 text-white" />
                 </div>
               </div>
 

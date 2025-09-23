@@ -11,7 +11,7 @@ import Link from 'next/link'
 import { ProductItem } from '@/services'
 import { useWishlistStore } from '@/store/wishlist'
 import { AddToCartWithQuestionsModal } from '@/components/cart/AddToCartWithQuestionsModal'
-import { useCartStore } from '@/store/cart'
+import { useCartStore } from '@/store/cart-api'
 
 interface EnhancedProductCardProps {
   product: ProductItem
@@ -54,17 +54,19 @@ const EnhancedProductCard = ({ product, showQuickActions = true }: EnhancedProdu
     setShowCustomizationModal(true)
   }
 
-  const handleAddToCartWithQuestions = (product: any, quantity: number, customizations: any[], totalCost: number) => {
+  const handleAddToCartWithQuestions = (product: any, quantity: number, customizations: any[], customizationCost: number) => {
     // Add to cart with customizations
     addToCart({
       id: product.id, // Cart item ID
       productId: product.id,
       name: product.name,
       description: product.description || '',
-      price: totalCost / quantity, // Price per item
+      price: product.price, // ✅ FIX: Use product's base price
+      salePrice: product.salePrice, // ✅ FIX: Include sale price if available
       imageUrl: product.imageUrl || '',
       customizations: customizations.length > 0 ? customizations : undefined,
-      customizationCost: customizations.length > 0 ? totalCost - (product.price * quantity) : 0,
+      customizationCost: customizationCost, // ✅ FIX: Use the customization cost directly
+      questions: product.questions, // ✅ FIX: Include questions for editing
     }, quantity)
     setShowCustomizationModal(false)
   }
@@ -169,14 +171,15 @@ const EnhancedProductCard = ({ product, showQuickActions = true }: EnhancedProdu
             </Link>
 
             {/* Reviews */}
-            {reviewCount > 0 && (
-              <div className="flex items-center gap-2 mb-3">
-                {renderStars(averageRating)}
-                <span className="text-sm text-gray-600 dark:text-gray-400">
-                  {averageRating.toFixed(1)} ({reviewCount})
-                </span>
-              </div>
-            )}
+            <div className="flex items-center gap-2 mb-3">
+              {renderStars(averageRating)}
+              <span className="text-sm text-gray-600 dark:text-gray-400">
+                {reviewCount > 0 
+                  ? `${averageRating.toFixed(1)} (${reviewCount})`
+                  : t('noReviews')
+                }
+              </span>
+            </div>
 
             {/* Price */}
             <div className="flex items-center gap-2 mb-4">

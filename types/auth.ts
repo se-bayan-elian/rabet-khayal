@@ -131,20 +131,4 @@ export interface Address {
   isDefault: boolean;
 }
 
-export interface AuthContextType {
-  user: User | null;
-  isAuthenticated: boolean;
-  isLoading: boolean;
-  login: (email: string) => Promise<void>;
-  register: (data: RegisterRequest) => Promise<void>;
-  verifyOtp: (
-    email: string,
-    code: string,
-    type?: "register" | "login"
-  ) => Promise<void>;
-  googleAuth: (token: string) => Promise<void>;
-  logout: () => void;
-  updateProfile: (data: UpdateProfileRequest) => Promise<void>;
-  refreshToken: () => Promise<void>;
-  setUser: (user: User | null) => void;
-}
+// AuthContextType removed - using React Query pattern instead

@@ -8,6 +8,7 @@ export interface WishlistItem {
   price: number;
   salePrice?: number;
   imageUrl?: string;
+  questions?: any[];
   addedAt: string;
 }
 

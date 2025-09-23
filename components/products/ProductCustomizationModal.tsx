@@ -15,7 +15,7 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { ShoppingCart, Upload, AlertTriangle, CheckCircle, X } from 'lucide-react'
 import { ProductItem, ProductQuestion } from '@/services'
-import { useCartStore } from '@/store/cart'
+import { useCartStore } from '@/store/cart-api'
 import Image from 'next/image'
 
 // Dynamic schema builder based on product questions

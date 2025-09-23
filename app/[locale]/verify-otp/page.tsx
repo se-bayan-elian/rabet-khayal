@@ -18,7 +18,7 @@ import {
   Timer,
   Sparkles
 } from 'lucide-react';
-import { useAuth } from '@/contexts/AuthContext';
+import { useAuthActions } from '@/lib/auth-actions';
 import { toast } from 'sonner';
 import { loginWithEmail } from '@/services/auth';
 
@@ -26,10 +26,12 @@ export default function VerifyOtpPage() {
   const t = useTranslations('auth.verify');
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { verifyOtp, isLoading } = useAuth();
+  const { verifyOtp } = useAuthActions();
+  const [isLoading, setIsLoading] = useState(false);
 
   const email = searchParams.get('email') || '';
   const type = searchParams.get('type') || 'login'; // 'login' or 'register'
+  const returnUrl = searchParams.get('callback') || searchParams.get('returnUrl') || '/';
 
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const [timer, setTimer] = useState(300); // 5 minutes
@@ -109,12 +111,17 @@ export default function VerifyOtpPage() {
     }
 
     try {
-      await verifyOtp(email, code, type as 'register' | 'login');
-      // Redirect is handled in auth context
+      setIsLoading(true);
+      await verifyOtp(email, code, type as 'register' | 'login', returnUrl);
+      // Redirect is handled in auth actions
     } catch (error: any) {
+      console.log('from verify otp page');
+      console.log(error);
       setError(error.message || t('errors.invalidCode'));
       setOtp(['', '', '', '', '', '']);
       inputRefs.current[0]?.focus();
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -145,61 +152,61 @@ export default function VerifyOtpPage() {
           <div className="hidden lg:flex flex-col justify-center px-8">
             <div className="max-w-lg">
 
-              <h2 className="text-3xl font-bold text-gray-800 mb-6 brand-heading">
+              <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-6 brand-heading">
                 {t('instructions.title')}
               </h2>
-              <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+              <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
                 {t('instructions.subtitle')}
               </p>
 
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center shrink-0">
-                    <Mail className="w-6 h-6 text-blue-600" />
+                  <div className="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center shrink-0">
+                    <Mail className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                   </div>
                   <div>
-                    <h3 className="text-gray-800 font-semibold mb-1">{t('instructions.step1.title')}</h3>
-                    <p className="text-gray-600 text-sm">{t('instructions.step1.description')}</p>
+                    <h3 className="text-gray-800 dark:text-gray-100 font-semibold mb-1">{t('instructions.step1.title')}</h3>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm">{t('instructions.step1.description')}</p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center shrink-0">
-                    <CheckCircle className="w-6 h-6 text-green-600" />
+                  <div className="w-12 h-12 rounded-xl bg-green-100 dark:bg-green-900/30 flex items-center justify-center shrink-0">
+                    <CheckCircle className="w-6 h-6 text-green-600 dark:text-green-400" />
                   </div>
                   <div>
-                    <h3 className="text-gray-800 font-semibold mb-1">{t('instructions.step2.title')}</h3>
-                    <p className="text-gray-600 text-sm">{t('instructions.step2.description')}</p>
+                    <h3 className="text-gray-800 dark:text-gray-100 font-semibold mb-1">{t('instructions.step2.title')}</h3>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm">{t('instructions.step2.description')}</p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center shrink-0">
-                    <Timer className="w-6 h-6 text-amber-600" />
+                  <div className="w-12 h-12 rounded-xl bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center shrink-0">
+                    <Timer className="w-6 h-6 text-amber-600 dark:text-amber-400" />
                   </div>
                   <div>
-                    <h3 className="text-gray-800 font-semibold mb-1">{t('instructions.step3.title')}</h3>
-                    <p className="text-gray-600 text-sm">{t('instructions.step3.description')}</p>
+                    <h3 className="text-gray-800 dark:text-gray-100 font-semibold mb-1">{t('instructions.step3.title')}</h3>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm">{t('instructions.step3.description')}</p>
                   </div>
                 </div>
               </div>
 
               {/* Help Text */}
-              <div className="mt-8 bg-blue-50 rounded-lg p-6">
-                <h3 className="text-sm font-medium text-blue-900 mb-3">
+              <div className="mt-8 bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6">
+                <h3 className="text-sm font-medium text-blue-900 dark:text-blue-200 mb-3">
                   {t('help.title')}
                 </h3>
-                <ul className="text-xs text-blue-700 space-y-2">
+                <ul className="text-xs text-blue-700 dark:text-blue-300 space-y-2">
                   <li className="flex items-start gap-2">
-                    <span className="text-blue-500 mt-1">•</span>
+                    <span className="text-blue-500 dark:text-blue-400 mt-1">•</span>
                     <span>{t('help.checkSpam')}</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-blue-500 mt-1">•</span>
+                    <span className="text-blue-500 dark:text-blue-400 mt-1">•</span>
                     <span>{t('help.checkEmail')}</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-blue-500 mt-1">•</span>
+                    <span className="text-blue-500 dark:text-blue-400 mt-1">•</span>
                     <span>{t('help.wait')}</span>
                   </li>
                 </ul>
@@ -210,17 +217,8 @@ export default function VerifyOtpPage() {
           {/* Right Side - Verification Form */}
           <div className="flex items-center justify-center">
             <div className="max-w-md w-full">
-              {/* Mobile Logo */}
-              <div className="lg:hidden text-center mb-8">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center shadow-lg"
-                  style={{ background: 'linear-gradient(135deg, var(--brand-gold), var(--brand-navy))' }}>
-                  <Sparkles className="w-8 h-8 text-white" />
-                </div>
-                <h1 className="text-2xl font-bold brand-heading">ربط الخيال</h1>
-                <p className="text-gray-600 text-sm">Link of Imagination</p>
-              </div>
 
-              <Card className="shadow-2xl border-0">
+              <Card className="shadow-2xl border-0 dark:bg-gray-800 dark:border-gray-700">
                 <CardHeader className="text-center pb-6">
                   <div className="w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center shadow-lg"
                     style={{ background: 'linear-gradient(135deg, var(--brand-gold), var(--brand-navy))' }}>
@@ -231,10 +229,10 @@ export default function VerifyOtpPage() {
                     )}
                   </div>
                   <CardTitle className="text-2xl brand-heading">{t('title')}</CardTitle>
-                  <p className="text-gray-600 mt-2">
+                  <p className="text-gray-600 dark:text-gray-300 mt-2">
                     {type === 'register' ? t('subtitle.register') : t('subtitle.login')}
                   </p>
-                  <div className="flex items-center justify-center gap-2 mt-2 text-sm text-gray-500">
+                  <div className="flex items-center justify-center gap-2 mt-2 text-sm text-gray-500 dark:text-gray-400">
                     <Mail className="w-4 h-4" />
                     <span className="break-all">{email}</span>
                   </div>
@@ -243,7 +241,7 @@ export default function VerifyOtpPage() {
                 <CardContent className="space-y-6">
                   {/* OTP Input */}
                   <div>
-                    <div className="flex justify-center gap-3 mb-4">
+                    <div dir="ltr" className="flex justify-center gap-3 mb-4">
                       {otp.map((digit, index) => (
                         <Input
                           key={index}
@@ -256,7 +254,7 @@ export default function VerifyOtpPage() {
                           onChange={e => handleOtpChange(index, e.target.value)}
                           onKeyDown={e => handleKeyDown(index, e)}
                           onPaste={handlePaste}
-                          className="w-12 h-12 text-center text-xl font-bold border-2 focus:border-blue-500"
+                          className="w-12 h-12 text-center text-xl font-bold border-2 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 dark:focus:border-brand-gold"
                           disabled={isLoading}
                         />
                       ))}
@@ -272,7 +270,7 @@ export default function VerifyOtpPage() {
 
                   {/* Timer */}
                   <div className="text-center">
-                    <div className="flex items-center justify-center gap-2 text-sm text-gray-600">
+                    <div className="flex items-center justify-center gap-2 text-sm text-gray-600 dark:text-gray-300">
                       <Timer className="w-4 h-4" />
                       <span>{t('codeExpires')} {formatTime(timer)}</span>
                     </div>
@@ -299,13 +297,13 @@ export default function VerifyOtpPage() {
 
                   {/* Resend Code */}
                   <div className="text-center space-y-4">
-                    <p className="text-sm text-gray-600">{t('didntReceive')}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">{t('didntReceive')}</p>
 
                     <Button
                       variant="outline"
                       onClick={handleResend}
                       disabled={!canResend || isResending}
-                      className="w-full h-12"
+                      className="w-full h-12 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
                     >
                       {isResending ? (
                         <>
@@ -322,11 +320,11 @@ export default function VerifyOtpPage() {
                   </div>
 
                   {/* Navigation Links */}
-                  <div className="text-center space-y-2 pt-4 border-t">
+                  <div className="text-center space-y-2 pt-4 border-t dark:border-gray-600">
                     <Button
                       variant="ghost"
                       onClick={() => router.push(type === 'register' ? '/register' : '/login')}
-                      className="text-sm"
+                      className="text-sm text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100"
                     >
                       <ArrowLeft className="w-4 h-4 mr-2 rtl:hidden" />
                       <ArrowRight className="w-4 h-4 ml-2 ltr:hidden" />
@@ -337,7 +335,7 @@ export default function VerifyOtpPage() {
                       <Button
                         variant="ghost"
                         onClick={() => router.push('/')}
-                        className="text-sm text-gray-500 hover:text-gray-700"
+                        className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
                       >
                         {t('backToHome')}
                       </Button>

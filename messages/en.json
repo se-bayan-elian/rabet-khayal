@@ -14,9 +14,42 @@
     "warning": "Warning",
     "info": "Info"
   },
+  "loading": {
+    "title": "Loading",
+    "message": "Please wait a moment...",
+    "tip1": "We're loading the content",
+    "tip2": "This may take a few seconds"
+  },
+  "errors": {
+    "notFound": {
+      "title": "Page Not Found",
+      "message": "Sorry, we couldn't find the page you're looking for",
+      "suggestion": "Check the link or try searching for the content you need",
+      "goBack": "Go Back",
+      "goHome": "Go Home",
+      "browseProducts": "Browse Products",
+      "helpText": "If you think this is an error, please contact us"
+    },
+    "error": {
+      "title": "Something went wrong",
+      "message": "Sorry, an unexpected error occurred",
+      "suggestion": "Please try again or return to the home page",
+      "tryAgain": "Try Again",
+      "goHome": "Go Home",
+      "helpTitle": "Need Help?",
+      "helpText": "If the error persists, please contact our support team"
+    }
+  },
   "company": {
     "name": "Rabet Alkhayal",
     "tagline": "Connecting Dreams to Reality"
+  },
+  "metadata": {
+    "product": {
+      "titleSuffix": "| Rabet Alkhayal",
+      "defaultDescription": "High-quality products and services from Rabet Alkhayal",
+      "keywords": "products, services, quality, printing, design, creative"
+    }
   },
   "serviceHero": {
     "title": {
@@ -109,7 +142,228 @@
     "addToCart": "Add to Cart",
     "viewReviews": "View Reviews ({count})",
     "weight": "Weight",
-    "relatedProducts": "Related Products"
+    "relatedProducts": "Related Products",
+    "meta": {
+      "title": "Our Products - Rabet Al-Khayal",
+      "description": "Discover a diverse range of high-quality products designed specifically for your needs",
+      "keywords": "products, shopping, quality, rabet al-khayal",
+      "ogTitle": "Our Products - Rabet Al-Khayal",
+      "ogDescription": "Discover a diverse range of high-quality products designed specifically for your needs",
+      "twitterTitle": "Our Products - Rabet Al-Khayal",
+      "twitterDescription": "Discover a diverse range of high-quality products designed specifically for your needs"
+    },
+    "hero": {
+      "badge": "Our Premium Services",
+      "title": "Comprehensive Solutions for Your Project Success",
+      "subtitle": "We provide a comprehensive range of technical and creative services to achieve your goals and develop your business with the highest professional standards"
+    },
+    "features": {
+      "highSecurity": {
+        "title": "High Security",
+        "description": "Advanced protection for your data"
+      },
+      "fastPerformance": {
+        "title": "Fast Performance",
+        "description": "Exceptional response speed"
+      },
+      "continuousSupport": {
+        "title": "Continuous Support",
+        "description": "24/7 customer service"
+      },
+      "highQuality": {
+        "title": "High Quality",
+        "description": "Advanced professional standards"
+      }
+    },
+    "categories": {
+      "webDevelopment": {
+        "title": "Web Development",
+        "description": "Advanced and responsive website development solutions",
+        "services": {
+          "companyWebsites": {
+            "name": "Company Websites",
+            "price": "From 2,500 SAR",
+            "features": {
+              "professionalDesign": "Professional Design",
+              "responsive": "Responsive",
+              "adminPanel": "Admin Panel",
+              "seoOptimized": "SEO Optimized"
+            }
+          },
+          "ecommerce": {
+            "name": "E-commerce Stores",
+            "price": "From 4,500 SAR",
+            "features": {
+              "securePayment": "Secure Payment System",
+              "inventoryManagement": "Inventory Management",
+              "orderTracking": "Order Tracking",
+              "detailedAnalytics": "Detailed Analytics"
+            }
+          },
+          "customWebsites": {
+            "name": "Custom Websites",
+            "price": "Based on Requirements",
+            "features": {
+              "innovativeSolutions": "Innovative Solutions",
+              "modernTechnologies": "Modern Technologies",
+              "highPerformance": "High Performance",
+              "ongoingSupport": "Ongoing Support"
+            }
+          }
+        }
+      },
+      "designAndBranding": {
+        "title": "Design & Branding",
+        "description": "Creative designs that reflect your brand identity",
+        "services": {
+          "visualIdentity": {
+            "name": "Visual Identity Design",
+            "price": "From 1,500 SAR",
+            "features": {
+              "professionalLogo": "Professional Logo",
+              "identityGuide": "Identity Guide",
+              "designTemplates": "Design Templates",
+              "colorsAndFonts": "Colors & Fonts"
+            }
+          },
+          "printDesign": {
+            "name": "Print Design",
+            "price": "From 500 SAR",
+            "features": {
+              "businessCards": "Business Cards",
+              "brochures": "Brochures",
+              "banners": "Banners",
+              "advertisingMaterials": "Advertising Materials"
+            }
+          },
+          "interfaceDesign": {
+            "name": "Interface Design",
+            "price": "From 2,000 SAR",
+            "features": {
+              "uiUxDesign": "UI/UX Design",
+              "interactivePrototypes": "Interactive Prototypes",
+              "userTesting": "User Testing",
+              "experienceOptimization": "Experience Optimization"
+            }
+          }
+        }
+      },
+      "digitalMarketing": {
+        "title": "Digital Marketing",
+        "description": "Advanced marketing strategies for your business growth",
+        "services": {
+          "socialMediaManagement": {
+            "name": "Social Media Management",
+            "price": "From 1,200 SAR/month",
+            "features": {
+              "contentCreation": "Content Creation",
+              "postScheduling": "Post Scheduling",
+              "customerInteraction": "Customer Interaction",
+              "performanceAnalysis": "Performance Analysis"
+            }
+          },
+          "googleAds": {
+            "name": "Google Ads",
+            "price": "From 800 SAR/month",
+            "features": {
+              "keywordResearch": "Keyword Research",
+              "campaignCreation": "Campaign Creation",
+              "adOptimization": "Ad Optimization",
+              "comprehensiveReports": "Comprehensive Reports"
+            }
+          },
+          "seo": {
+            "name": "Search Engine Optimization",
+            "price": "From 1,000 SAR/month",
+            "features": {
+              "siteAnalysis": "Site Analysis",
+              "contentOptimization": "Content Optimization",
+              "linkBuilding": "Link Building",
+              "rankingMonitoring": "Ranking Monitoring"
+            }
+          }
+        }
+      },
+      "mobileApps": {
+        "title": "Mobile Applications",
+        "description": "Smart applications for iOS and Android systems",
+        "services": {
+          "businessApps": {
+            "name": "Business Apps",
+            "price": "From 8,000 SAR",
+            "features": {
+              "managementSystem": "Management System",
+              "financialReports": "Financial Reports",
+              "smartNotifications": "Smart Notifications",
+              "highSecurity": "High Security"
+            }
+          },
+          "ecommerceApps": {
+            "name": "E-commerce Apps",
+            "price": "From 12,000 SAR",
+            "features": {
+              "storeInterface": "Store Interface",
+              "paymentSystem": "Payment System",
+              "orderTracking": "Order Tracking",
+              "loyaltyProgram": "Loyalty Program"
+            }
+          },
+          "customApps": {
+            "name": "Custom Apps",
+            "price": "Based on Requirements",
+            "features": {
+              "innovativeIdea": "Innovative Idea",
+              "advancedTechnologies": "Advanced Technologies",
+              "comprehensiveTesting": "Comprehensive Testing",
+              "storePublishing": "Store Publishing"
+            }
+          }
+        }
+      },
+      "technicalConsulting": {
+        "title": "Technical Consulting",
+        "description": "Specialized technical expertise for your business solutions",
+        "services": {
+          "businessAnalysis": {
+            "name": "Business Analysis",
+            "price": "From 2,000 SAR",
+            "features": {
+              "needsStudy": "Needs Study",
+              "marketAnalysis": "Market Analysis",
+              "implementationPlan": "Implementation Plan",
+              "growthProjections": "Growth Projections"
+            }
+          },
+          "cybersecurity": {
+            "name": "Cybersecurity",
+            "price": "From 3,000 SAR",
+            "features": {
+              "vulnerabilityScanning": "Vulnerability Scanning",
+              "protectionPlan": "Protection Plan",
+              "staffTraining": "Staff Training",
+              "continuousMonitoring": "Continuous Monitoring"
+            }
+          },
+          "digitalTransformation": {
+            "name": "Digital Transformation",
+            "price": "Based on Scope",
+            "features": {
+              "currentStateAssessment": "Current State Assessment",
+              "transformationStrategy": "Transformation Strategy",
+              "technologyImplementation": "Technology Implementation",
+              "resultsMeasurement": "Results Measurement"
+            }
+          }
+        }
+      }
+    },
+    "cta": {
+      "requestService": "Request Service",
+      "title": "Ready to Start Your Project?",
+      "subtitle": "Get a free consultation and discover how we can help you achieve your goals",
+      "freeConsultation": "Free Consultation",
+      "contactUs": "Contact Us"
+    }
   },
   "stats": {
     "title": "Company Statistics",
@@ -396,6 +650,8 @@
     "total": "Total",
     "free": "Free",
     "customizations": "Customizations",
+    "imageUploaded": "Image uploaded",
+    "viewImage": "View Image",
     "sale": "Sale",
     "editCustomizations": "Edit Customizations",
     "completeCustomizations": "Complete Required",
@@ -410,6 +666,8 @@
       "success": "Successfully Added!",
       "addedToCart": "Product added to cart",
       "total": "Total",
+      "productPrice": "Product Price",
+      "customizationCost": "Customization Cost",
       "continueShopping": "Continue Shopping",
       "goToCart": "View Cart",
       "viewCart": "View Cart"
@@ -417,7 +675,9 @@
     "errors": {
       "addFailed": "Failed to add product to cart",
       "updateFailed": "Failed to update quantity",
-      "removeFailed": "Failed to remove product"
+      "removeFailed": "Failed to remove product",
+      "authenticationRequired" : "Please login to continue",
+      "loginRequiredDescription" : "redirecting to login page ..."
     },
     "validation": {
       "selectOption": "Please select an option",
@@ -485,7 +745,59 @@
       "off": "off",
       "percentageOff": "% off",
       "dollarOff": "off"
-    }
+    },
+    "payment": {
+      "title": "Payment Method",
+      "available": "Available",
+      "secure": "Secure",
+      "methods": {
+        "visa": {
+          "name": "Visa",
+          "description": "Pay with Visa card"
+        },
+        "mastercard": {
+          "name": "Mastercard",
+          "description": "Pay with Mastercard"
+        },
+        "applePay": {
+          "name": "Apple Pay",
+          "description": "Pay with Apple Pay"
+        },
+        "stcPay": {
+          "name": "STC Pay",
+          "description": "Pay with STC Pay"
+        }
+      },
+      "security": {
+        "title": "Secure Payment",
+        "description": "Your payment information is encrypted and secure"
+      },
+      "processing": {
+        "title": "Processing Payment",
+        "payingWith": "Paying with",
+        "processing": "Processing...",
+        "pleaseWait": "Please wait while we process your payment",
+        "success": "Payment Successful!",
+        "orderConfirmed": "Your order has been confirmed",
+        "transactionId": "Transaction ID",
+        "failed": "Payment Failed",
+        "viewOrder": "View My Orders",
+        "tryAgain": "Try Again",
+        "securityNote": "Your payment is processed securely"
+      },
+      "errors": {
+        "processingFailed": "Payment processing failed. Please try again."
+      }
+    },
+    "authRequired": "Login Required",
+    "authRequiredDescription": "Please log in to complete your order",
+    "paymentMethodRequired": "Payment Method Required",
+    "paymentMethodRequiredDescription": "Please select a payment method to continue",
+    "orderCreationFailed": "Order Creation Failed",
+    "orderCreationFailedDescription": "Failed to create your order. Please try again.",
+    "orderSuccess": "Order Placed Successfully!",
+    "orderSuccessDescription": "Your order has been placed and is being processed",
+    "processing": "Processing..."
   },
   "wishlist": {
     "title": "My Wishlist",
@@ -739,6 +1051,44 @@
         "invalidLength": "Please enter a 6-digit code",
         "invalidCode": "Invalid verification code. Please try again."
       }
+    },
+    "google": {
+      "signingIn": "Signing you in...",
+      "welcome": "Welcome!",
+      "pleaseWait": "Please wait while we complete your sign-in...",
+      "redirectingHome": "Redirecting you to the home page...",
+      "redirectingLogin": "Redirecting you to the login page...",
+      "googleAuthFailed": "Google authentication failed",
+      "googleAuthSuccess": "Successfully signed in with Google!",
+      "welcomeMessage": "Welcome! You have been signed in successfully.",
+      "noAuthCode": "No authorization code received from Google",
+      "noAccessToken": "No access token received from server",
+      "authFailed": "Authentication failed. Please try again."
+    },
+    "messages": {
+      "login": {
+        "success": "Verification code sent to your email!",
+        "error": "Login failed",
+        "verifySuccess": "Login successful! Welcome back!",
+        "verifyError": "Verification failed"
+      },
+      "register": {
+        "success": "Verification code sent to your email!",
+        "error": "Registration failed",
+        "verifySuccess": "Registration successful! Welcome!",
+        "verifyError": "Verification failed"
+      },
+      "google": {
+        "success": "Google authentication successful!",
+        "error": "Google authentication failed"
+      },
+      "logout": {
+        "success": "Logged out successfully"
+      },
+      "profile": {
+        "updateSuccess": "Profile updated successfully!",
+        "updateError": "Profile update failed"
+      }
     }
   },
   "orders": {
@@ -757,11 +1107,82 @@
       "processing": "Processing",
       "shipped": "Shipped",
       "delivered": "Delivered",
+      "completed": "Completed",
       "cancelled": "Cancelled"
     },
+    "deliveryStatus": {
+      "title": "Delivery Status",
+      "pending": "Pending",
+      "confirmed": "Confirmed",
+      "processing": "Processing",
+      "shipped": "Shipped",
+      "delivered": "Delivered",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    },
+    "paymentStatus": {
+      "title": "Payment Status",
+      "pending": "Pending",
+      "paid": "Paid",
+      "failed": "Failed",
+      "refund": "Refunded"
+    },
     "orderNumber": "Order",
-    "quantity": "Qty",
-    "moreItems": "more items",
+      "quantity": "Qty",
+      "moreItems": "more items",
+      "homeDelivery": "Home Delivery",
+    "pickup": "Pickup",
+    "pickupFromCompany": "Pickup from Company",
+    "subtotal": "Subtotal",
+    "delivery": "Delivery",
+    "discount": "Discount",
+    "total": "Total",
+    "free": "Free",
+    "customizations": "Customizations",
+    "viewImage": "View Image",
+    "invoice": "Invoice",
+    "orderInformation": "Order Information",
+    "orderDate": "Order Date",
+    "totalAmount": "Total Amount",
+    "deliveryType": "Delivery Type",
+    "deliveryAddress": "Delivery Address",
+    "customerInformation": "Customer Information",
+    "customerName": "Customer Name",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "orderItems": "Order Items",
+    "price": "Price",
+    "salePrice": "Sale Price",
+    "customization": "Customization",
+    "viewCustomizations": "View Customizations",
+    "selected": "Selected",
+    "input": "Input",
+    "orderSummary": "Order Summary",
+    "orderDetails": "Order Details",
+    "deliveryFee": "Delivery Fee",
+    "items": "Items",
+    "invoiceSummary": "Invoice Summary",
+    "thankYou": "Thank you for your business!",
+    "autoGenerated": "This is an auto-generated invoice.",
+    "contactUs": "Contact us:",
+    "product": "Product",
+    "salesInvoice": "Sales Invoice",
+    "invoiceNumber": "Invoice Number",
+    "orderDate": "Order Date",
+    "paymentMethod": "Payment Method",
+    "deliveryType": "Delivery Type",
+    "homeDelivery": "Home Delivery",
+    "storePickup": "Store Pickup",
+    "orderInfo": "Order Information",
+    "deliveryAddress": "Delivery Address",
+    "customerName": "Customer Name",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "customerInfo": "Customer Information",
+    "printInvoice": "Print Invoice",
+    "downloadInvoice": "Download Invoice",
     "estimatedDelivery": "Estimated Delivery",
     "viewDetails": "View Details",
     "track": "Track Package",
@@ -776,7 +1197,29 @@
     "pagination": {
       "previous": "Previous",
       "next": "Next"
-    }
+    },
+    "orderDetails": "Order Details",
+    "printInvoice": "Print Invoice",
+    "downloadInvoice": "Download Invoice",
+    "orderInformation": "Order Information",
+    "orderDate": "Order Date",
+    "totalAmount": "Total Amount",
+    "deliveryType": "Delivery Type",
+    "deliveryAddress": "Delivery Address",
+    "customerInformation": "Customer Information",
+    "customerName": "Customer Name",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "orderItems": "Order Items",
+    "price": "Price",
+    "salePrice": "Sale Price",
+    "customization": "Customization",
+    "viewCustomizations": "View Customizations",
+    "text": "Text",
+    "option": "Option",
+    "image": "Image",
+    "orderSummary": "Order Summary"
   },
   "profile": {
     "title": "My Profile",
@@ -983,16 +1426,31 @@
       }
     },
     "team": {
-      "title": "Meet Our Team",
-      "subtitle": "The talented people behind our success",
-      "ceo": "Chief Executive Officer",
-      "cto": "Chief Technology Officer",
-      "designer": "Lead Designer",
-      "developer": "Lead Developer",
-      "ceo_bio": "Visionary leader with 15+ years in digital transformation",
-      "cto_bio": "Technology expert specializing in scalable solutions",
-      "designer_bio": "Creative mind behind our award-winning designs",
-      "developer_bio": "Full-stack developer with expertise in modern frameworks"
+      "title": "Our Team",
+      "subtitle": "We come together to provide the best technical and creative solutions for our clients",
+      "achievements": {
+        "title": "Key Achievements:"
+      },
+      "ceo": {
+        "name": "Ahmed Mohammed Al-Ali",
+        "role": "Chief Executive Officer",
+        "bio": "Expert in technology and innovation with over 15 years of experience in leading startups and technology institutions. Holds a Master's degree in Business Administration and specializes in digital transformation and technology strategies.",
+        "achievements": [
+          "Led over 100 successful technology projects",
+          "Recipient of technology innovation awards",
+          "Speaker at global technology conferences"
+        ]
+      },
+      "developer": {
+        "name": "Fatima Ahmed Al-Saeed",
+        "role": "Senior Developer",
+        "bio": "Developer specialized in application and website development with extensive experience in the latest technologies. Known for precision and creativity in solving complex technical problems and developing innovative solutions for clients.",
+        "achievements": [
+          "Specialized in mobile application development",
+          "Experience in artificial intelligence technologies",
+          "Holder of advanced technical certifications"
+        ]
+      }
     },
     "cta": {
       "title": "Ready to Start Your Journey?",

@@ -23,7 +23,7 @@ export const useGoogleAuth = () => {
     initAuth();
   }, []);
 
-  const signInWithGoogle = async () => {
+  const signInWithGoogle = async (sessionId?: string) => {
     if (!isInitialized) {
       toast.error('Google authentication is not ready yet');
       return;
@@ -31,8 +31,8 @@ export const useGoogleAuth = () => {
 
     setIsLoading(true);
     try {
-      // Redirect to Google OAuth URL
-      await triggerGoogleAuth();
+      // Redirect to Google OAuth URL with sessionId for cart migration
+      await triggerGoogleAuth(sessionId);
       // Note: User will be redirected, so we don't need to handle success here
     } catch (error: any) {
       console.error('Google authentication error:', error);

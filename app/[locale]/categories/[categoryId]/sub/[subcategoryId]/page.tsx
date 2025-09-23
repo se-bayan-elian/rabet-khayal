@@ -6,7 +6,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { useProductsBySubCategoryQuery, useProductsQuery, ProductItem as APIProductItem } from "@/services";
 import { useQuery } from "@tanstack/react-query";
 import { axiosClient } from "@/lib/axios";
-import { useCartStore } from "@/store/cart";
+import { useCartStore } from "@/store/cart-api";
 import { useWishlistStore } from "@/store/wishlist";
 import { AddToCartModal } from "@/components/cart/AddToCartModal";
 import { AddToCartWithQuestionsModal } from "@/components/cart/AddToCartWithQuestionsModal";
@@ -301,7 +301,10 @@ export default function SubcategoryPage() {
         description: product.description || product.subcategory?.description || "",
         price: parseFloat(product.originalPrice),
         salePrice: product.discountedPrice ? parseFloat(product.discountedPrice) : undefined,
+        unitPrice: product.discountedPrice ? parseFloat(product.discountedPrice) : parseFloat(product.originalPrice),
         imageUrl: product.imageUrl || undefined,
+        customizations: [],
+        customizationCost: 0,
       };
 
       await addToCart(cartItem, quantity);
@@ -330,18 +333,28 @@ export default function SubcategoryPage() {
     toggleWishlist(wishlistItem);
   };
 
-  const handleAddToCartWithQuestions = async (product: any, quantity: number, customizations: any[], totalCost: number) => {
+  const handleAddToCartWithQuestions = async (product: any, quantity: number, customizations: any[], customizationCost: number) => {
     try {
       const cartItem = {
         id: product.id,
         productId: product.id,
         name: product.name,
         description: product.description || "",
-        price: totalCost / quantity, // Price per item
+        price: product.price,
+        salePrice: product.salePrice,
+        unitPrice: (product.salePrice || product.price) + customizationCost,
         imageUrl: product.imageUrl || undefined,
-        customizations: customizations.length > 0 ? customizations : undefined,
-        customizationCost: customizations.length > 0 ? totalCost - (product.price * quantity) : 0,
+        customizations: customizations.length > 0 ? customizations : [],
+        customizationCost: customizationCost,
+        questions: product.questions, // ✅ FIX: Include questions for editing
       };
+
+      console.log('SubcategoryPage: Adding to cart with customizations:', {
+        productId: product.id,
+        customizations,
+        customizationCost,
+        questions: product.questions
+      });
 
       await addToCart(cartItem, quantity);
 
@@ -356,6 +369,22 @@ export default function SubcategoryPage() {
   };
 
 
+  // Render stars function
+  const renderStars = (rating: number) => {
+    return (
+      <div className="flex items-center gap-0.5">
+        {[1, 2, 3, 4, 5].map((star) => (
+          <Star 
+            key={star}
+            className={`w-3 h-3 ${
+              star <= rating ? 'fill-yellow-400 text-yellow-400 dark:fill-amber-400 dark:text-amber-400' : 'text-gray-300 dark:text-gray-500'
+            }`}
+          />
+        ))}
+      </div>
+    )
+  }
+
   // Product Card Component
   const ProductCard = ({ product }: { product: APIProductItem & { price: number; salePrice?: number; isInStock: boolean } }) => {
     const price = parseFloat(product.originalPrice);
@@ -363,6 +392,8 @@ export default function SubcategoryPage() {
     const isOnSale = salePrice && salePrice < price;
     const finalPrice = isOnSale ? salePrice! : price;
     const isWishlisted = isInWishlist(product.id);
+    const averageRating = product.averageRating || 0;
+    const reviewCount = product.reviewCount || 0;
 
     return (
       <Card className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl dark:hover:shadow-gray-900/50 transition-all duration-500 bg-gradient-to-br from-white via-gray-50 to-white dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 border border-gray-200/50 dark:border-gray-700/50 hover:border-brand-gold/30 dark:hover:border-amber-400/30">
@@ -411,7 +442,7 @@ export default function SubcategoryPage() {
           {/* Badges */}
           <div className="absolute top-3 left-3 flex flex-col gap-1">
             {isOnSale && (
-              <Badge className="bg-gradient-to-r from-red-500 to-red-600 text-white font-bold px-3 py-1.5 text-xs shadow-lg border border-red-400/30">
+              <Badge className="bg-gradient-to-r justify-center from-red-500 to-red-600 text-white font-bold px-3 py-1.5 text-xs shadow-lg border border-red-400/30">
                 {t("products.sale")}
               </Badge>
             )}
@@ -460,13 +491,15 @@ export default function SubcategoryPage() {
             )}
           </div>
 
-          {/* Product Features */}
-          <div className="flex flex-wrap gap-2">
-            {product.isFeatured && (
-              <Badge variant="secondary" className="bg-gradient-to-r from-brand-gold/20 to-yellow-100 text-brand-navy text-xs font-semibold px-3 py-1.5 border border-brand-gold/30 dark:from-amber-400/40 dark:to-yellow-300/30 dark:text-gray-900 dark:border-amber-400/50 shadow-sm">
-                {t("products.featured")}
-              </Badge>
-            )}
+          {/* Reviews */}
+          <div className="flex items-center gap-2">
+            {renderStars(averageRating)}
+            <span className="text-sm text-gray-600 dark:text-gray-400">
+              {reviewCount > 0 
+                ? `${(+averageRating).toFixed(1)} (${reviewCount})`
+                : t('products.noReviews')
+              }
+            </span>
           </div>
 
           {/* Price */}

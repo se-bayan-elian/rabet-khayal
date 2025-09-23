@@ -19,14 +19,17 @@ export const initializeGoogleAuth = (): Promise<void> => {
 /**
  * Trigger Google OAuth by redirecting to backend URL
  */
-export const triggerGoogleAuth = async (): Promise<void> => {
+export const triggerGoogleAuth = async (sessionId?: string): Promise<void> => {
   try {
     // Get the Google OAuth URL from backend
     const { url } = await getGoogleAuthUrl();
     
+    // Add sessionId to the URL if provided (for cart migration)
+    const finalUrl = sessionId ? `${url}&sessionId=${encodeURIComponent(sessionId)}` : url;
+    
     // Redirect to Google OAuth URL
     if (typeof window !== 'undefined') {
-      window.location.href = url;
+      window.location.href = finalUrl;
     }
   } catch (error) {
     throw new Error('Failed to get Google OAuth URL');

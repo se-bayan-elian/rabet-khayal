@@ -26,7 +26,8 @@ import {
   Clock,
   CheckCircle
 } from 'lucide-react';
-import { useAuth } from '@/contexts/AuthContext';
+import { useAuthActions } from '@/lib/auth-actions';
+import { useAuth } from '@/hooks/use-profile';
 import { GoogleSignInButton } from '@/components/ui/google-signin-button';
 import { toast } from 'sonner';
 
@@ -45,7 +46,8 @@ export default function RegisterPage() {
   const t = useTranslations('auth.register');
   const tCommon = useTranslations('common');
   const router = useRouter();
-  const { register: registerUser, isLoading, isAuthenticated } = useAuth();
+  const { register: registerUser } = useAuthActions();
+  const { isAuthenticated, isLoading } = useAuth();
   const [emailSent, setEmailSent] = useState(false);
   const [userData, setUserData] = useState<any>(null);
 
@@ -130,10 +132,10 @@ export default function RegisterPage() {
     <div className="min-h-screen" style={{ background: 'var(--brand-bg)' }}>
       <div className="grid lg:grid-cols-2 min-h-screen">
         {/* Left Side - Branding */}
-        <div className="hidden lg:flex flex-col justify-center px-12 py-12" style={{ background: 'linear-gradient(135deg, var(--brand-navy), var(--brand-gold))' }}>
+        <div className="hidden lg:block px-12 py-28" style={{ background: 'linear-gradient(135deg, var(--brand-navy), var(--brand-gold))' }}>
           <div className="max-w-lg">
 
-            <h2 className="text-4xl font-bold text-white mb-6 brand-heading">
+            <h2 className="text-4xl font-bold !text-white mb-6 brand-heading">
               {t('welcome.title')}
             </h2>
             <p className="text-xl text-white/90 mb-12 leading-relaxed">
@@ -159,15 +161,6 @@ export default function RegisterPage() {
         {/* Right Side - Register Form */}
         <div className="flex items-center justify-center px-4 py-24">
           <div className="max-w-md w-full">
-            {/* Mobile Logo */}
-            <div className="lg:hidden text-center mb-8">
-              <div className="w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center shadow-lg"
-                style={{ background: 'linear-gradient(135deg, var(--brand-gold), var(--brand-navy))' }}>
-                <Sparkles className="w-8 h-8 text-white" />
-              </div>
-              <h1 className="text-2xl font-bold brand-heading">ربط الخيال</h1>
-              <p className="text-gray-600 text-sm">Link of Imagination</p>
-            </div>
 
             <Card className="shadow-2xl border-0">
               <CardHeader className="text-center">
@@ -325,7 +318,7 @@ export default function RegisterPage() {
 
                 <div className="relative">
                   <Separator className="my-6" />
-                  <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-4 text-sm text-gray-500">
+                  <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-transparent px-4 text-sm text-gray-500 dark:text-white">
                     {t('or')}
                   </span>
                 </div>

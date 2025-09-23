@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -23,9 +23,10 @@ import {
   Clock,
   CheckCircle
 } from 'lucide-react';
-import { useAuth } from '@/contexts/AuthContext';
+import { useAuthActions } from '@/lib/auth-actions';
+import { useAuth } from '@/hooks/use-profile';
 import { GoogleSignInButton } from '@/components/ui/google-signin-button';
-import { toast } from 'sonner';
+import { useCartStore } from '@/store/cart-api';
 
 const loginSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
@@ -37,28 +38,35 @@ export default function LoginPage() {
   const t = useTranslations('auth.login');
   const tCommon = useTranslations('common');
   const router = useRouter();
-  const { login, isLoading, isAuthenticated } = useAuth();
+  const searchParams = useSearchParams();
+  const { login } = useAuthActions();
+  const { isAuthenticated, isLoading } = useAuth();
+  const { setLoggedIn } = useCartStore();
   const [emailSent, setEmailSent] = useState(false);
   const [sentEmail, setSentEmail] = useState('');
+  
+  // Get callback URL from query parameters
+  const callbackUrl = searchParams.get('callback') || searchParams.get('returnUrl') || '/';
 
   const { register, handleSubmit, formState: { errors } } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
   });
 
-  // Redirect if already authenticated
+  // Redirect if already authenticated and sync cart
   useEffect(() => {
     if (isAuthenticated) {
-      router.push('/');
+      setLoggedIn(true);
+      router.push(decodeURIComponent(callbackUrl));
     }
-  }, [isAuthenticated, router]);
+  }, [isAuthenticated, router, callbackUrl, setLoggedIn]);
 
   const onSubmit = async (data: LoginFormData) => {
     try {
       await login(data.email);
       setEmailSent(true);
       setSentEmail(data.email);
-      // Redirect to verification page with email in query
-      router.push(`/verify-otp?email=${encodeURIComponent(data.email)}&type=login`);
+      // Redirect to verification page with email and callback URL in query
+      router.push(`/verify-otp?email=${encodeURIComponent(data.email)}&type=login&callback=${encodeURIComponent(callbackUrl)}`);
     } catch (error) {
       // Error is handled by the auth context
     }
@@ -99,7 +107,7 @@ export default function LoginPage() {
                 {t('emailSent.description')} <strong>{sentEmail}</strong>
               </p>
               <Button
-                onClick={() => router.push(`/verify-otp?email=${encodeURIComponent(sentEmail)}&type=login`)}
+                onClick={() => router.push(`/verify-otp?email=${encodeURIComponent(sentEmail)}&type=login&callback=${encodeURIComponent(callbackUrl)}`)}
                 className="w-full btn-primary"
               >
                 {t('emailSent.continue')}
@@ -120,7 +128,7 @@ export default function LoginPage() {
         <div className="hidden lg:flex flex-col justify-center px-12 py-24" style={{ background: 'linear-gradient(135deg, var(--brand-navy), var(--brand-gold))' }}>
           <div className="max-w-lg">
 
-            <h2 className="text-4xl font-bold text-white mb-6 brand-heading">
+            <h2 className="text-4xl font-bold !text-white mb-6 brand-heading">
               {t('welcome.title')}
             </h2>
             <p className="text-xl text-white/90 mb-12 leading-relaxed">
@@ -146,15 +154,7 @@ export default function LoginPage() {
         {/* Right Side - Login Form */}
         <div className="flex items-center justify-center px-4 pt-36 pb-12">
           <div className="max-w-md w-full">
-            {/* Mobile Logo */}
-            <div className="lg:hidden text-center mb-8">
-              <div className="w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center shadow-lg"
-                style={{ background: 'linear-gradient(135deg, var(--brand-gold), var(--brand-navy))' }}>
-                <Sparkles className="w-8 h-8 text-white" />
-              </div>
-              <h1 className="text-2xl font-bold brand-heading">ربط الخيال</h1>
-              <p className="text-gray-600 text-sm">Link of Imagination</p>
-            </div>
+            
 
             <Card className="shadow-2xl border-0">
               <CardHeader className="text-center">
@@ -169,13 +169,14 @@ export default function LoginPage() {
                       {t('form.email')}
                     </Label>
                     <div className="relative mt-2">
-                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 !text-brand-gold" />
                       <Input
                         id="email"
                         type="email"
                         placeholder={t('form.emailPlaceholder')}
                         className="pl-10 h-12 text-base"
                         {...register('email')}
+                        
                       />
                     </div>
                     {errors.email && (
@@ -205,7 +206,7 @@ export default function LoginPage() {
 
                 <div className="relative">
                   <Separator className="my-6" />
-                  <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-4 text-sm text-gray-500">
+                  <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-transparent px-4 text-sm text-gray-500 dark:text-white">
                     {t('or')}
                   </span>
                 </div>

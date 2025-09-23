@@ -33,9 +33,10 @@ import { useTranslations, useLocale } from 'next-intl'
 import { usePathname } from "next/navigation"
 import { routing } from "@/i18n/routing"
 import { useCategoriesQuery, useServicesQuery } from "@/services"
-import { useCartStore } from '@/store/cart'
+import { useCartStore } from '@/store/cart-api'
 import { useWishlistStore } from '@/store/wishlist'
-import { useAuth } from '@/contexts/AuthContext'
+import { useAuth } from '@/hooks/use-profile'
+import { useAuthActions } from '@/lib/auth-actions'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -81,11 +82,12 @@ export function Header({
   // Store hooks for cart and wishlist
   const { cart } = useCartStore()
   const { items: wishlistItems } = useWishlistStore()
-  const cartCount = cart?.items?.reduce((total, item) => total + item.quantity, 0) || 0
+  const cartCount = cart?.totalItems || 0
   const wishlistCount = wishlistItems.length
 
-  // Auth hook
-  const { user, isAuthenticated, isLoading, logout } = useAuth()
+  // Auth hooks
+  const { user, isAuthenticated, isLoading } = useAuth()
+  const { logout } = useAuthActions()
   
   // Use user from auth context directly to avoid infinite loops
   const currentUser = user
@@ -634,7 +636,7 @@ export function Header({
                                 {subcategories.slice(0, 4).map((subcategory: any, subIndex: number) => (
                                   <Link
                                     key={subIndex}
-                                    href={`/categories/${category.id}/subcategories/${subcategory.id}`}
+                                    href={`/categories/${category.id}/sub/${subcategory.id}`}
                                     className="flex items-center gap-3 p-2 rounded-lg hover:bg-amber-50 dark:hover:bg-amber-900/20 transition-all duration-300 group/subcategory active:scale-95"
                                     onClick={() => setIsMenuOpen(false)}
                                   >

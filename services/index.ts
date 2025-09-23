@@ -1,4 +1,4 @@
-import { axiosClient } from "@/lib/axios";
+import { axiosAuthClient, axiosClient } from "@/lib/axios";
 import { useQuery } from "@tanstack/react-query";
 
 export interface PaginatedResponse<T> {
@@ -78,13 +78,15 @@ export interface Review {
 }
 
 export interface ReviewsResponse {
-  data: Review[];
+  data : {
+    data: Review[];
   total: number;
   page: number;
   limit: number;
   totalPages: number;
   averageRating: number;
   ratingDistribution: Record<string, number>;
+  }
 }
 
 export interface CreateReviewData {
@@ -285,7 +287,7 @@ export function useProductsBySubCategoryQuery(params: {
 
 // Cart APIs (backend sync)
 export async function fetchCart() {
-  const { data } = await axiosClient.get(`/carts/my`);
+  const { data } = await axiosAuthClient.get(`/carts/my`);
   return data;
 }
 
@@ -294,12 +296,12 @@ export async function addToCartApi(payload: {
   quantity: number;
   options?: Record<string, any>;
 }) {
-  const { data } = await axiosClient.post(`/carts/items`, payload);
+  const { data } = await axiosAuthClient.post(`/carts/items`, payload);
   return data;
 }
 
 export async function removeFromCartApi(itemId: string) {
-  const { data } = await axiosClient.delete(`/carts/items/${itemId}`);
+  const { data } = await axiosAuthClient.delete(`/carts/items/${itemId}`);
   return data;
 }
 
@@ -321,6 +323,9 @@ export function useProductQuery(productId: string) {
     staleTime: 1000 * 60 * 5,
   });
 }
+
+// Alias for backward compatibility
+export const useProductByIdQuery = useProductQuery;
 
 // Reviews API
 export async function fetchProductReviews(
@@ -357,7 +362,7 @@ export function useProductReviewsQuery(
 }
 
 export async function createReview(reviewData: CreateReviewData) {
-  const { data } = await axiosClient.post<{
+  const { data } = await axiosAuthClient.post<{
     success: boolean;
     data: Review;
     message: string;
@@ -488,10 +493,18 @@ export interface CouponValidationResponse {
 }
 
 // Coupon API functions
-export async function validateCoupon(code: string, orderTotal: number) {
-  const response = await axiosClient.post(`/coupons/validate`, {
+export async function validateCoupon(code: string, orderTotal: number, locale: string) {
+  // Ensure locale is just 'ar' or 'en', not 'ar-US' or similar
+  const cleanLocale = locale?.split('-')[0]?.toLowerCase() === 'ar' ? 'ar' : 'en';
+  console.log('Frontend sending locale:', cleanLocale);
+  
+  const response = await axiosAuthClient.post(`/coupons/validate`, {
     code,
     orderTotal,
+  }, {
+    headers: {
+      "Accept-Language": cleanLocale
+    }
   });
 
   // Extract the actual validation data from the wrapped response

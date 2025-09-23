@@ -14,9 +14,42 @@
     "warning": "تحذير",
     "info": "معلومات"
   },
+  "loading": {
+    "title": "جاري التحميل",
+    "message": "يرجى الانتظار قليلاً...",
+    "tip1": "نحن نعمل على تحميل المحتوى",
+    "tip2": "هذا قد يستغرق بضع ثوانٍ"
+  },
+  "errors": {
+    "notFound": {
+      "title": "الصفحة غير موجودة",
+      "message": "عذراً، لم نتمكن من العثور على الصفحة التي تبحث عنها",
+      "suggestion": "تحقق من الرابط أو جرب البحث عن المحتوى المطلوب",
+      "goBack": "العودة للخلف",
+      "goHome": "العودة للرئيسية",
+      "browseProducts": "تصفح المنتجات",
+      "helpText": "إذا كنت تعتقد أن هذا خطأ، يرجى التواصل معنا"
+    },
+    "error": {
+      "title": "حدث خطأ",
+      "message": "عذراً، حدث خطأ غير متوقع",
+      "suggestion": "يرجى المحاولة مرة أخرى أو العودة للصفحة الرئيسية",
+      "tryAgain": "حاول مرة أخرى",
+      "goHome": "العودة للرئيسية",
+      "helpTitle": "تحتاج مساعدة؟",
+      "helpText": "إذا استمر الخطأ، يرجى التواصل مع فريق الدعم الفني"
+    }
+  },
   "company": {
     "name": "ربط الخيال",
     "tagline": "نربط الخيال لننير الواقع"
+  },
+  "metadata": {
+    "product": {
+      "titleSuffix": "| ربط الخيال",
+      "defaultDescription": "منتجات وخدمات عالية الجودة من ربط الخيال",
+      "keywords": "منتجات, خدمات, جودة, طباعة, تصميم, إبداعي"
+    }
   },
   "serviceHero": {
     "title": {
@@ -235,7 +268,228 @@
     "addToCart": "أضف للسلة",
     "viewReviews": "عرض التقييمات ({count})",
     "weight": "الوزن",
-    "relatedProducts": "منتجات ذات صلة"
+    "relatedProducts": "منتجات ذات صلة",
+    "meta": {
+      "title": "منتجاتنا - ربط الخيال",
+      "description": "اكتشف مجموعة متنوعة من المنتجات عالية الجودة المصممة خصيصاً لاحتياجاتك",
+      "keywords": "منتجات، تسوق، جودة، ربط الخيال",
+      "ogTitle": "منتجاتنا - ربط الخيال",
+      "ogDescription": "اكتشف مجموعة متنوعة من المنتجات عالية الجودة المصممة خصيصاً لاحتياجاتك",
+      "twitterTitle": "منتجاتنا - ربط الخيال",
+      "twitterDescription": "اكتشف مجموعة متنوعة من المنتجات عالية الجودة المصممة خصيصاً لاحتياجاتك"
+    },
+    "hero": {
+      "badge": "خدماتنا المتميزة",
+      "title": "حلول متكاملة لنجاح مشروعك",
+      "subtitle": "نقدم مجموعة شاملة من الخدمات التقنية والإبداعية لتحقيق أهدافك وتطوير أعمالك بأعلى المعايير المهنية"
+    },
+    "features": {
+      "highSecurity": {
+        "title": "أمان عالي",
+        "description": "حماية متقدمة لبياناتك"
+      },
+      "fastPerformance": {
+        "title": "أداء سريع",
+        "description": "سرعة استجابة فائقة"
+      },
+      "continuousSupport": {
+        "title": "دعم مستمر",
+        "description": "خدمة عملاء على مدار الساعة"
+      },
+      "highQuality": {
+        "title": "جودة عالية",
+        "description": "معايير احترافية متقدمة"
+      }
+    },
+    "categories": {
+      "webDevelopment": {
+        "title": "تطوير المواقع",
+        "description": "حلول تطوير مواقع متقدمة ومتجاوبة",
+        "services": {
+          "companyWebsites": {
+            "name": "مواقع الشركات",
+            "price": "من 2,500 ريال",
+            "features": {
+              "professionalDesign": "تصميم احترافي",
+              "responsive": "متجاوب",
+              "adminPanel": "لوحة تحكم",
+              "seoOptimized": "SEO محسن"
+            }
+          },
+          "ecommerce": {
+            "name": "متاجر إلكترونية",
+            "price": "من 4,500 ريال",
+            "features": {
+              "securePayment": "نظام دفع آمن",
+              "inventoryManagement": "إدارة المخزون",
+              "orderTracking": "تتبع الطلبات",
+              "detailedAnalytics": "تحليلات مفصلة"
+            }
+          },
+          "customWebsites": {
+            "name": "مواقع مخصصة",
+            "price": "حسب المتطلبات",
+            "features": {
+              "innovativeSolutions": "حلول مبتكرة",
+              "modernTechnologies": "تقنيات حديثة",
+              "highPerformance": "أداء عالي",
+              "ongoingSupport": "دعم مستمر"
+            }
+          }
+        }
+      },
+      "designAndBranding": {
+        "title": "التصميم والعلامة التجارية",
+        "description": "تصاميم إبداعية تعكس هوية علامتك التجارية",
+        "services": {
+          "visualIdentity": {
+            "name": "تصميم الهوية البصرية",
+            "price": "من 1,500 ريال",
+            "features": {
+              "professionalLogo": "شعار احترافي",
+              "identityGuide": "دليل الهوية",
+              "designTemplates": "قوالب التصميم",
+              "colorsAndFonts": "ألوان وخطوط"
+            }
+          },
+          "printDesign": {
+            "name": "تصميم المطبوعات",
+            "price": "من 500 ريال",
+            "features": {
+              "businessCards": "كروت أعمال",
+              "brochures": "بروشورات",
+              "banners": "لافتات",
+              "advertisingMaterials": "مواد إعلانية"
+            }
+          },
+          "interfaceDesign": {
+            "name": "تصميم الواجهات",
+            "price": "من 2,000 ريال",
+            "features": {
+              "uiUxDesign": "UI/UX Design",
+              "interactivePrototypes": "نماذج تفاعلية",
+              "userTesting": "اختبار المستخدم",
+              "experienceOptimization": "تحسين التجربة"
+            }
+          }
+        }
+      },
+      "digitalMarketing": {
+        "title": "التسويق الرقمي",
+        "description": "استراتيجيات تسويقية متقدمة لنمو عملك",
+        "services": {
+          "socialMediaManagement": {
+            "name": "إدارة وسائل التواصل",
+            "price": "من 1,200 ريال/شهرياً",
+            "features": {
+              "contentCreation": "إنشاء المحتوى",
+              "postScheduling": "جدولة المنشورات",
+              "customerInteraction": "تفاعل مع العملاء",
+              "performanceAnalysis": "تحليل الأداء"
+            }
+          },
+          "googleAds": {
+            "name": "إعلانات جوجل",
+            "price": "من 800 ريال/شهرياً",
+            "features": {
+              "keywordResearch": "بحث الكلمات المفتاحية",
+              "campaignCreation": "إنشاء الحملات",
+              "adOptimization": "تحسين الإعلانات",
+              "comprehensiveReports": "تقارير شاملة"
+            }
+          },
+          "seo": {
+            "name": "تحسين محركات البحث",
+            "price": "من 1,000 ريال/شهرياً",
+            "features": {
+              "siteAnalysis": "تحليل الموقع",
+              "contentOptimization": "تحسين المحتوى",
+              "linkBuilding": "بناء الروابط",
+              "rankingMonitoring": "متابعة التصنيف"
+            }
+          }
+        }
+      },
+      "mobileApps": {
+        "title": "التطبيقات المحمولة",
+        "description": "تطبيقات ذكية لنظامي iOS و Android",
+        "services": {
+          "businessApps": {
+            "name": "تطبيقات الأعمال",
+            "price": "من 8,000 ريال",
+            "features": {
+              "managementSystem": "نظام إدارة",
+              "financialReports": "تقارير مالية",
+              "smartNotifications": "إشعارات ذكية",
+              "highSecurity": "أمان عالي"
+            }
+          },
+          "ecommerceApps": {
+            "name": "تطبيقات التجارة",
+            "price": "من 12,000 ريال",
+            "features": {
+              "storeInterface": "واجهة متجر",
+              "paymentSystem": "نظام دفع",
+              "orderTracking": "تتبع الطلبات",
+              "loyaltyProgram": "برنامج ولاء"
+            }
+          },
+          "customApps": {
+            "name": "تطبيقات مخصصة",
+            "price": "حسب المتطلبات",
+            "features": {
+              "innovativeIdea": "فكرة مبتكرة",
+              "advancedTechnologies": "تقنيات متطورة",
+              "comprehensiveTesting": "اختبار شامل",
+              "storePublishing": "نشر في المتاجر"
+            }
+          }
+        }
+      },
+      "technicalConsulting": {
+        "title": "الاستشارات التقنية",
+        "description": "خبرة تقنية متخصصة لحلول عملك",
+        "services": {
+          "businessAnalysis": {
+            "name": "تحليل الأعمال",
+            "price": "من 2,000 ريال",
+            "features": {
+              "needsStudy": "دراسة الاحتياجات",
+              "marketAnalysis": "تحليل السوق",
+              "implementationPlan": "خطة التنفيذ",
+              "growthProjections": "توقعات النمو"
+            }
+          },
+          "cybersecurity": {
+            "name": "الأمن السيبراني",
+            "price": "من 3,000 ريال",
+            "features": {
+              "vulnerabilityScanning": "فحص الثغرات",
+              "protectionPlan": "خطة الحماية",
+              "staffTraining": "تدريب الموظفين",
+              "continuousMonitoring": "مراقبة مستمرة"
+            }
+          },
+          "digitalTransformation": {
+            "name": "التحول الرقمي",
+            "price": "حسب النطاق",
+            "features": {
+              "currentStateAssessment": "تقييم الوضع الحالي",
+              "transformationStrategy": "استراتيجية التحول",
+              "technologyImplementation": "تنفيذ التقنيات",
+              "resultsMeasurement": "قياس النتائج"
+            }
+          }
+        }
+      }
+    },
+    "cta": {
+      "requestService": "طلب الخدمة",
+      "title": "جاهز للبدء في مشروعك؟",
+      "subtitle": "احصل على استشارة مجانية واكتشف كيف يمكننا مساعدتك في تحقيق أهدافك",
+      "freeConsultation": "استشارة مجانية",
+      "contactUs": "تواصل معنا"
+    }
   },
   "stats": {
     "title": "إحصائيات الشركة",
@@ -398,6 +652,8 @@
     "total": "الإجمالي",
     "free": "مجاني",
     "customizations": "التخصيصات",
+    "imageUploaded": "تم رفع صورة",
+    "viewImage": "عرض الصورة",
     "sale": "تخفيض",
     "editCustomizations": "تعديل التخصيصات",
     "completeCustomizations": "أكمل المطلوب",
@@ -412,6 +668,8 @@
       "success": "تمت الإضافة بنجاح!",
       "addedToCart": "تمت إضافة المنتج إلى سلة التسوق",
       "total": "المجموع",
+      "productPrice": "سعر المنتج",
+      "customizationCost": "تكلفة التخصيص",
       "continueShopping": "متابعة التسوق",
       "goToCart": "عرض السلة",
       "viewCart": "عرض السلة"
@@ -419,7 +677,9 @@
     "errors": {
       "addFailed": "فشل في إضافة المنتج للسلة",
       "updateFailed": "فشل في تحديث الكمية",
-      "removeFailed": "فشل في إزالة المنتج"
+      "removeFailed": "فشل في إزالة المنتج",
+      "authenticationRequired" : "يرجى تسجيل الدخول للمتابعة",
+      "loginRequiredDescription" : "يتم تحويلك إلى صفحة التسجيل ..."
     },
     "validation": {
       "selectOption": "يرجى اختيار خيار",
@@ -487,7 +747,59 @@
       "off": "خصم",
       "percentageOff": "% خصم",
       "dollarOff": "خصم"
-    }
+    },
+    "payment": {
+      "title": "طريقة الدفع",
+      "available": "متاح",
+      "secure": "آمن",
+      "methods": {
+        "visa": {
+          "name": "فيزا",
+          "description": "ادفع ببطاقة فيزا"
+        },
+        "mastercard": {
+          "name": "ماستركارد",
+          "description": "ادفع ببطاقة ماستركارد"
+        },
+        "applePay": {
+          "name": "آبل باي",
+          "description": "ادفع بآبل باي"
+        },
+        "stcPay": {
+          "name": "STC Pay",
+          "description": "ادفع بـ STC Pay"
+        }
+      },
+      "security": {
+        "title": "دفع آمن",
+        "description": "معلومات الدفع الخاصة بك مشفرة وآمنة"
+      },
+      "processing": {
+        "title": "معالجة الدفع",
+        "payingWith": "الدفع بواسطة",
+        "processing": "جاري المعالجة...",
+        "pleaseWait": "يرجى الانتظار بينما نعالج دفعتك",
+        "success": "تم الدفع بنجاح!",
+        "orderConfirmed": "تم تأكيد طلبك",
+        "transactionId": "رقم المعاملة",
+        "failed": "فشل الدفع",
+        "viewOrder": "عرض طلباتي",
+        "tryAgain": "حاول مرة أخرى",
+        "securityNote": "يتم معالجة دفعتك بأمان"
+      },
+      "errors": {
+        "processingFailed": "فشل في معالجة الدفع. يرجى المحاولة مرة أخرى."
+      }
+    },
+    "authRequired": "تسجيل الدخول مطلوب",
+    "authRequiredDescription": "يرجى تسجيل الدخول لإكمال طلبك",
+    "paymentMethodRequired": "طريقة الدفع مطلوبة",
+    "paymentMethodRequiredDescription": "يرجى اختيار طريقة دفع للمتابعة",
+    "orderCreationFailed": "فشل في إنشاء الطلب",
+    "orderCreationFailedDescription": "فشل في إنشاء طلبك. يرجى المحاولة مرة أخرى.",
+    "orderSuccess": "تم وضع الطلب بنجاح!",
+    "orderSuccessDescription": "تم وضع طلبك وهو قيد المعالجة",
+    "processing": "جاري المعالجة..."
   },
   "wishlist": {
     "title": "قائمة المفضلة",
@@ -740,6 +1052,44 @@
         "invalidLength": "يرجى إدخال رمز مكون من 6 أرقام",
         "invalidCode": "رمز التحقق غير صحيح. يرجى المحاولة مرة أخرى."
       }
+    },
+    "google": {
+      "signingIn": "جاري تسجيل الدخول...",
+      "welcome": "مرحباً!",
+      "pleaseWait": "يرجى الانتظار بينما نكمل تسجيل الدخول...",
+      "redirectingHome": "جاري توجيهك إلى الصفحة الرئيسية...",
+      "redirectingLogin": "جاري توجيهك إلى صفحة تسجيل الدخول...",
+      "googleAuthFailed": "فشل في تسجيل الدخول مع Google",
+      "googleAuthSuccess": "تم تسجيل الدخول مع Google بنجاح!",
+      "welcomeMessage": "مرحباً! تم تسجيل الدخول بنجاح.",
+      "noAuthCode": "لم يتم استلام رمز التفويض من Google",
+      "noAccessToken": "لم يتم استلام رمز الوصول من الخادم",
+      "authFailed": "فشل في المصادقة. يرجى المحاولة مرة أخرى."
+    },
+    "messages": {
+      "login": {
+        "success": "تم إرسال رمز التحقق إلى بريدك الإلكتروني!",
+        "error": "فشل في تسجيل الدخول",
+        "verifySuccess": "تم تسجيل الدخول بنجاح! مرحباً بعودتك!",
+        "verifyError": "فشل في التحقق من الرمز"
+      },
+      "register": {
+        "success": "تم إرسال رمز التحقق إلى بريدك الإلكتروني!",
+        "error": "فشل في إنشاء الحساب",
+        "verifySuccess": "تم إنشاء الحساب بنجاح! مرحباً بك!",
+        "verifyError": "فشل في التحقق من الرمز"
+      },
+      "google": {
+        "success": "تم تسجيل الدخول مع Google بنجاح!",
+        "error": "فشل في تسجيل الدخول مع Google"
+      },
+      "logout": {
+        "success": "تم تسجيل الخروج بنجاح"
+      },
+      "profile": {
+        "updateSuccess": "تم تحديث الملف الشخصي بنجاح!",
+        "updateError": "فشل في تحديث الملف الشخصي"
+      }
     }
   },
   "orders": {
@@ -758,11 +1108,82 @@
       "processing": "قيد المعالجة",
       "shipped": "تم الشحن",
       "delivered": "تم التسليم",
+      "completed": "مكتمل",
       "cancelled": "ملغي"
+    },
+    "deliveryStatus": {
+      "title": "حالة التسليم",
+      "pending": "قيد الانتظار",
+      "confirmed": "مؤكد",
+      "processing": "قيد المعالجة",
+      "shipped": "تم الشحن",
+      "delivered": "تم التسليم",
+      "completed": "مكتمل",
+      "cancelled": "ملغي"
+    },
+    "paymentStatus": {
+      "title": "حالة الدفع",
+      "pending": "قيد الانتظار",
+      "paid": "مدفوع",
+      "failed": "فشل",
+      "refund": "مسترد"
     },
     "orderNumber": "طلب",
     "quantity": "الكمية",
     "moreItems": "عناصر أخرى",
+    "homeDelivery": "تسليم منزلي",
+    "pickup": "استلام",
+    "pickupFromCompany": "استلام من الشركة",
+    "subtotal": "المجموع الفرعي",
+    "delivery": "التسليم",
+    "discount": "الخصم",
+    "total": "المجموع",
+    "free": "مجاني",
+    "customizations": "التخصيصات",
+    "viewImage": "عرض الصورة",
+    "invoice": "الفاتورة",
+    "orderInformation": "معلومات الطلب",
+    "orderDate": "تاريخ الطلب",
+    "totalAmount": "المبلغ الإجمالي",
+    "deliveryType": "نوع التسليم",
+    "deliveryAddress": "عنوان التسليم",
+    "customerInformation": "معلومات العميل",
+    "customerName": "اسم العميل",
+    "email": "البريد الإلكتروني",
+    "phone": "الهاتف",
+    "address": "العنوان",
+    "orderItems": "عناصر الطلب",
+    "price": "السعر",
+    "salePrice": "سعر البيع",
+    "customization": "التخصيص",
+    "viewCustomizations": "عرض التخصيصات",
+    "selected": "المحدد",
+    "input": "الإدخال",
+    "orderSummary": "ملخص الطلب",
+    "orderDetails": "تفاصيل الطلب",
+    "deliveryFee": "رسوم التسليم",
+    "items": "العناصر",
+    "invoiceSummary": "ملخص الفاتورة",
+    "thankYou": "شكراً لتعاملك معنا!",
+    "autoGenerated": "هذه فاتورة مُنشأة تلقائياً.",
+    "contactUs": "تواصل معنا:",
+    "product": "المنتج",
+    "salesInvoice": "فاتورة المبيعات",
+    "invoiceNumber": "رقم الفاتورة",
+    "orderDate": "تاريخ الطلب",
+    "paymentMethod": "طريقة الدفع",
+    "deliveryType": "نوع التسليم",
+    "homeDelivery": "التوصيل للمنزل",
+    "storePickup": "الاستلام من المتجر",
+    "orderInfo": "معلومات الطلب",
+    "deliveryAddress": "عنوان التسليم",
+    "customerName": "اسم العميل",
+    "email": "البريد الإلكتروني",
+    "phone": "الهاتف",
+    "address": "العنوان",
+    "customerInfo": "معلومات العميل",
+    "printInvoice": "طباعة الفاتورة",
+    "downloadInvoice": "تحميل الفاتورة",
     "estimatedDelivery": "التسليم المتوقع",
     "viewDetails": "عرض التفاصيل",
     "track": "تتبع الطرد",
@@ -989,16 +1410,31 @@
       }
     },
     "team": {
-      "title": "تعرف على فريقنا",
-      "subtitle": "الأشخاص الموهوبون وراء نجاحنا",
-      "ceo": "الرئيس التنفيذي",
-      "cto": "الرئيس التقني",
-      "designer": "كبير المصممين",
-      "developer": "كبير المطورين",
-      "ceo_bio": "قائد رؤيوي مع أكثر من 15 عاماً في التحول الرقمي",
-      "cto_bio": "خبير تكنولوجيا متخصص في الحلول القابلة للتطوير",
-      "designer_bio": "العقل المبدع وراء تصاميمنا الحائزة على جوائز",
-      "developer_bio": "مطور متكامل مع خبرة في الأطر الحديثة"
+      "title": "فريق العمل",
+      "subtitle": "نلتقي معاً لنقدم أفضل الحلول التقنية والإبداعية لعملائنا",
+      "achievements": {
+        "title": "الإنجازات الرئيسية:"
+      },
+      "ceo": {
+        "name": "أحمد محمد العلي",
+        "role": "الرئيس التنفيذي",
+        "bio": "خبير في مجال التكنولوجيا والابتكار مع أكثر من 15 عاماً من الخبرة في قيادة الشركات الناشئة والمؤسسات التقنية. حاصل على درجة الماجستير في إدارة الأعمال ومتخصص في التحول الرقمي والاستراتيجيات التقنية.",
+        "achievements": [
+          "قاد أكثر من 100 مشروع تقني ناجح",
+          "حاصل على جوائز الابتكار التقني",
+          "متحدث في مؤتمرات التكنولوجيا العالمية"
+        ]
+      },
+      "developer": {
+        "name": "فاطمة أحمد السعيد",
+        "role": "مطور أول",
+        "bio": "مطورة متخصصة في تطوير التطبيقات والمواقع الإلكترونية مع خبرة واسعة في أحدث التقنيات. تتميز بالدقة والإبداع في حل المشاكل التقنية المعقدة وتطوير حلول مبتكرة للعملاء.",
+        "achievements": [
+          "متخصصة في تطوير التطبيقات المحمولة",
+          "خبرة في تقنيات الذكاء الاصطناعي",
+          "حاصلة على شهادات تقنية متقدمة"
+        ]
+      }
     },
     "cta": {
       "title": "مستعد لبدء رحلتك؟",
@@ -1362,4 +1798,5 @@
     "goBack": "العودة",
     "contactUs": "اتصل بنا"
   }
+
 }

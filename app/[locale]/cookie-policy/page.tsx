@@ -146,7 +146,7 @@ export default function CookiesPage() {
   };
 
   return (
-    <div className="min-h-screen pt-20" style={{ background: 'var(--brand-bg)' }}>
+    <div className="min-h-screen pt-20 bg-white dark:bg-gray-900" style={{ background: 'var(--brand-bg)' }}>
       <div className="section-padding">
         <div className="section-container">
           {/* Header */}
@@ -155,11 +155,11 @@ export default function CookiesPage() {
               style={{ background: 'linear-gradient(135deg, var(--brand-gold), var(--brand-navy))' }}>
               <Cookie className="w-8 h-8 text-white" />
             </div>
-            <h1 className="text-4xl font-bold brand-heading mb-4">{t('title')}</h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-6">
+            <h1 className="text-4xl font-bold brand-heading mb-4 text-brand-navy dark:!text-gray-200">{t('title')}</h1>
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-6">
               {t('subtitle')}
             </p>
-            <div className="flex items-center justify-center gap-2 text-sm text-gray-500">
+            <div className="flex items-center justify-center gap-2 text-sm text-gray-500 dark:text-gray-400">
               <Calendar className="w-4 h-4" />
               <span>{t('lastUpdated')}: {new Date().toLocaleDateString()}</span>
             </div>
@@ -168,9 +168,9 @@ export default function CookiesPage() {
           <div className="grid lg:grid-cols-4 gap-8">
             {/* Sidebar */}
             <div className="lg:col-span-1">
-              <Card className="sticky top-24">
+              <Card className="sticky top-24 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                 <CardHeader>
-                  <CardTitle className="text-lg">{t('quickActions')}</CardTitle>
+                  <CardTitle className="text-lg text-brand-navy dark:!text-gray-200">{t('quickActions')}</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   {!hasMadeChoice && (
@@ -203,9 +203,9 @@ export default function CookiesPage() {
                     </Button>
                   )}
                   {hasMadeChoice && (
-                    <div className="text-center p-4 bg-green-50 rounded-lg border border-green-200">
+                    <div className="text-center p-4 bg-green-50 dark:bg-green-900/30 rounded-lg border border-green-200 dark:border-green-800">
                       <CheckCircle className="w-6 h-6 text-green-600 mx-auto mb-2" />
-                      <p className="text-sm text-green-700 font-medium">
+                      <p className="text-sm text-green-700 dark:text-green-400 font-medium">
                         {t('preferences.saved')}
                       </p>
                       <Button
@@ -220,16 +220,16 @@ export default function CookiesPage() {
                   )}
                   <Separator />
                   <nav className="space-y-2">
-                    <a href="#what-are-cookies" className="block text-sm text-blue-600 hover:text-blue-500">
+                    <a href="#what-are-cookies" className="block text-sm text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300">
                       {t('nav.whatAreCookies')}
                     </a>
-                    <a href="#how-we-use" className="block text-sm text-blue-600 hover:text-blue-500">
+                    <a href="#how-we-use" className="block text-sm text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300">
                       {t('nav.howWeUse')}
                     </a>
-                    <a href="#cookie-types" className="block text-sm text-blue-600 hover:text-blue-500">
+                    <a href="#cookie-types" className="block text-sm text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300">
                       {t('nav.cookieTypes')}
                     </a>
-                    <a href="#manage-preferences" className="block text-sm text-blue-600 hover:text-blue-500">
+                    <a href="#manage-preferences" className="block text-sm text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300">
                       {t('nav.managePreferences')}
                     </a>
                   </nav>
@@ -240,19 +240,19 @@ export default function CookiesPage() {
             {/* Main Content */}
             <div className="lg:col-span-3 space-y-8">
               {/* Introduction */}
-              <Card id="what-are-cookies" className="scroll-mt-24">
+              <Card id="what-are-cookies" className="scroll-mt-24 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-3 text-2xl">
+                  <CardTitle className="flex items-center gap-3 text-2xl text-brand-navy dark:!text-gray-200">
                     <Info className="w-6 h-6 text-blue-600" />
                     {t('sections.whatAreCookies.title')}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="prose prose-gray max-w-none">
-                    <p className="text-lg leading-relaxed text-gray-700 mb-4">
+                    <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300 mb-4">
                       {t('sections.whatAreCookies.description')}
                     </p>
-                    <p className="text-gray-700 leading-relaxed">
+                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                       {t('sections.whatAreCookies.details')}
                     </p>
                   </div>
@@ -260,9 +260,9 @@ export default function CookiesPage() {
               </Card>
 
               {/* How We Use Cookies */}
-              <Card id="how-we-use" className="scroll-mt-24">
+              <Card id="how-we-use" className="scroll-mt-24 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-3 text-2xl">
+                  <CardTitle className="flex items-center gap-3 text-2xl text-brand-navy dark:!text-gray-200">
                     <Eye className="w-6 h-6 text-green-600" />
                     {t('sections.howWeUse.title')}
                   </CardTitle>
@@ -275,8 +275,8 @@ export default function CookiesPage() {
                           <Zap className="w-4 h-4 text-blue-600" />
                         </div>
                         <div>
-                          <h4 className="font-semibold mb-1">{t('sections.howWeUse.performance.title')}</h4>
-                          <p className="text-sm text-gray-600">{t('sections.howWeUse.performance.description')}</p>
+                          <h4 className="font-semibold mb-1 text-brand-navy dark:!text-gray-200">{t('sections.howWeUse.performance.title')}</h4>
+                          <p className="text-sm text-gray-600 dark:text-gray-300">{t('sections.howWeUse.performance.description')}</p>
                         </div>
                       </div>
                       <div className="flex items-start gap-3">
@@ -284,8 +284,8 @@ export default function CookiesPage() {
                           <Settings className="w-4 h-4 text-green-600" />
                         </div>
                         <div>
-                          <h4 className="font-semibold mb-1">{t('sections.howWeUse.functionality.title')}</h4>
-                          <p className="text-sm text-gray-600">{t('sections.howWeUse.functionality.description')}</p>
+                          <h4 className="font-semibold mb-1 text-brand-navy dark:!text-gray-200">{t('sections.howWeUse.functionality.title')}</h4>
+                          <p className="text-sm text-gray-600 dark:text-gray-300">{t('sections.howWeUse.functionality.description')}</p>
                         </div>
                       </div>
                     </div>
@@ -295,8 +295,8 @@ export default function CookiesPage() {
                           <BarChart className="w-4 h-4 text-purple-600" />
                         </div>
                         <div>
-                          <h4 className="font-semibold mb-1">{t('sections.howWeUse.analytics.title')}</h4>
-                          <p className="text-sm text-gray-600">{t('sections.howWeUse.analytics.description')}</p>
+                          <h4 className="font-semibold mb-1 text-brand-navy dark:!text-gray-200">{t('sections.howWeUse.analytics.title')}</h4>
+                          <p className="text-sm text-gray-600 dark:text-gray-300">{t('sections.howWeUse.analytics.description')}</p>
                         </div>
                       </div>
                       <div className="flex items-start gap-3">
@@ -304,8 +304,8 @@ export default function CookiesPage() {
                           <Target className="w-4 h-4 text-orange-600" />
                         </div>
                         <div>
-                          <h4 className="font-semibold mb-1">{t('sections.howWeUse.marketing.title')}</h4>
-                          <p className="text-sm text-gray-600">{t('sections.howWeUse.marketing.description')}</p>
+                          <h4 className="font-semibold mb-1 text-brand-navy dark:!text-gray-200">{t('sections.howWeUse.marketing.title')}</h4>
+                          <p className="text-sm text-gray-600 dark:text-gray-300">{t('sections.howWeUse.marketing.description')}</p>
                         </div>
                       </div>
                     </div>
@@ -314,9 +314,9 @@ export default function CookiesPage() {
               </Card>
 
               {/* Cookie Types */}
-              <Card id="cookie-types" className="scroll-mt-24">
+              <Card id="cookie-types" className="scroll-mt-24 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-3 text-2xl">
+                  <CardTitle className="flex items-center gap-3 text-2xl text-brand-navy dark:!text-gray-200">
                     <Database className="w-6 h-6 text-purple-600" />
                     {t('sections.cookieTypes.title')}
                   </CardTitle>
@@ -324,7 +324,7 @@ export default function CookiesPage() {
                 <CardContent>
                   <div className="space-y-6">
                     {cookieTypes.map((type, index) => (
-                      <div key={type.id} className="shadow-lg rounded-xl p-6 hover:shadow-md transition-shadow">
+                      <div key={type.id} className="shadow-lg dark:shadow-gray-900/20 rounded-xl p-6 hover:shadow-md dark:hover:shadow-gray-900/30 transition-shadow bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700">
                         <div className="flex items-start justify-between gap-4">
                           <div className="flex items-start gap-4 flex-1">
                             <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${type.color}`}>
@@ -332,7 +332,7 @@ export default function CookiesPage() {
                             </div>
                             <div className="flex-1">
                               <div className="flex items-center gap-3 mb-2">
-                                <h3 className="text-lg font-semibold">{type.title}</h3>
+                                <h3 className="text-lg font-semibold text-brand-navy dark:!text-gray-200">{type.title}</h3>
                                 {type.required ? (
                                   <Badge className="bg-gray-100 text-gray-800">
                                     {t('required')}
@@ -343,8 +343,8 @@ export default function CookiesPage() {
                                   </Badge>
                                 )}
                               </div>
-                              <p className="text-gray-600 mb-3">{type.description}</p>
-                              <div className="text-sm text-gray-500">
+                              <p className="text-gray-600 dark:text-gray-300 mb-3">{type.description}</p>
+                              <div className="text-sm text-gray-500 dark:text-gray-400">
                                 <strong>{t('examples')}:</strong> {type.examples}
                               </div>
                             </div>
@@ -365,9 +365,9 @@ export default function CookiesPage() {
               </Card>
 
               {/* Manage Preferences */}
-              <Card id="manage-preferences" className="scroll-mt-24">
+              <Card id="manage-preferences" className="scroll-mt-24 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-3 text-2xl">
+                  <CardTitle className="flex items-center gap-3 text-2xl text-brand-navy dark:!text-gray-200">
                     <Settings className="w-6 h-6 text-green-600" />
                     {t('sections.managePreferences.title')}
                   </CardTitle>
@@ -383,8 +383,8 @@ export default function CookiesPage() {
 
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
-                        <h4 className="font-semibold mb-3">{t('sections.managePreferences.browserSettings.title')}</h4>
-                        <ul className="space-y-2 text-sm text-gray-600">
+                        <h4 className="font-semibold mb-3 text-brand-navy dark:!text-gray-200">{t('sections.managePreferences.browserSettings.title')}</h4>
+                        <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
                           <li>• {t('sections.managePreferences.browserSettings.chrome')}</li>
                           <li>• {t('sections.managePreferences.browserSettings.firefox')}</li>
                           <li>• {t('sections.managePreferences.browserSettings.safari')}</li>
@@ -392,11 +392,11 @@ export default function CookiesPage() {
                         </ul>
                       </div>
                       <div>
-                        <h4 className="font-semibold mb-3">{t('sections.managePreferences.thirdParty.title')}</h4>
-                        <ul className="space-y-2 text-sm text-gray-600">
-                          <li>• <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-500">Google Analytics Opt-out</a></li>
-                          <li>• <a href="http://optout.aboutads.info/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-500">Digital Advertising Alliance</a></li>
-                          <li>• <a href="http://www.youronlinechoices.com/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-500">Your Online Choices</a></li>
+                        <h4 className="font-semibold mb-3 text-brand-navy dark:!text-gray-200">{t('sections.managePreferences.thirdParty.title')}</h4>
+                        <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
+                          <li>• <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300">Google Analytics Opt-out</a></li>
+                          <li>• <a href="http://optout.aboutads.info/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300">Digital Advertising Alliance</a></li>
+                          <li>• <a href="http://www.youronlinechoices.com/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300">Your Online Choices</a></li>
                         </ul>
                       </div>
                     </div>
@@ -426,12 +426,12 @@ export default function CookiesPage() {
                         </Button>
                       </div>
                     ) : (
-                      <div className="text-center p-4 bg-green-50 rounded-lg border border-green-200">
+                      <div className="text-center p-4 bg-green-50 dark:bg-green-900/30 rounded-lg border border-green-200 dark:border-green-800">
                         <CheckCircle className="w-6 h-6 text-green-600 mx-auto mb-2" />
-                        <p className="text-sm text-green-700 font-medium">
+                        <p className="text-sm text-green-700 dark:text-green-400 font-medium">
                           {t('preferences.saved')}
                         </p>
-                        <p className="text-xs text-green-600 mt-1 mb-3">
+                        <p className="text-xs text-green-600 dark:text-green-400 mt-1 mb-3">
                           {t('preferences.changeNote')}
                         </p>
                         <Button

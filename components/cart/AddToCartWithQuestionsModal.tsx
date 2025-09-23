@@ -167,42 +167,69 @@ export function AddToCartWithQuestionsModal({
         if (selectedValue) {
           if (question.type === 'checkbox' && Array.isArray(selectedValue)) {
             selectedValue.forEach((answerId: string) => {
+              const answer = question.answers.find((a: ProductAnswer) => a.id === answerId);
               customizations.push({
                 questionId: question.id,
                 answerId: answerId,
+                additionalPrice: answer?.extraPrice ? parseFloat(answer.extraPrice.toString()) : 0, // ✅ FIX: Parse string to number
               });
             });
           } else if (question.type === 'select') {
+            const answer = question.answers.find((a: ProductAnswer) => a.id === selectedValue);
             customizations.push({
               questionId: question.id,
               answerId: selectedValue,
+              additionalPrice: answer?.extraPrice ? parseFloat(answer.extraPrice.toString()) : 0, // ✅ FIX: Parse string to number
             });
           } else if (question.type === 'text' || question.type === 'note') {
             customizations.push({
               questionId: question.id,
               textValue: selectedValue,
+              additionalPrice: 0, // ✅ FIX: Text/note customizations have no additional price
             });
           } else if (question.type === 'image') {
-            let imageValue;
+            let imageUrl, imagePublicId;
             if (typeof selectedValue === 'object' && selectedValue) {
-              imageValue = selectedValue.publicId;
+              imageUrl = selectedValue.url;
+              imagePublicId = selectedValue.publicId;
+            } else if (typeof selectedValue === 'string' && selectedValue.startsWith('http')) {
+              imageUrl = selectedValue;
             } else if (typeof selectedValue === 'string' && selectedValue) {
-              imageValue = selectedValue;
+              imagePublicId = selectedValue;
             }
 
-            if (imageValue) {
+            if (imageUrl || imagePublicId) {
               customizations.push({
                 questionId: question.id,
-                imagePublicId: imageValue,
+                imageUrl: imageUrl, // ✅ FIX: Include image URL
+                imagePublicId: imagePublicId, // ✅ FIX: Include image public ID
+                additionalPrice: 0, // ✅ FIX: Image customizations have no additional price
               });
             }
           }
         }
       });
 
+      console.log('AddToCartWithQuestionsModal: Calling onAddToCart with:', {
+        product: product.id,
+        quantity,
+        customizations,
+        customizationCost
+      });
+      
+      // Debug: Log each customization with its additional price
+      customizations.forEach((cust, index) => {
+        console.log(`Customization ${index}:`, {
+          questionId: cust.questionId,
+          answerId: cust.answerId,
+          additionalPrice: cust.additionalPrice,
+          textValue: cust.textValue,
+          imageUrl: cust.imageUrl
+        });
+      });
+
       await onAddToCart(product, quantity, customizations, customizationCost);
-      // Close the modal - parent will handle success modal
-      onClose();
+      // Don't close the modal here - let the parent handle it after showing success modal
     } catch (error) {
       console.error('Failed to add to cart:', error);
     } finally {
@@ -284,8 +311,7 @@ export function AddToCartWithQuestionsModal({
                     {t("customizationCost")}:
                   </span>
                   <div className="flex items-center gap-1 text-lg font-bold text-blue-900 dark:text-blue-100">
-                    <DollarSign className="w-4 h-4" />
-                    {customizationCost.toFixed(2)}
+                    {customizationCost.toFixed(2)} ﷼
                   </div>
                 </div>
               </div>
@@ -441,8 +467,8 @@ export function AddToCartWithQuestionsModal({
                 <span className="text-gray-600 dark:text-gray-300 font-medium" style={{ fontFamily: 'Tajawal, sans-serif' }}>
                   {t("total")}:
                 </span>
-                <span className="text-xl font-bold text-brand-navy dark:text-brand-gold" style={{ fontFamily: 'Tajawal, sans-serif' }}>
-                  ﷼{totalPrice.toFixed(2)}
+                <span className="text-xl font-bold text-brand-navy dark:!text-brand-gold" style={{ fontFamily: 'Tajawal, sans-serif' }}>
+                  {totalPrice.toFixed(2)} ﷼
                 </span>
               </div>
             </div>

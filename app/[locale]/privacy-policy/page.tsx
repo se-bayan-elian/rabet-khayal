@@ -100,7 +100,7 @@ export default function PrivacyPolicyPage() {
   ];
 
   return (
-    <div className="min-h-screen pt-20" style={{ background: 'var(--brand-bg)' }}>
+    <div className="min-h-screen pt-20 bg-white dark:bg-gray-900" style={{ background: 'var(--brand-bg)' }}>
       <div className="section-padding">
         <div className="section-container">
           {/* Header */}
@@ -109,11 +109,11 @@ export default function PrivacyPolicyPage() {
               style={{ background: 'linear-gradient(135deg, var(--brand-gold), var(--brand-navy))' }}>
               <Shield className="w-8 h-8 text-white" />
             </div>
-            <h1 className="text-4xl font-bold brand-heading mb-4">{t('title')}</h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-6">
+            <h1 className="text-4xl font-bold brand-heading mb-4 text-brand-navy dark:!text-gray-200">{t('title')}</h1>
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-6">
               {t('subtitle')}
             </p>
-            <div className="flex items-center justify-center gap-2 text-sm text-gray-500">
+            <div className="flex items-center justify-center gap-2 text-sm text-gray-500 dark:text-gray-400">
               <Calendar className="w-4 h-4" />
               <span>{t('lastUpdated')}: {new Date().toLocaleDateString()}</span>
             </div>
@@ -122,9 +122,9 @@ export default function PrivacyPolicyPage() {
           <div className="grid lg:grid-cols-4 gap-8">
             {/* Table of Contents */}
             <div className="lg:col-span-1">
-              <Card className="sticky top-24">
+              <Card className="sticky top-24 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                 <CardHeader>
-                  <CardTitle className="text-lg">{t('tableOfContents')}</CardTitle>
+                  <CardTitle className="text-lg text-brand-navy dark:!text-gray-200">{t('tableOfContents')}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <nav className="space-y-2">
@@ -132,23 +132,23 @@ export default function PrivacyPolicyPage() {
                       <a
                         key={section.id}
                         href={`#${section.id}`}
-                        className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors text-sm group"
+                        className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors text-sm group"
                       >
-                        <div className="w-8 h-8 rounded-lg flex items-center justify-center group-hover:bg-blue-100">
-                          <section.icon className="w-4 h-4 text-gray-600 group-hover:text-blue-600" />
+                        <div className="w-8 h-8 rounded-lg flex items-center justify-center group-hover:bg-blue-100 dark:group-hover:bg-blue-900/30">
+                          <section.icon className="w-4 h-4 text-gray-600 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400" />
                         </div>
-                        <span className="group-hover:text-blue-600">{section.title}</span>
+                        <span className="group-hover:text-blue-600 dark:group-hover:text-blue-400">{section.title}</span>
                       </a>
                     ))}
                     <Separator className="my-4" />
                     <a
                       href="#contact"
-                      className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors text-sm group"
+                      className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors text-sm group"
                     >
-                      <div className="w-8 h-8 rounded-lg flex items-center justify-center group-hover:bg-blue-100">
-                        <Mail className="w-4 h-4 text-gray-600 group-hover:text-blue-600" />
+                      <div className="w-8 h-8 rounded-lg flex items-center justify-center group-hover:bg-blue-100 dark:group-hover:bg-blue-900/30">
+                        <Mail className="w-4 h-4 text-gray-600 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400" />
                       </div>
-                      <span className="group-hover:text-blue-600">{t('contact.title')}</span>
+                      <span className="group-hover:text-blue-600 dark:group-hover:text-blue-400">{t('contact.title')}</span>
                     </a>
                   </nav>
                 </CardContent>
@@ -158,10 +158,10 @@ export default function PrivacyPolicyPage() {
             {/* Main Content */}
             <div className="lg:col-span-3 space-y-8">
               {/* Introduction */}
-              <Card>
+              <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                 <CardContent className="pt-6">
                   <div className="prose prose-gray max-w-none">
-                    <p className="text-lg leading-relaxed text-gray-700">
+                    <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
                       {t('introduction')}
                     </p>
                   </div>
@@ -170,9 +170,9 @@ export default function PrivacyPolicyPage() {
 
               {/* Sections */}
               {sections.map((section, index) => (
-                <Card key={section.id} id={section.id} className="scroll-mt-24">
+                <Card key={section.id} id={section.id} className="scroll-mt-24 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                   <CardHeader>
-                    <CardTitle className="flex items-center gap-3 text-xl">
+                    <CardTitle className="flex items-center gap-3 text-xl text-brand-navy dark:!text-gray-200">
                       <div className="w-10 h-10 rounded-xl flex items-center justify-center"
                         style={{ background: 'linear-gradient(135deg, var(--brand-gold), var(--brand-navy))' }}>
                         <section.icon className="w-5 h-5 text-white" />
@@ -182,7 +182,7 @@ export default function PrivacyPolicyPage() {
                   </CardHeader>
                   <CardContent>
                     <div className="prose prose-gray max-w-none">
-                      <div className="whitespace-pre-line text-gray-700 leading-relaxed">
+                      <div className="whitespace-pre-line text-gray-700 dark:text-gray-300 leading-relaxed">
                         {section.content}
                       </div>
                     </div>
@@ -191,9 +191,9 @@ export default function PrivacyPolicyPage() {
               ))}
 
               {/* Contact Information */}
-              <Card id="contact" className="scroll-mt-24">
+              <Card id="contact" className="scroll-mt-24 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-3 text-xl">
+                  <CardTitle className="flex items-center gap-3 text-xl text-brand-navy dark:!text-gray-200">
                     <div className="w-10 h-10 rounded-xl flex items-center justify-center"
                       style={{ background: 'linear-gradient(135deg, var(--brand-gold), var(--brand-navy))' }}>
                       <Mail className="w-5 h-5 text-white" />
@@ -204,8 +204,8 @@ export default function PrivacyPolicyPage() {
                 <CardContent>
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
-                      <h4 className="font-semibold mb-3">{t('contact.privacy.title')}</h4>
-                      <div className="space-y-2 text-sm text-gray-600">
+                      <h4 className="font-semibold mb-3 text-brand-navy dark:!text-gray-200">{t('contact.privacy.title')}</h4>
+                      <div className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
                         <div className="flex items-center gap-2">
                           <Mail className="w-4 h-4" />
                           <span>{t('contact.privacy.email')}</span>
@@ -217,8 +217,8 @@ export default function PrivacyPolicyPage() {
                       </div>
                     </div>
                     <div>
-                      <h4 className="font-semibold mb-3">{t('contact.support.title')}</h4>
-                      <div className="space-y-2 text-sm text-gray-600">
+                      <h4 className="font-semibold mb-3 text-brand-navy dark:!text-gray-200">{t('contact.support.title')}</h4>
+                      <div className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
                         <div className="flex items-center gap-2">
                           <Mail className="w-4 h-4" />
                           <span>{t('contact.support.email')}</span>
@@ -234,8 +234,8 @@ export default function PrivacyPolicyPage() {
                   <Separator className="my-6" />
 
                   <div>
-                    <h4 className="font-semibold mb-3">{t('contact.address.title')}</h4>
-                    <div className="flex items-start gap-2 text-sm text-gray-600">
+                    <h4 className="font-semibold mb-3 text-brand-navy dark:!text-gray-200">{t('contact.address.title')}</h4>
+                    <div className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300">
                       <MapPin className="w-4 h-4 mt-0.5 shrink-0" />
                       <span>{t('contact.address.full')}</span>
                     </div>

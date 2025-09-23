@@ -1,94 +1,122 @@
 "use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useAuth } from '@/contexts/AuthContext';
+import { useAuthActions } from '@/lib/auth-actions';
+import { useQueryClient } from '@tanstack/react-query';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Loader2, CheckCircle, XCircle } from 'lucide-react';
 import { toast } from 'sonner';
+import { useTranslations } from 'next-intl';
+import { setAccessToken } from '@/services/auth';
 
 export default function GoogleCallbackPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { setUser } = useAuth();
+  const queryClient = useQueryClient();
+  const t = useTranslations('auth.google');
   const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
   const [message, setMessage] = useState('');
+  const hasProcessed = useRef(false);
 
   useEffect(() => {
+    // Prevent multiple executions
+    if (hasProcessed.current) return;
+    
+    let isMounted = true;
+    hasProcessed.current = true;
+
     const handleCallback = async () => {
       try {
-        // Get the tokens from URL parameters (backend should redirect with these)
-        const accessToken = searchParams.get('accessToken');
-        const refreshToken = searchParams.get('refreshToken');
+        // Check for success/error status from backend redirect
+        const success = searchParams.get('success');
         const error = searchParams.get('error');
 
         if (error) {
-          setStatus('error');
-          setMessage('Authentication failed. Please try again.');
-          toast.error('Google authentication failed');
+          if (isMounted) {
+            setStatus('error');
+            setMessage(t('googleAuthFailed'));
+            toast.error(t('googleAuthFailed'));
+          }
+          
+          // Redirect to login page after error
+          setTimeout(() => {
+            if (isMounted) {
+              router.push('/login');
+            }
+          }, 3000);
           return;
         }
 
-        if (accessToken && refreshToken) {
-          // Set tokens in cookies
-          document.cookie = `accessToken=${accessToken}; path=/; max-age=${7 * 24 * 60 * 60}`;
-          document.cookie = `refreshToken=${refreshToken}; path=/; max-age=${30 * 24 * 60 * 60}`;
-
-          // Fetch user profile
-          const response = await fetch('/api/auth/profile', {
-            headers: {
-              'Authorization': `Bearer ${accessToken}`,
-            },
-          });
-
-          if (response.ok) {
-            const profile = await response.json();
-            setUser(profile.data);
-            setStatus('success');
-            setMessage('Successfully signed in with Google!');
-            toast.success('Welcome! You have been signed in successfully.');
+        if (success === 'true') {
+          // Get access token from URL parameters
+          const accessToken = searchParams.get('accessToken');
+          
+          if (accessToken) {
+            // Set the access token in cookies
+            setAccessToken(accessToken);
+            
+            // Invalidate all queries to refresh the app state
+            await queryClient.invalidateQueries();
+            
+            if (isMounted) {
+              setStatus('success');
+              setMessage(t('googleAuthSuccess'));
+              toast.success(t('welcomeMessage'));
+            }
             
             // Redirect to home page after a short delay
             setTimeout(() => {
-              router.push('/');
+              if (isMounted) {
+                router.push('/');
+              }
             }, 2000);
           } else {
-            throw new Error('Failed to fetch user profile');
+            throw new Error('Access token not received from backend');
           }
         } else {
-          throw new Error('No authentication tokens received');
+          // No success parameter, something went wrong
+          throw new Error('Authentication process incomplete');
         }
       } catch (error: any) {
         console.error('Google callback error:', error);
-        setStatus('error');
-        setMessage(error.message || 'Authentication failed. Please try again.');
-        toast.error('Google authentication failed');
+        if (isMounted) {
+          setStatus('error');
+          setMessage(error.message || t('authFailed'));
+          toast.error(t('googleAuthFailed'));
+        }
         
         // Redirect to login page after error
         setTimeout(() => {
-          router.push('/login');
+          if (isMounted) {
+            router.push('/login');
+          }
         }, 3000);
       }
     };
 
     handleCallback();
-  }, [searchParams, setUser, router]);
+
+    return () => {
+      isMounted = false;
+    };
+  }, []); // Empty dependency array since we only want to run once
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
       <Card className="w-full max-w-md mx-4">
         <CardHeader className="text-center">
           <CardTitle className="text-2xl font-bold">
-            {status === 'loading' && 'Signing you in...'}
-            {status === 'success' && 'Welcome!'}
-            {status === 'error' && 'Authentication Failed'}
+            {status === 'loading' && t('signingIn')}
+            {status === 'success' && t('welcome')}
+            {status === 'error' && t('authFailed')}
           </CardTitle>
         </CardHeader>
         <CardContent className="text-center space-y-4">
           {status === 'loading' && (
             <>
               <Loader2 className="w-12 h-12 mx-auto animate-spin text-blue-600" />
-              <p className="text-gray-600">Please wait while we complete your sign-in...</p>
+              <p className="text-gray-600">{t('pleaseWait')}</p>
             </>
           )}
           
@@ -96,7 +124,7 @@ export default function GoogleCallbackPage() {
             <>
               <CheckCircle className="w-12 h-12 mx-auto text-green-600" />
               <p className="text-gray-600">{message}</p>
-              <p className="text-sm text-gray-500">Redirecting you to the home page...</p>
+              <p className="text-sm text-gray-500">{t('redirectingHome')}</p>
             </>
           )}
           
@@ -104,7 +132,7 @@ export default function GoogleCallbackPage() {
             <>
               <XCircle className="w-12 h-12 mx-auto text-red-600" />
               <p className="text-gray-600">{message}</p>
-              <p className="text-sm text-gray-500">Redirecting you to the login page...</p>
+              <p className="text-sm text-gray-500">{t('redirectingLogin')}</p>
             </>
           )}
         </CardContent>

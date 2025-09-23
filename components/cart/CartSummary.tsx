@@ -12,7 +12,7 @@ import {
   Info
 } from "lucide-react"
 import { useTranslations } from "next-intl"
-import { useCartStore } from "@/store/cart"
+import { useCartStore } from "@/store/cart-api"
 import Link from "next/link"
 
 interface CartSummaryProps {
@@ -124,7 +124,7 @@ export function CartSummary({ showCheckoutButton = true, className }: CartSummar
           <div className="text-center text-sm text-green-600 bg-green-50 p-2 rounded">
             🎉 {t('summary.savings', { 
               default: 'You saved ${{amount}}!',
-              amount: ﷼{cart.couponDiscount.toFixed(2)}
+              amount: `﷼${cart.couponDiscount.toFixed(2)}`
             })}
           </div>
         )}

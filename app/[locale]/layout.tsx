@@ -8,9 +8,10 @@ import { ThemeProvider } from "@/components/layouts/theme-provider"
 import { QueryProvider } from "@/components/query-provider"
 import { Toaster } from "@/components/ui/toaster"
 import { Toaster as SonnerToaster } from 'sonner'
-import { AuthProvider } from '@/contexts/AuthContext'
+import { QueryClient, dehydrate } from '@tanstack/react-query'
 import { getServerProfile } from '@/lib/server-auth'
 import MainLayout from "@/components/layouts/MainLayout"
+import { cookies } from "next/headers"
 
 const tajawal = Tajawal({
   weight: ["200", "400", "500", "700"],
@@ -31,27 +32,32 @@ export default async function RootLayout({
   const { locale } = await params;
   const messages = await getMessages();
   
+  // Create a new QueryClient for server-side prefetching
+  const queryClient = new QueryClient();
+  const accessToken = (await cookies()).get('accessToken')?.value ?? "";
   // Fetch profile data on server-side for hydration
-  const initialProfile = await getServerProfile();
+  const initialProfile = await getServerProfile(accessToken);
+  // Prefetch profile data if we have a profile
+  if (initialProfile) {
+    queryClient.setQueryData(['profile', accessToken],  initialProfile);
+  }
 
   return (
     <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
       <body className={tajawal.className}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange={false}>
           <NextIntlClientProvider messages={messages}>
-            <QueryProvider>
-              <AuthProvider initialProfile={initialProfile}>
-                <MainLayout>
-                  {children}
-                </MainLayout>
-                <Toaster />
-                <SonnerToaster
-                  position="top-right"
-                  richColors
-                  closeButton
-                  theme="light"
-                />
-              </AuthProvider>
+            <QueryProvider initialData={dehydrate(queryClient)}>
+              <MainLayout>
+                {children}
+              </MainLayout>
+              <Toaster />
+              <SonnerToaster
+                position="top-right"
+                richColors
+                closeButton
+                theme="light"
+              />
             </QueryProvider>
           </NextIntlClientProvider>
         </ThemeProvider>

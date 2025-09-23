@@ -16,7 +16,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { useTranslations } from 'next-intl'
 import { useFeaturedProductsQuery, ProductItem as APIProductItem } from '@/services'
-import { useCartStore } from '@/store/cart'
+import { useCartStore } from '@/store/cart-api'
 import { useWishlistStore } from '@/store/wishlist'
 import { AddToCartModal } from "@/components/cart/AddToCartModal"
 import { AddToCartWithQuestionsModal } from "@/components/cart/AddToCartWithQuestionsModal"
@@ -60,7 +60,10 @@ export function CreativeProducts({ title, subtitle }: CreativeProductsProps) {
           description: product.description || product.subcategory?.description || "",
           price: parseFloat(product.originalPrice),
           salePrice: product.discountedPrice ? parseFloat(product.discountedPrice) : undefined,
+          unitPrice: product.discountedPrice ? parseFloat(product.discountedPrice) : parseFloat(product.originalPrice),
           imageUrl: product.imageUrl || undefined,
+          customizations: [],
+          customizationCost: 0,
         }
 
         await addToCart(cartItem, quantity)
@@ -75,7 +78,7 @@ export function CreativeProducts({ title, subtitle }: CreativeProductsProps) {
     }
   }
 
-  const handleAddToCartWithQuestions = async (product: any, quantity: number, customizations: any[], totalCost: number) => {
+  const handleAddToCartWithQuestions = async (product: any, quantity: number, customizations: any[], customizationCost: number) => {
     try {
       const cartItem = {
         id: product.id,
@@ -84,15 +87,24 @@ export function CreativeProducts({ title, subtitle }: CreativeProductsProps) {
         description: product.description || product.subcategory?.description || "",
         price: parseFloat(product.originalPrice),
         salePrice: product.discountedPrice ? parseFloat(product.discountedPrice) : undefined,
+        unitPrice: (product.discountedPrice ? parseFloat(product.discountedPrice) : parseFloat(product.originalPrice)) + customizationCost,
         imageUrl: product.imageUrl || undefined,
-        customizations: customizations,
-        customizationCost: totalCost,
+        customizations: customizations.length > 0 ? customizations : [],
+        customizationCost: customizationCost,
+        questions: product.questions,
       }
+
+      console.log('CreativeProducts: Adding to cart with customizations:', {
+        productId: product.id,
+        customizations,
+        customizationCost,
+        questions: product.questions
+      });
 
       await addToCart(cartItem, quantity)
       setShowQuestionsModal(false)
       // Show success modal
-      setCartModalProduct(product)
+      setCartModalProduct(cartItem)
       setCartModalQuantity(quantity)
       setShowCartModal(true)
     } catch (error) {
@@ -108,6 +120,7 @@ export function CreativeProducts({ title, subtitle }: CreativeProductsProps) {
       price: parseFloat(product.originalPrice),
       salePrice: product.discountedPrice ? parseFloat(product.discountedPrice) : undefined,
       imageUrl: product.imageUrl || undefined,
+      questions: product.questions || [], // Include questions for customization modal
       addedAt: new Date().toISOString(),
     }
     toggleWishlist(wishlistItem)
@@ -122,6 +135,22 @@ export function CreativeProducts({ title, subtitle }: CreativeProductsProps) {
     isInStock: product.isAvailable !== false && (product.stock === undefined || product.stock > 0),
   }))
 
+  // Render stars function
+  const renderStars = (rating: number) => {
+    return (
+      <div className="flex items-center gap-0.5">
+        {[1, 2, 3, 4, 5].map((star) => (
+          <Star 
+            key={star}
+            className={`w-3 h-3 ${
+              star <= rating ? 'fill-yellow-400 text-yellow-400 dark:fill-amber-400 dark:text-amber-400' : 'text-gray-300 dark:text-gray-500'
+            }`}
+          />
+        ))}
+      </div>
+    )
+  }
+
   // Product Card Component (from subcategory page)
   const ProductCard = ({ product }: { product: APIProductItem & { price: number; salePrice?: number; isInStock: boolean } }) => {
     const price = parseFloat(product.originalPrice);
@@ -129,6 +158,8 @@ export function CreativeProducts({ title, subtitle }: CreativeProductsProps) {
     const isOnSale = salePrice && salePrice < price;
     const finalPrice = isOnSale ? salePrice! : price;
     const isWishlisted = isInWishlist(product.id);
+    const averageRating = product.averageRating || 0;
+    const reviewCount = product.reviewCount || 0;
 
     return (
       <Card className="group relative overflow-hidden rounded-2xl shadow-md hover:shadow-2xl transition-all duration-500 bg-white dark:bg-gray-800 border-0 dark:border-gray-700">
@@ -158,7 +189,7 @@ export function CreativeProducts({ title, subtitle }: CreativeProductsProps) {
               className="w-9 h-9 rounded-full bg-white/90 hover:bg-white shadow-lg backdrop-blur-sm"
               onClick={() => handleWishlistToggle(product)}
             >
-              <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-red-500 text-red-500' : 'text-gray-700'}`} />
+              <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-red-500 text-red-500' : 'text-gray-700 dark:text-gray-200'}`} />
             </Button>
             <Link href={`/products/${product.id}`}>
               <Button
@@ -166,7 +197,7 @@ export function CreativeProducts({ title, subtitle }: CreativeProductsProps) {
                 variant="secondary"
                 className="w-9 h-9 rounded-full bg-white/90 hover:bg-white shadow-lg backdrop-blur-sm"
               >
-                <Eye className="w-4 h-4 text-gray-700" />
+                <Eye className="w-4 h-4 text-gray-700 dark:text-gray-200" />
               </Button>
             </Link>
           </div>
@@ -174,12 +205,12 @@ export function CreativeProducts({ title, subtitle }: CreativeProductsProps) {
           {/* Badges */}
           <div className="absolute top-3 left-3 flex flex-col gap-1">
             {isOnSale && (
-              <Badge className="bg-red-500 text-white font-bold px-2 py-1 text-xs">
+              <Badge className="bg-red-500 text-white justify-center font-bold px-2 py-1 text-xs">
                 {t("sale")}
               </Badge>
             )}
             {product.isFeatured && (
-              <Badge className="bg-brand-gold text-brand-navy font-bold px-2 py-1 text-xs">
+              <Badge className="bg-brand-gold justify-center text-brand-navy font-bold px-2 py-1 text-xs">
                 {t("featured")}
               </Badge>
             )}
@@ -207,7 +238,7 @@ export function CreativeProducts({ title, subtitle }: CreativeProductsProps) {
         <CardContent className="p-4 space-y-3">
           <div>
             <Link href={`/products/${product.id}`}>
-              <h3 className="font-semibold text-gray-900 dark:text-white line-clamp-2 group-hover:text-brand-navy transition-colors cursor-pointer hover:underline">
+              <h3 className="font-semibold text-gray-900 dark:text-white line-clamp-2 group-hover:!text-brand-navy dark:!text-brand-gold transition-colors cursor-pointer hover:underline">
                 {product.name}
               </h3>
             </Link>
@@ -223,23 +254,25 @@ export function CreativeProducts({ title, subtitle }: CreativeProductsProps) {
             )}
           </div>
 
-          {/* Product Features */}
-          <div className="flex flex-wrap gap-1">
-            {product.isFeatured && (
-              <Badge variant="secondary" className="bg-brand-gold/10 text-brand-navy text-xs">
-                {t("featured")}
-              </Badge>
-            )}
+          {/* Reviews */}
+          <div className="flex items-center gap-2">
+            {renderStars(averageRating)}
+            <span className="text-sm text-gray-600 dark:text-gray-400">
+              {reviewCount > 0 
+                ? `${(+averageRating).toFixed(1)} (${reviewCount})`
+                : t('noReviews')
+              }
+            </span>
           </div>
 
           {/* Price */}
           <div className="flex items-center gap-2">
-            <span className="text-lg font-bold text-brand-navy">
-              ﷼{finalPrice?.toFixed(2)}
+            <span className="text-lg font-bold text-brand-navy dark:!text-brand-gold">
+              {finalPrice?.toFixed(2)} ﷼
             </span>
             {isOnSale && (
               <span className="text-sm text-gray-500 line-through">
-                ﷼{price.toFixed(2)}
+                {price.toFixed(2)} ﷼
               </span>
             )}
           </div>

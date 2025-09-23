@@ -7,7 +7,7 @@ import { ShoppingCart, ArrowRight, CheckCircle, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
-import { CartItem } from "@/store/cart";
+import { CartItem } from "@/store/cart-api";
 
 interface AddToCartModalProps {
   isOpen: boolean;
@@ -23,7 +23,8 @@ export function AddToCartModal({ isOpen, onClose, product, quantity, totalPrice:
   if (!product) return null;
 
   const finalPrice = product.salePrice || product.price;
-  const calculatedTotal = propTotalPrice || (finalPrice * quantity);
+  const customizationCost = product.customizationCost || 0;
+  const calculatedTotal = propTotalPrice || ((finalPrice + customizationCost) * quantity);
   const isOnSale = product.salePrice && product.salePrice < product.price;
 
   return (
@@ -88,32 +89,56 @@ export function AddToCartModal({ isOpen, onClose, product, quantity, totalPrice:
               <h3 className="font-semibold text-gray-900 dark:text-white line-clamp-2 leading-tight mb-1" style={{ fontFamily: 'Tajwal, sans-serif' }}>
                 {product.name}
               </h3>
-              <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-1 mb-2" style={{ fontFamily: 'Tajwal, sans-serif' }}>
-                {product.description}
+              <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-1 mb-2" style={{ fontFamily: 'Tajwal, sans-serif' }}
+              dangerouslySetInnerHTML={{ __html: product.description }}
+              >
               </p>
 
               {/* Price */}
               <div className="flex items-center gap-2">
-                <span className="text-lg font-bold text-brand-navy dark:text-brand-gold" style={{ fontFamily: 'Tajwal, sans-serif' }}>
-                  ﷼{finalPrice.toFixed(2)}
+                <span className="text-lg font-bold text-brand-navy dark:!text-brand-gold" style={{ fontFamily: 'Tajwal, sans-serif' }}>
+                  {finalPrice.toFixed(2)} ﷼
                 </span>
                 {isOnSale && (
                   <span className="text-sm text-gray-500 dark:text-gray-400 line-through" style={{ fontFamily: 'Tajwal, sans-serif' }}>
-                    ﷼{product.price.toFixed(2)}
-                  </span>
+                    {product.price.toFixed(2)}
+                  </span> 
                 )}
               </div>
             </div>
           </div>
 
-          {/* Total */}
-          <div className="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-700 rounded-xl p-4 border border-gray-200 dark:border-gray-600">
+          {/* Price Breakdown */}
+          <div className="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-700 rounded-xl p-4 border border-gray-200 dark:border-gray-600 space-y-2">
+            {/* Product Price */}
             <div className="flex items-center justify-between">
               <span className="text-gray-600 dark:text-gray-300 font-medium" style={{ fontFamily: 'Tajwal, sans-serif' }}>
-                {t("modal.total")}
+                {t("modal.productPrice")} ({quantity}x):
               </span>
-              <span className="text-xl font-bold text-brand-navy dark:text-brand-gold" style={{ fontFamily: 'Tajwal, sans-serif' }}>
-                ﷼{calculatedTotal.toFixed(2)}
+              <span className="text-gray-900 dark:text-white font-semibold" style={{ fontFamily: 'Tajwal, sans-serif' }}>
+                {(finalPrice * quantity).toFixed(2)} ﷼
+              </span>
+            </div>
+            
+            {/* Customization Cost */}
+            {customizationCost > 0 && (
+              <div className="flex items-center justify-between">
+                <span className="text-gray-600 dark:text-gray-300 font-medium" style={{ fontFamily: 'Tajwal, sans-serif' }}>
+                  {t("modal.customizationCost")} ({quantity}x):
+                </span>
+                <span className="text-brand-gold font-semibold" style={{ fontFamily: 'Tajwal, sans-serif' }}>
+                  {(customizationCost * quantity).toFixed(2)} ﷼
+                </span>
+              </div>
+            )}
+            
+            {/* Total */}
+            <div className="flex items-center justify-between pt-2 border-t border-gray-200 dark:border-gray-600">
+              <span className="text-gray-900 dark:text-white font-bold" style={{ fontFamily: 'Tajwal, sans-serif' }}>
+                {t("modal.total")}:
+              </span>
+              <span className="text-xl font-bold text-brand-navy dark:!text-brand-gold" style={{ fontFamily: 'Tajwal, sans-serif' }}>
+                {calculatedTotal.toFixed(2)} ﷼
               </span>
             </div>
           </div>

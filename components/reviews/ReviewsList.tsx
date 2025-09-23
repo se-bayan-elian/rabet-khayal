@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { Star, ThumbsUp, MoreHorizontal, User } from 'lucide-react'
-import { useProductReviewsQuery, Review, ReviewsResponse } from '@/services'
+import { useProductReviewsQuery, type Review, type ReviewsResponse } from '@/services'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 
@@ -33,13 +33,9 @@ const ReviewsList = ({ productId, initialReviews }: ReviewsListProps) => {
     limit: 10
   })
 
-  const reviews = Array.isArray((reviewsData as ReviewsResponse)?.data) 
-    ? (reviewsData as ReviewsResponse)?.data 
-    : Array.isArray(initialReviews) 
-    ? initialReviews 
-    : []
-  const averageRating = (reviewsData as ReviewsResponse)?.averageRating || 0
-  const totalReviews = (reviewsData as ReviewsResponse)?.total || 0
+  const reviews = reviewsData?.data?.data || []
+  const averageRating: number = reviewsData?.data?.averageRating || 0
+  const totalReviews: number = reviewsData?.data?.total || 0
 
   // Debug log
   console.log('ReviewsList Debug:', { reviewsData, reviews, isArray: Array.isArray(reviews) })
@@ -141,7 +137,7 @@ const ReviewsList = ({ productId, initialReviews }: ReviewsListProps) => {
       </div>
 
       {/* Reviews List */}
-      {!Array.isArray(reviews) || reviews.length === 0 ? (
+      {reviews.length === 0 ? (
         <Card className="p-8 text-center bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
           <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
             <Star className="w-8 h-8 text-gray-400 dark:text-gray-500" />
@@ -151,7 +147,7 @@ const ReviewsList = ({ productId, initialReviews }: ReviewsListProps) => {
         </Card>
       ) : (
         <div className="space-y-4">
-          {Array.isArray(reviews) && reviews.map((review: Review) => (
+          {reviews.map((review) => (
             <Card key={review.id} className="hover:shadow-lg transition-shadow bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
               <CardHeader className="pb-3">
                 <div className="flex items-start justify-between">

@@ -27,7 +27,8 @@ import {
   ArrowLeft,
   X
 } from 'lucide-react';
-import { useAuth } from '@/contexts/AuthContext';
+import { useAuth } from '@/hooks/use-profile';
+import { useAuthActions } from '@/lib/auth-actions';
 import { UpdateProfileRequest } from '@/types/auth';
 import { uploadImageToCloudinary, validateImageFile } from '@/lib/upload';
 import { toast } from 'sonner';
@@ -45,7 +46,8 @@ type ProfileFormData = z.infer<typeof profileSchema>;
 export default function MyProfilePage() {
   const t = useTranslations('profile');
   const router = useRouter();
-  const { user, updateProfile, isLoading } = useAuth();
+  const { user, isLoading } = useAuth();
+  const { updateProfile } = useAuthActions();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [isEditing, setIsEditing] = useState(false);

@@ -20,7 +20,7 @@ import {
 } from "lucide-react";
 import { useLocale } from "next-intl";
 import Image from "next/image";
-import { CartItem, CartItemCustomization } from "@/store/cart";
+import { CartItem, CartItemCustomization } from "@/store/cart-api";
 
 interface ProductQuestion {
   id: string;

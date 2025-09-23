@@ -10,6 +10,7 @@ interface GoogleSignInButtonProps {
   variant?: 'default' | 'outline' | 'secondary' | 'ghost' | 'link' | 'destructive';
   size?: 'default' | 'sm' | 'lg' | 'icon';
   disabled?: boolean;
+  sessionId?: string; // For cart migration
 }
 
 export const GoogleSignInButton: React.FC<GoogleSignInButtonProps> = ({
@@ -18,12 +19,13 @@ export const GoogleSignInButton: React.FC<GoogleSignInButtonProps> = ({
   variant = 'outline',
   size = 'default',
   disabled = false,
+  sessionId,
 }) => {
   const { signInWithGoogle, isLoading, isInitialized } = useGoogleAuth();
 
   const handleClick = () => {
     if (isInitialized && !isLoading) {
-      signInWithGoogle();
+      signInWithGoogle(sessionId);
     }
   };
 

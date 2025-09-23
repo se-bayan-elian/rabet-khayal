@@ -349,7 +349,6 @@ export default function CartPage() {
   const [customizationError, setCustomizationError] = useState("");
   const [isGettingLocation, setIsGettingLocation] = useState(false);
   const [couponCode, setCouponCode] = useState("");
-  const [isCreatingOrder, setIsCreatingOrder] = useState(false);
 
   const dir = locale === "ar" ? "rtl" : "ltr";
 
@@ -383,20 +382,8 @@ export default function CartPage() {
       return;
     }
 
-    setIsCreatingOrder(true);
-    try {
-      // Create order from cart
-      const orderId = await createOrder('visa'); // Default payment method, you can make this selectable
-      
-      // Navigate to my orders page
-      router.push(`/${locale}/my-orders`);
-      
-    } catch (error) {
-      console.error('Failed to create order:', error);
-      alert('Failed to create order. Please try again.');
-    } finally {
-      setIsCreatingOrder(false);
-    }
+    // Redirect to payment page instead of creating order directly
+    router.push(`/${locale}/payment`);
   };
   // Sync cart store auth state with main auth state
   useEffect(() => {
@@ -1027,18 +1014,13 @@ export default function CartPage() {
                   className="w-full btn-primary"
                   size="lg"
                   disabled={
-                    isCreatingOrder ||
                     (cart.deliveryType === 'home' && !localDeliveryAddress.trim()) ||
                     !validateCustomizations().isValid
                   }
                   onClick={handleCheckout}
                 >
-                  {isCreatingOrder ? (
-                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  ) : (
                   <CreditCard className="w-4 h-4 mr-2" />
-                  )}
-                  {isCreatingOrder ? t("creatingOrder") : t("proceedToCheckout")}
+                  {t("proceedToPayment")}
                 </Button>
 
                 {/* Security Info */}

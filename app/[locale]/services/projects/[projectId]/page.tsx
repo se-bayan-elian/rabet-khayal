@@ -30,7 +30,6 @@ export default function ProjectDetailPage() {
     queryFn: () => fetchProjectById(params.projectId),
     staleTime: 5000,
   })
-  console.log(project)
 
   // Loading state
   if (isLoading) {

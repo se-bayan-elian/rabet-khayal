@@ -94,7 +94,7 @@ export interface Order {
   items: OrderItem[];
   shippingAddress: Address;
   billingAddress?: Address;
-  paymentMethod: string;
+  paymentMethod: 'visa' | 'mastercard' | 'apple_pay' | 'stc_pay';
   trackingNumber?: string;
   createdAt: string;
   updatedAt: string;

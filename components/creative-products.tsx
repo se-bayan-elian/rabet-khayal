@@ -40,7 +40,6 @@ export function CreativeProducts({ title, subtitle }: CreativeProductsProps) {
   const [cartModalProduct, setCartModalProduct] = useState<any>(null)
   const [cartModalQuantity, setCartModalQuantity] = useState(1)
 
-  console.log(error)
   const handleAddToCart = async (product: APIProductItem & { price: number; salePrice?: number; isInStock: boolean }, quantity = 1) => {
     // Check if product has required questions
     const hasRequiredQuestions = product.questions && product.questions.some((q: any) => q.required)
@@ -94,12 +93,7 @@ export function CreativeProducts({ title, subtitle }: CreativeProductsProps) {
         questions: product.questions,
       }
 
-      console.log('CreativeProducts: Adding to cart with customizations:', {
-        productId: product.id,
-        customizations,
-        customizationCost,
-        questions: product.questions
-      });
+      
 
       await addToCart(cartItem, quantity)
       setShowQuestionsModal(false)

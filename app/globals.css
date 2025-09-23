@@ -409,15 +409,21 @@
   box-shadow: var(--shadow-md);
 }
 
-/* === CREATIVE CTA SECTION STYLES === */
+/* === ENHANCED CREATIVE CTA SECTION STYLES === */
 .cta-creative {
-  background: linear-gradient(135deg, var(--brand-navy) 0%, var(--brand-navy-light) 100%);
-  border-radius: 2rem;
-  padding: 4rem 3rem;
+  background: linear-gradient(135deg, var(--brand-navy) 0%, var(--brand-navy-light) 50%, var(--brand-navy) 100%);
+  border-radius: 3rem;
+  padding: 5rem 3rem;
   position: relative;
   overflow: hidden;
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.25),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* Enhanced geometric background patterns */
 .cta-creative::before {
   content: '';
   position: absolute;
@@ -425,21 +431,61 @@
   right: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(255, 204, 0, 0.1) 0%, transparent 70%);
-  animation: float 6s ease-in-out infinite;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(255, 204, 0, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 60%, rgba(255, 204, 0, 0.08) 0%, transparent 50%);
+  animation: float 8s ease-in-out infinite;
 }
 
 .cta-creative::after {
   content: '';
   position: absolute;
-  bottom: -2rem;
-  left: -2rem;
-  width: 4rem;
-  height: 4rem;
+  bottom: -3rem;
+  left: -3rem;
+  width: 6rem;
+  height: 6rem;
+  background: linear-gradient(45deg, var(--brand-gold), rgba(255, 204, 0, 0.3));
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: pulse 6s ease-in-out infinite;
+  box-shadow: 0 0 30px rgba(255, 204, 0, 0.3);
+}
+
+/* Additional decorative elements */
+.cta-creative .cta-decorative-1 {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  width: 3rem;
+  height: 3rem;
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(255, 204, 0, 0.2));
+  border-radius: 1rem;
+  transform: rotate(45deg);
+  animation: rotate 20s linear infinite;
+}
+
+.cta-creative .cta-decorative-2 {
+  position: absolute;
+  bottom: 2rem;
+  right: 4rem;
+  width: 2rem;
+  height: 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  animation: float 4s ease-in-out infinite reverse;
+}
+
+.cta-creative .cta-decorative-3 {
+  position: absolute;
+  top: 4rem;
+  left: 2rem;
+  width: 1.5rem;
+  height: 1.5rem;
   background: var(--brand-gold);
   border-radius: 50%;
-  opacity: 0.2;
-  animation: pulse 4s ease-in-out infinite;
+  opacity: 0.6;
+  animation: pulse 3s ease-in-out infinite;
 }
 
 .cta-creative .cta-content {
@@ -449,65 +495,166 @@
 
 .cta-creative h3 {
   color: var(--brand-white);
-  font-size: clamp(2rem, 4vw, 2.5rem);
-  font-weight: 800;
-  margin-bottom: 1rem;
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 900;
+  margin-bottom: 1.5rem;
   font-family: 'Tajawal', sans-serif;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .cta-creative p {
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 1.125rem;
-  margin-bottom: 2rem;
-  max-width: 600px;
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 1.25rem;
+  margin-bottom: 2.5rem;
+  max-width: 700px;
   margin-left: auto;
   margin-right: auto;
+  line-height: 1.7;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .cta-buttons {
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
   justify-content: center;
   flex-wrap: wrap;
+  margin-bottom: 2rem;
 }
 
 .btn-cta-primary {
-  background: var(--brand-gold);
+  background: linear-gradient(135deg, var(--brand-gold) 0%, #fbbf24 50%, var(--brand-gold) 100%);
   color: var(--brand-navy);
-  padding: 1rem 2rem;
-  border-radius: 0.75rem;
-  font-weight: 700;
+  padding: 1.25rem 2.5rem;
+  border-radius: 1.5rem;
+  font-weight: 800;
   font-size: 1.125rem;
   border: none;
   cursor: pointer;
-  transition: all var(--transition-normal);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
   font-family: 'Tajawal', sans-serif;
+  box-shadow: 
+    0 10px 25px rgba(255, 204, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-cta-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.6s;
+}
+
+.btn-cta-primary:hover::before {
+  left: 100%;
 }
 
 .btn-cta-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(255, 204, 0, 0.4);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 
+    0 20px 40px rgba(255, 204, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.2);
+  background: linear-gradient(135deg, #fbbf24 0%, var(--brand-gold) 50%, #f59e0b 100%);
 }
 
 .btn-cta-secondary {
-  background: transparent;
+  background: rgba(255, 255, 255, 0.1);
   color: var(--brand-white);
-  padding: 1rem 2rem;
+  padding: 1.25rem 2.5rem;
   border: 2px solid rgba(255, 255, 255, 0.3);
-  border-radius: 0.75rem;
-  font-weight: 600;
+  border-radius: 1.5rem;
+  font-weight: 700;
   font-size: 1.125rem;
   cursor: pointer;
-  transition: all var(--transition-normal);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   font-family: 'Tajawal', sans-serif;
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-cta-secondary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(135deg, var(--brand-gold), rgba(255, 204, 0, 0.8));
+  transition: width 0.4s ease;
+  z-index: -1;
+}
+
+.btn-cta-secondary:hover::before {
+  width: 100%;
 }
 
 .btn-cta-secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-3px) scale(1.05);
   border-color: var(--brand-gold);
-  transform: translateY(-2px);
+  color: var(--brand-navy);
+  box-shadow: 0 15px 30px rgba(255, 204, 0, 0.3);
+}
+
+/* Trust indicators enhancement */
+.cta-trust-indicators {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.cta-trust-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 1.5rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.cta-trust-item:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.cta-trust-icon {
+  width: 4rem;
+  height: 4rem;
+  background: linear-gradient(135deg, var(--brand-gold), rgba(255, 204, 0, 0.8));
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  box-shadow: 0 8px 16px rgba(255, 204, 0, 0.3);
+}
+
+.cta-trust-text {
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1.4;
 }
 
 /* Enhanced Service Cards */
@@ -626,6 +773,11 @@
 @keyframes pulse {
   0%, 100% { transform: scale(1); opacity: 0.2; }
   50% { transform: scale(1.2); opacity: 0.4; }
+}
+
+@keyframes rotate {
+  0% { transform: rotate(45deg); }
+  100% { transform: rotate(405deg); }
 }
 
 @keyframes shimmer {
@@ -796,12 +948,98 @@
 
 /* Dark theme adjustments for enhanced components */
 .dark .cta-creative {
-  background: linear-gradient(135deg, var(--brand-gold) 0%, var(--brand-gold-dark) 100%);
+  background: linear-gradient(135deg, var(--brand-gold) 0%, var(--brand-gold-dark) 50%, var(--brand-gold) 100%);
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-.dark .cta-creative h3,
-.dark .cta-creative p {
+.dark .cta-creative::before {
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(30, 64, 175, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 40% 60%, rgba(30, 64, 175, 0.1) 0%, transparent 50%);
+}
+
+.dark .cta-creative::after {
+  background: linear-gradient(45deg, var(--brand-navy), rgba(30, 64, 175, 0.4));
+  box-shadow: 0 0 30px rgba(30, 64, 175, 0.4);
+}
+
+.dark .cta-creative .cta-decorative-1 {
+  background: linear-gradient(45deg, rgba(30, 64, 175, 0.2), rgba(255, 255, 255, 0.1));
+}
+
+.dark .cta-creative .cta-decorative-2 {
+  background: rgba(30, 64, 175, 0.2);
+}
+
+.dark .cta-creative .cta-decorative-3 {
+  background: var(--brand-navy);
+}
+
+.dark .cta-creative h3 {
   color: var(--brand-navy);
+  background: linear-gradient(135deg, var(--brand-navy) 0%, #1e3a8a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
+}
+
+.dark .cta-creative p {
+  color: rgba(30, 64, 175, 0.9);
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+}
+
+.dark .btn-cta-primary {
+  background: linear-gradient(135deg, var(--brand-navy) 0%, #1e3a8a 50%, var(--brand-navy) 100%);
+  color: var(--brand-gold);
+  box-shadow: 
+    0 10px 25px rgba(30, 64, 175, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.dark .btn-cta-primary:hover {
+  background: linear-gradient(135deg, #1e3a8a 0%, var(--brand-navy) 50%, #1e40af 100%);
+  box-shadow: 
+    0 20px 40px rgba(30, 64, 175, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+.dark .btn-cta-secondary {
+  background: rgba(30, 64, 175, 0.1);
+  color: var(--brand-navy);
+  border: 2px solid rgba(30, 64, 175, 0.3);
+}
+
+.dark .btn-cta-secondary::before {
+  background: linear-gradient(135deg, var(--brand-navy), rgba(30, 64, 175, 0.8));
+}
+
+.dark .btn-cta-secondary:hover {
+  border-color: var(--brand-navy);
+  color: var(--brand-gold);
+  box-shadow: 0 15px 30px rgba(30, 64, 175, 0.3);
+}
+
+.dark .cta-trust-item {
+  background: rgba(30, 64, 175, 0.05);
+  border: 1px solid rgba(30, 64, 175, 0.1);
+}
+
+.dark .cta-trust-item:hover {
+  background: rgba(30, 64, 175, 0.1);
+}
+
+.dark .cta-trust-icon {
+  background: linear-gradient(135deg, var(--brand-navy), rgba(30, 64, 175, 0.8));
+  box-shadow: 0 8px 16px rgba(30, 64, 175, 0.3);
+}
+
+.dark .cta-trust-text {
+  color: rgba(30, 64, 175, 0.9);
 }
 
 .dark .service-card {

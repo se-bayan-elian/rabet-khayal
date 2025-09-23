@@ -115,8 +115,6 @@ export default function VerifyOtpPage() {
       await verifyOtp(email, code, type as 'register' | 'login', returnUrl);
       // Redirect is handled in auth actions
     } catch (error: any) {
-      console.log('from verify otp page');
-      console.log(error);
       setError(error.message || t('errors.invalidCode'));
       setOtp(['', '', '', '', '', '']);
       inputRefs.current[0]?.focus();

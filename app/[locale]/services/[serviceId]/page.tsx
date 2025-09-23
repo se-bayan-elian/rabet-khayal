@@ -228,11 +228,11 @@ export default function ServicePage() {
                             <div className="flex items-baseline gap-2">
                               {plan.originalPrice !== plan.finalPrice && (
                                 <span className="text-lg text-gray-400 dark:text-gray-500 line-through">
-                                  ﷼{plan.originalPrice}
+                                  {plan.originalPrice} ﷼
                                 </span>
                               )}
-                              <span className="text-4xl font-bold dark:text-white" style={{ color: 'var(--brand-navy)' }}>
-                                ﷼{plan.finalPrice}
+                              <span className="text-4xl font-bold dark:!text-white" style={{ color: 'var(--brand-navy)' }}>
+                                {plan.finalPrice} ﷼
                               </span>
                             </div>
                             <span className="text-gray-600 dark:text-gray-400">/{plan.billingPeriod}</span>
@@ -486,37 +486,36 @@ export default function ServicePage() {
 
             {/* Enhanced Call to Action */}
             <div className="relative overflow-hidden">
-              <div className="bg-gradient-to-br from-amber-500 via-amber-600 to-orange-500 rounded-3xl p-12 text-white relative">
-                {/* Background Pattern */}
-                <div className="absolute inset-0 opacity-10">
-                  <div className="absolute top-0 left-0 w-32 h-32 bg-white rounded-full -translate-x-16 -translate-y-16"></div>
-                  <div className="absolute top-1/4 right-0 w-24 h-24 bg-white rounded-full translate-x-12"></div>
-                  <div className="absolute bottom-0 left-1/3 w-20 h-20 bg-white rounded-full translate-y-10"></div>
-                  <div className="absolute bottom-1/4 right-1/4 w-16 h-16 bg-white rounded-full"></div>
-                </div>
+              <div className="cta-creative">
+                {/* Decorative Elements */}
+                <div className="cta-decorative-1"></div>
+                <div className="cta-decorative-2"></div>
+                <div className="cta-decorative-3"></div>
                 
                 {/* Content */}
-                <div className="relative z-10 text-center max-w-4xl mx-auto">
+                <div className="cta-content">
                   {/* Icon */}
-                  <div className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-6 rtl:mx-auto">
-                    <MessageSquare className="w-10 h-10 text-white" />
+                  <div className="flex justify-center mb-8">
+                    <div className="cta-trust-icon">
+                      <MessageSquare className="w-8 h-8 text-white" />
+                    </div>
                   </div>
                   
                   {/* Title */}
-                  <h3 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                  <h3 className="mb-6">
                     {tDetail('cta.readyToStart')}
                   </h3>
                   
                   {/* Description */}
-                  <p className="text-xl text-amber-100 mb-8 rtl:text-right max-w-2xl mx-auto leading-relaxed">
+                  <p className="mb-8 max-w-3xl mx-auto">
                     {tDetail('cta.description')}
                   </p>
                   
                   {/* Action Buttons */}
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center items-center rtl:flex-row-reverse">
+                  <div className="cta-buttons">
                     <Button
                       onClick={() => handleRequestService()}
-                      className="bg-blue-600 text-white hover:bg-blue-700 border-0 px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 min-w-[200px]"
+                      className="btn-cta-primary"
                       size="lg"
                     >
                       <MessageSquare className="w-5 h-5 mr-3 rtl:mr-0 rtl:ml-3" />
@@ -524,7 +523,7 @@ export default function ServicePage() {
                     </Button>
                     <Button
                       variant="outline"
-                      className="border-2 border-green-400 text-green-400 hover:bg-green-400 hover:text-white px-8 py-4 text-lg font-semibold rounded-xl backdrop-blur-sm hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 min-w-[200px]"
+                      className="btn-cta-secondary"
                       size="lg"
                     >
                       <ArrowRight className="w-5 h-5 mr-3 rtl:mr-0 rtl:ml-3 rtl:hidden" />
@@ -534,35 +533,27 @@ export default function ServicePage() {
                   </div>
                   
                   {/* Trust Indicators */}
-                  <div className="mt-12 pt-8 border-t border-white/20">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-                      <div className="flex flex-col items-center space-y-2">
-                        <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
-                          <Users className="w-6 h-6 text-white" />
-                        </div>
-                        <span className="text-sm text-amber-100 font-medium">{tDetail('cta.trustIndicators.expertTeam')}</span>
+                  <div className="cta-trust-indicators">
+                    <div className="cta-trust-item">
+                      <div className="cta-trust-icon">
+                        <Users className="w-6 h-6 text-white" />
                       </div>
-                      <div className="flex flex-col items-center space-y-2">
-                        <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
-                          <Clock className="w-6 h-6 text-white" />
-                        </div>
-                        <span className="text-sm text-amber-100 font-medium">{tDetail('cta.trustIndicators.fastDelivery')}</span>
+                      <span className="cta-trust-text">{tDetail('cta.trustIndicators.expertTeam')}</span>
+                    </div>
+                    <div className="cta-trust-item">
+                      <div className="cta-trust-icon">
+                        <Clock className="w-6 h-6 text-white" />
                       </div>
-                      <div className="flex flex-col items-center space-y-2">
-                        <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
-                          <Shield className="w-6 h-6 text-white" />
-                        </div>
-                        <span className="text-sm text-amber-100 font-medium">{tDetail('cta.trustIndicators.qualityGuarantee')}</span>
+                      <span className="cta-trust-text">{tDetail('cta.trustIndicators.fastDelivery')}</span>
+                    </div>
+                    <div className="cta-trust-item">
+                      <div className="cta-trust-icon">
+                        <Shield className="w-6 h-6 text-white" />
                       </div>
+                      <span className="cta-trust-text">{tDetail('cta.trustIndicators.qualityGuarantee')}</span>
                     </div>
                   </div>
                 </div>
-                
-                {/* Floating Elements */}
-                <div className="absolute top-4 right-4 w-2 h-2 bg-white/30 rounded-full animate-pulse"></div>
-                <div className="absolute top-8 right-12 w-1 h-1 bg-white/40 rounded-full animate-pulse delay-1000"></div>
-                <div className="absolute bottom-8 left-8 w-3 h-3 bg-white/20 rounded-full animate-pulse delay-500"></div>
-                <div className="absolute bottom-4 left-16 w-1 h-1 bg-white/50 rounded-full animate-pulse delay-1500"></div>
               </div>
             </div>
           </div>

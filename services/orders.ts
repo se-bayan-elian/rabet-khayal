@@ -8,6 +8,7 @@ export interface CreateOrderRequest {
   deliveryFee?: number;
   tax?: number;
   couponId?: string;
+  paymentId?: string;
 }
 
 export interface ProcessPaymentRequest {
@@ -21,7 +22,8 @@ export interface Order {
   id: string;
   userId: string;
   cartId: string;
-  paymentMethod: string;
+  paymentMethod: 'visa' | 'mastercard' | 'apple_pay' | 'stc_pay';
+  paymentId?: string;
   paymentStatus: 'pending' | 'paid' | 'failed' | 'refund';
   orderStatus: 'pending' | 'confirmed' | 'processing' | 'shipped' | 'delivered' | 'completed' | 'cancelled';
   googleAddress: string;

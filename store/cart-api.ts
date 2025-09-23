@@ -177,7 +177,7 @@ interface CartStore {
   calculateTotals: () => void;
   
   // Checkout
-  createOrder: (paymentMethod: 'visa' | 'mastercard' | 'apple_pay' | 'stc_pay') => Promise<string>;
+  createOrder: (paymentMethod: 'visa' | 'mastercard' | 'apple_pay' | 'stc_pay', paymentId?: string) => Promise<{ success: boolean; order?: any; error?: string }>;
 }
 
 const initialCart: CartState = {
@@ -212,7 +212,6 @@ const setToSessionStorage = (key: string, value: any) => {
   if (typeof window === 'undefined') return;
   try {
     sessionStorage.setItem(key, JSON.stringify(value));
-    console.log(`💾 Saved to session storage [${key}]:`, value);
   } catch (error) {
     console.error('Failed to save to session storage:', error);
     // Clear corrupted data
@@ -229,11 +228,6 @@ const isAuthenticated = (): boolean => {
   if (typeof window === 'undefined') return false;
   const token = Cookies.get('accessToken');
   const hasValidToken = !!token && token.trim() !== '';
-  console.log('🔐 isAuthenticated check:', { 
-    hasToken: !!token, 
-    tokenLength: token?.length || 0,
-    isValid: hasValidToken 
-  });
   return hasValidToken;
 };
 
@@ -250,9 +244,7 @@ const getSessionId = (): string => {
   if (!sessionId) {
     sessionId = generateSessionId();
     sessionStorage.setItem('cart-session-id', sessionId);
-    console.log('🆕 NEW SESSION ID GENERATED:', sessionId);
   } else {
-    console.log('♻️ EXISTING SESSION ID RETRIEVED:', sessionId);
   }
   return sessionId;
 };
@@ -261,11 +253,7 @@ const getSessionId = (): string => {
 const getAxiosClient = () => {
   const authenticated = isAuthenticated();
   const client = authenticated ? axiosAuthClient : axiosClient;
-  console.log('🔧 getAxiosClient:', { 
-    authenticated, 
-    usingAuthClient: authenticated,
-    clientType: authenticated ? 'axiosAuthClient' : 'axiosClient'
-  });
+ 
   return client;
 };
 
@@ -278,14 +266,8 @@ const getCurrentSessionId = (get: any): string => {
   
   if (!sessionId) {
     sessionId = getSessionId();
-    console.log('🔄 Retrieved sessionId from storage:', sessionId);
   }
   
-  console.log('🔍 getCurrentSessionId consistency check:', { 
-    storeSessionId: currentState.sessionId, 
-    storageSessionId: typeof window !== 'undefined' ? sessionStorage.getItem('cart-session-id') : 'SSR',
-    finalSessionId: sessionId 
-  });
   
   return sessionId;
 };
@@ -331,13 +313,7 @@ const transformCartItem = (backendItem: BackendCartItem): CartItem => {
         : cust.selectedAnswerImageUrl;
       
       // Transform customization data properly
-      console.log('Raw customization from backend:', {
-        optionId: cust.optionId,
-        questionText: cust.questionText,
-        selectedAnswer: cust.selectedAnswer,
-        question: cust.question,
-        answers: cust.question.answers
-      });
+      
       
       const result = {
         questionId: cust.optionId,
@@ -349,7 +325,7 @@ const transformCartItem = (backendItem: BackendCartItem): CartItem => {
         imageUrl: imageUrl || undefined, // Construct Cloudinary URL or use existing URL
       };
       
-      console.log('Transformed customization:', result);
+      
       return result;
     }),
     customizationCost: backendItem.customizations?.reduce((sum, cust) => sum + parseFloat(cust.additionalPrice), 0) || 0,
@@ -383,10 +359,7 @@ const transformToBackendCustomizations = (customizations: CartItemCustomization[
     // Fallback if question text is still not found
     if (!questionText) {
       questionText = `Question ${cust.questionId}`;
-      console.warn('⚠️ Question text not found for customization:', {
-        questionId: cust.questionId,
-        availableQuestions: questions?.map(q => ({ id: q.id, text: q.questionText }))
-      });
+      
     }
     
     return {
@@ -410,7 +383,7 @@ const refreshCartFromBackend = async (set: any, get: any) => {
       headers['X-Session-ID'] = getCurrentSessionId(get);
     }
 
-    console.log('📋 GET /carts with headers:', headers);
+    
     const response = await getAxiosClient().get('/carts', { headers });
     const backendCart: BackendCart = response.data.data || response.data;
     
@@ -424,12 +397,7 @@ const refreshCartFromBackend = async (set: any, get: any) => {
       ? currentCart.selectedDeliveryOption.cost 
       : 0;
     
-    console.log('🔄 Recalculating delivery cost during cart sync:', {
-      deliveryType: currentCart.deliveryType,
-      selectedDeliveryOption: currentCart.selectedDeliveryOption,
-      originalDeliveryCost: currentCart.deliveryCost,
-      recalculatedDeliveryCost
-    });
+    
     
     set({
       cart: {
@@ -476,10 +444,10 @@ export const useCartStore = create<CartStore>()((set, get) => ({
       } else if (isLoggedIn && sessionId && currentState.sessionId) {
         // Only send sessionId if we have one stored for merging (during login)
         headers['X-Session-ID'] = sessionId;
-        console.log('🔄 Sending sessionId for cart merging during login');
+        
       }
 
-      console.log('📋 GET /carts with headers:', headers);
+      
     const response = await getAxiosClient().get('/carts', { headers });
       const backendCart: BackendCart = response.data.data || response.data;
       
@@ -506,19 +474,11 @@ export const useCartStore = create<CartStore>()((set, get) => ({
       
       // Clear corrupted session storage data
       if (!isValidDeliveryOption && savedDeliveryOption) {
-        console.warn('🧹 Clearing corrupted delivery option from session storage:', savedDeliveryOption);
+        
         sessionStorage.removeItem(DELIVERY_OPTION_KEY);
       }
       
-      console.log('🔍 Loading from session storage:', {
-        savedDeliveryType,
-        savedDeliveryOption,
-        isValidDeliveryOption,
-        validatedDeliveryOption,
-        savedDeliveryAddress,
-        savedCoupon,
-        calculatedDeliveryCost: savedDeliveryType === 'home' && validatedDeliveryOption ? validatedDeliveryOption.cost : 0
-      });
+      
       
       set({
         cart: {
@@ -560,7 +520,7 @@ export const useCartStore = create<CartStore>()((set, get) => ({
     
     if (loggedIn && !currentState.isLoggedIn) {
       // User is logging in - keep sessionId for cart merging, then clear it after
-      console.log('🔄 User logging in - triggering cart merge with sessionId:', currentState.sessionId);
+      
       
       set({
         isLoggedIn: true,
@@ -572,12 +532,11 @@ export const useCartStore = create<CartStore>()((set, get) => ({
       // Initialize cart (this will merge anonymous cart with user cart)
       get().initializeCart().then(() => {
         // After successful initialization/merging, clear the sessionId
-        console.log('✅ Cart merged successfully, clearing sessionId');
+
         set({ sessionId: '' });
       });
     } else if (!loggedIn && currentState.isLoggedIn) {
       // User is logging out - generate new sessionId for anonymous cart
-      console.log('🔄 User logging out - generating new sessionId');
       const newSessionId = getSessionId();
       
       set({
@@ -610,14 +569,7 @@ export const useCartStore = create<CartStore>()((set, get) => ({
     // Calculate total
     const total = subtotal + cart.deliveryCost - couponDiscount;
     
-    console.log('🧮 calculateTotals called:', {
-      subtotal,
-      deliveryCost: cart.deliveryCost,
-      couponDiscount,
-      total,
-      deliveryType: cart.deliveryType,
-      selectedDeliveryOption: cart.selectedDeliveryOption
-    });
+
     
     set({
       cart: {
@@ -658,30 +610,15 @@ export const useCartStore = create<CartStore>()((set, get) => ({
       if (!isAuthenticated()) {
         const sessionId = getCurrentSessionId(get);
         headers['X-Session-ID'] = sessionId;
-        console.log('🚀 CART REQUEST DEBUG:', {
-          method: 'CART_OPERATION',
-          requestType: 'ANONYMOUS_USER',
-          sessionId: sessionId,
-          storeSessionId: get().sessionId,
-          storageSessionId: typeof window !== 'undefined' ? sessionStorage.getItem('cart-session-id') : 'SSR',
-          isAuthenticated: isAuthenticated(),
-          timestamp: new Date().toISOString()
-        });
+      
       }
       
       const backendCustomizations = product.customizations 
         ? transformToBackendCustomizations(product.customizations, product.questions)
         : [];
 
-      // Debug: Log what's being sent to backend
-      console.log('🔍 Sending to backend:', {
-        productId: product.productId,
-        quantity,
-        unitPrice: product.salePrice || product.price,
-        customizations: backendCustomizations
-      });
+      
 
-      console.log('📝 POST /carts/items with headers:', headers);
       await getAxiosClient().post('/carts/items', {
         productId: product.productId,
         quantity,
@@ -712,15 +649,7 @@ export const useCartStore = create<CartStore>()((set, get) => ({
       if (!isAuthenticated()) {
         const sessionId = getCurrentSessionId(get);
         headers['X-Session-ID'] = sessionId;
-        console.log('🚀 CART REQUEST DEBUG:', {
-          method: 'CART_OPERATION',
-          requestType: 'ANONYMOUS_USER',
-          sessionId: sessionId,
-          storeSessionId: get().sessionId,
-          storageSessionId: typeof window !== 'undefined' ? sessionStorage.getItem('cart-session-id') : 'SSR',
-          isAuthenticated: isAuthenticated(),
-          timestamp: new Date().toISOString()
-        });
+      
       }
       
       await getAxiosClient().put(`/carts/items/${itemId}`, { quantity }, { headers });
@@ -744,15 +673,7 @@ export const useCartStore = create<CartStore>()((set, get) => ({
       if (!isAuthenticated()) {
         const sessionId = getCurrentSessionId(get);
         headers['X-Session-ID'] = sessionId;
-        console.log('🚀 CART REQUEST DEBUG:', {
-          method: 'CART_OPERATION',
-          requestType: 'ANONYMOUS_USER',
-          sessionId: sessionId,
-          storeSessionId: get().sessionId,
-          storageSessionId: typeof window !== 'undefined' ? sessionStorage.getItem('cart-session-id') : 'SSR',
-          isAuthenticated: isAuthenticated(),
-          timestamp: new Date().toISOString()
-        });
+      
       }
       
       await getAxiosClient().delete(`/carts/items/${itemId}`, { headers });
@@ -819,14 +740,7 @@ export const useCartStore = create<CartStore>()((set, get) => ({
       deliveryCost = cart.deliveryCost || 0;
     }
 
-    console.log('🚚 setDeliveryType called:', {
-      type,
-      currentDeliveryType: cart.deliveryType,
-      selectedOption: cart.selectedDeliveryOption,
-      calculatedCost: deliveryCost,
-      currentDeliveryCost: cart.deliveryCost,
-      preservingCost: type === "home" && cart.selectedDeliveryOption
-    });
+   
 
     const updatedCart = {
       ...cart,
@@ -850,13 +764,7 @@ export const useCartStore = create<CartStore>()((set, get) => ({
     const { cart } = get();
     const deliveryCost = cart.deliveryType === "home" ? option.cost : 0;
     
-    console.log('🚚 setDeliveryOption called:', {
-      option,
-      currentDeliveryType: cart.deliveryType,
-      calculatedCost: deliveryCost,
-      currentDeliveryCost: cart.deliveryCost,
-      currentSelectedOption: cart.selectedDeliveryOption
-    });
+   
     
     const updatedCart = {
       ...cart,
@@ -869,12 +777,7 @@ export const useCartStore = create<CartStore>()((set, get) => ({
     // Save to session storage
     setToSessionStorage(DELIVERY_OPTION_KEY, option);
     
-    console.log('🚚 setDeliveryOption after set:', {
-      newDeliveryCost: updatedCart.deliveryCost,
-      newSelectedOption: updatedCart.selectedDeliveryOption,
-      savedToSession: option,
-      sessionStorageValue: getFromSessionStorage(DELIVERY_OPTION_KEY)
-    });
+   
     
     get().calculateTotals();
   },
@@ -916,7 +819,7 @@ export const useCartStore = create<CartStore>()((set, get) => ({
   },
 
   clearCart: async () => {
-    console.log('🧹 clearCart called - clearing cart and coupon');
+   
     set({ isLoading: true });
     try {
       const headers: Record<string, string> = {};
@@ -926,15 +829,7 @@ export const useCartStore = create<CartStore>()((set, get) => ({
       if (!isAuthenticated()) {
         const sessionId = getCurrentSessionId(get);
         headers['X-Session-ID'] = sessionId;
-        console.log('🚀 CART REQUEST DEBUG:', {
-          method: 'CART_OPERATION',
-          requestType: 'ANONYMOUS_USER',
-          sessionId: sessionId,
-          storeSessionId: get().sessionId,
-          storageSessionId: typeof window !== 'undefined' ? sessionStorage.getItem('cart-session-id') : 'SSR',
-          isAuthenticated: isAuthenticated(),
-          timestamp: new Date().toISOString()
-        });
+
       }
       
       await getAxiosClient().delete("/carts", { headers });
@@ -973,16 +868,10 @@ export const useCartStore = create<CartStore>()((set, get) => ({
   ensureCartSynced: async () => {
     const { cart } = get();
     
-    console.log('🔍 ensureCartSynced - Current cart state:', {
-      hasCartId: !!cart.id,
-      itemsCount: cart.items?.length || 0,
-      hasAppliedCoupon: !!cart.appliedCoupon,
-      couponId: cart.appliedCoupon?.id,
-      couponCode: cart.appliedCoupon?.code
-    });
+
     
     if (!cart.id) {
-      console.log('🔄 No cart ID, initializing cart...');
+
       await get().initializeCart();
     }
 
@@ -994,13 +883,7 @@ export const useCartStore = create<CartStore>()((set, get) => ({
       throw new Error('Cart synchronization failed');
     }
 
-    console.log('🔍 ensureCartSynced - Final cart state:', {
-      hasCartId: !!cart.id,
-      itemsCount: cart.items?.length || 0,
-      hasAppliedCoupon: !!cart.appliedCoupon,
-      couponId: cart.appliedCoupon?.id,
-      couponCode: cart.appliedCoupon?.code
-    });
+ 
 
     return cart;
   },
@@ -1029,7 +912,7 @@ export const useCartStore = create<CartStore>()((set, get) => ({
       const orderTotal = cart.subtotal;
 
       const response = await validateCoupon(code, orderTotal, locale);
-      console.log('🔍 Coupon Validation Response:', response);
+   
 
       if (response.isValid && response.coupon) {
         const appliedCoupon: AppliedCoupon = {
@@ -1040,7 +923,7 @@ export const useCartStore = create<CartStore>()((set, get) => ({
           description: response.coupon.description,
         };
         
-        console.log('🔍 Applied Coupon Object:', appliedCoupon);
+   
 
         set({
           cart: {
@@ -1054,12 +937,12 @@ export const useCartStore = create<CartStore>()((set, get) => ({
         });
 
         // Save to session storage
-        console.log('🔍 Saving coupon to session storage:', appliedCoupon);
+
         setToSessionStorage(COUPON_KEY, appliedCoupon);
         
         // Verify it was saved
         const savedCoupon = getFromSessionStorage(COUPON_KEY);
-        console.log('🔍 Verified saved coupon:', savedCoupon);
+  
 
         get().calculateTotals();
 
@@ -1119,7 +1002,7 @@ export const useCartStore = create<CartStore>()((set, get) => ({
   },
 
 
-  createOrder: async (paymentMethod: 'visa' | 'mastercard' | 'apple_pay' | 'stc_pay') => {
+  createOrder: async (paymentMethod: 'visa' | 'mastercard' | 'apple_pay' | 'stc_pay', paymentId?: string) => {
     if (!isAuthenticated()) {
       throw new Error('User must be authenticated to create an order');
     }
@@ -1131,28 +1014,7 @@ export const useCartStore = create<CartStore>()((set, get) => ({
 
       // Get coupon ID if coupon is applied
       const couponId = syncedCart.appliedCoupon?.id;
-      console.log('🔍 Order Creation Debug:', {
-        hasAppliedCoupon: !!syncedCart.appliedCoupon,
-        couponId: couponId,
-        couponCode: syncedCart.appliedCoupon?.code,
-        fullAppliedCoupon: syncedCart.appliedCoupon,
-        deliveryType: syncedCart.deliveryType,
-        deliveryCost: syncedCart.deliveryCost,
-        selectedDeliveryOption: syncedCart.selectedDeliveryOption,
-        frontendSubtotal: syncedCart.subtotal,
-        frontendTotalPrice: syncedCart.totalPrice,
-        frontendCouponDiscount: syncedCart.couponDiscount,
-        cartItems: syncedCart.items?.map(item => ({
-          id: item.id,
-          unitPrice: item.unitPrice,
-          salePrice: item.salePrice,
-          price: item.price,
-          quantity: item.quantity,
-          customizationCost: item.customizationCost,
-          customizations: item.customizations
-        })),
-        fullCartState: syncedCart
-      });
+     
 
       // Get current locale from cookies or default to 'ar'
       const locale = typeof window !== 'undefined' 
@@ -1169,29 +1031,39 @@ export const useCartStore = create<CartStore>()((set, get) => ({
         tax: 0,
         couponId, // Include coupon ID if available
         locale, // Add locale for i18n support
+        paymentId, // Include payment ID if provided
       };
       
-      console.log('🔍 Order Request Data:', orderRequestData);
+
       
       const response = await axiosAuthClient.post('/orders', orderRequestData);
 
       const order = response.data.data;
 
       // Clear cart after successful order creation
-      console.log('🧹 Clearing cart after successful order creation');
+
       await get().clearCart();
       
       // Clear session storage
-      console.log('🧹 Clearing session storage');
+      
       sessionStorage.removeItem(DELIVERY_TYPE_KEY);
       sessionStorage.removeItem(DELIVERY_OPTION_KEY);
       sessionStorage.removeItem(DELIVERY_ADDRESS_KEY);
       sessionStorage.removeItem(COUPON_KEY);
 
-      return order.id;
+      return {
+        success: true,
+        order: order,
+        orderId: order.id
+      };
     } catch (error) {
       console.error('Failed to create order:', error);
-      throw error;
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : 'Failed to create order',
+        order: null,
+        orderId: null
+      };
     } finally {
       set({ isLoading: false });
     }

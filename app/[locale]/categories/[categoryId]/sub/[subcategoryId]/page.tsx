@@ -349,12 +349,7 @@ export default function SubcategoryPage() {
         questions: product.questions, // ✅ FIX: Include questions for editing
       };
 
-      console.log('SubcategoryPage: Adding to cart with customizations:', {
-        productId: product.id,
-        customizations,
-        customizationCost,
-        questions: product.questions
-      });
+      
 
       await addToCart(cartItem, quantity);
 

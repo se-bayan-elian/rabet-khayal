@@ -4,10 +4,11 @@ import AboutPage from '@/components/pages/AboutPage'
 import { generateMetadata as generateMeta, generateAlternateLanguages, generateOrganizationJsonLd, generateJsonLd } from '@/lib/metadata'
 
 interface Props {
-  params: { locale: string }
+  params: Promise<{ locale: string }>
 }
 
-export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
+export async function generateMetadata({ params}: Props): Promise<Metadata> {
+  const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'metadata.about' })
   
   return generateMeta({
@@ -22,7 +23,8 @@ export async function generateMetadata({ params: { locale } }: Props): Promise<M
   })
 }
 
-export default function About({ params: { locale } }: Props) {
+export default async function About({ params }: Props) {
+  const { locale } = await params
   // Generate JSON-LD structured data
   const organizationJsonLd = generateOrganizationJsonLd(locale)
 

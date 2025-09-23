@@ -49,6 +49,11 @@
       "titleSuffix": "| Rabet Alkhayal",
       "defaultDescription": "High-quality products and services from Rabet Alkhayal",
       "keywords": "products, services, quality, printing, design, creative"
+    },
+    "about": {
+      "title": "About Us | Rabet Alkhayal",
+      "description": "Learn about Rabet Alkhayal, your trusted partner for high-quality creative and technical products and services. Discover our mission, values, and commitment to excellence.",
+      "keywords": "about us, company, mission, values, team, quality, services, products"
     }
   },
   "serviceHero": {
@@ -719,6 +724,7 @@
     "geolocationNotSupported": "Geolocation is not supported in your browser",
     "locationAccessDenied": "Location access denied",
     "proceedToCheckout": "Proceed to Checkout",
+    "proceedToPayment": "Proceed to Payment",
     "secureCheckout": "Secure and encrypted checkout 🔒",
     "missingRequiredCustomization": "Required customization missing for {product}: {question}",
     "couponDiscount": "Coupon Discount",
@@ -1364,14 +1370,18 @@
   },
   "about": {
     "hero": {
+      "badge": "About Us",
       "title": "About Rabet Al-Khayal",
-      "subtitle": "We are a leading digital innovation company dedicated to transforming ideas into reality through cutting-edge technology and creative excellence."
+      "subtitle": "We are a leading digital innovation company dedicated to transforming ideas into reality through cutting-edge technology and creative excellence.",
+      "cta": "Discover Our Services",
+      "portfolio": "View Our Work",
+      "imageAlt": "About company image"
     },
     "stats": {
-      "customers": "Happy Customers",
+      "clients": "Happy Customers",
       "projects": "Completed Projects",
-      "countries": "Countries Served",
-      "satisfaction": "Satisfaction Rate"
+      "awards": "Awards Won",
+      "years": "Years of Experience"
     },
     "mission": {
       "title": "Our Mission",
@@ -1381,82 +1391,86 @@
       "title": "Our Vision",
       "description": "To be the leading force in digital transformation across the Middle East, setting new standards for creativity, innovation, and customer satisfaction in the digital services industry."
     },
+    "story": {
+      "title": "Our Story",
+      "paragraph1": "Rabet Al-Khayal's journey began with a clear vision to bridge the gap between imagination and reality through cutting-edge technology and innovative creative solutions.",
+      "paragraph2": "Over the years, we have evolved from a small startup to a leading platform in the region, serving thousands of clients and executing hundreds of successful projects.",
+      "paragraph3": "We are proud of our achievements and look forward to the future with confidence, continuing to provide the best technical and creative solutions for our clients.",
+      "achievements": {
+        "innovation": "Continuous Innovation",
+        "quality": "High Quality",
+        "support": "Excellent Support",
+        "growth": "Sustainable Growth"
+      },
+      "imageAlt": "About company story image"
+    },
     "values": {
       "title": "Our Core Values",
       "subtitle": "The principles that guide everything we do",
-      "quality": {
-        "title": "Quality Excellence",
-        "description": "We deliver exceptional quality in every project, ensuring our clients receive solutions that exceed expectations."
-      },
-      "customer": {
-        "title": "Customer Focus",
-        "description": "Our customers are at the heart of everything we do. We listen, understand, and deliver solutions that truly matter."
-      },
       "innovation": {
         "title": "Innovation",
         "description": "We embrace new technologies and creative approaches to solve complex challenges and drive digital transformation."
       },
-      "sustainability": {
-        "title": "Sustainability",
-        "description": "We are committed to sustainable practices that benefit our community and the environment for future generations."
+      "passion": {
+        "title": "Passion",
+        "description": "We are passionate about what we do and dedicate ourselves to delivering the best results for our clients."
+      },
+      "quality": {
+        "title": "Quality Excellence",
+        "description": "We deliver exceptional quality in every project, ensuring our clients receive solutions that exceed expectations."
+      },
+      "excellence": {
+        "title": "Excellence",
+        "description": "We strive for excellence in everything we do, from design to implementation and delivery."
       }
     },
     "timeline": {
       "title": "Our Journey",
       "subtitle": "Milestones that shaped our story",
-      "founded": {
+      "founding": {
         "title": "Company Founded",
         "description": "Started with a vision to revolutionize digital services in the region"
       },
-      "expansion": {
-        "title": "Regional Expansion",
-        "description": "Expanded operations to serve clients across the Middle East"
-      },
-      "recognition": {
-        "title": "Industry Recognition",
-        "description": "Received multiple awards for innovation and customer satisfaction"
-      },
       "growth": {
         "title": "Rapid Growth",
-        "description": "Reached 10,000+ satisfied customers and 500+ successful projects"
+        "description": "Expanded operations to serve clients across the Middle East"
+      },
+      "expansion": {
+        "title": "Regional Expansion",
+        "description": "Received multiple awards for innovation and customer satisfaction"
       },
       "innovation": {
         "title": "Innovation Hub",
         "description": "Launched our innovation center focusing on emerging technologies"
+      },
+      "present": {
+        "title": "Present & Future",
+        "description": "Reached 10,000+ satisfied customers and 500+ successful projects"
       }
     },
     "team": {
       "title": "Our Team",
       "subtitle": "We come together to provide the best technical and creative solutions for our clients",
-      "achievements": {
-        "title": "Key Achievements:"
+      "chairman": {
+        "name": "Mohammed Al-Mutairi",
+        "role": "Chairman of the Board",
+        "image": "/images/team/chairman.jpg",
+        "message": "Chairman's Message",
+        "content": "Welcome as Chairman of the Board of Rabet Al-Khayal Company. I consider myself a consultant in human resources and a business leader, working with focus and passion to help and support individuals and institutions in both government and private sectors to achieve their goals by fully utilizing their potential and providing innovative solutions in training, self-development, and competency enhancement.\n\nI have been and continue to be interested in how to invest the potential of individuals and institutions to achieve the highest results, as there is nothing worse than seeing wasted potential. Therefore, we have taken it upon ourselves to provide solutions for developing human competencies to help individuals, leaders, and institutions achieve their full potential. With the launch of Saudi Vision 2030, we felt the importance of investing our team's capabilities to support human resource development in the Kingdom through innovative solutions that combine the best modern global practices with a deep understanding of national development requirements to achieve the highest level of progress."
       },
-      "ceo": {
-        "name": "Ahmed Mohammed Al-Ali",
-        "role": "Chief Executive Officer",
-        "bio": "Expert in technology and innovation with over 15 years of experience in leading startups and technology institutions. Holds a Master's degree in Business Administration and specializes in digital transformation and technology strategies.",
-        "achievements": [
-          "Led over 100 successful technology projects",
-          "Recipient of technology innovation awards",
-          "Speaker at global technology conferences"
-        ]
-      },
-      "developer": {
-        "name": "Fatima Ahmed Al-Saeed",
-        "role": "Senior Developer",
-        "bio": "Developer specialized in application and website development with extensive experience in the latest technologies. Known for precision and creativity in solving complex technical problems and developing innovative solutions for clients.",
-        "achievements": [
-          "Specialized in mobile application development",
-          "Experience in artificial intelligence technologies",
-          "Holder of advanced technical certifications"
-        ]
+      "generalManager": {
+        "name": "Mohanad Hamad",
+        "role": "General Manager",
+        "image": "/images/team/general-manager.jpg",
+        "message": "General Manager's Message",
+        "content": "It started as a dream, then it came true and became a reality, thanks to God Almighty, and through the efforts of sincere people working at Rabet Al-Khayal Agency. We overcame difficulties and achieved success after success until we reached the forefront of elite companies in the Kingdom. We spared no effort to maintain our position at the forefront, and in light of the great economic growth and civilizational renaissance that the Kingdom is witnessing and its distinguished geographical location, the Kingdom has aligned with economic movements through modern and advanced methods that helped attract investors and increase economic activity in the country. Therefore, we were keen on continuous development to raise the company's efficiency with strategic policies and plans through which we aspire to contribute effectively to enriching our society and gaining our clients' trust by establishing principles of honesty, professionalism, and commitment."
       }
     },
-    "cta": {
+    "contact": {
       "title": "Ready to Start Your Journey?",
       "subtitle": "Let's work together to transform your ideas into digital reality. Contact us today to discuss your project.",
-      "contact": "Get in Touch",
-      "services": "View Services"
+      "email": "Get in Touch",
+      "phone": "Call Us"
     }
   },
   "cookies": {
@@ -1843,5 +1857,93 @@
     },
     "goBack": "Go Back",
     "contactUs": "Contact Us"
+  },
+  "payment": {
+    "title": "Payment",
+    "subtitle": "Complete your payment to finish your order",
+    "emptyCart": {
+      "title": "Cart is Empty",
+      "description": "Your cart must contain items before proceeding to payment",
+      "backToCart": "Back to Cart"
+    },
+    "form": {
+      "title": "Payment Information",
+      "cardholderName": "Cardholder Name",
+      "cardholderNamePlaceholder": "Enter cardholder name",
+      "cardNumber": "Card Number",
+      "expiryMonth": "Expiry Month",
+      "expiryYear": "Expiry Year",
+      "cvc": "Security Code (CVC)",
+      "securityNotice": "Your information is protected with the highest security standards. We will not store your credit card details.",
+      "processing": "Processing...",
+      "payNow": "Pay Now"
+    },
+    "summary": {
+      "title": "Order Summary",
+      "items": "Items",
+      "subtotal": "Subtotal",
+      "delivery": "Delivery Fee",
+      "discount": "Discount",
+      "total": "Total",
+      "paymentMethod": "Payment Method",
+      "creditCard": "Credit Card"
+    },
+    "errors": {
+      "formInvalid": "Please correct the errors in the form",
+      "nameRequired": "Cardholder name is required",
+      "nameMinLength": "Cardholder name must be at least 2 characters",
+      "cardNumberRequired": "Card number is required",
+      "cardNumberInvalid": "Invalid card number",
+      "expiryMonthRequired": "Expiry month is required",
+      "expiryMonthInvalid": "Invalid expiry month",
+      "expiryYearRequired": "Expiry year is required",
+      "expiryYearInvalid": "Invalid expiry year",
+      "cvcRequired": "Security code is required",
+      "cvcInvalid": "Invalid security code",
+      "paymentFailed": "Payment processing failed",
+      "noPaymentUrl": "Payment URL not received"
+    },
+    "callback": {
+      "processing": "Processing Payment",
+      "processingDescription": "Please wait while we verify your payment status",
+      "creatingOrder": "Creating Order",
+      "creatingOrderDescription": "Payment confirmed, creating your order",
+      "successTitle": "Payment Successful!",
+      "failureTitle": "Payment Failed",
+      "successMessage": "Your order has been created successfully",
+      "paymentFailed": "Payment processing failed",
+      "noPaymentId": "Payment ID not found",
+      "paymentNotPaid": "Payment not confirmed",
+      "orderCreated": "Order created successfully",
+      "orderCreationFailed": "Failed to create order",
+      "generalError": "An unexpected error occurred",
+      "errorDetails": "Error Details",
+      "orderDetails": "Order Details",
+      "orderId": "Order ID",
+      "paymentId": "Payment ID",
+      "viewOrders": "View My Orders",
+      "continueShopping": "Continue Shopping",
+      "retryPayment": "Retry Payment",
+      "backToCart": "Back to Cart"
+    },
+    "security": {
+      "title": "Payment Security",
+      "description": "We use the latest security technologies to protect your information",
+      "ssl": "Secure SSL Connection",
+      "encryption": "256-bit Encryption",
+      "pciCompliant": "PCI DSS Compliant",
+      "noStorage": "We do not store your credit card details"
+    },
+    "help": {
+      "title": "Payment Help",
+      "supportedCards": "Supported Cards",
+      "visa": "Visa",
+      "mastercard": "Mastercard",
+      "amex": "American Express",
+      "mada": "Mada",
+      "troubleshooting": "Troubleshooting",
+      "contactSupport": "Contact Support",
+      "faq": "FAQ"
+    }
   }
 }

@@ -141,6 +141,35 @@ export function generateProductJsonLd(product: any, locale: string) {
   }
 }
 
+export function generateOrganizationJsonLd(locale: string) {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://rabet-alkhayal.com'
+  
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Rabet Alkhayal',
+    alternateName: locale === 'ar' ? 'ربط الخيال' : 'Rabet Alkhayal',
+    url: baseUrl,
+    logo: `${baseUrl}/images/logo.png`,
+    description: locale === 'ar' 
+      ? 'منصة متكاملة للمنتجات والخدمات الإبداعية والتقنية عالية الجودة'
+      : 'Comprehensive platform for high-quality creative and technical products and services',
+    address: {
+      '@type': 'PostalAddress',
+      addressCountry: 'SA',
+      addressRegion: 'Riyadh'
+    },
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'customer service',
+      availableLanguage: ['Arabic', 'English']
+    },
+    sameAs: [
+      // Add social media URLs here if available
+    ]
+  }
+}
+
 export function generateJsonLd(data: any) {
   return {
     __html: JSON.stringify(data, null, 2)

@@ -285,14 +285,18 @@ export function ServicesOverview({ title, subtitle }: ServicesOverviewProps) {
           })}
         </div>
 
-        {/* Creative CTA Section */}
+        {/* Enhanced Creative CTA Section */}
         <div className="text-center fade-in">
-          <div className="cta-creative max-w-5xl mx-auto">
+          <div className="cta-creative max-w-6xl mx-auto">
+            {/* Decorative Elements */}
+            <div className="cta-decorative-1"></div>
+            <div className="cta-decorative-2"></div>
+            <div className="cta-decorative-3"></div>
+            
             <div className="cta-content">
-              <div className="flex justify-center mb-6">
-                <div className="w-20 h-20 rounded-full flex items-center justify-center dark:bg-secondary bg-primary"
-                  >
-                  <Sparkles className="w-10 h-10 dark:text-yellow-300 text-white" />
+              <div className="flex justify-center mb-8">
+                <div className="cta-trust-icon">
+                  <Sparkles className="w-8 h-8 text-white" />
                 </div>
               </div>
 
@@ -300,13 +304,13 @@ export function ServicesOverview({ title, subtitle }: ServicesOverviewProps) {
                 {t('title', { default: 'Our Premium Services' })}
               </h3>
 
-              <p className="mb-8 max-w-2xl mx-auto">
+              <p className="mb-8 max-w-3xl mx-auto">
                 {t('subtitle', { default: 'We offer comprehensive innovative tech solutions' })}
               </p>
 
               <div className="cta-buttons">
                 <Button className="btn-cta-primary">
-                  <Users className="w-6 h-6 mr-3" />
+                  <Users className="w-5 h-5 mr-3" />
                   {t('features.freeConsultation', { default: 'Free Consultation' })}
                 </Button>
                 <Link href="/products">

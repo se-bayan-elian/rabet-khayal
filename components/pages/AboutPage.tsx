@@ -76,24 +76,20 @@ export default function AboutPage({ locale }: AboutPageProps) {
     }
   ]
 
-  const team = [
+  const teamMembers = [
     {
-      name: t('team.ceo.name'),
-      role: t('team.ceo.role'),
-      image: '/images/team/ceo.jpg',
-      description: t('team.ceo.description')
+      name: t('team.chairman.name'),
+      role: t('team.chairman.role'),
+      image: t('team.chairman.image'),
+      message: t('team.chairman.message'),
+      content: t('team.chairman.content')
     },
     {
-      name: t('team.cto.name'),
-      role: t('team.cto.role'),
-      image: '/images/team/cto.jpg',
-      description: t('team.cto.description')
-    },
-    {
-      name: t('team.designer.name'),
-      role: t('team.designer.role'),
-      image: '/images/team/designer.jpg',
-      description: t('team.designer.description')
+      name: t('team.generalManager.name'),
+      role: t('team.generalManager.role'),
+      image: t('team.generalManager.image'),
+      message: t('team.generalManager.message'),
+      content: t('team.generalManager.content')
     }
   ]
 
@@ -319,11 +315,12 @@ export default function AboutPage({ locale }: AboutPageProps) {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {team.map((member, index) => (
-              <Card key={index} className="text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-                <CardContent className="p-8">
-                  <div className="relative w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden">
+          <div className="space-y-16">
+            {teamMembers.map((member, index) => (
+              <div key={index} className={`grid lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''}`}>
+                {/* Image Section */}
+                <div className={`relative ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
+                  <div className="aspect-square relative rounded-2xl overflow-hidden shadow-2xl">
                     <Image
                       src={member.image}
                       alt={member.name}
@@ -331,17 +328,36 @@ export default function AboutPage({ locale }: AboutPageProps) {
                       className="object-cover"
                     />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-                    {member.name}
-                  </h3>
-                  <Badge className="mb-4 bg-brand-gold text-brand-navy">
-                    {member.role}
-                  </Badge>
-                  <p className="text-gray-600 dark:text-gray-400">
-                    {member.description}
-                  </p>
-                </CardContent>
-              </Card>
+                  <div className="absolute inset-0 bg-gradient-to-tr from-brand-gold/20 to-transparent rounded-2xl"></div>
+                </div>
+
+                {/* Content Section */}
+                <div className={`${index % 2 === 1 ? 'lg:col-start-1' : ''}`}>
+                  <div className="space-y-6">
+                    <div>
+                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                        {member.name}
+                      </h3>
+                      <Badge className="mb-4 bg-brand-gold text-brand-navy text-lg px-4 py-2">
+                        {member.role}
+                      </Badge>
+                    </div>
+                    
+                    <div>
+                      <h4 className="text-xl font-semibold text-brand-navy dark:text-brand-gold mb-4">
+                        {member.message}
+                      </h4>
+                      <div className="prose prose-lg max-w-none text-gray-600 dark:text-gray-400 leading-relaxed">
+                        {member.content.split('\n\n').map((paragraph, pIndex) => (
+                          <p key={pIndex} className="mb-4 last:mb-0">
+                            {paragraph}
+                          </p>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </div>

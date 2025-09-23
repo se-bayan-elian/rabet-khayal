@@ -96,7 +96,6 @@ export function Header({
   const servicesApi = servicesApiData?.data || []
   const { data: categoriesApiData } = useCategoriesQuery({ pagination: { page: 1, limit: 8 } })
   const categoriesApi = categoriesApiData || []
-  console.log(categoriesApi)
   // Enhanced scroll effect
   useEffect(() => {
     const handleScroll = () => {

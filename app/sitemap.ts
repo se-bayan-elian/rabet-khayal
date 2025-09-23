@@ -1,5 +1,4 @@
 import { MetadataRoute } from 'next'
-import { getTranslations } from 'next-intl/server'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://rabet-alkhayal.com'
@@ -7,24 +6,53 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Get all supported locales
   const locales = ['ar', 'en']
   
-  // Static pages that exist for all locales
+  // Static pages that exist for all locales (excluding private pages)
   const staticPages = [
-    '',
-    '/products',
-    '/services',
-    '/categories',
-    '/about',
-    '/contact',
-    '/privacy-policy',
-    '/terms-and-conditions',
-    '/cookie-policy',
-    '/login',
-    '/register',
-    '/verify-otp',
-    '/cart',
-    '/wishlist',
-    '/my-orders',
-    '/my-profile'
+    {
+      path: '',
+      priority: 1.0,
+      changeFrequency: 'daily' as const,
+    },
+    {
+      path: '/products',
+      priority: 0.9,
+      changeFrequency: 'daily' as const,
+    },
+    {
+      path: '/services',
+      priority: 0.9,
+      changeFrequency: 'daily' as const,
+    },
+    {
+      path: '/categories',
+      priority: 0.8,
+      changeFrequency: 'weekly' as const,
+    },
+    {
+      path: '/about',
+      priority: 0.7,
+      changeFrequency: 'monthly' as const,
+    },
+    {
+      path: '/contact',
+      priority: 0.6,
+      changeFrequency: 'monthly' as const,
+    },
+    {
+      path: '/privacy-policy',
+      priority: 0.3,
+      changeFrequency: 'yearly' as const,
+    },
+    {
+      path: '/terms-and-conditions',
+      priority: 0.3,
+      changeFrequency: 'yearly' as const,
+    },
+    {
+      path: '/cookie-policy',
+      priority: 0.3,
+      changeFrequency: 'yearly' as const,
+    },
   ]
 
   const sitemap: MetadataRoute.Sitemap = []
@@ -32,18 +60,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Generate sitemap entries for each locale and page combination
   for (const locale of locales) {
     for (const page of staticPages) {
-      const url = page === '' ? `${baseUrl}/${locale}` : `${baseUrl}/${locale}${page}`
+      const url = page.path === '' ? `${baseUrl}/${locale}` : `${baseUrl}/${locale}${page.path}`
       
       sitemap.push({
         url,
         lastModified: new Date(),
-        changeFrequency: page === '' ? 'daily' : 'weekly',
-        priority: page === '' ? 1 : 0.8,
+        changeFrequency: page.changeFrequency,
+        priority: page.priority,
         alternates: {
           languages: Object.fromEntries(
             locales.map(loc => [
               loc,
-              `${baseUrl}/${loc}${page === '' ? '' : page}`
+              `${baseUrl}/${loc}${page.path === '' ? '' : page.path}`
             ])
           )
         }
@@ -51,92 +79,167 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
 
-  // Add dynamic product pages (you might want to fetch these from your API)
-  // This is a placeholder - you should replace with actual product data
-  const productPages = [
-    '/products/1',
-    '/products/2',
-    '/products/3',
-    // Add more product IDs as needed
-  ]
-
-  for (const locale of locales) {
-    for (const productPage of productPages) {
-      const url = `${baseUrl}/${locale}${productPage}`
+  // Try to fetch dynamic content from API
+  try {
+    // Fetch products from API
+    const productsResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/api/products?limit=1000`, {
+      next: { revalidate: 3600 } // Revalidate every hour
+    })
+    
+    if (productsResponse.ok) {
+      const productsData = await productsResponse.json()
+      const products = productsData.data || []
       
-      sitemap.push({
-        url,
-        lastModified: new Date(),
-        changeFrequency: 'monthly',
-        priority: 0.6,
-        alternates: {
-          languages: Object.fromEntries(
-            locales.map(loc => [
-              loc,
-              `${baseUrl}/${loc}${productPage}`
-            ])
-          )
+      for (const locale of locales) {
+        for (const product of products) {
+          const url = `${baseUrl}/${locale}/products/${product.id}`
+          
+          sitemap.push({
+            url,
+            lastModified: new Date(product.updatedAt || product.createdAt),
+            changeFrequency: 'weekly',
+            priority: 0.7,
+            alternates: {
+              languages: Object.fromEntries(
+                locales.map(loc => [
+                  loc,
+                  `${baseUrl}/${loc}/products/${product.id}`
+                ])
+              )
+            }
+          })
         }
-      })
+      }
     }
+  } catch (error) {
+    console.warn('Failed to fetch products for sitemap:', error)
   }
 
-  // Add dynamic service pages
-  const servicePages = [
-    '/services/1',
-    '/services/2',
-    '/services/3',
-    // Add more service IDs as needed
-  ]
-
-  for (const locale of locales) {
-    for (const servicePage of servicePages) {
-      const url = `${baseUrl}/${locale}${servicePage}`
+  try {
+    // Fetch services from API
+    const servicesResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/api/services?limit=1000`, {
+      next: { revalidate: 3600 } // Revalidate every hour
+    })
+    
+    if (servicesResponse.ok) {
+      const servicesData = await servicesResponse.json()
+      const services = servicesData.data || []
       
-      sitemap.push({
-        url,
-        lastModified: new Date(),
-        changeFrequency: 'monthly',
-        priority: 0.6,
-        alternates: {
-          languages: Object.fromEntries(
-            locales.map(loc => [
-              loc,
-              `${baseUrl}/${loc}${servicePage}`
-            ])
-          )
+      for (const locale of locales) {
+        for (const service of services) {
+          const url = `${baseUrl}/${locale}/services/${service.id}`
+          
+          sitemap.push({
+            url,
+            lastModified: new Date(service.updatedAt || service.createdAt),
+            changeFrequency: 'weekly',
+            priority: 0.7,
+            alternates: {
+              languages: Object.fromEntries(
+                locales.map(loc => [
+                  loc,
+                  `${baseUrl}/${loc}/services/${service.id}`
+                ])
+              )
+            }
+          })
         }
-      })
+      }
     }
+  } catch (error) {
+    console.warn('Failed to fetch services for sitemap:', error)
   }
 
-  // Add category and subcategory pages
-  const categoryPages = [
-    '/categories/1',
-    '/categories/2',
-    '/categories/3',
-    // Add more category IDs as needed
-  ]
-
-  for (const locale of locales) {
-    for (const categoryPage of categoryPages) {
-      const url = `${baseUrl}/${locale}${categoryPage}`
+  try {
+    // Fetch categories from API
+    const categoriesResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/api/categories?limit=1000`, {
+      next: { revalidate: 3600 } // Revalidate every hour
+    })
+    
+    if (categoriesResponse.ok) {
+      const categoriesData = await categoriesResponse.json()
+      const categories = categoriesData.data || []
       
-      sitemap.push({
-        url,
-        lastModified: new Date(),
-        changeFrequency: 'weekly',
-        priority: 0.7,
-        alternates: {
-          languages: Object.fromEntries(
-            locales.map(loc => [
-              loc,
-              `${baseUrl}/${loc}${categoryPage}`
-            ])
-          )
+      for (const locale of locales) {
+        for (const category of categories) {
+          const url = `${baseUrl}/${locale}/categories/${category.id}`
+          
+          sitemap.push({
+            url,
+            lastModified: new Date(category.updatedAt || category.createdAt),
+            changeFrequency: 'weekly',
+            priority: 0.6,
+            alternates: {
+              languages: Object.fromEntries(
+                locales.map(loc => [
+                  loc,
+                  `${baseUrl}/${loc}/categories/${category.id}`
+                ])
+              )
+            }
+          })
+
+          // Add subcategories if they exist
+          if (category.subcategories && category.subcategories.length > 0) {
+            for (const subcategory of category.subcategories) {
+              const subcategoryUrl = `${baseUrl}/${locale}/categories/${category.id}/sub/${subcategory.id}`
+              
+              sitemap.push({
+                url: subcategoryUrl,
+                lastModified: new Date(subcategory.updatedAt || subcategory.createdAt),
+                changeFrequency: 'weekly',
+                priority: 0.5,
+                alternates: {
+                  languages: Object.fromEntries(
+                    locales.map(loc => [
+                      loc,
+                      `${baseUrl}/${loc}/categories/${category.id}/sub/${subcategory.id}`
+                    ])
+                  )
+                }
+              })
+            }
+          }
         }
-      })
+      }
     }
+  } catch (error) {
+    console.warn('Failed to fetch categories for sitemap:', error)
+  }
+
+  try {
+    // Fetch service projects from API
+    const projectsResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/api/services/projects?limit=1000`, {
+      next: { revalidate: 3600 } // Revalidate every hour
+    })
+    
+    if (projectsResponse.ok) {
+      const projectsData = await projectsResponse.json()
+      const projects = projectsData.data || []
+      
+      for (const locale of locales) {
+        for (const project of projects) {
+          const url = `${baseUrl}/${locale}/services/projects/${project.id}`
+          
+          sitemap.push({
+            url,
+            lastModified: new Date(project.updatedAt || project.createdAt),
+            changeFrequency: 'monthly',
+            priority: 0.5,
+            alternates: {
+              languages: Object.fromEntries(
+                locales.map(loc => [
+                  loc,
+                  `${baseUrl}/${loc}/services/projects/${project.id}`
+                ])
+              )
+            }
+          })
+        }
+      }
+    }
+  } catch (error) {
+    console.warn('Failed to fetch service projects for sitemap:', error)
   }
 
   return sitemap

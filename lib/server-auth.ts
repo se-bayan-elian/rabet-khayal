@@ -11,7 +11,6 @@ export const getServerProfile = async (accessToken: string): Promise<UserProfile
       }
     });
 
-    console.log('Server profile fetched successfully:', response.data.data);
     return response.data.data;
   } catch (error) {
     // If there's an error (401, network, etc.), return null

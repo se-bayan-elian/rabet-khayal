@@ -393,7 +393,6 @@ export function useRelatedProductsQuery(productId: string, limit: number = 6) {
 // Featured products for homepage
 export async function fetchFeaturedProducts(limit: number = 6) {
   const { data } = await axiosClient.get(`/products/featured?limit=${limit}`);
-  console.log(data);
   return data?.data;
 }
 
@@ -496,7 +495,6 @@ export interface CouponValidationResponse {
 export async function validateCoupon(code: string, orderTotal: number, locale: string) {
   // Ensure locale is just 'ar' or 'en', not 'ar-US' or similar
   const cleanLocale = locale?.split('-')[0]?.toLowerCase() === 'ar' ? 'ar' : 'en';
-  console.log('Frontend sending locale:', cleanLocale);
   
   const response = await axiosAuthClient.post(`/coupons/validate`, {
     code,

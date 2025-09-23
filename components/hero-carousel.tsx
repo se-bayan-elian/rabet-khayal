@@ -172,7 +172,6 @@ export function HeroCarousel({ title, subtitle, cta }: HeroCarouselProps) {
       ]
     }
   ]
-  console.log(banners)
   // Use banners if available, otherwise use default slides
   const slides = banners && banners.length > 0
     ? banners.map((banner: any, index: number) => ({

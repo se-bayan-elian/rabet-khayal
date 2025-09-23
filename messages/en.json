@@ -1944,6 +1944,28 @@
       "troubleshooting": "Troubleshooting",
       "contactSupport": "Contact Support",
       "faq": "FAQ"
+    },
+    "paymentMethods": {
+      "title": "Supported Payment Methods",
+      "subtitle": "We accept all major payment methods for your convenience",
+      "mada": "Mada",
+      "visa": "Visa",
+      "mastercard": "Mastercard",
+      "amex": "American Express",
+      "apple_pay": "Apple Pay",
+      "stc_pay": "STC Pay",
+      "creditCard": "Credit Cards",
+      "securePayment": "Secure Payment",
+      "encrypted": "All transactions are encrypted and secure"
+    },
+    "footer": {
+      "paymentMethods": {
+        "title": "Supported Payment Methods",
+        "mada": "Mada",
+        "visa": "Visa",
+        "mastercard": "Mastercard",
+        "amex": "American Express"
+      }
     }
   }
 }

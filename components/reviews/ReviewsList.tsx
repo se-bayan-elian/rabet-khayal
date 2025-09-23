@@ -37,8 +37,6 @@ const ReviewsList = ({ productId, initialReviews }: ReviewsListProps) => {
   const averageRating: number = reviewsData?.data?.averageRating || 0
   const totalReviews: number = reviewsData?.data?.total || 0
 
-  // Debug log
-  console.log('ReviewsList Debug:', { reviewsData, reviews, isArray: Array.isArray(reviews) })
 
   const renderStars = (rating: number, size = 'sm') => {
     return (

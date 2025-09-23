@@ -59,7 +59,6 @@ export const useAuthActions = () => {
       if (type === 'login') {
         const { sessionId: cartSessionId } = useCartStore.getState();
         sessionId = cartSessionId;
-        console.log('Using sessionId for cart migration:', sessionId);
       }
 
       const response = await verifyOtp({ email, code }, type, sessionId);
@@ -89,7 +88,6 @@ export const useAuthActions = () => {
     try {
       // Get sessionId from cart store for cart migration during Google login
       const { sessionId } = useCartStore.getState();
-      console.log('Using sessionId for Google login cart migration:', sessionId);
 
       const response = await googleAuth({ googleToken: token, sessionId });
 

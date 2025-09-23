@@ -13,7 +13,6 @@ type ServiceCardProps = {
 
 const ServiceCard = ({ service }: ServiceCardProps) => {
   const t = useTranslations('services');
-  console.log(service);
 
   return (
     <Link href={`/services/${service.id}`}>

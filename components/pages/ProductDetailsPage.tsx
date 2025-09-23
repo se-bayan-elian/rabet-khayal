@@ -362,7 +362,6 @@ export default function ProductDetailsPage() {
   const salePrice = product.discountedPrice ? parseFloat(product.discountedPrice) : undefined;
   const isOnSale = salePrice && salePrice < price;
   const finalPrice = isOnSale ? salePrice! : price;
-  console.log(product)
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
       <div className="section-container section-padding px-4 md:px-6 lg:px-8">

@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Sparkles, Send, Youtube, MessageCircle, Send as TelegramIcon, Music, Camera } from "lucide-react"
+import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Sparkles, Send, Youtube, MessageCircle, Send as TelegramIcon, Music, Camera, CreditCard, Shield } from "lucide-react"
 import Link from "next/link"
 import { useTranslations } from 'next-intl'
 import { useFeaturedServicesQuery } from '@/services'
@@ -131,6 +131,26 @@ export function Footer({
                 <span className="text-gray-300">الرياض، المملكة العربية السعودية</span>
               </div>
             </div>
+            {/* Social Links */}
+            <div className="flex gap-3 pt-4">
+                <div className="sr-only">{t('followUs')}</div>
+                {socialLinks.map((social, index) => {
+                  const Icon = social.icon
+                  return (
+                    <a
+                      key={index}
+                      href={social.href}
+                      className="w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all duration-300 hover:scale-110"
+                      style={{
+                        borderColor: 'var(--brand-gray-600)',
+                        color: 'var(--brand-gray-300)'
+                      }}
+                    >
+                      <Icon className="w-5 h-5" />
+                    </a>
+                  )
+                })}
+              </div>
           </div>
 
           {/* Quick Links */}
@@ -169,6 +189,7 @@ export function Footer({
             </ul>
           </div>
 
+
           {/* Location Map */}
           <div className="footer-section">
             <h3 className="text-xl font-bold mb-6 brand-text">{t('location', { default: 'Our Location' })}</h3>
@@ -190,25 +211,62 @@ export function Footer({
                 ></iframe>
               </div>
 
-              {/* Social Links */}
-              <div className="flex gap-3 pt-4">
-                <div className="sr-only">{t('followUs')}</div>
-                {socialLinks.map((social, index) => {
-                  const Icon = social.icon
-                  return (
-                    <a
-                      key={index}
-                      href={social.href}
-                      className="w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all duration-300 hover:scale-110"
-                      style={{
-                        borderColor: 'var(--brand-gray-600)',
-                        color: 'var(--brand-gray-300)'
-                      }}
-                    >
-                      <Icon className="w-5 h-5" />
-                    </a>
-                  )
-                })}
+              
+
+              {/* Payment Method Icons */}
+              <div className="flex gap-3">
+                <div className="sr-only">{t('paymentMethods.title')}</div>
+                {/* Mada */}
+                <div 
+                  className="w-12 h-12 rounded-lg flex items-center justify-center border-2 transition-all duration-300 hover:scale-110 cursor-pointer"
+                  style={{
+                    borderColor: 'var(--brand-gray-600)',
+                    background: 'rgba(255, 255, 255, 0.95)',
+                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)'
+                  }}
+                  title={t('paymentMethods.mada')}
+                >
+                  <Image src="/mada.png" alt={t('paymentMethods.mada')} width={28} height={28} className="object-contain" />
+                </div>
+
+                {/* Visa */}
+                <div 
+                  className="w-12 h-12 rounded-lg flex items-center justify-center border-2 transition-all duration-300 hover:scale-110 cursor-pointer"
+                  style={{
+                    borderColor: 'var(--brand-gray-600)',
+                    background: 'rgba(255, 255, 255, 0.95)',
+                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)'
+                  }}
+                  title={t('paymentMethods.visa')}
+                >
+                  <Image src="/visa.png" alt={t('paymentMethods.visa')} width={28} height={28} className="object-contain" />
+                </div>
+
+                {/* Mastercard */}
+                <div 
+                  className="w-12 h-12 rounded-lg flex items-center justify-center border-2 transition-all duration-300 hover:scale-110 cursor-pointer"
+                  style={{
+                    borderColor: 'var(--brand-gray-600)',
+                    background: 'rgba(255, 255, 255, 0.95)',
+                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)'
+                  }}
+                  title={t('paymentMethods.mastercard')}
+                >
+                  <Image src="/master.png" alt={t('paymentMethods.mastercard')} width={28} height={28} className="object-contain" />
+                </div>
+
+                {/* Amex */}
+                <div 
+                  className="w-12 h-12 rounded-lg flex items-center justify-center border-2 transition-all duration-300 hover:scale-110 cursor-pointer"
+                  style={{
+                    borderColor: 'var(--brand-gray-600)',
+                    background: 'rgba(255, 255, 255, 0.95)',
+                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)'
+                  }}
+                  title={t('paymentMethods.amex')}
+                >
+                  <Image src="/amex.png" alt={t('paymentMethods.amex')} width={28} height={28} className="object-contain" />
+                </div>
               </div>
             </div>
           </div>

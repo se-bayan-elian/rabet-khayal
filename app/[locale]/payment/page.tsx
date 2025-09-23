@@ -10,7 +10,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Loader2, CreditCard, Lock, CheckCircle } from 'lucide-react';
+import { Loader2, CreditCard, Lock, CheckCircle, Shield } from 'lucide-react';
+import Image from 'next/image';
 import { toast } from 'sonner';
 
 interface PaymentFormData {
@@ -218,8 +219,8 @@ export default function PaymentPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
-      <div className="max-w-4xl mx-auto px-4">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-24">
+      <div className="max-w-6xl mx-auto px-4 ">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-center mb-2 text-gray-900 dark:text-white">{t('title')}</h1>
           <p className="text-gray-600 dark:text-gray-400 text-center">{t('subtitle')}</p>
@@ -422,9 +423,90 @@ export default function PaymentPage() {
                 </div>
 
                 {/* Payment Method Info */}
-                <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
-                  <h5 className="font-medium mb-2 text-gray-900 dark:text-white">{t('summary.paymentMethod')}</h5>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">{t('summary.creditCard')}</p>
+                <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
+                  <h5 className="font-medium mb-3 text-gray-900 dark:text-white">{t('paymentMethods.title')}</h5>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">{t('paymentMethods.subtitle')}</p>
+                  
+                  {/* Supported Payment Methods */}
+                  <div className="grid grid-cols-2  gap-4 mb-4">
+                    {/* Mada */}
+                    <div className="flex items-center gap-3 p-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 hover:shadow-md transition-shadow">
+                      <div 
+                        className="w-10 h-10 rounded-lg flex items-center justify-center border-2 transition-all duration-300"
+                        style={{
+                          borderColor: 'var(--brand-gray-600)',
+                          background: 'rgba(255, 255, 255, 0.95)',
+                          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)'
+                        }}
+                      >
+                        <Image src="/mada.png" alt={t('paymentMethods.mada')} width={24} height={24} className="object-contain" />
+                      </div>
+                      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                        {t('paymentMethods.mada')}
+                      </span>
+                    </div>
+
+                    {/* Visa */}
+                    <div className="flex items-center gap-3 p-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 hover:shadow-md transition-shadow">
+                      <div 
+                        className="w-10 h-10 rounded-lg flex items-center justify-center border-2 transition-all duration-300"
+                        style={{
+                          borderColor: 'var(--brand-gray-600)',
+                          background: 'rgba(255, 255, 255, 0.95)',
+                          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)'
+                        }}
+                      >
+                        <Image src="/visa.png" alt={t('paymentMethods.visa')} width={24} height={24} className="object-contain" />
+                      </div>
+                      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                        {t('paymentMethods.visa')}
+                      </span>
+                    </div>
+
+                    {/* Mastercard */}
+                    <div className="flex items-center gap-3 p-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 hover:shadow-md transition-shadow">
+                      <div 
+                        className="w-10 h-10 rounded-lg flex items-center justify-center border-2 transition-all duration-300"
+                        style={{
+                          borderColor: 'var(--brand-gray-600)',
+                          background: 'rgba(255, 255, 255, 0.95)',
+                          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)'
+                        }}
+                      >
+                        <Image src="/master.png" alt={t('paymentMethods.mastercard')} width={24} height={24} className="object-contain" />
+                      </div>
+                      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                        {t('paymentMethods.mastercard')}
+                      </span>
+                    </div>
+
+                    {/* American Express */}
+                    <div className="flex items-center gap-3 p-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 hover:shadow-md transition-shadow">
+                      <div 
+                        className="w-10 h-10 rounded-lg flex items-center justify-center border-2 transition-all duration-300"
+                        style={{
+                          borderColor: 'var(--brand-gray-600)',
+                          background: 'rgba(255, 255, 255, 0.95)',
+                          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)'
+                        }}
+                      >
+                        <Image src="/amex.png" alt={t('paymentMethods.amex')} width={24} height={24} className="object-contain" />
+                      </div>
+                      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                        {t('paymentMethods.amex')}
+                      </span>
+                    </div>
+
+                   
+
+                    
+                  </div>
+
+                  {/* Security Info */}
+                  <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                    <Shield className="w-3 h-3" />
+                    <span>{t('paymentMethods.encrypted')}</span>
+                  </div>
                 </div>
               </div>
             </CardContent>

@@ -1898,6 +1898,28 @@
       "troubleshooting": "استكشاف الأخطاء",
       "contactSupport": "اتصل بالدعم الفني",
       "faq": "الأسئلة الشائعة"
+    },
+    "paymentMethods": {
+      "title": "طرق الدفع المدعومة",
+      "subtitle": "نقبل جميع طرق الدفع الرئيسية لراحتك",
+      "mada": "مدى",
+      "visa": "فيزا",
+      "mastercard": "ماستركارد",
+      "amex": "أمريكان إكسبريس",
+      "apple_pay": "آبل باي",
+      "stc_pay": "STC باي",
+      "creditCard": "بطاقات الائتمان",
+      "securePayment": "دفع آمن",
+      "encrypted": "جميع المعاملات مشفرة وآمنة"
+    },
+    "footer": {
+      "paymentMethods": {
+        "title": "طرق الدفع المدعومة",
+        "mada": "مدى",
+        "visa": "فيزا",
+        "mastercard": "ماستركارد",
+        "amex": "أمريكان إكسبريس"
+      }
     }
   }
 

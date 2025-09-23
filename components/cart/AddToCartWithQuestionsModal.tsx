@@ -210,23 +210,9 @@ export function AddToCartWithQuestionsModal({
         }
       });
 
-      console.log('AddToCartWithQuestionsModal: Calling onAddToCart with:', {
-        product: product.id,
-        quantity,
-        customizations,
-        customizationCost
-      });
+     
       
-      // Debug: Log each customization with its additional price
-      customizations.forEach((cust, index) => {
-        console.log(`Customization ${index}:`, {
-          questionId: cust.questionId,
-          answerId: cust.answerId,
-          additionalPrice: cust.additionalPrice,
-          textValue: cust.textValue,
-          imageUrl: cust.imageUrl
-        });
-      });
+      
 
       await onAddToCart(product, quantity, customizations, customizationCost);
       // Don't close the modal here - let the parent handle it after showing success modal

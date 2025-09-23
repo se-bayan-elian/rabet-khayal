@@ -19,17 +19,10 @@ export const axiosClient = axios.create({
 axiosAuthClient.interceptors.request.use(
   (config) => {
     const token = getAccessToken();
-    console.log('🔑 axiosAuthClient interceptor:', {
-      hasToken: !!token,
-      tokenLength: token?.length || 0,
-      url: config.url,
-      method: config.method
-    });
+    
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
-      console.log('✅ Authorization header added');
     } else {
-      console.log('❌ No token found, Authorization header NOT added');
     }
     return config;
   },

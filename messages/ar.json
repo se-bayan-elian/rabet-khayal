@@ -530,6 +530,7 @@
     "newsletterDesc": "اشترك في نشرتنا الإخبارية لتحصل على آخر الأخبار والعروض",
     "emailPlaceholder": "بريدك الإلكتروني",
     "followUs": "تابعنا",
+    "whatsappTooltip": "تواصل معنا عبر واتساب",
     "links": {
       "home": "الرئيسية",
       "products": "المنتجات",
@@ -685,13 +686,15 @@
       "enterText": "يرجى إدخال نص",
       "addNote": "يرجى إضافة ملاحظة",
       "selectAtLeastOne": "يرجى اختيار خيار واحد على الأقل",
-      "uploadImage": "يرجى رفع صورة"
+      "uploadImage": "يرجى رفع صورة",
+      "uploadFile": "يرجى رفع ملف"
     },
     "optional": "اختياري",
     "selectOption": "اختر خيار",
     "enterText": "أدخل نص",
     "addNote": "أضف ملاحظة",
     "uploadImage": "رفع صورة",
+    "uploadFile": "رفع ملف",
     "saving": "جاري الحفظ...",
     "productQuestions": "أسئلة المنتج",
     "question": "سؤال",

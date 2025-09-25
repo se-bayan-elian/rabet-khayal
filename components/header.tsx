@@ -131,7 +131,7 @@ export function Header({
             <div className={`transition-all duration-300 ${isScrolled ? 'scale-90' : 'scale-100'}`}>
               <div className={`hidden md:block font-bold  text-transparent bg-clip-text bg-gradient-to-r dark:from-white dark:via-amber-100 dark:to-amber-200 from-amber-500 to-amber-700 transition-all duration-300 ${isScrolled ? 'text-lg' : 'text-xl'
                 }`}>{tCompany('name')}</div>
-              <div className={`opacity-80 text-gray-600 dark:text-amber-200/80 transition-all duration-300 ${isScrolled ? 'text-[10px]' : 'text-xs'
+              <div className={`opacity-80 text-gray-600 dark:text-amber-200/80 transition-all duration-300 ${isScrolled ? 'text-[12px]' : 'text-sm'
                 } hidden sm:block`}>{tCompany('tagline')}</div>
             </div>
           </Link>

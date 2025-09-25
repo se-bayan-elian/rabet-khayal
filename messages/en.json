@@ -529,6 +529,7 @@
     "newsletterDesc": "Subscribe to our newsletter for the latest news and offers",
     "emailPlaceholder": "Your email address",
     "followUs": "Follow Us",
+    "whatsappTooltip": "Contact us via WhatsApp",
     "links": {
       "home": "Home",
       "products": "Products",
@@ -684,13 +685,15 @@
       "enterText": "Please enter text",
       "addNote": "Please add a note",
       "selectAtLeastOne": "Please select at least one option",
-      "uploadImage": "Please upload an image"
+      "uploadImage": "Please upload an image",
+      "uploadFile": "Please upload a file"
     },
     "optional": "Optional",
     "selectOption": "Select an option",
     "enterText": "Enter text",
     "addNote": "Add a note",
     "uploadImage": "Upload image",
+    "uploadFile": "Upload file",
     "saving": "Saving...",
     "productQuestions": "Product Questions",
     "question": "question",

@@ -42,7 +42,7 @@ export interface ProductQuestion {
   id: string;
   productId: string;
   questionText: string;
-  type: "select" | "text" | "note" | "checkbox" | "image";
+  type: "select" | "text" | "note" | "checkbox" | "image" | "file";
   required: boolean;
   answers: ProductAnswer[];
 }
@@ -53,6 +53,8 @@ export interface ProductAnswer {
   answerText: string;
   imageUrl?: string;
   imagePublicId?: string;
+  fileUrl?: string;
+  filePublicId?: string;
   extraPrice: number;
 }
 

@@ -33,10 +33,9 @@ const PUBLIC_ROUTES = [
 // Function to check if user has valid tokens
 function hasValidTokens(request: NextRequest): boolean {
   const accessToken = request.cookies.get('accessToken')?.value;
-  const refreshToken = request.cookies.get('refreshToken')?.value;
   
   // User is considered authenticated if they have both tokens
-  return !!(accessToken && refreshToken);
+  return !!(accessToken);
 }
 
 // Function to check if route matches pattern

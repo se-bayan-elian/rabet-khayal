@@ -418,6 +418,17 @@ export default function MyOrdersPage() {
                                             {t('viewImage')}
                                           </Button>
                                         )}
+                                        {customization.hasFile && customization.fileUrl && (
+                                          <Button
+                                            variant="outline"
+                                            size="sm"
+                                            className="h-5 px-2 text-xs"
+                                            onClick={() => window.open(customization.fileUrl!, '_blank')}
+                                          >
+                                            <Download className="w-3 h-3 mr-1" />
+                                            {t('downloadFile')}
+                                          </Button>
+                                        )}
                                         {customization.additionalPrice > 0 && (
                                           <span className="text-green-600 dark:text-green-400 font-medium">
                                             +{customization.additionalPrice.toFixed(2)} ﷼

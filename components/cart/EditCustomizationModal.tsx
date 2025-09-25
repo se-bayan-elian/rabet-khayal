@@ -12,6 +12,7 @@ import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { ImageUpload } from "@/components/ui/image-upload";
+import { FileUpload } from "@/components/ui/file-upload";
 import {
   Save,
   X,
@@ -25,7 +26,7 @@ import { CartItem, CartItemCustomization } from "@/store/cart-api";
 interface ProductQuestion {
   id: string;
   questionText: string;
-  type: "select" | "text" | "note" | "checkbox" | "image";
+  type: "select" | "text" | "note" | "checkbox" | "image" | "file";
   required: boolean;
   answers: ProductAnswer[];
 }
@@ -34,6 +35,10 @@ interface ProductAnswer {
   id: string;
   answerText: string;
   extraPrice: number;
+  imageUrl?: string;
+  imagePublicId?: string;
+  fileUrl?: string;
+  filePublicId?: string;
 }
 
 interface EditCustomizationModalProps {
@@ -144,6 +149,9 @@ export function EditCustomizationModal({
             case 'image':
               errors[fieldName] = t("validation.uploadImage");
               break;
+            case 'file':
+              errors[fieldName] = t("validation.uploadFile");
+              break;
           }
         }
       }
@@ -208,6 +216,20 @@ export function EditCustomizationModal({
               customizations.push({
                 questionId: question.id,
                 imagePublicId: imageValue,
+              });
+            }
+          } else if (question.type === 'file') {
+            let fileValue;
+            if (typeof selectedValue === 'object' && selectedValue) {
+              fileValue = selectedValue.publicId;
+            } else if (typeof selectedValue === 'string' && selectedValue) {
+              fileValue = selectedValue;
+            }
+
+            if (fileValue) {
+              customizations.push({
+                questionId: question.id,
+                filePublicId: fileValue,
               });
             }
           }
@@ -421,7 +443,35 @@ export function EditCustomizationModal({
                       );
                     })()}
 
-                    {error && question.type !== 'image' && (
+                    {question.type === 'file' && (() => {
+                      const currentValue = formData[fieldName];
+                      let fileUrl, filePublicId;
+
+                      if (typeof currentValue === 'object' && currentValue) {
+                        fileUrl = currentValue.url;
+                        filePublicId = currentValue.publicId;
+                      } else if (typeof currentValue === 'string' && currentValue.startsWith('http')) {
+                        fileUrl = currentValue;
+                      } else if (typeof currentValue === 'string' && currentValue) {
+                        filePublicId = currentValue;
+                      }
+
+                      return (
+                        <FileUpload
+                          fileUrl={fileUrl}
+                          filePublicId={filePublicId}
+                          onFileChange={(url, publicId) => {
+                            updateFormField(fieldName, { url, publicId });
+                          }}
+                          placeholder={t("uploadFile")}
+                          folder="product-question-files"
+                          required={question.required}
+                          error={error}
+                        />
+                      );
+                    })()}
+
+                    {error && question.type !== 'image' && question.type !== 'file' && (
                       <Alert variant="destructive">
                         <AlertCircle className="h-4 w-4" />
                         <AlertDescription>

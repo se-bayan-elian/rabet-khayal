@@ -72,6 +72,82 @@ export function validateImageFile(file: File): {
 }
 
 /**
+ * Uploads a file (PDF, documents) to Cloudinary
+ * Returns the public_id and secure_url
+ */
+export async function uploadFileToCloudinary(
+  file: File,
+  folder?: string
+): Promise<{ url: string; publicId: string }> {
+  const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+  const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
+
+  if (!cloudName || !uploadPreset) {
+    throw new Error("Cloudinary configuration is missing");
+  }
+
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("upload_preset", uploadPreset);
+  formData.append("resource_type", "raw");
+
+  if (folder) {
+    formData.append("folder", folder);
+  }
+  const response = await fetch(
+    `https://api.cloudinary.com/v1_1/${cloudName}/raw/upload`,
+    {
+      method: "POST",
+      body: formData,
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error(`Upload failed: ${response.statusText}`);
+  }
+
+  const data = await response.json();
+
+  if (!data.secure_url || !data.public_id) {
+    throw new Error("Cloudinary upload failed - invalid response");
+  }
+  const baseUrl = `https://res.cloudinary.com/${cloudName}/raw/upload`;
+
+  const viewUrl = `${baseUrl}/fl_attachment:false/${data.public_id}`;
+
+  return {
+    url: viewUrl,
+    publicId: data.public_id,
+  };
+}
+
+/**
+ * Validates a file before upload
+ */
+export function validateFile(file: File): {
+  isValid: boolean;
+  error?: string;
+} {
+  // Check file type - only allow PDF
+  if (file.type !== 'application/pdf') {
+    return { isValid: false, error: "Please select a PDF file only" };
+  }
+
+  // Check file size (10MB max)
+  const maxSize = 10 * 1024 * 1024; // 10MB
+  if (file.size > maxSize) {
+    return {
+      isValid: false,
+      error: `File size must be less than ${Math.round(
+        maxSize / 1024 / 1024
+      )}MB`,
+    };
+  }
+
+  return { isValid: true };
+}
+
+/**
  * Generates a unique filename with timestamp
  */
 export function generateUniqueFileName(originalName: string): string {

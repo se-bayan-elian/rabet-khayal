@@ -92,6 +92,15 @@ function CustomizationDisplay({ customizations, questions }: { customizations: C
       };
     }
 
+    if (customization.filePublicId || customization.fileUrl) {
+      const fileUrl = customization.fileUrl;
+      return {
+        icon: <FileText className="w-3 h-3" />,
+        text: questionText,
+        fileUrl: fileUrl
+      };
+    }
+
     return null;
   };
 
@@ -117,6 +126,19 @@ function CustomizationDisplay({ customizations, questions }: { customizations: C
                   >
                     <ExternalLink className="w-3 h-3" />
                     View Image
+                  </a>
+                </div>
+              )}
+              {display.fileUrl && (
+                <div className="mt-1">
+                  <a 
+                    href={display.fileUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-brand-gold dark:text-amber-400 hover:text-brand-navy dark:hover:text-amber-300 underline"
+                  >
+                    <ExternalLink className="w-3 h-3" />
+                    Download File
                   </a>
                 </div>
               )}

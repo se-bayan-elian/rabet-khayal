@@ -30,6 +30,7 @@ import {
   X,
   Eye,
   EyeOff,
+  Download,
 } from "lucide-react";
 import { Order } from "@/services/orders";
 import Image from "next/image";
@@ -467,6 +468,21 @@ export function OrderDetailsModal({
                                             className="h-6 px-2 text-xs"
                                           >
                                             {t('viewImage')}
+                                          </Button>
+                                        </div>
+                                      )}
+                                      
+                                      {/* File */}
+                                      {customization.hasFile && customization.fileUrl && (
+                                        <div className="flex items-center gap-2 mb-2">
+                                          <Download className="w-4 h-4 text-yellow-600" />
+                                          <Button 
+                                            onClick={() => window.open(customization.fileUrl!, '_blank')}
+                                            variant="outline"
+                                            size="sm"
+                                            className="h-6 px-2 text-xs"
+                                          >
+                                            {t('downloadFile')}
                                           </Button>
                                         </div>
                                       )}

@@ -14,6 +14,8 @@ export interface BackendCartCustomization {
   selectedAnswerImageUrl?: string;
   selectedAnswerImagePublicId?: string;
   customerInput?: string;
+  fileUrl?: string;
+  filePublicId?: string;
   additionalPrice: string; // Backend returns as string
   question: {
     id: string;
@@ -89,6 +91,8 @@ export interface CartItemCustomization {
   textValue?: string;
   imagePublicId?: string;
   imageUrl?: string; // URL for viewing image customizations
+  fileUrl?: string; // URL for viewing file customizations
+  filePublicId?: string; // Public ID for file customizations
 }
 
 export interface CartItem {
@@ -286,7 +290,9 @@ const areCustomizationsEqual = (cust1?: CartItemCustomization[], cust2?: CartIte
     return c1.questionId === c2.questionId &&
            c1.answerId === c2.answerId &&
            c1.textValue === c2.textValue &&
-           c1.imagePublicId === c2.imagePublicId;
+           c1.imagePublicId === c2.imagePublicId &&
+           c1.fileUrl === c2.fileUrl &&
+           c1.filePublicId === c2.filePublicId;
   });
 };
 
@@ -323,6 +329,8 @@ const transformCartItem = (backendItem: BackendCartItem): CartItem => {
         textValue: cust.customerInput || undefined,
         imagePublicId: cust.selectedAnswerImagePublicId || undefined,
         imageUrl: imageUrl || undefined, // Construct Cloudinary URL or use existing URL
+        fileUrl: cust.fileUrl || undefined, // Add file URL
+        filePublicId: cust.filePublicId || undefined, // Add file public ID
       };
       
       
@@ -367,7 +375,10 @@ const transformToBackendCustomizations = (customizations: CartItemCustomization[
       questionText: questionText,
       selectedAnswer: cust.answerId, // Backend expects selectedAnswer, not selectedAnswerId
       customerInput: cust.textValue,
+      selectedValueImageUrl: cust.imageUrl, // Add image URL
       selectedValueImagePublicId: cust.imagePublicId, // This is correct field name
+      fileUrl: cust.fileUrl, // Add file URL
+      filePublicId: cust.filePublicId, // Add file public ID
       additionalPrice: additionalPrice, // Calculate from answer's extraPrice
     };
   });
@@ -617,7 +628,8 @@ export const useCartStore = create<CartStore>()((set, get) => ({
         ? transformToBackendCustomizations(product.customizations, product.questions)
         : [];
 
-      
+      // Debug: Log backend customizations being sent
+      console.log('Backend customizations being sent:', backendCustomizations);
 
       await getAxiosClient().post('/carts/items', {
         productId: product.productId,

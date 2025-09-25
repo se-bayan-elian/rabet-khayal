@@ -12,6 +12,7 @@ import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { ImageUpload } from "@/components/ui/image-upload";
+import { FileUpload } from "@/components/ui/file-upload";
 import {
   Save,
   X,
@@ -27,7 +28,7 @@ import Image from "next/image";
 interface ProductQuestion {
   id: string;
   questionText: string;
-  type: "select" | "text" | "note" | "checkbox" | "image";
+  type: "select" | "text" | "note" | "checkbox" | "image" | "file";
   required: boolean;
   answers: ProductAnswer[];
 }
@@ -36,6 +37,10 @@ interface ProductAnswer {
   id: string;
   answerText: string;
   extraPrice: number;
+  imageUrl?: string;
+  imagePublicId?: string;
+  fileUrl?: string;
+  filePublicId?: string;
 }
 
 interface ProductCustomizationModalProps {

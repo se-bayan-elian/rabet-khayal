@@ -143,14 +143,14 @@ export default function ContactPage() {
 
       {/* Contact Form & Info */}
       <section className="section-padding">
-        <div className="section-container">
+        <div className="!px-0 md:!px-4 section-container">
           <div className="grid lg:grid-cols-3 gap-12">
             {/* Enhanced Contact Form */}
             <div className="lg:col-span-2">
-              <Card className="shadow-2xl border-0 card-creative bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+              <Card className="shadow-2xl border-0 !p-2 md:!p-6 card-creative bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                 <CardHeader className="relative">
                   <div className="absolute -top-4 -right-4 w-8 h-8 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full animate-bounce opacity-70"></div>
-                  <CardTitle className="text-3xl brand-heading dark:text-white flex items-center gap-3">
+                  <CardTitle className="md:text-3xl brand-heading dark:text-white flex items-center gap-3">
                     <div className="w-10 h-10 bg-gradient-to-r from-amber-400 to-orange-500 rounded-xl flex items-center justify-center">
                       <span className="text-white text-xl">📝</span>
                     </div>
@@ -165,7 +165,7 @@ export default function ContactPage() {
                     </div>
                   )}
                 </CardHeader>
-                <CardContent>
+                <CardContent className='!p-2 md:!p-6'>
                   <form onSubmit={handleSubmit} className="space-y-8">
                     {/* Enhanced Personal Information */}
                     <div className="space-y-6">
@@ -412,7 +412,7 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <h4 className="font-semibold mb-1 dark:text-gray-200">{t('email')}</h4>
-                      <p className="text-gray-600 dark:text-gray-400">info@rabetalkhayal.com</p>
+                      <p className="text-gray-600 dark:text-gray-400">rabtalk23@gmail.com</p>
                     </div>
                   </div>
 
@@ -422,7 +422,7 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <h4 className="font-semibold mb-1 dark:text-gray-200">{t('phone')}</h4>
-                      <p dir="ltr" className="text-gray-600 dark:text-gray-400">+966 56 455 4142</p>
+                      <p dir="ltr" className="text-gray-600 dark:text-gray-400">+966 502 663 328</p>
                     </div>
                   </div>
 
@@ -430,7 +430,7 @@ export default function ContactPage() {
                     <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ background: 'var(--brand-gold)' }}>
                       <MapPin className="w-5 h-5 text-white" />
                     </div>
-                    <div>
+                    <div className='flex-1'>
                       <h4 className="font-semibold mb-1 dark:text-gray-200">{t('address')}</h4>
                       <p className="text-gray-600 dark:text-gray-400">{t('addressText')}</p>
                     </div>

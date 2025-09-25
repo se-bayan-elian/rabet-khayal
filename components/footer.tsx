@@ -114,21 +114,21 @@ export function Footer({
                   style={{ background: 'rgba(255, 204, 0, 0.2)' }}>
                   <Phone className="w-4 h-4 text-yellow-400" />
                 </div>
-                <span className="text-gray-300">+966 50 123 4567</span>
+                <span className="text-gray-300" dir="ltr">+966 502 663 328</span>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-lg flex items-center justify-center"
                   style={{ background: 'rgba(255, 204, 0, 0.2)' }}>
                   <Mail className="w-4 h-4 text-yellow-400" />
                 </div>
-                <span className="text-gray-300">info@linkimagination.com</span>
+                <span className="text-gray-300">rabtalk23@gmail.com</span>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-lg flex items-center justify-center"
                   style={{ background: 'rgba(255, 204, 0, 0.2)' }}>
                   <MapPin className="w-4 h-4 text-yellow-400" />
                 </div>
-                <span className="text-gray-300">الرياض، المملكة العربية السعودية</span>
+                <span className="text-gray-300 flex-1">{t('addressText')}</span>
               </div>
             </div>
             {/* Social Links */}

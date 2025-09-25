@@ -510,21 +510,16 @@
     }
   },
   "footer": {
-    "company": "Rabet Alkhayal",
-    "links": {
-      "home": "Home",
-      "products": "Products",
-      "services": "Services",
-      "categories": "Categories",
-      "about": "About Us",
-      "contact": "Contact"
-    },
-    "services": {
-      "webDevelopment": "Web Development",
-      "mobileApps": "Mobile Apps",
-      "digitalMarketing": "Digital Marketing",
-      "uiUxDesign": "UI/UX Design"
-    },
+    "addressText": "Saudi Arabia - Riyadh - Al-Salam District - Al-Imam Shafii Street with intersection of Zubair bin Al-Awwam",
+    "paymentMethods": {
+      "title": "Supported Payment Methods",
+      "mada": "Mada",
+      "visa": "Visa",
+      "mastercard": "Mastercard",
+      "amex": "American Express"
+    }
+,
+    "company": "Rabet Alkhayal",   
     "description": "We are a leading company in technology and design",
     "quickLinks": "Quick Links",
     "services": "Our Services",
@@ -858,7 +853,7 @@
     "email": "Email",
     "phone": "Phone",
     "address": "Address",
-    "addressText": "Riyadh, Saudi Arabia",
+    "addressText": "Saudi Arabia - Riyadh - Al-Salam District - Al-Imam Shafii Street with intersection of Zubair bin Al-Awwam",
     "workingHours": "Working Hours",
     "sunday": "Sunday",
     "monday": "Monday",
@@ -1362,7 +1357,7 @@
       },
       "address": {
         "title": "Registered Address",
-        "full": "123 Business District, Riyadh 12345, Saudi Arabia"
+        "full": "Saudi Arabia - Riyadh - Al-Salam District - Al-Imam Shafii Street with intersection of Zubair bin Al-Awwam"
       }
     },
     "goBack": "Go Back",
@@ -1852,7 +1847,7 @@
       },
       "address": {
         "title": "Registered Address",
-        "full": "123 Business District, Riyadh 12345, Saudi Arabia"
+        "full": "Saudi Arabia - Riyadh - Al-Salam District - Al-Imam Shafii Street with intersection of Zubair bin Al-Awwam"
       }
     },
     "goBack": "Go Back",
@@ -1957,15 +1952,7 @@
       "creditCard": "Credit Cards",
       "securePayment": "Secure Payment",
       "encrypted": "All transactions are encrypted and secure"
-    },
-    "footer": {
-      "paymentMethods": {
-        "title": "Supported Payment Methods",
-        "mada": "Mada",
-        "visa": "Visa",
-        "mastercard": "Mastercard",
-        "amex": "American Express"
-      }
     }
+
   }
 }

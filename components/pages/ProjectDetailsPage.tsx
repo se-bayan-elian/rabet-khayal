@@ -130,10 +130,10 @@ export default function ProjectDetailPage() {
               </div>
 
               {project.projectUrl && (
-                <Link href={project.projectUrl} target="_blank" className="flex items-center gap-2  w-fit btn-primary">
+                <a href={project.projectUrl} target="_blank" className="flex items-center gap-2  w-fit btn-primary">
                     <ExternalLink className="w-4 h-4 mr-2" />
                     {t('viewLive')}
-                </Link>
+                </a>
               )}
             </div>
 

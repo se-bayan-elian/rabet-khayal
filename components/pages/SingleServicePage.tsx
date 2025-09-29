@@ -194,7 +194,7 @@ export default function ServicePage() {
                     ))}
                   </div>
                 ) : pricingPlans?.length === 0 ? (
-                  <Card className="p-8  text-center bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+                  <Card className="p-8  text-center overflow-x-hidden bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                     <CardContent>
                       <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
                         <Star className="w-8 h-8 text-gray-400 dark:text-gray-500" />
@@ -339,14 +339,14 @@ export default function ServicePage() {
 
                         <div className="flex justify-between items-center">
                           {project.projectUrl && (
-                            <Link
+                            <a
                               href={project.projectUrl}
                               target="_blank"
                               className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 flex items-center gap-1"
                             >
                               <ExternalLink className="w-4 h-4" />
                               {tDetail('viewLive')}
-                            </Link>
+                            </a>
                           )}
                           <Link href={`/services/projects/${project.id}`}>
                             <Button variant="ghost" size="sm" className="group-hover:translate-x-2 rtl:group-hover:-translate-x-2 transition-transform">

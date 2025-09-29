@@ -235,7 +235,7 @@ export default function ServicePage() {
                                 {plan.finalPrice} ﷼
                               </span>
                             </div>
-                            <span className="text-gray-600 dark:text-gray-400">/{plan.billingPeriod}</span>
+                            <span className="text-gray-600 dark:text-gray-400">/{tDetail(`billingPeriod.${plan.billingPeriod}`)}</span>
                           </div>
 
                           <div className="space-y-3 mb-6">

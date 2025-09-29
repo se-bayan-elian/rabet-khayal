@@ -212,6 +212,11 @@
           "fastDelivery": "تسليم سريع",
           "qualityGuarantee": "ضمان الجودة"
         }
+      },
+      "billingPeriod": {
+        "one-time": "دفعة واحدة",
+        "monthly": "شهري",
+        "yearly": "سنوي"
       }
     },
     "project": {

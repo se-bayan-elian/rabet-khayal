@@ -471,6 +471,11 @@
           "fastDelivery": "Fast Delivery",
           "qualityGuarantee": "Quality Guarantee"
         }
+      },
+      "billingPeriod": {
+        "one-time": "one-time",
+        "monthly": "monthly",
+        "yearly": "yearly"
       }
     },
     "web": {

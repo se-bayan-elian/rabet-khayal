@@ -118,7 +118,7 @@ export default function ServicePage() {
         <div className="absolute inset-0 flex items-center">
           <div className="section-container text-white">
             <div className="max-w-4xl">
-              <h1 className="text-3xl md:text-5xl font-bold mb-6  !text-white">{service.name}</h1>
+              <h1 className="text-3xl text-center md:text-5xl font-bold mb-6  !text-white">{service.name}</h1>
               <Button
                 onClick={() => handleRequestService()}
                 className="btn-primary flex mx-auto"

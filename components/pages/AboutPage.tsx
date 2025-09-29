@@ -151,7 +151,7 @@ export default function AboutPage({ locale }: AboutPageProps) {
             <div className="relative">
               <div className="aspect-square relative rounded-full overflow-hidden border-4 border-brand-gold/20">
                 <Image
-                  src="/images/about-hero.jpg"
+                  src="/about-hero.png"
                   alt={t('hero.imageAlt')}
                   fill
                   className="object-cover"
@@ -304,7 +304,7 @@ export default function AboutPage({ locale }: AboutPageProps) {
       </section>
 
       {/* Team Section */}
-      <section className="py-20 px-4">
+      {/* <section className="py-20 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
@@ -318,7 +318,6 @@ export default function AboutPage({ locale }: AboutPageProps) {
           <div className="space-y-16">
             {teamMembers.map((member, index) => (
               <div key={index} className={`grid lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''}`}>
-                {/* Image Section */}
                 <div className={`relative ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
                   <div className="aspect-square relative rounded-2xl overflow-hidden shadow-2xl">
                     <Image
@@ -331,7 +330,6 @@ export default function AboutPage({ locale }: AboutPageProps) {
                   <div className="absolute inset-0 bg-gradient-to-tr from-brand-gold/20 to-transparent rounded-2xl"></div>
                 </div>
 
-                {/* Content Section */}
                 <div className={`${index % 2 === 1 ? 'lg:col-start-1' : ''}`}>
                   <div className="space-y-6">
                     <div>
@@ -361,7 +359,7 @@ export default function AboutPage({ locale }: AboutPageProps) {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Contact CTA */}
       <section className="py-20 px-4 bg-brand-navy">

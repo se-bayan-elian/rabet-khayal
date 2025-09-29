@@ -213,7 +213,7 @@ export default function ServicePage() {
                         borderColor: plan.isPopular ? 'var(--brand-gold)' : undefined
                       }}>
                         {plan.isPopular && (
-                          <div className="absolute top-0 right-6 transform -translate-y-1/2 px-4 py-1 rounded-full text-sm font-bold text-white" style={{ background: 'var(--brand-gold)' }}>
+                          <div className="top-0 right-6 transform -translate-y-1/2 px-4 py-1 rounded-full text-sm font-bold text-white" style={{ background: 'var(--brand-gold)' }}>
                             {tDetail('popular')}
                           </div>
                         )}
@@ -340,7 +340,7 @@ export default function ServicePage() {
                         <div className="flex justify-between items-center">
                           {project.projectUrl && (
                             <a
-                              href={'/'+project.projectUrl}
+                              href={project.projectUrl}
                               target="_blank"
                               className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 flex items-center gap-1"
                             >

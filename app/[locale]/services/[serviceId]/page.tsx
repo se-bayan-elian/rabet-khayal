@@ -194,7 +194,7 @@ export default function ServicePage() {
                     ))}
                   </div>
                 ) : pricingPlans?.length === 0 ? (
-                  <Card className="p-8 text-center bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+                  <Card className="p-8  text-center bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                     <CardContent>
                       <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
                         <Star className="w-8 h-8 text-gray-400 dark:text-gray-500" />
@@ -209,7 +209,7 @@ export default function ServicePage() {
                 ) : (
                   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {pricingPlans?.map((plan: any) => (
-                      <Card key={plan.id} className={`relative  transition-all duration-300 hover:shadow-2xl bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 ${plan.isPopular ? 'border-2 shadow-xl scale-105' : 'hover:scale-105'}`} style={{
+                      <Card key={plan.id} className={`relative overflow-visible transition-all duration-300 hover:shadow-2xl bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 ${plan.isPopular ? 'border-2 shadow-xl scale-105' : 'hover:scale-105'}`} style={{
                         borderColor: plan.isPopular ? 'var(--brand-gold)' : undefined
                       }}>
                         {plan.isPopular && (

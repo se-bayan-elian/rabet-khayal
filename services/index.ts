@@ -197,6 +197,13 @@ export async function fetchSubcategories(
   return data.data ?? [];
 }
 
+export async function fetchSubcategoryById(subcategoryId: string): Promise<SubcategoryItem> {
+  const { data } = await axiosClient.get<{ data: SubcategoryItem }>(
+    `/categories/subcategories/${subcategoryId}`
+  );
+  return data.data;
+}
+
 export function useSubcategoriesQuery(
   categoryId: string,
   params?: { pagination?: { page?: number; limit?: number } }

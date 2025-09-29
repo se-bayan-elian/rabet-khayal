@@ -136,7 +136,7 @@ export default function ServicePage() {
       {/* Main Content */}
       <section className="section-padding bg-gradient-to-br from-amber-50 to-orange-50 dark:from-gray-900 dark:to-gray-800" style={{ background: 'var(--brand-bg)' }}>
         <div className="section-container">
-          <Tabs defaultValue="details" className="w-full h-fit" dir={dir}>
+          <Tabs defaultValue="details" className="w-full h-full" dir={dir}>
             <TabsList className="grid w-full grid-cols-2 mb-8 bg-white dark:bg-gray-800 p-1 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 h-fit">
               <TabsTrigger 
                 value="details" 
@@ -209,7 +209,7 @@ export default function ServicePage() {
                 ) : (
                   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {pricingPlans?.map((plan: any) => (
-                      <Card key={plan.id} className={`relative overflow-hidden transition-all duration-300 hover:shadow-2xl bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 ${plan.isPopular ? 'border-2 shadow-xl scale-105' : 'hover:scale-105'}`} style={{
+                      <Card key={plan.id} className={`relative  transition-all duration-300 hover:shadow-2xl bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 ${plan.isPopular ? 'border-2 shadow-xl scale-105' : 'hover:scale-105'}`} style={{
                         borderColor: plan.isPopular ? 'var(--brand-gold)' : undefined
                       }}>
                         {plan.isPopular && (

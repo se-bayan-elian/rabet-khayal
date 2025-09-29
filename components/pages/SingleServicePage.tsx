@@ -213,13 +213,13 @@ export default function ServicePage() {
                         borderColor: plan.isPopular ? 'var(--brand-gold)' : undefined
                       }}>
                         {plan.isPopular && (
-                          <div className="top-0 right-6 transform w-fit px-4 py-1 rounded-full text-sm font-bold text-white" style={{ background: 'var(--brand-gold)' }}>
+                          <div className="top-0 right-6 mt-2 ms-2 transform w-fit px-4 py-1 rounded-full text-sm font-bold text-white" style={{ background: 'var(--brand-gold)' }}>
                             {tDetail('popular')}
                           </div>
                         )}
                         <CardContent className="p-6 h-full items-between">
                           <h3 className="text-2xl font-bold mb-2 brand-heading dark:text-white">{plan.name}</h3>
-                          <div className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-2 html-content"
+                          <div className="text-gray-600 dark:text-gray-300 mb-4  html-content"
                                dangerouslySetInnerHTML={{ __html: plan.description || "" }}
                           >
                           </div>

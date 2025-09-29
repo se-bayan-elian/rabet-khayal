@@ -178,7 +178,7 @@ export function Header({
                           href={service.href || `/services/${service.id}`}
                           className="flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-amber-50 hover:to-orange-50 dark:hover:from-amber-900/20 dark:hover:to-orange-900/20 transition-all duration-300 group"
                         >
-                          <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-gradient-to-br from-amber-400 to-orange-500 shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300 overflow-hidden">
+                          <div className="w-10 h-10 max-h-10 rounded-xl flex items-center justify-center bg-gradient-to-br from-amber-400 to-orange-500 shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300 overflow-hidden">
                             {service.iconUrl || service.icon ? (
                               <img
                                 src={service.iconUrl || service.icon}

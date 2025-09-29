@@ -1519,7 +1519,6 @@ html, body {
 
 .container, .section-container {
   max-width: 100%;
-  overflow-x: hidden;
 }
 
 /* RTL-specific improvements */

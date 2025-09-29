@@ -340,7 +340,7 @@ export default function ServicePage() {
                         <div className="flex justify-between items-center">
                           {project.projectUrl && (
                             <a
-                              href={project.projectUrl}
+                              href={'/'+project.projectUrl}
                               target="_blank"
                               className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 flex items-center gap-1"
                             >

@@ -18,8 +18,8 @@ const tajawal = Tajawal({
   subsets: ["arabic"],
 })
 export const metadata: Metadata = {
-  title: "ربط الخيال - Rabet Alkhayal",
-  description: "شركة ربط الخيال - نربط أحلامك بالواقع",
+  title: "ربط الخيال للدعاية والإعلان",
+  description: "شركة ربط الخيال للدعاية والإعلان - نربط أحلامك بالواقع",
 }
 
 export default async function RootLayout({

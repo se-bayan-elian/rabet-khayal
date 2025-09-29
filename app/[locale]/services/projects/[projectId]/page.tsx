@@ -99,7 +99,7 @@ export default function ProjectDetailPage() {
             </Button>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-12 ">
             <div>
               <h1 className="text-3xl md:text-4xl font-bold mb-4 brand-heading dark:text-white">{project.title}</h1>
               <p className="text-lg text-gray-600 dark:text-gray-300 mb-6 leading-relaxed"

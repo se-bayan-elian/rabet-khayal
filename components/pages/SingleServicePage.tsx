@@ -209,11 +209,11 @@ export default function ServicePage() {
                 ) : (
                   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {pricingPlans?.map((plan: any) => (
-                      <Card key={plan.id} className={`relative overflow-visible overflow-x-hidden transition-all duration-300 hover:shadow-2xl bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 ${plan.isPopular ? 'border-2 shadow-xl scale-105' : 'hover:scale-105'}`} style={{
+                      <Card key={plan.id} className={`relative overflow-hidden  transition-all duration-300 hover:shadow-2xl bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 ${plan.isPopular ? 'border-2 shadow-xl scale-105' : 'hover:scale-105'}`} style={{
                         borderColor: plan.isPopular ? 'var(--brand-gold)' : undefined
                       }}>
                         {plan.isPopular && (
-                          <div className="top-0 right-6 transform -translate-y-1/2 px-4 py-1 rounded-full text-sm font-bold text-white" style={{ background: 'var(--brand-gold)' }}>
+                          <div className="top-0 right-6 transform w-fit px-4 py-1 rounded-full text-sm font-bold text-white" style={{ background: 'var(--brand-gold)' }}>
                             {tDetail('popular')}
                           </div>
                         )}

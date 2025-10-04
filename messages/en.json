@@ -612,7 +612,8 @@
       "sale": "Sale",
       "new": "New",
       "featured": "Featured",
-      "adding": "Adding..."
+      "adding": "Adding...",
+      "noReviews": "No reviews yet"
     },
     "loading": "Loading products...",
     "error": {

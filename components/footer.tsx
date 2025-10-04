@@ -190,6 +190,13 @@ export function Footer({
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-lg flex items-center justify-center"
                   style={{ background: 'rgba(255, 204, 0, 0.2)' }}>
+                  <Phone className="w-4 h-4 text-yellow-400" />
+                </div>
+                <span className="text-gray-300" dir="ltr">+966 565 644 684</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center"
+                  style={{ background: 'rgba(255, 204, 0, 0.2)' }}>
                   <Mail className="w-4 h-4 text-yellow-400" />
                 </div>
                 <span className="text-gray-300">rabtalk23@gmail.com</span>

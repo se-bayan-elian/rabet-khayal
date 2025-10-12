@@ -27,9 +27,12 @@ export interface ServiceItem {
 export interface CategoryItem {
   id: string;
   name: string;
+  description?: string;
   imageUrl?: string | null;
   iconUrl?: string | null;
   subcategories?: SubcategoryItem[];
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface SubcategoryItem {
@@ -157,6 +160,13 @@ export async function fetchCategories(params?: {
   return data?.data?.data ?? [];
 }
 
+export async function fetchCategoryById(categoryId: string): Promise<CategoryItem> {
+  const { data } = await axiosClient.get<{ success: boolean; data: CategoryItem; message: string }>(
+    `/categories/${categoryId}`
+  );
+  return data.data;
+}
+
 export function useServicesQuery(params?: {
   q?: string;
   page?: number;
@@ -176,6 +186,15 @@ export function useCategoriesQuery(params?: {
   return useQuery({
     queryKey: ["categories", params ?? { pagination: { page: 1, limit: 10 } }],
     queryFn: () => fetchCategories(params),
+    staleTime: 1000 * 60 * 5,
+  });
+}
+
+export function useCategoryQuery(categoryId: string) {
+  return useQuery({
+    queryKey: ["category", categoryId],
+    queryFn: () => fetchCategoryById(categoryId),
+    enabled: !!categoryId,
     staleTime: 1000 * 60 * 5,
   });
 }

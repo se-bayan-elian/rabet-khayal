@@ -560,6 +560,14 @@ export default function SubcategoryPage() {
                         {t('breadcrumb.categories')}
                       </Link>
                       <ChevronRight className="w-4 h-4 shrink-0 text-white/60" />
+                      {subcategoryData.category && (
+                        <>
+                          <Link href={`/categories/${categoryId}`} className="hover:text-white transition-colors shrink-0 hover:underline truncate">
+                            {subcategoryData.category.name}
+                          </Link>
+                          <ChevronRight className="w-4 h-4 shrink-0 text-white/60" />
+                        </>
+                      )}
                       <span className="text-white font-medium truncate">{subcategoryData.name}</span>
                     </div>
 

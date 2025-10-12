@@ -54,6 +54,11 @@
       "title": "About Us | Rabet Alkhayal",
       "description": "Learn about Rabet Alkhayal, your trusted partner for high-quality creative and technical products and services. Discover our mission, values, and commitment to excellence.",
       "keywords": "about us, company, mission, values, team, quality, services, products"
+    },
+    "category": {
+      "titleSuffix": "| Rabet Alkhayal",
+      "defaultDescription": "Browse our collection of products and subcategories",
+      "keywords": "category, products, subcategories, shopping, quality"
     }
   },
   "serviceHero": {
@@ -578,6 +583,33 @@
       "title": "No categories found",
       "message": "We couldn't find any categories at the moment. Check back later!",
       "goHome": "Go Home"
+    }
+  },
+  "categoryDetailPage": {
+    "breadcrumb": {
+      "home": "Home",
+      "categories": "Categories"
+    },
+    "badge": "Category",
+    "subcategoriesCount": "Subcategories",
+    "subcategoriesTitle": "Explore Subcategories",
+    "subcategoriesSubtitle": "Browse our collection of subcategories",
+    "subcategoryBadge": "Subcategory",
+    "explore": "Explore",
+    "error": {
+      "title": "Unable to load category",
+      "message": "Something went wrong while fetching the category. Please try again.",
+      "retry": "Try Again"
+    },
+    "notFound": {
+      "title": "Category Not Found",
+      "message": "The category you're looking for doesn't exist or has been removed.",
+      "goToCategories": "Browse All Categories"
+    },
+    "empty": {
+      "title": "No Subcategories Yet",
+      "message": "This category doesn't have any subcategories at the moment.",
+      "backToCategories": "Back to Categories"
     }
   },
   "subcategoryPage": {

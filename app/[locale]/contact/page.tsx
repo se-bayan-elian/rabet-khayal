@@ -471,7 +471,7 @@ export default function ContactPage() {
                     </div>
                     <div className="flex justify-between">
                       <span className="dark:text-gray-300">{t('saturday')}</span>
-                      <span className="text-gray-600 dark:text-gray-400">{t('hours.weekend')}</span>
+                      <span className="text-gray-600 dark:text-gray-400">{t('hours.saturday')}</span>
                     </div>
                   </div>
                 </CardContent>

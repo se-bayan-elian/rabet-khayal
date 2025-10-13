@@ -905,9 +905,9 @@
     "friday": "Friday",
     "saturday": "Saturday",
     "hours": {
-      "weekday": "9:00 AM - 6:00 PM",
-      "friday": "2:00 PM - 6:00 PM",
-      "weekend": "10:00 AM - 4:00 PM"
+      "weekday": "8:00 AM - 12:00 PM, 4:00 PM - 12:00 AM",
+      "friday": "Closed",
+      "saturday": "9:00 AM - 12:00 PM, 4:00 PM - 12:00 AM"
     },
     "success": {
       "title": "Message Sent!",

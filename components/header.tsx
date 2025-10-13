@@ -189,7 +189,7 @@ export function Header({
                               <Box className="w-6 h-6 text-white" />
                             )}
                           </div>
-                            <div className="font-semibold text-sm brand-heading text-gray-800 dark:text-gray-100 group-hover:text-amber-700 dark:group-hover:text-amber-300 transition-colors duration-300">{displayName}</div>
+                            <div className="flex-1 font-semibold text-sm brand-heading text-gray-800 dark:text-gray-100 group-hover:text-amber-700 dark:group-hover:text-amber-300 transition-colors duration-300">{displayName}</div>
                           
                         </Link>
                       )
@@ -222,7 +222,7 @@ export function Header({
                       const subcategories = category?.subcategories || []
                       return (
                         <div key={category.id || index} className="p-4 rounded-xl hover:bg-gradient-to-r hover:from-amber-50 hover:to-orange-50 dark:hover:from-amber-900/20 dark:hover:to-orange-900/20 transition-all duration-300 cursor-pointer group border border-transparent hover:border-amber-200 dark:hover:border-amber-800/30 shadow-sm hover:shadow-md">
-                          <div className="flex items-center gap-3 mb-3">
+                          <Link href={`/categories/${category.id}`} className="flex items-center gap-3 mb-3">
                             <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-gradient-to-br from-amber-100 to-orange-100 dark:from-amber-900/40 dark:to-orange-900/40 group-hover:from-amber-200 group-hover:to-orange-200 dark:group-hover:from-amber-800/60 dark:group-hover:to-orange-800/60 transition-all duration-300 overflow-hidden shadow-md group-hover:shadow-lg">
                               {category.iconUrl ? (
                                 <img
@@ -235,8 +235,8 @@ export function Header({
                               )}
                             </div>
 
-                            <div className="font-semibold text-sm brand-heading text-gray-800 dark:text-gray-100 group-hover:text-amber-700 dark:group-hover:text-amber-300 transition-colors duration-300">{name}</div>
-                          </div>
+                            <div className="font-semibold text-sm brand-heading text-gray-800 dark:text-gray-100 group-hover:text-amber-700 dark:group-hover:text-amber-300 transition-colors duration-300 flex-1">{name}</div>
+                          </Link>
 
                           {subcategories.length > 0 && (
                             <div className="space-y-2">
@@ -257,7 +257,7 @@ export function Header({
                                       <Package className="w-4 h-4 text-gray-600 dark:text-gray-400 group-hover/subcategory:text-amber-700 dark:group-hover/subcategory:text-amber-300 transition-colors duration-300" />
                                     )}
                                   </div>
-                                  <div className="font-medium text-xs brand-heading text-gray-600 dark:text-gray-300 group-hover/subcategory:text-amber-700 dark:group-hover/subcategory:text-amber-300 transition-colors duration-300">
+                                  <div className="font-medium flex-1 text-xs brand-heading text-gray-600 dark:text-gray-300 group-hover/subcategory:text-amber-700 dark:group-hover/subcategory:text-amber-300 transition-colors duration-300">
                                     {subcategory.name}
                                   </div>
                                 </Link>

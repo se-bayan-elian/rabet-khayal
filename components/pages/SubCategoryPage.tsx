@@ -99,8 +99,12 @@ const FilterPanel = ({
           <label className="text-xs text-gray-500 dark:text-gray-400">{t("filters.minPrice")}</label>
           <Input
             type="number"
-            value={filters.minPrice}
-            onChange={(e) => handleFilterChange('minPrice', Number(e.target.value))}
+            value={filters.minPrice || ""}
+            onChange={(e) => {
+              const value = e.target.value;
+              handleFilterChange('minPrice', value === "" ? 0 : Number(value));
+            }}
+            placeholder="0"
             className="mt-1 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100"
           />
         </div>
@@ -108,8 +112,12 @@ const FilterPanel = ({
           <label className="text-xs text-gray-500 dark:text-gray-400">{t("filters.maxPrice")}</label>
           <Input
             type="number"
-            value={filters.maxPrice}
-            onChange={(e) => handleFilterChange('maxPrice', Number(e.target.value))}
+            value={filters.maxPrice || ""}
+            onChange={(e) => {
+              const value = e.target.value;
+              handleFilterChange('maxPrice', value === "" ? 10000 : Number(value));
+            }}
+            placeholder="10000"
             className="mt-1 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100"
           />
         </div>

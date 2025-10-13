@@ -1996,6 +1996,116 @@
       "securePayment": "Secure Payment",
       "encrypted": "All transactions are encrypted and secure"
     }
-
+  },
+  "about": {
+    "hero": {
+      "badge": "About Us",
+      "title": "Crafting Digital Excellence",
+      "subtitle": "We are a passionate team of innovators, designers, and developers dedicated to transforming ideas into exceptional digital experiences that drive business growth and exceed expectations.",
+      "cta": "Get Started",
+      "portfolio": "View Portfolio",
+      "imageAlt": "About Rabet Alkhayal team"
+    },
+    "stats": {
+      "clients": "Happy Clients",
+      "projects": "Projects Completed",
+      "awards": "Awards Won",
+      "years": "Years Experience"
+    },
+    "story": {
+      "title": "Our Story",
+      "paragraph1": "Founded with a vision to bridge the gap between creativity and technology, Rabet Alkhayal has been at the forefront of digital innovation since our inception. We believe that every great idea deserves exceptional execution.",
+      "paragraph2": "Our journey began with a simple mission: to help businesses thrive in the digital landscape by providing cutting-edge solutions that combine aesthetic appeal with functional excellence. We've grown from a small team of passionate individuals to a comprehensive digital agency.",
+      "paragraph3": "Today, we continue to push boundaries, embrace new technologies, and deliver solutions that not only meet but exceed our clients' expectations. Our commitment to quality and innovation remains unwavering.",
+      "achievements": {
+        "innovation": "Innovation",
+        "quality": "Quality",
+        "support": "Support",
+        "growth": "Growth"
+      },
+      "imageAlt": "Our company story and journey"
+    },
+    "values": {
+      "title": "Our Core Values",
+      "subtitle": "The principles that guide everything we do and shape our culture of excellence",
+      "innovation": {
+        "title": "Innovation",
+        "description": "We embrace new technologies and creative approaches to deliver cutting-edge solutions that set our clients apart from the competition."
+      },
+      "passion": {
+        "title": "Passion",
+        "description": "Our love for what we do drives us to go above and beyond, ensuring every project receives the attention and care it deserves."
+      },
+      "quality": {
+        "title": "Quality",
+        "description": "We maintain the highest standards in everything we do, from initial concept to final delivery, ensuring exceptional results every time."
+      },
+      "excellence": {
+        "title": "Excellence",
+        "description": "We strive for perfection in every detail, continuously improving our processes and delivering solutions that exceed expectations."
+      }
+    },
+    "timeline": {
+      "title": "Our Journey",
+      "subtitle": "Key milestones that have shaped our growth and success over the years",
+      "founding": {
+        "title": "Company Founded",
+        "description": "Rabet Alkhayal was established with a vision to revolutionize digital experiences and help businesses thrive in the modern world."
+      },
+      "growth": {
+        "title": "Rapid Growth",
+        "description": "We expanded our team and services, establishing ourselves as a trusted partner for businesses seeking digital transformation."
+      },
+      "expansion": {
+        "title": "Service Expansion",
+        "description": "We broadened our expertise to include comprehensive digital solutions, from web development to digital marketing strategies."
+      },
+      "innovation": {
+        "title": "Innovation Focus",
+        "description": "We invested heavily in emerging technologies and innovative approaches, staying ahead of industry trends and client needs."
+      },
+      "present": {
+        "title": "Present Day",
+        "description": "Today, we continue to lead the industry with cutting-edge solutions, exceptional service, and unwavering commitment to client success."
+      }
+    },
+    "team": {
+      "title": "Meet Our Team",
+      "subtitle": "The talented individuals who make our success possible",
+      "chairman": {
+        "name": "Ahmed Al-Rashid",
+        "role": "Chairman & Founder",
+        "image": "/images/team/chairman.jpg",
+        "message": "Leading with Vision and Innovation",
+        "content": "With over 15 years of experience in the technology sector, Ahmed founded Rabet Alkhayal with a clear vision: to bridge the gap between traditional business practices and modern digital solutions. His leadership has been instrumental in establishing our company as a trusted partner for businesses across various industries.\n\nAhmed's expertise in strategic planning and digital transformation has helped numerous organizations achieve their goals and stay competitive in an ever-evolving market. His commitment to innovation and excellence continues to drive our company forward."
+      },
+      "generalManager": {
+        "name": "Sarah Al-Mansouri",
+        "role": "General Manager",
+        "image": "/images/team/general-manager.jpg",
+        "message": "Excellence in Operations and Client Relations",
+        "content": "Sarah brings a wealth of experience in operations management and client relations to Rabet Alkhayal. Her meticulous attention to detail and commitment to client satisfaction have been key factors in our company's success and growth.\n\nWith a background in business administration and a passion for technology, Sarah ensures that every project is delivered on time, within budget, and exceeds client expectations. Her leadership in managing our diverse team of professionals has created a culture of collaboration and excellence."
+      }
+    },
+    "contact": {
+      "title": "Ready to Start Your Project?",
+      "subtitle": "Let's discuss how we can help bring your vision to life with our expertise and innovative solutions.",
+      "email": "Contact Us",
+      "phone": "Call Us"
+    },
+    "ui": {
+      "scrollToExplore": "Scroll to explore",
+      "ourImpact": "Our Impact",
+      "impactSubtitle": "Numbers that tell our story of growth, innovation, and excellence",
+      "ourStory": "Our Story",
+      "ourValues": "Our Values",
+      "ourJourney": "Our Journey",
+      "getInTouch": "Get In Touch",
+      "features": {
+        "innovation": "Innovation",
+        "growth": "Growth",
+        "excellence": "Excellence"
+      }
+    }
   }
 }
